@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Camadas da Conexão - Jogo Educativo</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+</head>
+<body>
+    <!-- Tela Inicial -->
+    <div id="main-menu" class="screen active">
+        <div class="container">
+            <h1 class="game-title">Camadas da Conexão</h1>
+            <p class="game-subtitle">Seja um Mensageiro Digital e domine a Internet!</p>
+            
+            <div class="player-info">
+                <div class="points-display">
+                    <span class="points-icon">⭐</span>
+                    <span id="player-points">0</span> pontos
+                </div>
+            </div>
+
+            <div class="menu-buttons">
+                <button class="menu-btn primary" onclick="GameScreens.showScreen('game-map')">
+                    🎮 Jogar
+                </button>
+                <button class="menu-btn" onclick="GameScreens.showScreen('phases')">
+                    🗺️ Fases
+                </button>
+                <button class="menu-btn" onclick="GameScreens.showScreen('shop')">
+                    🛒 Loja
+                </button>
+                <button class="menu-btn" onclick="GameScreens.showScreen('settings')">
+                    ⚙️ Configurações
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tela do Mapa -->
+    <div id="game-map" class="screen">
+        <div class="container">
+            <header class="game-header">
+                <button class="back-btn" onclick="GameScreens.showScreen('main-menu')">← Voltar</button>
+                <div class="points-display">
+                    <span class="points-icon">⭐</span>
+                    <span id="map-points">0</span> pontos
+                </div>
+            </header>
+
+            <h2>Trilha do Circuito Digital</h2>
+            
+            <div class="circuit-map">
+                <div class="phase-node phase-1 available" data-phase="1" onclick="GamePhases.startPhase(1)">
+                    <div class="phase-icon">📡</div>
+                    <div class="phase-info">
+                        <div class="phase-title">Fase 1</div>
+                        <div class="phase-subtitle">Modelo em Camadas</div>
+                        <div class="phase-cost">Grátis</div>
+                    </div>
+                </div>
+
+                <div class="connection-line"></div>
+
+                <div class="phase-node phase-2 locked" data-phase="2" onclick="GamePhases.startPhase(2)">
+                    <div class="phase-icon">⚡</div>
+                    <div class="phase-info">
+                        <div class="phase-title">Fase 2</div>
+                        <div class="phase-subtitle">Paralelismo</div>
+                        <div class="phase-cost">10 pontos</div>
+                    </div>
+                </div>
+
+                <div class="connection-line"></div>
+
+                <div class="phase-node phase-3 locked" data-phase="3" onclick="GamePhases.startPhase(3)">
+                    <div class="phase-icon">🔄</div>
+                    <div class="phase-info">
+                        <div class="phase-title">Fase 3</div>
+                        <div class="phase-subtitle">Concorrência</div>
+                        <div class="phase-cost">25 pontos</div>
+                    </div>
+                </div>
+
+                <div class="connection-line"></div>
+
+                <div class="phase-node phase-4 locked" data-phase="4" onclick="GamePhases.startPhase(4)">
+                    <div class="phase-icon">🌐</div>
+                    <div class="phase-info">
+                        <div class="phase-title">Fase 4</div>
+                        <div class="phase-subtitle">Armazenamento Distribuído</div>
+                        <div class="phase-cost">45 pontos</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tela de Fases -->
+    <div id="phases" class="screen">
+        <div class="container">
+            <header class="game-header">
+                <button class="back-btn" onclick="GameScreens.showScreen('main-menu')">← Voltar</button>
+                <div class="points-display">
+                    <span class="points-icon">⭐</span>
+                    <span id="phases-points">0</span> pontos
+                </div>
+            </header>
+
+            <h2>Todas as Fases</h2>
+            
+            <div class="phases-list">
+                <div class="phase-card" data-phase="1">
+                    <div class="phase-header">
+                        <span class="phase-icon">📡</span>
+                        <h3>Fase 1 - Modelo em Camadas</h3>
+                        <span class="phase-status completed">✓</span>
+                    </div>
+                    <p>Organize as camadas do modelo OSI na ordem correta.</p>
+                    <div class="phase-stats">
+                        <span>Melhor pontuação: <span id="best-score-1">0</span></span>
+                    </div>
+                    <button class="play-phase-btn" onclick="GamePhases.startPhase(1)">Jogar</button>
+                </div>
+
+                <div class="phase-card locked" data-phase="2">
+                    <div class="phase-header">
+                        <span class="phase-icon">⚡</span>
+                        <h3>Fase 2 - Paralelismo</h3>
+                        <span class="phase-status">🔒</span>
+                    </div>
+                    <p>Identifique tarefas que podem ser executadas simultaneamente.</p>
+                    <div class="phase-requirement">Requer: 10 pontos</div>
+                    <button class="play-phase-btn" disabled onclick="GamePhases.startPhase(2)">Bloqueada</button>
+                </div>
+
+                <div class="phase-card locked" data-phase="3">
+                    <div class="phase-header">
+                        <span class="phase-icon">🔄</span>
+                        <h3>Fase 3 - Concorrência</h3>
+                        <span class="phase-status">🔒</span>
+                    </div>
+                    <p>Gerencie o acesso concorrente a dados compartilhados.</p>
+                    <div class="phase-requirement">Requer: 25 pontos</div>
+                    <button class="play-phase-btn" disabled onclick="GamePhases.startPhase(3)">Bloqueada</button>
+                </div>
+
+                <div class="phase-card locked" data-phase="4">
+                    <div class="phase-header">
+                        <span class="phase-icon">🌐</span>
+                        <h3>Fase 4 - Armazenamento Distribuído</h3>
+                        <span class="phase-status">🔒</span>
+                    </div>
+                    <p>Distribua dados entre servidores de forma eficiente.</p>
+                    <div class="phase-requirement">Requer: 45 pontos</div>
+                    <button class="play-phase-btn" disabled onclick="GamePhases.startPhase(4)">Bloqueada</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tela da Loja -->
+    <div id="shop" class="screen">
+        <div class="container">
+            <header class="game-header">
+                <button class="back-btn" onclick="GameScreens.showScreen('main-menu')">← Voltar</button>
+                <div class="points-display">
+                    <span class="points-icon">⭐</span>
+                    <span id="shop-points">0</span> pontos
+                </div>
+            </header>
+
+            <h2>Loja de Habilidades</h2>
+            
+            <div class="shop-items">
+                <div class="shop-item" data-skill="bonus-points">
+                    <div class="item-icon">💰</div>
+                    <div class="item-info">
+                        <h3>Bônus de Pontos</h3>
+                        <p>+10% pontos em todas as fases</p>
+                        <div class="item-price">Preço: 30 pontos</div>
+                    </div>
+                    <button class="buy-btn" onclick="GameShop.buySkill('bonus-points', 30)">Comprar</button>
+                </div>
+
+                <div class="shop-item" data-skill="auto-unlock">
+                    <div class="item-icon">🔓</div>
+                    <div class="item-info">
+                        <h3>Desbloqueio Automático</h3>
+                        <p>Fases são desbloqueadas automaticamente</p>
+                        <div class="item-price">Preço: 50 pontos</div>
+                    </div>
+                    <button class="buy-btn" onclick="GameShop.buySkill('auto-unlock', 50)">Comprar</button>
+                </div>
+
+                <div class="shop-item" data-skill="time-bonus">
+                    <div class="item-icon">⏰</div>
+                    <div class="item-info">
+                        <h3>Bônus de Tempo</h3>
+                        <p>+10 pontos de bônus por velocidade</p>
+                        <div class="item-price">Preço: 25 pontos</div>
+                    </div>
+                    <button class="buy-btn" onclick="GameShop.buySkill('time-bonus', 25)">Comprar</button>
+                </div>
+            </div>
+
+            <div class="owned-skills">
+                <h3>Habilidades Adquiridas</h3>
+                <div id="owned-skills-list">
+                    <p class="no-skills">Nenhuma habilidade adquirida ainda.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tela de Configurações -->
+    <div id="settings" class="screen">
+        <div class="container">
+            <header class="game-header">
+                <button class="back-btn" onclick="GameScreens.showScreen('main-menu')">← Voltar</button>
+            </header>
+
+            <h2>Configurações</h2>
+            
+            <div class="settings-options">
+                <div class="setting-item">
+                    <label for="sound-toggle">Som do jogo:</label>
+                    <div class="toggle-switch">
+                        <input type="checkbox" id="sound-toggle" checked onchange="GameSettings.toggleSound(this.checked)">
+                        <span class="toggle-slider"></span>
+                    </div>
+                </div>
+
+                <div class="setting-item">
+                    <label>Progresso do jogador:</label>
+                    <button class="danger-btn" onclick="GameSettings.resetProgress()">
+                        🗑️ Resetar Progresso
+                    </button>
+                </div>
+
+                <div class="setting-item">
+                    <label>Informações do jogo:</label>
+                    <div class="game-info">
+                        <p><strong>Versão:</strong> 1.0.0</p>
+                        <p><strong>Desenvolvido em:</strong> HTML, CSS, JavaScript</p>
+                        <p><strong>Tema:</strong> Redes de Computadores e Programação</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Telas de Fases (serão carregadas dinamicamente) -->
+    <div id="phase-game" class="screen">
+        <!-- Conteúdo da fase será inserido aqui dinamicamente -->
+    </div>
+
+    <!-- Modal de Resultados -->
+    <div id="result-modal" class="modal">
+        <div class="modal-content">
+            <h2 id="result-title">Fase Concluída!</h2>
+            <div class="result-stars" id="result-stars"></div>
+            <p id="result-message">Parabéns! Você ganhou pontos.</p>
+            <div class="result-points">
+                <span id="points-earned">+0</span> pontos
+            </div>
+            <button class="modal-btn primary" onclick="GameScreens.closeModal()">Continuar</button>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/gameData.js"></script>
+    <script src="js/gameStorage.js"></script>
+    <script src="js/gameScreens.js"></script>
+    <script src="js/gamePhases.js"></script>
+    <script src="js/gameShop.js"></script>
+    <script src="js/gameSettings.js"></script>
+    <script src="js/phases/phase1.js"></script>
+    <script src="js/phases/phase2.js"></script>
+    <script src="js/phases/phase3.js"></script>
+    <script src="js/phases/phase4.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
