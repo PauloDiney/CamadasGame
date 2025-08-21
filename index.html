@@ -1,285 +1,205 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Camadas da Conexão - Jogo Educativo</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/animations.css">
+    <link href="https://fonts.googleapis.com/css2?family=Kdam+Thmor+Pro&display=swap" rel="stylesheet">
 </head>
+
 <body>
-    <!-- Tela Inicial -->
-    <div id="main-menu" class="screen active">
-        <div class="container">
-            <h1 class="game-title">Camadas da Conexão</h1>
-            <p class="game-subtitle">Seja um Mensageiro Digital e domine a Internet!</p>
-            
-            <div class="player-info">
-                <div class="points-display">
-                    <span class="points-icon">⭐</span>
-                    <span id="player-points">0</span> pontos
-                </div>
+    <!-- Página Principal -->
+    <section id="main-page" class="screen-section">
+        <header class="header">
+            <div>
+                <h1 class="header-title">Camadas da Conexão</h1>
+                <p class="header-subtitle">Seja um menssageiro digital</p>
             </div>
 
-            <div class="menu-buttons">
-                <button class="menu-btn primary" onclick="GameScreens.showScreen('game-map')">
-                    🎮 Jogar
-                </button>
-                <button class="menu-btn" onclick="GameScreens.showScreen('phases')">
-                    🗺️ Fases
-                </button>
-                <button class="menu-btn" onclick="GameScreens.showScreen('shop')">
-                    🛒 Loja
-                </button>
-                <button class="menu-btn" onclick="GameScreens.showScreen('settings')">
-                    ⚙️ Configurações
-                </button>
+            <div class="header-points">
+                <svg xmlns="http://www.w3.org/2000/svg" width="65" height="61" viewBox="0 0 65 61" fill="none">
+                    <path
+                        d="M32.5 0L40.0212 23.1479H64.3604L44.6696 37.4541L52.1908 60.6021L32.5 46.2959L12.8092 60.6021L20.3304 37.4541L0.639606 23.1479H24.9788L32.5 0Z"
+                        fill="#E1EA2D" />
+                </svg>
+                <p id="pontos-display">0 Pontos</p>
             </div>
-        </div>
-    </div>
+        </header>
 
-    <!-- Tela do Mapa -->
-    <div id="game-map" class="screen">
-        <div class="container">
-            <header class="game-header">
-                <button class="back-btn" onclick="GameScreens.showScreen('main-menu')">← Voltar</button>
-                <div class="points-display">
-                    <span class="points-icon">⭐</span>
-                    <span id="map-points">0</span> pontos
-                </div>
-            </header>
+        <main>
+            <section class="content_inputs">
+                <section class="input_container">
+                    <a href="#" id="iniciar-jornada-btn">
 
-            <h2>Trilha do Circuito Digital</h2>
-            
-            <div class="circuit-map">
-                <div class="phase-node phase-1 available" data-phase="1" onclick="GamePhases.startPhase(1)">
-                    <div class="phase-icon">📡</div>
-                    <div class="phase-info">
-                        <div class="phase-title">Fase 1</div>
-                        <div class="phase-subtitle">Modelo em Camadas</div>
-                        <div class="phase-cost">Grátis</div>
-                    </div>
-                </div>
+                    Iniciar Jornada
+                    <svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 120 120" fill="none">
+                        <path
+                            d="M19.9572 54.7739L19.9783 64.6944L79.5017 64.568L79.5228 74.4886L89.4434 74.4675L89.4223 64.5469L99.3428 64.5258L99.3218 54.6053L89.4012 54.6263L89.3801 44.7058L79.4596 44.7269L79.4806 54.6474L19.9572 54.7739ZM69.5179 34.8274L79.4385 34.8063L79.4596 44.7269L69.539 44.7479L69.5179 34.8274ZM69.5179 34.8274L59.5974 34.8484L59.5763 24.9279L69.4968 24.9068L69.5179 34.8274ZM69.6233 84.4302L79.5439 84.4091L79.5228 74.4886L69.6022 74.5096L69.6233 84.4302ZM69.6233 84.4302L59.7027 84.4513L59.7238 94.3718L69.6444 94.3508L69.6233 84.4302Z"
+                            fill="#E1EA2D" />
+                    </svg>
 
-                <div class="connection-line"></div>
+                </a>
+            </section>
+            <section class="input_container">
+                <a href="#" id="fases-btn">
 
-                <div class="phase-node phase-2 locked" data-phase="2" onclick="GamePhases.startPhase(2)">
-                    <div class="phase-icon">⚡</div>
-                    <div class="phase-info">
-                        <div class="phase-title">Fase 2</div>
-                        <div class="phase-subtitle">Paralelismo</div>
-                        <div class="phase-cost">10 pontos</div>
-                    </div>
-                </div>
+                    Fases
+                    <svg xmlns="http://www.w3.org/2000/svg" width="83" height="83" viewBox="0 0 83 83" fill="none">
+                        <g clip-path="url(#clip0_6_94)">
+                            <path
+                                d="M82.9999 24.2083C82.9954 23.3621 82.7853 22.5296 82.3877 21.7826C81.9901 21.0356 81.4169 20.3964 80.7174 19.92L56.5091 3.45833C55.6583 2.87696 54.6519 2.56593 53.6214 2.56593C52.5909 2.56593 51.5845 2.87696 50.7337 3.45833L30.5024 18.3637C30.201 18.583 29.8377 18.7012 29.4649 18.7012C29.0921 18.7012 28.7289 18.583 28.4274 18.3637L8.26536 3.45833C7.48276 2.88086 6.55359 2.53503 5.58387 2.46031C4.61416 2.38558 3.64297 2.58497 2.78114 3.03572C1.91931 3.48646 1.20156 4.17041 0.709786 5.00951C0.218017 5.84861 -0.0279564 6.80906 -6.27975e-05 7.78125V58.7917C0.00445042 59.6379 0.214557 60.4704 0.612169 61.2174C1.00978 61.9644 1.58299 62.6036 2.28244 63.08L26.4908 79.5417C27.3416 80.123 28.348 80.4341 29.3785 80.4341C30.4089 80.4341 31.4154 80.123 32.2662 79.5417L52.4283 64.7054C52.7298 64.4861 53.093 64.368 53.4658 64.368C53.8386 64.368 54.2018 64.4861 54.5033 64.7054L74.7345 79.5417C75.6326 80.1852 76.7076 80.5355 77.8124 80.5446C78.495 80.5492 79.1716 80.4181 79.803 80.1591C80.4345 79.9 81.0082 79.5181 81.4908 79.0354C81.9734 78.5528 82.3554 77.9791 82.6144 77.3477C82.8735 76.7162 83.0045 76.0396 82.9999 75.3571V24.2083ZM32.8541 26.0412C32.8485 25.7718 32.9085 25.5051 33.029 25.2641C33.1495 25.0231 33.3269 24.815 33.5458 24.6579L48.7624 13.28C48.8979 13.1975 49.0534 13.1539 49.212 13.1539C49.3706 13.1539 49.5261 13.1975 49.6616 13.28C49.778 13.331 49.8818 13.407 49.9654 13.5026C50.0491 13.5983 50.1107 13.7112 50.1458 13.8333V56.9587C50.1514 57.2281 50.0914 57.4949 49.9709 57.7359C49.8504 57.9769 49.673 58.185 49.4541 58.3421L34.2374 69.72C34.102 69.8025 33.9464 69.8461 33.7879 69.8461C33.6293 69.8461 33.4737 69.8025 33.3383 69.72C33.2219 69.669 33.1181 69.593 33.0344 69.4974C32.9508 69.4017 32.8892 69.2888 32.8541 69.1667V26.0412ZM6.9166 12.8996C6.91299 12.7346 6.95666 12.5721 7.04246 12.4311C7.12825 12.2902 7.25258 12.1767 7.40077 12.1042C7.53623 12.0217 7.69177 11.9781 7.85035 11.9781C8.00894 11.9781 8.16448 12.0217 8.29994 12.1042L25.2458 24.5887C25.4586 24.7516 25.6315 24.9609 25.7513 25.2006C25.8712 25.4403 25.9348 25.7041 25.9374 25.9721V69.1667C25.9379 69.3222 25.8963 69.475 25.8172 69.6089C25.7381 69.7428 25.6243 69.8528 25.4879 69.9275C25.3501 70.0032 25.1955 70.0429 25.0383 70.0429C24.8811 70.0429 24.7265 70.0032 24.5887 69.9275L7.67744 58.3421C7.44304 58.1873 7.25079 57.9767 7.11798 57.7292C6.98518 57.4817 6.91598 57.205 6.9166 56.9242V12.8996ZM76.0833 70.1004C76.0869 70.2654 76.0432 70.4279 75.9574 70.5689C75.8716 70.7098 75.7473 70.8233 75.5991 70.8958C75.4637 70.9783 75.3081 71.0219 75.1495 71.0219C74.9909 71.0219 74.8354 70.9783 74.6999 70.8958L57.7541 58.515C57.5413 58.3521 57.3684 58.1429 57.2486 57.9032C57.1287 57.6635 57.0651 57.3996 57.0624 57.1317V13.8333C57.062 13.6778 57.1036 13.525 57.1827 13.3911C57.2618 13.2572 57.3756 13.1472 57.512 13.0725C57.6498 12.9968 57.8044 12.9571 57.9616 12.9571C58.1188 12.9571 58.2734 12.9968 58.4112 13.0725L75.3224 24.5887C75.5568 24.7435 75.7491 24.9541 75.8819 25.2016C76.0147 25.4491 76.0839 25.7258 76.0833 26.0067V70.1004Z"
+                                fill="#E1EA2D" />
+                        </g>
+                        <defs>
+                            <clipPath id="clip0_6_94">
+                                <rect width="83" height="83" fill="white" />
+                            </clipPath>
+                        </defs>
+                    </svg>
 
-                <div class="connection-line"></div>
 
-                <div class="phase-node phase-3 locked" data-phase="3" onclick="GamePhases.startPhase(3)">
-                    <div class="phase-icon">🔄</div>
-                    <div class="phase-info">
-                        <div class="phase-title">Fase 3</div>
-                        <div class="phase-subtitle">Concorrência</div>
-                        <div class="phase-cost">25 pontos</div>
-                    </div>
-                </div>
+                </a>
+            </section>
+            <section class="input_container">
+                <a href="loja.html" id="loja-btn">
 
-                <div class="connection-line"></div>
+                    Loja
+                    <svg xmlns="http://www.w3.org/2000/svg" width="108" height="108" viewBox="0 0 108 108" fill="none">
+                        <path
+                            d="M18 27V18H90V27H18ZM18 90V63H13.5V54L18 31.5H90L94.5 54V63H90V90H81V63H63V90H18ZM27 81H54V63H27V81Z"
+                            fill="#E1EA2D" />
+                    </svg>
 
-                <div class="phase-node phase-4 locked" data-phase="4" onclick="GamePhases.startPhase(4)">
-                    <div class="phase-icon">🌐</div>
-                    <div class="phase-info">
-                        <div class="phase-title">Fase 4</div>
-                        <div class="phase-subtitle">Armazenamento Distribuído</div>
-                        <div class="phase-cost">45 pontos</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+                </a>
+            </section>
+            <section class="input_container">
+                <a href="configuracoes.html" id="configuracoes-btn">
 
-    <!-- Tela de Fases -->
-    <div id="phases" class="screen">
-        <div class="container">
-            <header class="game-header">
-                <button class="back-btn" onclick="GameScreens.showScreen('main-menu')">← Voltar</button>
-                <div class="points-display">
-                    <span class="points-icon">⭐</span>
-                    <span id="phases-points">0</span> pontos
-                </div>
-            </header>
+                    Configurações
+                    <svg xmlns="http://www.w3.org/2000/svg" width="89" height="89" viewBox="0 0 89 89" fill="none">
+                        <mask id="mask0_6_98" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="6" y="6"
+                            width="77" height="77">
+                            <path
+                                d="M44.5001 7.41669L33.3751 18.5417H18.5417V33.375L7.41675 44.5L18.5417 55.625V70.4584H33.3751L44.5001 81.5834L55.6251 70.4584H70.4584V55.625L81.5834 44.5L70.4584 33.375V18.5417H55.6251L44.5001 7.41669Z"
+                                fill="white" stroke="white" stroke-width="2" stroke-linejoin="round" />
+                            <path
+                                d="M44.5 55.625C47.4505 55.625 50.2802 54.4529 52.3666 52.3666C54.4529 50.2802 55.625 47.4505 55.625 44.5C55.625 41.5495 54.4529 38.7198 52.3666 36.6334C50.2802 34.5471 47.4505 33.375 44.5 33.375C41.5495 33.375 38.7198 34.5471 36.6334 36.6334C34.5471 38.7198 33.375 41.5495 33.375 44.5C33.375 47.4505 34.5471 50.2802 36.6334 52.3666C38.7198 54.4529 41.5495 55.625 44.5 55.625Z"
+                                fill="black" stroke="black" stroke-width="2" stroke-linejoin="round" />
+                        </mask>
+                        <g mask="url(#mask0_6_98)">
+                            <path d="M0 0H89V89H0V0Z" fill="#E1EA2D" />
+                        </g>
+                    </svg>
 
-            <h2>Todas as Fases</h2>
-            
-            <div class="phases-list">
-                <div class="phase-card" data-phase="1">
-                    <div class="phase-header">
-                        <span class="phase-icon">📡</span>
-                        <h3>Fase 1 - Modelo em Camadas</h3>
-                        <span class="phase-status completed">✓</span>
-                    </div>
-                    <p>Organize as camadas do modelo OSI na ordem correta.</p>
-                    <div class="phase-stats">
-                        <span>Melhor pontuação: <span id="best-score-1">0</span></span>
-                    </div>
-                    <button class="play-phase-btn" onclick="GamePhases.startPhase(1)">Jogar</button>
-                </div>
 
-                <div class="phase-card locked" data-phase="2">
-                    <div class="phase-header">
-                        <span class="phase-icon">⚡</span>
-                        <h3>Fase 2 - Paralelismo</h3>
-                        <span class="phase-status">🔒</span>
-                    </div>
-                    <p>Identifique tarefas que podem ser executadas simultaneamente.</p>
-                    <div class="phase-requirement">Requer: 10 pontos</div>
-                    <button class="play-phase-btn" disabled onclick="GamePhases.startPhase(2)">Bloqueada</button>
-                </div>
+                </a>
+            </section>
 
-                <div class="phase-card locked" data-phase="3">
-                    <div class="phase-header">
-                        <span class="phase-icon">🔄</span>
-                        <h3>Fase 3 - Concorrência</h3>
-                        <span class="phase-status">🔒</span>
-                    </div>
-                    <p>Gerencie o acesso concorrente a dados compartilhados.</p>
-                    <div class="phase-requirement">Requer: 25 pontos</div>
-                    <button class="play-phase-btn" disabled onclick="GamePhases.startPhase(3)">Bloqueada</button>
-                </div>
-
-                <div class="phase-card locked" data-phase="4">
-                    <div class="phase-header">
-                        <span class="phase-icon">🌐</span>
-                        <h3>Fase 4 - Armazenamento Distribuído</h3>
-                        <span class="phase-status">🔒</span>
-                    </div>
-                    <p>Distribua dados entre servidores de forma eficiente.</p>
-                    <div class="phase-requirement">Requer: 45 pontos</div>
-                    <button class="play-phase-btn" disabled onclick="GamePhases.startPhase(4)">Bloqueada</button>
+        </section>
+        <section class="content_habilidades">
+            <h3>Equipamentos Ativos</h3>
+            <div class="equipamentos" id="equipamentos-container">
+                <!-- Os equipamentos serão carregados dinamicamente via JavaScript -->
+                <div class="no-equipment">
+                    <p>Nenhum equipamento ativo</p>
+                    <p class="suggestion">Visite a <a href="loja.html">Loja</a> para comprar equipamentos!</p>
                 </div>
             </div>
-        </div>
-    </div>
+        </section>
+    </main>
+    </section>
 
-    <!-- Tela da Loja -->
-    <div id="shop" class="screen">
-        <div class="container">
-            <header class="game-header">
-                <button class="back-btn" onclick="GameScreens.showScreen('main-menu')">← Voltar</button>
-                <div class="points-display">
-                    <span class="points-icon">⭐</span>
-                    <span id="shop-points">0</span> pontos
-                </div>
-            </header>
+    <!-- JavaScript para navegação e sincronização -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Carregar e sincronizar dados da loja
+            loadGameData();
 
-            <h2>Loja de Habilidades</h2>
-            
-            <div class="shop-items">
-                <div class="shop-item" data-skill="bonus-points">
-                    <div class="item-icon">💰</div>
-                    <div class="item-info">
-                        <h3>Bônus de Pontos</h3>
-                        <p>+10% pontos em todas as fases</p>
-                        <div class="item-price">Preço: 30 pontos</div>
-                    </div>
-                    <button class="buy-btn" onclick="GameShop.buySkill('bonus-points', 30)">Comprar</button>
-                </div>
+            // Botão Iniciar Jornada (placeholder)
+            const iniciarBtn = document.getElementById('iniciar-jornada-btn');
+            if (iniciarBtn) {
+                iniciarBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    alert('Funcionalidade "Iniciar Jornada" será implementada em breve!');
+                });
+            }
 
-                <div class="shop-item" data-skill="auto-unlock">
-                    <div class="item-icon">🔓</div>
-                    <div class="item-info">
-                        <h3>Desbloqueio Automático</h3>
-                        <p>Fases são desbloqueadas automaticamente</p>
-                        <div class="item-price">Preço: 50 pontos</div>
-                    </div>
-                    <button class="buy-btn" onclick="GameShop.buySkill('auto-unlock', 50)">Comprar</button>
-                </div>
+            // Botão Fases (placeholder)
+            const fasesBtn = document.getElementById('fases-btn');
+            if (fasesBtn) {
+                fasesBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    alert('Funcionalidade "Fases" será implementada em breve!');
+                });
+            }
 
-                <div class="shop-item" data-skill="time-bonus">
-                    <div class="item-icon">⏰</div>
-                    <div class="item-info">
-                        <h3>Bônus de Tempo</h3>
-                        <p>+10 pontos de bônus por velocidade</p>
-                        <div class="item-price">Preço: 25 pontos</div>
-                    </div>
-                    <button class="buy-btn" onclick="GameShop.buySkill('time-bonus', 25)">Comprar</button>
-                </div>
-            </div>
+            function loadGameData() {
+                // Carregar pontos
+                const pontos = parseInt(localStorage.getItem('gamePoints') || '2450');
+                const pontosDisplay = document.getElementById('pontos-display');
+                if (pontosDisplay) {
+                    pontosDisplay.textContent = `${pontos} Pontos`;
+                }
 
-            <div class="owned-skills">
-                <h3>Habilidades Adquiridas</h3>
-                <div id="owned-skills-list">
-                    <p class="no-skills">Nenhuma habilidade adquirida ainda.</p>
-                </div>
-            </div>
-        </div>
-    </div>
+                // Carregar equipamentos
+                const equippedItems = JSON.parse(localStorage.getItem('equippedItems') || '[]');
+                displayEquippedItems(equippedItems);
+            }
 
-    <!-- Tela de Configurações -->
-    <div id="settings" class="screen">
-        <div class="container">
-            <header class="game-header">
-                <button class="back-btn" onclick="GameScreens.showScreen('main-menu')">← Voltar</button>
-            </header>
+            function displayEquippedItems(items) {
+                const container = document.getElementById('equipamentos-container');
+                
+                if (items.length === 0) {
+                    container.innerHTML = `
+                        <div class="no-equipment">
+                            <p>Nenhum equipamento ativo</p>
+                            <p class="suggestion">Visite a <a href="loja.html">Loja</a> para comprar equipamentos!</p>
+                        </div>
+                    `;
+                } else {
+                    container.innerHTML = items.map(item => `
+                        <article class="equipamento active-equipment">
+                            <div class="equipment-header">
+                                <h4>${item.name}</h4>
+                                <span class="equipment-category">${getCategoryDisplayName(item.category)}</span>
+                            </div>
+                            <p>${item.description}</p>
+                            <div class="equipment-footer">
+                                <span class="equipment-price">${item.price} Pontos</span>
+                                <span class="equipment-status">✓ Ativo</span>
+                            </div>
+                        </article>
+                    `).join('');
+                }
+            }
 
-            <h2>Configurações</h2>
-            
-            <div class="settings-options">
-                <div class="setting-item">
-                    <label for="sound-toggle">Som do jogo:</label>
-                    <div class="toggle-switch">
-                        <input type="checkbox" id="sound-toggle" checked onchange="GameSettings.toggleSound(this.checked)">
-                        <span class="toggle-slider"></span>
-                    </div>
-                </div>
+            function getCategoryDisplayName(category) {
+                const categories = {
+                    'velocidade': 'Velocidade',
+                    'precisao': 'Precisão',
+                    'bonus': 'Bônus',
+                    'especiais': 'Especiais'
+                };
+                return categories[category] || 'Geral';
+            }
 
-                <div class="setting-item">
-                    <label>Progresso do jogador:</label>
-                    <button class="danger-btn" onclick="GameSettings.resetProgress()">
-                        🗑️ Resetar Progresso
-                    </button>
-                </div>
+            // Atualizar dados quando a página ganha foco (quando volta de outras páginas)
+            window.addEventListener('focus', function() {
+                loadGameData();
+            });
 
-                <div class="setting-item">
-                    <label>Informações do jogo:</label>
-                    <div class="game-info">
-                        <p><strong>Versão:</strong> 1.0.0</p>
-                        <p><strong>Desenvolvido em:</strong> HTML, CSS, JavaScript</p>
-                        <p><strong>Tema:</strong> Redes de Computadores e Programação</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+            // Escutar mudanças no localStorage (para sincronização em tempo real)
+            window.addEventListener('storage', function(e) {
+                if (e.key === 'gamePoints' || e.key === 'equippedItems') {
+                    loadGameData();
+                }
+            });
+        });
+    </script>
 
-    <!-- Telas de Fases (serão carregadas dinamicamente) -->
-    <div id="phase-game" class="screen">
-        <!-- Conteúdo da fase será inserido aqui dinamicamente -->
-    </div>
-
-    <!-- Modal de Resultados -->
-    <div id="result-modal" class="modal">
-        <div class="modal-content">
-            <h2 id="result-title">Fase Concluída!</h2>
-            <div class="result-stars" id="result-stars"></div>
-            <p id="result-message">Parabéns! Você ganhou pontos.</p>
-            <div class="result-points">
-                <span id="points-earned">+0</span> pontos
-            </div>
-            <button class="modal-btn primary" onclick="GameScreens.closeModal()">Continuar</button>
-        </div>
-    </div>
-
-    <!-- Scripts -->
-    <script src="js/gameData.js"></script>
-    <script src="js/gameStorage.js"></script>
-    <script src="js/gameScreens.js"></script>
-    <script src="js/gamePhases.js"></script>
-    <script src="js/gameShop.js"></script>
-    <script src="js/gameSettings.js"></script>
-    <script src="js/phases/phase1.js"></script>
-    <script src="js/phases/phase2.js"></script>
-    <script src="js/phases/phase3.js"></script>
-    <script src="js/phases/phase4.js"></script>
-    <script src="js/main.js"></script>
 </body>
+
 </html>

@@ -1,0 +1,517 @@
+/* CSS específico para a página da loja */
+
+/* Permitir scroll na loja */
+* {
+    overflow: visible;
+}
+
+html {
+    overflow-y: auto;
+    height: 100%;
+}
+
+body {
+    height: auto;
+    min-height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.screen-section {
+    width: 100%;
+    min-height: 100vh;
+    height: auto;
+    padding-bottom: 2rem;
+}
+
+/* Header da Loja */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 2rem;
+    gap: 2rem;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    flex: 0 0 auto;
+}
+
+.header-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    text-align: center;
+}
+
+.header-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex: 0 0 auto;
+}
+
+/* Botão Voltar no Header */
+.back-button {
+    background: rgba(225, 234, 45, 0.8);
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    border: 2px solid rgba(225, 234, 45, 0.9);
+    position: relative;
+    overflow: hidden;
+}
+
+.back-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s;
+}
+
+.back-button:hover {
+    background: rgba(225, 234, 45, 0.95);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(225, 234, 45, 0.4);
+}
+
+.back-button:hover::before {
+    left: 100%;
+}
+
+.back-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #000;
+    font-family: "Kdam Thmor Pro";
+    font-size: 18px;
+    text-decoration: none;
+    padding: 0.75rem 1.25rem;
+    font-weight: bold;
+}
+
+.back-link svg {
+    transition: all 0.3s ease;
+}
+
+.back-button:hover .back-link svg {
+    transform: translateX(-3px) scale(1.1);
+}
+
+/* Filtros da Loja */
+.shop-filters {
+    width: 100%;
+    padding: 2rem 0 1rem 0;
+    display: flex;
+    justify-content: center;
+}
+
+.filter-container {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.filter-btn {
+    padding: 0.75rem 1.5rem;
+    background: rgba(0, 221, 255, 0.3);
+    border: 2px solid rgba(0, 221, 255, 0.5);
+    border-radius: 25px;
+    color: #fff;
+    font-family: "Kdam Thmor Pro";
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+.filter-btn:hover {
+    background: rgba(0, 221, 255, 0.5);
+    transform: translateY(-2px);
+}
+
+.filter-btn.active {
+    background: rgba(225, 234, 45, 0.8);
+    border-color: #E1EA2D;
+    color: #000;
+    transform: translateY(-2px);
+}
+
+/* Grid da Loja */
+.shop-items {
+    padding: 0 2rem;
+}
+
+.shop-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* Item da Loja */
+.shop-item {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 15px;
+    padding: 1.5rem;
+    border: 3px solid rgba(0, 221, 255, 0.3);
+    transition: all 0.4s ease;
+    animation: slideInFromBottom 0.6s ease-out forwards;
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.shop-item:hover {
+    transform: translateY(-5px);
+    border-color: #0DF;
+    box-shadow: 0 10px 25px rgba(0, 221, 255, 0.3);
+}
+
+.shop-item.purchased {
+    background: rgba(225, 234, 45, 0.2);
+    border-color: #E1EA2D;
+}
+
+.shop-item.fade-in {
+    animation: fadeInScale 0.4s ease-out forwards;
+}
+
+/* Ícone do Item */
+.item-icon {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    background: rgba(0, 221, 255, 0.1);
+    border-radius: 10px;
+}
+
+.item-icon svg {
+    filter: drop-shadow(0 2px 8px rgba(0, 221, 255, 0.3));
+}
+
+/* Informações do Item */
+.item-info {
+    text-align: center;
+}
+
+.item-name {
+    font-family: "Kdam Thmor Pro";
+    font-size: 22px;
+    color: #000;
+    margin-bottom: 0.5rem;
+}
+
+.item-description {
+    font-family: "Kdam Thmor Pro";
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 1rem;
+    line-height: 1.4;
+}
+
+/* Tags de Efeito */
+.item-effects {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+.effect-tag {
+    padding: 0.25rem 0.75rem;
+    border-radius: 15px;
+    font-size: 12px;
+    font-weight: bold;
+    font-family: "Kdam Thmor Pro";
+}
+
+.effect-tag.speed {
+    background: rgba(255, 107, 107, 0.8);
+    color: white;
+}
+
+.effect-tag.precision {
+    background: rgba(78, 205, 196, 0.8);
+    color: white;
+}
+
+.effect-tag.bonus {
+    background: rgba(255, 193, 7, 0.8);
+    color: #000;
+}
+
+/* Footer do Item */
+.item-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 2px solid rgba(0, 221, 255, 0.2);
+}
+
+.item-price {
+    font-family: "Kdam Thmor Pro";
+    font-size: 18px;
+    font-weight: bold;
+    color: #E1EA2D;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.buy-btn {
+    padding: 0.5rem 1.5rem;
+    background: linear-gradient(135deg, #0DF, #00a8cc);
+    border: none;
+    border-radius: 20px;
+    color: white;
+    font-family: "Kdam Thmor Pro";
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 10px rgba(0, 221, 255, 0.3);
+}
+
+.buy-btn:hover {
+    background: linear-gradient(135deg, #00a8cc, #0DF);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 221, 255, 0.5);
+}
+
+.buy-btn:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+/* Equipamentos Ativos */
+.equipped-items {
+    padding: 2rem;
+    text-align: center;
+}
+
+.equipped-items h3 {
+    font-family: "Kdam Thmor Pro";
+    font-size: 28px;
+    color: #E1EA2D;
+    margin-bottom: 2rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.equipped-slots {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.equipped-slot {
+    width: 200px;
+    height: 100px;
+    background: rgba(0, 221, 255, 0.1);
+    border: 3px dashed rgba(0, 221, 255, 0.3);
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.equipped-slot.empty {
+    border-style: dashed;
+}
+
+.equipped-slot.filled {
+    background: rgba(225, 234, 45, 0.3);
+    border: 3px solid #E1EA2D;
+    border-style: solid;
+}
+
+.slot-text {
+    font-family: "Kdam Thmor Pro";
+    color: rgba(0, 221, 255, 0.5);
+    font-size: 16px;
+}
+
+.equipped-name {
+    font-family: "Kdam Thmor Pro";
+    color: #000;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    padding: 0 1rem;
+}
+
+.unequip-btn {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    width: 25px;
+    height: 25px;
+    background: rgba(255, 0, 0, 0.8);
+    border: none;
+    border-radius: 50%;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.unequip-btn:hover {
+    background: rgba(255, 0, 0, 1);
+    transform: scale(1.1);
+}
+
+/* Mensagens de Feedback */
+.message {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 1rem 2rem;
+    border-radius: 10px;
+    font-family: "Kdam Thmor Pro";
+    font-size: 14px;
+    z-index: 1000;
+    animation: slideInMessage 0.3s ease-out;
+}
+
+.message.success {
+    background: rgba(76, 175, 80, 0.9);
+    color: white;
+}
+
+.message.error {
+    background: rgba(244, 67, 54, 0.9);
+    color: white;
+}
+
+.message.warning {
+    background: rgba(255, 193, 7, 0.9);
+    color: #000;
+}
+
+.message.info {
+    background: rgba(33, 150, 243, 0.9);
+    color: white;
+}
+
+/* Animações */
+@keyframes slideInFromBottom {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInScale {
+    0% {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes slideInMessage {
+    0% {
+        opacity: 0;
+        transform: translateX(100px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem;
+    }
+    
+    .header-left {
+        align-self: flex-start;
+    }
+    
+    .header-center {
+        order: 1;
+    }
+    
+    .header-info {
+        order: 2;
+        align-self: flex-end;
+    }
+    
+    .back-link {
+        font-size: 16px;
+        padding: 0.5rem 1rem;
+    }
+    
+    .shop-grid {
+        grid-template-columns: 1fr;
+        padding: 0 1rem;
+        gap: 1rem;
+    }
+    
+    .filter-container {
+        gap: 0.5rem;
+    }
+    
+    .filter-btn {
+        font-size: 14px;
+        padding: 0.5rem 1rem;
+    }
+    
+    .equipped-slots {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .equipped-slot {
+        width: 100%;
+        max-width: 300px;
+    }
+}
+
+@media (max-width: 480px) {
+    .shop-items {
+        padding: 0 1rem;
+    }
+    
+    .shop-item {
+        padding: 1rem;
+    }
+    
+    .item-name {
+        font-size: 18px;
+    }
+    
+    .equipped-items {
+        padding: 1rem;
+    }
+    
+    .equipped-items h3 {
+        font-size: 22px;
+    }
+}

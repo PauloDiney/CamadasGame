@@ -1,0 +1,301 @@
+/* CSS específico para a página de configurações */
+
+/* Permitir scroll apenas na página de configurações */
+* {
+    overflow: visible;
+}
+
+html {
+    overflow-y: auto;
+    height: 100%;
+}
+
+body {
+    height: auto;
+    min-height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+/* Configurações gerais da tela */
+.screen-section {
+    width: 100%;
+    min-height: 100vh;
+    height: auto;
+    transition: opacity 0.3s ease-in-out;
+    overflow: visible;
+}
+
+/* Layout dos itens de configuração */
+.config-option .config-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 1rem;
+}
+
+.config-text h3 {
+    color: #000;
+    font-family: "Kdam Thmor Pro";
+    font-size: 24px;
+    margin: 0;
+    margin-bottom: 5px;
+}
+
+.config-text p {
+    color: #333;
+    font-family: "Kdam Thmor Pro";
+    font-size: 14px;
+    margin: 0;
+    opacity: 0.8;
+}
+
+/* Slider de volume */
+.config-slider {
+    width: 120px;
+    height: 6px;
+    border-radius: 3px;
+    background: rgba(0, 0, 0, 0.2);
+    outline: none;
+    appearance: none;
+    -webkit-appearance: none;
+    cursor: pointer;
+}
+
+.config-slider::-webkit-slider-thumb {
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #E1EA2D;
+    cursor: pointer;
+    border: 2px solid #0DF;
+    transition: all 0.3s ease;
+}
+
+.config-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+    box-shadow: 0 0 10px rgba(225, 234, 45, 0.5);
+}
+
+.config-slider::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #E1EA2D;
+    cursor: pointer;
+    border: 2px solid #0DF;
+    transition: all 0.3s ease;
+}
+
+/* Toggle switch */
+.config-toggle {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 30px;
+}
+
+.config-toggle input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.toggle-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+    transition: 0.4s;
+    border-radius: 30px;
+}
+
+.toggle-slider:before {
+    position: absolute;
+    content: "";
+    height: 22px;
+    width: 22px;
+    left: 4px;
+    bottom: 4px;
+    background-color: #ccc;
+    transition: 0.4s;
+    border-radius: 50%;
+}
+
+.config-toggle input:checked + .toggle-slider {
+    background-color: #0DF;
+}
+
+.config-toggle input:checked + .toggle-slider:before {
+    transform: translateX(30px);
+    background-color: #E1EA2D;
+}
+
+.toggle-slider:hover {
+    box-shadow: 0 0 10px rgba(0, 221, 255, 0.3);
+}
+
+/* Select personalizado */
+.config-select {
+    padding: 8px 15px;
+    border-radius: 8px;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    background: rgba(255, 255, 255, 0.9);
+    color: #000;
+    font-family: "Kdam Thmor Pro";
+    font-size: 16px;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.3s ease;
+    min-width: 120px;
+}
+
+.config-select:focus {
+    border-color: #0DF;
+    box-shadow: 0 0 10px rgba(0, 221, 255, 0.3);
+}
+
+.config-select:hover {
+    border-color: #0DF;
+    background: rgba(255, 255, 255, 1);
+}
+
+/* Botões de ação */
+.config-action {
+    background: rgba(225, 234, 45, 0.7);
+}
+
+.config-action:hover {
+    background: rgba(225, 234, 45, 0.85);
+}
+
+.config-button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    color: #000;
+    font-family: "Kdam Thmor Pro";
+    font-size: 32px;
+    text-decoration: none;
+    padding: 0.5rem;
+    transition: color 0.3s ease;
+}
+
+.config-button.reset {
+    color: #d32f2f;
+}
+
+.config-button.reset:hover {
+    color: #b71c1c;
+}
+
+.config-button svg {
+    width: 2.5rem;
+    height: 2.5rem;
+    transition: all 0.3s ease;
+}
+
+.config-action:hover svg {
+    transform: translateX(5px) scale(1.05);
+}
+
+/* Estatísticas */
+.stats-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+}
+
+.stat-card {
+    text-align: center;
+}
+
+.stat-number {
+    font-size: 32px;
+    color: #0DF;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 8px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    margin-top: 10px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #0DF, #E1EA2D);
+    border-radius: 4px;
+    transition: width 0.8s ease;
+    animation: progressGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes progressGlow {
+    0% {
+        box-shadow: 0 0 5px rgba(0, 221, 255, 0.3);
+    }
+    100% {
+        box-shadow: 0 0 15px rgba(0, 221, 255, 0.6);
+    }
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .config-content {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+    
+    .config-text {
+        margin-bottom: 1rem;
+    }
+    
+    .config-button {
+        font-size: 24px;
+    }
+    
+    .stat-number {
+        font-size: 24px;
+    }
+}
+
+/* Animações específicas para a página de configurações */
+.config-option {
+    animation: slideInFromLeft 0.6s ease-out forwards;
+}
+
+.config-option:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.config-option:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.config-option:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+.config-option:nth-child(4) {
+    animation-delay: 0.4s;
+}
+
+.config-action:nth-child(5) {
+    animation-delay: 0.5s;
+}
+
+.config-action:nth-child(6) {
+    animation-delay: 0.6s;
+}

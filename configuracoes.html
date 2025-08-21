@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configurações - Camadas da Conexão</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/configuracoes.css">
+    <link href="https://fonts.googleapis.com/css2?family=Kdam+Thmor+Pro&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <section id="configuracoes" class="screen-section">
+        <header class="header">
+            <div>
+                <h1 class="header-title">Configurações</h1>
+                <p class="header-subtitle">Personalize sua experiência</p>
+            </div>
+            <div class="header-info">
+                <svg xmlns="http://www.w3.org/2000/svg" width="65" height="61" viewBox="0 0 65 61" fill="none">
+                    <path
+                        d="M32.5 0L40.0212 23.1479H64.3604L44.6696 37.4541L52.1908 60.6021L32.5 46.2959L12.8092 60.6021L20.3304 37.4541L0.639606 23.1479H24.9788L32.5 0Z"
+                        fill="#E1EA2D" />
+                </svg>
+                <p>0 Pontos</p>
+            </div>
+        </header>
+
+        <main>
+            <section class="content_inputs">
+                <section class="input_container config-option">
+                    <div class="config-content">
+                        <div class="config-text">
+                            <h3>Volume do Som</h3>
+                            <p>Ajuste o volume dos efeitos sonoros</p>
+                        </div>
+                        <input type="range" min="0" max="100" value="70" class="config-slider">
+                    </div>
+                </section>
+
+                <section class="input_container config-option">
+                    <div class="config-content">
+                        <div class="config-text">
+                            <h3>Música de Fundo</h3>
+                            <p>Ativar/desativar música ambiente</p>
+                        </div>
+                        <label class="config-toggle">
+                            <input type="checkbox" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                </section>
+
+                <section class="input_container config-option">
+                    <div class="config-content">
+                        <div class="config-text">
+                            <h3>Dificuldade</h3>
+                            <p>Escolha o nível de desafio</p>
+                        </div>
+                        <select class="config-select">
+                            <option value="facil">Fácil</option>
+                            <option value="medio" selected>Médio</option>
+                            <option value="dificil">Difícil</option>
+                        </select>
+                    </div>
+                </section>
+
+                <section class="input_container config-option">
+                    <div class="config-content">
+                        <div class="config-text">
+                            <h3>Modo Escuro</h3>
+                            <p>Interface com tema escuro</p>
+                        </div>
+                        <label class="config-toggle">
+                            <input type="checkbox">
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                </section>
+
+                <section class="input_container config-action">
+                    <a href="#" class="config-button reset">
+                        Resetar Progresso
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
+                            <path d="M20 5V15L12.5 7.5" stroke="#E1EA2D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M12.5 7.5C16.5 3.5 22 3.5 26.5 7.5C31 11.5 31 18.5 26.5 22.5C22 26.5 16.5 26.5 12.5 22.5" stroke="#E1EA2D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                </section>
+
+                <section class="input_container config-action">
+                    <a href="index.html" class="config-button back" id="voltar-menu-btn">
+                        Voltar ao Menu
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
+                            <path d="M25 10L15 20L25 30" stroke="#E1EA2D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                </section>
+            </section>
+
+            <section class="content_habilidades">
+                <h3>Estatísticas do Jogo</h3>
+                <div class="equipamentos stats-grid">
+                    <article class="equipamento stat-card">
+                        <h4>Fases Concluídas</h4>
+                        <p class="stat-number">3/7</p>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 43%;"></div>
+                        </div>
+                    </article>
+                    <article class="equipamento stat-card">
+                        <h4>Pontuação Total</h4>
+                        <p class="stat-number">2.450</p>
+                        <p>Melhor pontuação: 850</p>
+                    </article>
+                    <article class="equipamento stat-card">
+                        <h4>Tempo de Jogo</h4>
+                        <p class="stat-number">2h 35min</p>
+                        <p>Sessão mais longa: 45min</p>
+                    </article>
+                </div>
+            </section>
+        </main>
+    </section>
+
+    <!-- JavaScript específico para configurações -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Funcionalidade do slider de volume
+            const volumeSlider = document.querySelector('.config-slider');
+            if (volumeSlider) {
+                volumeSlider.addEventListener('input', function() {
+                    console.log('Volume ajustado para:', this.value + '%');
+                });
+            }
+
+            // Funcionalidade dos toggles
+            const toggles = document.querySelectorAll('.config-toggle input[type="checkbox"]');
+            toggles.forEach(toggle => {
+                toggle.addEventListener('change', function() {
+                    const setting = this.closest('.config-content').querySelector('h3').textContent;
+                    console.log(setting + ':', this.checked ? 'Ativado' : 'Desativado');
+                });
+            });
+
+            // Funcionalidade do select de dificuldade
+            const difficultySelect = document.querySelector('.config-select');
+            if (difficultySelect) {
+                difficultySelect.addEventListener('change', function() {
+                    console.log('Dificuldade alterada para:', this.value);
+                });
+            }
+
+            // Botão de reset
+            const resetBtn = document.querySelector('.config-button.reset');
+            if (resetBtn) {
+                resetBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    if (confirm('Tem certeza que deseja resetar todo o progresso? Esta ação não pode ser desfeita.')) {
+                        alert('Progresso resetado com sucesso!');
+                        // Aqui viria a lógica real de reset
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>
