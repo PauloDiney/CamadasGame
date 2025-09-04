@@ -23,6 +23,33 @@ svg{
     z-index: -2;
 }
 
+/* Garantir que todos os SVGs tenham z-index adequado */
+.container svg {
+    position: relative;
+    z-index: 10;
+    pointer-events: all;
+}
+
+/* Garantir que as divs que contêm os SVGs também sejam interativas */
+.container > div > div {
+    position: relative;
+    z-index: 5;
+    pointer-events: all;
+}
+
+/* Específico para lateral-esquerda-dentro e lateral-direita-dentro */
+.lateral-esquerda-dentro,
+.lateral-direita-dentro {
+    z-index: 3;
+    pointer-events: none; /* Permite que os cliques passem pela div container */
+}
+
+.lateral-esquerda-dentro > div,
+.lateral-direita-dentro > div {
+    pointer-events: all; /* Mas habilita para as divs filhas */
+    z-index: 10;
+}
+
 
 .cima {
     display: flex;
@@ -229,4 +256,29 @@ svg{
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    z-index: 5;
+}
+
+/* Debug: adicionar border temporário para identificar áreas clicáveis */
+.lateral-esquerda-dentro > div:hover,
+.lateral-direita-dentro > div:hover {
+    outline: 2px solid rgba(0, 221, 255, 0.5);
+    border-radius: 50%;
+}
+
+/* Garantir que os SVGs das extremidades tenham hover funcionando */
+.lateral-esquerda-dentro div:first-child svg,
+.lateral-esquerda-dentro div:last-child svg,
+.lateral-direita-dentro div:first-child svg,
+.lateral-direita-dentro div:last-child svg {
+    z-index: 15 !important;
+    position: relative;
+}
+
+/* Hover específico para elementos que podem estar sobrepostos */
+.lateral-esquerda-dentro svg:hover,
+.lateral-direita-dentro svg:hover {
+    cursor: pointer !important;
+    transform: scale(1.15) !important;
+    filter: drop-shadow(0 0 10px rgba(0, 221, 255, 0.8)) !important;
 }
