@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fase 5 - Camada de Aplicação</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/fase.css">
+    <link href="https://fonts.googleapis.com/css2?family=Kdam+Thmor+Pro&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="fase-container">
+        <!-- Header da Fase -->
+        <header class="fase-header">
+            <div class="header-left">
+                <a href="trilha.html" class="btn-voltar-fase">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                        <path d="M19 12H5M5 12L12 19M5 12L12 5" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                    Voltar à Trilha
+                </a>
+                <div class="fase-titulo">
+                    <h1>Fase 5: Camada de Aplicação</h1>
+                    <p>Protocolos e serviços de rede</p>
+                </div>
+            </div>
+            <div class="header-right">
+                <div class="fase-pontos">
+                    <span id="pontos-fase">0 Pontos</span>
+                </div>
+                <div class="fase-progresso">
+                    <span>Progresso: <span id="progresso-atual">0</span>/4</span>
+                    <div class="progresso-bar-mini">
+                        <div class="progresso-fill-mini" id="progresso-fill"></div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Área Principal da Fase -->
+        <main class="fase-main">
+            <!-- Seção de Introdução -->
+            <section class="fase-secao ativa" id="secao-intro">
+                <div class="secao-content">
+                    <div class="intro-visual">
+                        <div class="aplicacao-animada">
+                            <div class="servico web">
+                                <span>🌐</span>
+                                <small>Web</small>
+                            </div>
+                            <div class="servico email">
+                                <span>📧</span>
+                                <small>Email</small>
+                            </div>
+                            <div class="servico ftp">
+                                <span>📁</span>
+                                <small>FTP</small>
+                            </div>
+                            <div class="servico dns">
+                                <span>🌍</span>
+                                <small>DNS</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="intro-texto">
+                        <h2>Camada de Aplicação</h2>
+                        <p>A camada de aplicação é a interface entre o usuário e a rede. Ela contém todos os protocolos e serviços que as aplicações usam para comunicar através da rede.</p>
+                        
+                        <div class="conceitos-chave">
+                            <h3>Conceitos Principais:</h3>
+                            <ul>
+                                <li><strong>HTTP/HTTPS:</strong> Navegação web</li>
+                                <li><strong>SMTP/POP3/IMAP:</strong> Serviços de email</li>
+                                <li><strong>DNS:</strong> Resolução de nomes</li>
+                                <li><strong>FTP/SFTP:</strong> Transferência de arquivos</li>
+                            </ul>
+                        </div>
+
+                        <button class="btn-continuar" onclick="iniciarDesafio(1)">
+                            Começar Desafios
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Desafio 1: Protocolos Web -->
+            <section class="fase-secao" id="secao-desafio1">
+                <div class="secao-content">
+                    <div class="desafio-header">
+                        <h2>Desafio 1: Analise Requisições HTTP</h2>
+                        <p>Identifique os componentes de cada requisição HTTP</p>
+                    </div>
+
+                    <div class="desafio-area">
+                        <div class="requisicao-http">
+                            <div class="codigo-http">
+                                <pre><code>GET /produtos/lista HTTP/1.1
+Host: loja.exemplo.com
+User-Agent: Mozilla/5.0
+Accept: text/html
+Cookie: sessionid=abc123</code></pre>
+                            </div>
+                        </div>
+
+                        <div class="analise-componentes">
+                            <div class="componente-item">
+                                <label>Método HTTP:</label>
+                                <select id="metodo-http">
+                                    <option value="">Selecione</option>
+                                    <option value="GET">GET</option>
+                                    <option value="POST">POST</option>
+                                    <option value="PUT">PUT</option>
+                                    <option value="DELETE">DELETE</option>
+                                </select>
+                            </div>
+                            <div class="componente-item">
+                                <label>Recurso Solicitado:</label>
+                                <input type="text" id="recurso-http" placeholder="/produtos/lista">
+                            </div>
+                            <div class="componente-item">
+                                <label>Versão do Protocolo:</label>
+                                <select id="versao-http">
+                                    <option value="">Selecione</option>
+                                    <option value="HTTP/1.0">HTTP/1.0</option>
+                                    <option value="HTTP/1.1">HTTP/1.1</option>
+                                    <option value="HTTP/2.0">HTTP/2.0</option>
+                                </select>
+                            </div>
+                            <div class="componente-item">
+                                <label>Host do Servidor:</label>
+                                <input type="text" id="host-http" placeholder="loja.exemplo.com">
+                            </div>
+                        </div>
+                        
+                        <button class="btn-verificar" onclick="verificarHTTP()">Verificar Análise</button>
+                    </div>
+
+                    <div class="desafio-feedback" id="feedback-desafio1"></div>
+                </div>
+            </section>
+
+            <!-- Desafio 2: DNS -->
+            <section class="fase-secao" id="secao-desafio2">
+                <div class="secao-content">
+                    <div class="desafio-header">
+                        <h2>Desafio 2: Resolução DNS</h2>
+                        <p>Ordene as etapas do processo de resolução DNS</p>
+                    </div>
+
+                    <div class="desafio-area">
+                        <div class="dns-cenario">
+                            <h3>Cenário: Acessando www.exemplo.com</h3>
+                            <p>O usuário digita www.exemplo.com no navegador. Organize as etapas:</p>
+                        </div>
+
+                        <div class="etapas-dns">
+                            <div class="etapa-dns" data-ordem="1" onclick="selecionarEtapaDNS(this)">
+                                <span class="numero-etapa">1</span>
+                                <div class="etapa-conteudo">
+                                    <h4>Consulta Local</h4>
+                                    <p>Verificar cache DNS local</p>
+                                </div>
+                            </div>
+                            <div class="etapa-dns" data-ordem="2" onclick="selecionarEtapaDNS(this)">
+                                <span class="numero-etapa">2</span>
+                                <div class="etapa-conteudo">
+                                    <h4>Servidor DNS Recursivo</h4>
+                                    <p>Consultar servidor DNS do provedor</p>
+                                </div>
+                            </div>
+                            <div class="etapa-dns" data-ordem="3" onclick="selecionarEtapaDNS(this)">
+                                <span class="numero-etapa">3</span>
+                                <div class="etapa-conteudo">
+                                    <h4>Servidor Raiz</h4>
+                                    <p>Consultar servidor DNS raiz (.)</p>
+                                </div>
+                            </div>
+                            <div class="etapa-dns" data-ordem="4" onclick="selecionarEtapaDNS(this)">
+                                <span class="numero-etapa">4</span>
+                                <div class="etapa-conteudo">
+                                    <h4>Servidor TLD</h4>
+                                    <p>Consultar servidor .com</p>
+                                </div>
+                            </div>
+                            <div class="etapa-dns" data-ordem="5" onclick="selecionarEtapaDNS(this)">
+                                <span class="numero-etapa">5</span>
+                                <div class="etapa-conteudo">
+                                    <h4>Servidor Autoritativo</h4>
+                                    <p>Consultar servidor de exemplo.com</p>
+                                </div>
+                            </div>
+                            <div class="etapa-dns" data-ordem="6" onclick="selecionarEtapaDNS(this)">
+                                <span class="numero-etapa">6</span>
+                                <div class="etapa-conteudo">
+                                    <h4>Retorno do IP</h4>
+                                    <p>Receber o endereço IP final</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="sequencia-dns">
+                            <h4>Sequência Ordenada:</h4>
+                            <div class="sequencia-slots">
+                                <div class="slot-dns" data-posicao="1">1º</div>
+                                <div class="slot-dns" data-posicao="2">2º</div>
+                                <div class="slot-dns" data-posicao="3">3º</div>
+                                <div class="slot-dns" data-posicao="4">4º</div>
+                                <div class="slot-dns" data-posicao="5">5º</div>
+                                <div class="slot-dns" data-posicao="6">6º</div>
+                            </div>
+                        </div>
+
+                        <button class="btn-verificar" onclick="verificarDNS()" disabled>Verificar Sequência</button>
+                        <button class="btn-resetar" onclick="resetarDNS()">Resetar</button>
+                    </div>
+
+                    <div class="desafio-feedback" id="feedback-desafio2"></div>
+                </div>
+            </section>
+
+            <!-- Desafio 3: Email -->
+            <section class="fase-secao" id="secao-desafio3">
+                <div class="secao-content">
+                    <div class="desafio-header">
+                        <h2>Desafio 3: Fluxo de Email</h2>
+                        <p>Configure o fluxo completo de envio e recebimento de email</p>
+                    </div>
+
+                    <div class="desafio-area">
+                        <div class="email-cenario">
+                            <h3>Cenário: Ana (ana@empresa.com) envia email para Bob (bob@universidade.edu)</h3>
+                        </div>
+
+                        <div class="email-fluxo">
+                            <div class="participante remetente">
+                                <h4>📧 Ana</h4>
+                                <p>ana@empresa.com</p>
+                                <div class="protocolo-usado" data-protocolo="SMTP">
+                                    <select class="protocolo-select" data-tipo="envio">
+                                        <option value="">Protocolo de Envio</option>
+                                        <option value="SMTP">SMTP</option>
+                                        <option value="POP3">POP3</option>
+                                        <option value="IMAP">IMAP</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="servidor intermediario">
+                                <h4>🖥️ Servidor empresa.com</h4>
+                                <div class="protocolo-usado" data-protocolo="SMTP">
+                                    <select class="protocolo-select" data-tipo="transfer">
+                                        <option value="">Protocolo de Transferência</option>
+                                        <option value="SMTP">SMTP</option>
+                                        <option value="POP3">POP3</option>
+                                        <option value="IMAP">IMAP</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="servidor intermediario">
+                                <h4>🖥️ Servidor universidade.edu</h4>
+                                <div class="protocolo-usado" data-protocolo="SMTP">
+                                    <select class="protocolo-select" data-tipo="receive">
+                                        <option value="">Protocolo de Recebimento</option>
+                                        <option value="SMTP">SMTP</option>
+                                        <option value="POP3">POP3</option>
+                                        <option value="IMAP">IMAP</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="participante destinatario">
+                                <h4>📬 Bob</h4>
+                                <p>bob@universidade.edu</p>
+                                <div class="protocolo-usado" data-protocolo="POP3">
+                                    <select class="protocolo-select" data-tipo="client">
+                                        <option value="">Protocolo do Cliente</option>
+                                        <option value="SMTP">SMTP</option>
+                                        <option value="POP3">POP3</option>
+                                        <option value="IMAP">IMAP</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="email-info">
+                            <h4>Dicas:</h4>
+                            <ul>
+                                <li><strong>SMTP:</strong> Usado para envio e transferência entre servidores</li>
+                                <li><strong>POP3:</strong> Download de emails (remove do servidor)</li>
+                                <li><strong>IMAP:</strong> Sincronização de emails (mantém no servidor)</li>
+                            </ul>
+                        </div>
+                        
+                        <button class="btn-verificar" onclick="verificarEmail()" disabled>Verificar Fluxo</button>
+                    </div>
+
+                    <div class="desafio-feedback" id="feedback-desafio3"></div>
+                </div>
+            </section>
+
+            <!-- Conclusão da Fase -->
+            <section class="fase-secao" id="secao-conclusao">
+                <div class="secao-content">
+                    <div class="conclusao-visual">
+                        <div class="sucesso-icon">🎉</div>
+                        <h2>Parabéns! Todas as Fases Concluídas!</h2>
+                        <p>Você dominou todas as 7 camadas do modelo OSI!</p>
+                    </div>
+
+                    <div class="conquista-final">
+                        <h3>🏆 Conquista Desbloqueada: Mestre das Camadas OSI</h3>
+                        <div class="camadas-dominadas">
+                            <div class="camada-item">✓ Física</div>
+                            <div class="camada-item">✓ Enlace</div>
+                            <div class="camada-item">✓ Rede</div>
+                            <div class="camada-item">✓ Transporte</div>
+                            <div class="camada-item">✓ Aplicação</div>
+                        </div>
+                    </div>
+
+                    <div class="conhecimentos-adquiridos">
+                        <h3>Conhecimentos Adquiridos:</h3>
+                        <ul>
+                            <li>✓ Análise de requisições HTTP</li>
+                            <li>✓ Processo de resolução DNS</li>
+                            <li>✓ Fluxo de protocolos de email</li>
+                            <li>✓ Funcionamento da camada de aplicação</li>
+                        </ul>
+                    </div>
+
+                    <div class="resultados-fase">
+                        <div class="resultado-item">
+                            <span class="resultado-label">Desafios Concluídos:</span>
+                            <span class="resultado-valor">3/3</span>
+                        </div>
+                        <div class="resultado-item">
+                            <span class="resultado-label">Pontos Ganhos:</span>
+                            <span class="resultado-valor">+350</span>
+                        </div>
+                        <div class="resultado-item">
+                            <span class="resultado-label">Pontuação Total:</span>
+                            <span class="resultado-valor" id="pontos-total-final">0</span>
+                        </div>
+                    </div>
+
+                    <div class="conclusao-acoes">
+                        <button class="btn-continuar" onclick="voltarTrilha()">
+                            Voltar à Trilha
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- HUD de Progresso -->
+        <div class="hud-progresso">
+            <div class="hud-item">
+                <span>Fase:</span>
+                <span>5 - Aplicação</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sistema de Jogo: Tempo, Vida e Habilidades -->
+    <script src="js/gameSystemSimple.js"></script>
+    <script src="js/global.js"></script>
+    <script src="js/audio.js"></script>
+    <script src="js/darkmode.js"></script>
+    <script src="js/fase5.js"></script>
+
+</body>
+
+</html>

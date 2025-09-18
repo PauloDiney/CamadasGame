@@ -18,12 +18,9 @@
                 <h1 class="header-title">Camadas da Conexão</h1>
                 <p class="header-subtitle">Seja um menssageiro digital</p>
             </div>
-
             <div class="header-points">
                 <svg xmlns="http://www.w3.org/2000/svg" width="65" height="61" viewBox="0 0 65 61" fill="none">
-                    <path
-                        d="M32.5 0L40.0212 23.1479H64.3604L44.6696 37.4541L52.1908 60.6021L32.5 46.2959L12.8092 60.6021L20.3304 37.4541L0.639606 23.1479H24.9788L32.5 0Z"
-                        fill="#E1EA2D" />
+                    <path d="M32.5 0L40.0212 23.1479H64.3604L44.6696 37.4541L52.1908 60.6021L32.5 46.2959L12.8092 60.6021L20.3304 37.4541L0.639606 23.1479H24.9788L32.5 0Z" fill="#E1EA2D" />
                 </svg>
                 <p id="pontos-display">0 Pontos</p>
             </div>
@@ -44,7 +41,7 @@
                 </a>
             </section>
             <section class="input_container">
-                <a href="#" id="fases-btn">
+                <a href="fases.html" id="fases-btn">
 
                     Fases
                     <svg xmlns="http://www.w3.org/2000/svg" width="83" height="83" viewBox="0 0 83 83" fill="none">
@@ -102,7 +99,6 @@
         <section class="content_habilidades">
             <h3>Equipamentos Ativos</h3>
             <div class="equipamentos" id="equipamentos-container">
-                <!-- Os equipamentos serão carregados dinamicamente via JavaScript -->
                 <div class="no-equipment">
                     <p>Nenhum equipamento ativo</p>
                     <p class="suggestion">Visite a <a href="loja.html">Loja</a> para comprar equipamentos!</p>
@@ -112,84 +108,9 @@
     </main>
     </section>
 
-    <!-- JavaScript para navegação e sincronização -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Carregar e sincronizar dados da loja
-            
-
-            // Botão Fases (placeholder)
-            const fasesBtn = document.getElementById('fases-btn');
-            if (fasesBtn) {
-                fasesBtn.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    alert('Funcionalidade "Fases" será implementada em breve!');
-                });
-            }
-
-            function loadGameData() {
-                // Carregar pontos
-                const pontos = parseInt(localStorage.getItem('gamePoints') || '2450');
-                const pontosDisplay = document.getElementById('pontos-display');
-                if (pontosDisplay) {
-                    pontosDisplay.textContent = `${pontos} Pontos`;
-                }
-
-                // Carregar equipamentos
-                const equippedItems = JSON.parse(localStorage.getItem('equippedItems') || '[]');
-                displayEquippedItems(equippedItems);
-            }
-
-            function displayEquippedItems(items) {
-                const container = document.getElementById('equipamentos-container');
-                
-                if (items.length === 0) {
-                    container.innerHTML = `
-                        <div class="no-equipment">
-                            <p>Nenhum equipamento ativo</p>
-                            <p class="suggestion">Visite a <a href="loja.html">Loja</a> para comprar equipamentos!</p>
-                        </div>
-                    `;
-                } else {
-                    container.innerHTML = items.map(item => `
-                        <article class="equipamento active-equipment">
-                            <div class="equipment-header">
-                                <h4>${item.name}</h4>
-                                <span class="equipment-category">${getCategoryDisplayName(item.category)}</span>
-                            </div>
-                            <p>${item.description}</p>
-                            <div class="equipment-footer">
-                                <span class="equipment-price">${item.price} Pontos</span>
-                                <span class="equipment-status">✓ Ativo</span>
-                            </div>
-                        </article>
-                    `).join('');
-                }
-            }
-
-            function getCategoryDisplayName(category) {
-                const categories = {
-                    'velocidade': 'Velocidade',
-                    'precisao': 'Precisão',
-                    'bonus': 'Bônus',
-                    'especiais': 'Especiais'
-                };
-                return categories[category] || 'Geral';
-            }
-
-            // Atualizar dados quando a página ganha foco (quando volta de outras páginas)
-            window.addEventListener('focus', function() {
-                loadGameData();
-            });
-
-            // Escutar mudanças no localStorage (para sincronização em tempo real)
-            window.addEventListener('storage', function(e) {
-                if (e.key === 'gamePoints' || e.key === 'equippedItems') {
-                    loadGameData();
-                }
-            });
-        });
-    </script>
+    <script src="js/global.js"></script>
+    <script src="js/audio.js"></script>
+    <script src="js/darkmode.js"></script>
 
 </body>
 

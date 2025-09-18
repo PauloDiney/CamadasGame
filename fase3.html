@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fase 3 - Camada de Rede</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/fase.css">
+    <link href="https://fonts.googleapis.com/css2?family=Kdam+Thmor+Pro&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="fase-container">
+        <!-- Header da Fase -->
+        <header class="fase-header">
+            <div class="header-left">
+                <a href="trilha.html" class="btn-voltar-fase">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                        <path d="M19 12H5M5 12L12 19M5 12L12 5" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                    Voltar à Trilha
+                </a>
+                <div class="fase-titulo">
+                    <h1>Fase 3: Camada de Rede</h1>
+                    <p>Roteamento e endereçamento IP</p>
+                </div>
+            </div>
+            <div class="header-right">
+                <div class="fase-pontos">
+                    <span id="pontos-fase">0 Pontos</span>
+                </div>
+                <div class="fase-progresso">
+                    <span>Progresso: <span id="progresso-atual">0</span>/4</span>
+                    <div class="progresso-bar-mini">
+                        <div class="progresso-fill-mini" id="progresso-fill"></div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Área Principal da Fase -->
+        <main class="fase-main">
+            <!-- Seção de Introdução -->
+            <section class="fase-secao ativa" id="secao-intro">
+                <div class="secao-content">
+                    <div class="intro-visual">
+                        <div class="rede-animada">
+                            <div class="dispositivo router">
+                                <span>Router</span>
+                            </div>
+                            <div class="conexao"></div>
+                            <div class="dispositivo host">
+                                <span>Host A<br>192.168.1.10</span>
+                            </div>
+                            <div class="conexao"></div>
+                            <div class="dispositivo host">
+                                <span>Host B<br>192.168.2.20</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="intro-texto">
+                        <h2>Camada de Rede</h2>
+                        <p>A camada de rede é responsável pelo roteamento de pacotes entre diferentes redes. Ela usa endereços IP para identificar dispositivos e determinar o melhor caminho para entregar dados.</p>
+                        
+                        <div class="conceitos-chave">
+                            <h3>Conceitos Principais:</h3>
+                            <ul>
+                                <li><strong>Endereços IP:</strong> Identificação lógica de dispositivos</li>
+                                <li><strong>Roteamento:</strong> Determinação do melhor caminho</li>
+                                <li><strong>Subnetting:</strong> Divisão de redes</li>
+                                <li><strong>Protocolo IP:</strong> Internet Protocol</li>
+                            </ul>
+                        </div>
+
+                        <button class="btn-continuar" onclick="iniciarDesafio(1)">
+                            Começar Desafios
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Desafio 1: Endereços IP -->
+            <section class="fase-secao" id="secao-desafio1">
+                <div class="secao-content">
+                    <div class="desafio-header">
+                        <h2>Desafio 1: Classifique os Endereços IP</h2>
+                        <p>Identifique a classe de cada endereço IP (A, B, C, Privado ou Inválido)</p>
+                    </div>
+
+                    <div class="desafio-area">
+                        <div class="ip-addresses">
+                            <div class="ip-item" data-classe="A" onclick="abrirClassificacao(this)">
+                                <span class="ip-text">10.0.0.1</span>
+                                <div class="ip-classificacao">
+                                    <select class="classe-select">
+                                        <option value="">Selecione</option>
+                                        <option value="A">Classe A</option>
+                                        <option value="B">Classe B</option>
+                                        <option value="C">Classe C</option>
+                                        <option value="Privado">Privado</option>
+                                        <option value="Inválido">Inválido</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="ip-item" data-classe="B" onclick="abrirClassificacao(this)">
+                                <span class="ip-text">172.16.10.5</span>
+                                <div class="ip-classificacao">
+                                    <select class="classe-select">
+                                        <option value="">Selecione</option>
+                                        <option value="A">Classe A</option>
+                                        <option value="B">Classe B</option>
+                                        <option value="C">Classe C</option>
+                                        <option value="Privado">Privado</option>
+                                        <option value="Inválido">Inválido</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="ip-item" data-classe="C" onclick="abrirClassificacao(this)">
+                                <span class="ip-text">192.168.1.100</span>
+                                <div class="ip-classificacao">
+                                    <select class="classe-select">
+                                        <option value="">Selecione</option>
+                                        <option value="A">Classe A</option>
+                                        <option value="B">Classe B</option>
+                                        <option value="C">Classe C</option>
+                                        <option value="Privado">Privado</option>
+                                        <option value="Inválido">Inválido</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="ip-item" data-classe="A" onclick="abrirClassificacao(this)">
+                                <span class="ip-text">100.64.0.1</span>
+                                <div class="ip-classificacao">
+                                    <select class="classe-select">
+                                        <option value="">Selecione</option>
+                                        <option value="A">Classe A</option>
+                                        <option value="B">Classe B</option>
+                                        <option value="C">Classe C</option>
+                                        <option value="Privado">Privado</option>
+                                        <option value="Inválido">Inválido</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="ip-item" data-classe="Inválido" onclick="abrirClassificacao(this)">
+                                <span class="ip-text">256.100.50.25</span>
+                                <div class="ip-classificacao">
+                                    <select class="classe-select">
+                                        <option value="">Selecione</option>
+                                        <option value="A">Classe A</option>
+                                        <option value="B">Classe B</option>
+                                        <option value="C">Classe C</option>
+                                        <option value="Privado">Privado</option>
+                                        <option value="Inválido">Inválido</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="ip-item" data-classe="B" onclick="abrirClassificacao(this)">
+                                <span class="ip-text">130.50.100.200</span>
+                                <div class="ip-classificacao">
+                                    <select class="classe-select">
+                                        <option value="">Selecione</option>
+                                        <option value="A">Classe A</option>
+                                        <option value="B">Classe B</option>
+                                        <option value="C">Classe C</option>
+                                        <option value="Privado">Privado</option>
+                                        <option value="Inválido">Inválido</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button class="btn-verificar" onclick="verificarIPs()" disabled>Verificar Classificações</button>
+                    </div>
+
+                    <div class="desafio-feedback" id="feedback-desafio1"></div>
+                </div>
+            </section>
+
+            <!-- Desafio 2: Roteamento -->
+            <section class="fase-secao" id="secao-desafio2">
+                <div class="secao-content">
+                    <div class="desafio-header">
+                        <h2>Desafio 2: Monte a Tabela de Roteamento</h2>
+                        <p>Configure as rotas para conectar as redes corretamente</p>
+                    </div>
+
+                    <div class="desafio-area">
+                        <div class="topologia-rede">
+                            <div class="rede" data-rede="192.168.1.0/24">
+                                <span>Rede A<br>192.168.1.0/24</span>
+                            </div>
+                            <div class="router" data-router="R1">
+                                <span>Router R1</span>
+                            </div>
+                            <div class="rede" data-rede="192.168.2.0/24">
+                                <span>Rede B<br>192.168.2.0/24</span>
+                            </div>
+                            <div class="router" data-router="R2">
+                                <span>Router R2</span>
+                            </div>
+                            <div class="rede" data-rede="192.168.3.0/24">
+                                <span>Rede C<br>192.168.3.0/24</span>
+                            </div>
+                        </div>
+
+                        <div class="tabela-roteamento">
+                            <h3>Tabela de Roteamento - Router R1</h3>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Destino</th>
+                                        <th>Máscara</th>
+                                        <th>Gateway</th>
+                                        <th>Interface</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>192.168.1.0</td>
+                                        <td>255.255.255.0</td>
+                                        <td>
+                                            <select class="rota-select" data-destino="192.168.1.0">
+                                                <option value="">Selecione</option>
+                                                <option value="0.0.0.0">0.0.0.0</option>
+                                                <option value="192.168.2.1">192.168.2.1</option>
+                                            </select>
+                                        </td>
+                                        <td>eth0</td>
+                                    </tr>
+                                    <tr>
+                                        <td>192.168.2.0</td>
+                                        <td>255.255.255.0</td>
+                                        <td>
+                                            <select class="rota-select" data-destino="192.168.2.0">
+                                                <option value="">Selecione</option>
+                                                <option value="0.0.0.0">0.0.0.0</option>
+                                                <option value="192.168.2.1">192.168.2.1</option>
+                                            </select>
+                                        </td>
+                                        <td>eth1</td>
+                                    </tr>
+                                    <tr>
+                                        <td>192.168.3.0</td>
+                                        <td>255.255.255.0</td>
+                                        <td>
+                                            <select class="rota-select" data-destino="192.168.3.0">
+                                                <option value="">Selecione</option>
+                                                <option value="0.0.0.0">0.0.0.0</option>
+                                                <option value="192.168.2.1">192.168.2.1</option>
+                                            </select>
+                                        </td>
+                                        <td>eth1</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <button class="btn-verificar" onclick="verificarRoteamento()" disabled>Verificar Tabela</button>
+                    </div>
+
+                    <div class="desafio-feedback" id="feedback-desafio2"></div>
+                </div>
+            </section>
+
+            <!-- Desafio 3: Subnetting -->
+            <section class="fase-secao" id="secao-desafio3">
+                <div class="secao-content">
+                    <div class="desafio-header">
+                        <h2>Desafio 3: Cálculo de Subnetting</h2>
+                        <p>Calcule as informações de rede para o endereço IP fornecido</p>
+                    </div>
+
+                    <div class="desafio-area">
+                        <div class="subnet-problema">
+                            <div class="ip-dado">
+                                <h3>IP Fornecido: 192.168.10.150/26</h3>
+                            </div>
+                        </div>
+
+                        <div class="subnet-calculos">
+                            <div class="calculo-item">
+                                <label>Endereço de Rede:</label>
+                                <input type="text" id="endereco-rede" placeholder="192.168.10.xxx">
+                            </div>
+                            <div class="calculo-item">
+                                <label>Primeiro IP Válido:</label>
+                                <input type="text" id="primeiro-ip" placeholder="192.168.10.xxx">
+                            </div>
+                            <div class="calculo-item">
+                                <label>Último IP Válido:</label>
+                                <input type="text" id="ultimo-ip" placeholder="192.168.10.xxx">
+                            </div>
+                            <div class="calculo-item">
+                                <label>Endereço de Broadcast:</label>
+                                <input type="text" id="endereco-broadcast" placeholder="192.168.10.xxx">
+                            </div>
+                            <div class="calculo-item">
+                                <label>Máscara de Sub-rede:</label>
+                                <input type="text" id="mascara-subnet" placeholder="255.255.255.xxx">
+                            </div>
+                            <div class="calculo-item">
+                                <label>Quantidade de Hosts:</label>
+                                <input type="number" id="quantidade-hosts" placeholder="62">
+                            </div>
+                        </div>
+
+                        <button class="btn-verificar" onclick="verificarSubnetting()">Verificar Cálculos</button>
+                    </div>
+
+                    <div class="desafio-feedback" id="feedback-desafio3"></div>
+                </div>
+            </section>
+
+            <!-- Conclusão da Fase -->
+            <section class="fase-secao" id="secao-conclusao">
+                <div class="secao-content">
+                    <div class="conclusao-visual">
+                        <div class="sucesso-icon">✓</div>
+                        <h2>Parabéns! Fase 3 Concluída!</h2>
+                        <p>Você dominou os conceitos da Camada de Rede!</p>
+                    </div>
+
+                    <div class="conhecimentos-adquiridos">
+                        <h3>Conhecimentos Adquiridos:</h3>
+                        <ul>
+                            <li>✓ Classificação de endereços IP</li>
+                            <li>✓ Configuração de tabelas de roteamento</li>
+                            <li>✓ Cálculos de subnetting</li>
+                            <li>✓ Funcionamento da camada de rede</li>
+                        </ul>
+                    </div>
+
+                    <div class="resultados-fase">
+                        <div class="resultado-item">
+                            <span class="resultado-label">Desafios Concluídos:</span>
+                            <span class="resultado-valor">3/3</span>
+                        </div>
+                        <div class="resultado-item">
+                            <span class="resultado-label">Pontos Ganhos:</span>
+                            <span class="resultado-valor">+250</span>
+                        </div>
+                        <div class="resultado-item">
+                            <span class="resultado-label">Próxima Fase:</span>
+                            <span class="resultado-valor">Camada de Transporte</span>
+                        </div>
+                    </div>
+
+                    <div class="conclusao-acoes">
+                        <button class="btn-continuar" onclick="voltarTrilha()">
+                            Voltar à Trilha
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- HUD de Progresso -->
+        <div class="hud-progresso">
+            <div class="hud-item">
+                <span>Fase:</span>
+                <span>3 - Rede</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sistema de Jogo: Tempo, Vida e Habilidades -->
+    <script src="js/gameSystemSimple.js"></script>
+    <script src="js/global.js"></script>
+    <script src="js/audio.js"></script>
+    <script src="js/darkmode.js"></script>
+    <script src="js/fase3.js"></script>
+
+</body>
+
+</html>

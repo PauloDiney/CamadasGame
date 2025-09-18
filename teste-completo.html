@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste Completo - Sistema Corrigido</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background: #1a1a2e;
+            color: white;
+        }
+        .test-content {
+            margin-top: 100px;
+            padding: 20px;
+            text-align: center;
+        }
+        .test-buttons {
+            margin: 20px 0;
+        }
+        button {
+            background: #0DF;
+            color: black;
+            border: none;
+            padding: 10px 15px;
+            margin: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        button:hover {
+            background: #00bfff;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-content">
+        <h1>🎮 Teste do Sistema Corrigido</h1>
+        
+        <div class="test-buttons">
+            <h3>Testes Básicos:</h3>
+            <button onclick="gameSystemActions.status()">Ver Status (Console)</button>
+            <button onclick="gameSystemActions.acertou(100)">Simular Acerto (+100)</button>
+            <button onclick="gameSystemActions.errou('Teste manual')">Simular Erro (Perde Vida)</button>
+            <button onclick="gameSystemActions.ganharPontos(50)">Ganhar Pontos (+50)</button>
+        </div>
+        
+        <div class="test-buttons">
+            <h3>Testes de Habilidades:</h3>
+            <button onclick="testarVidaExtra()">Equipar Vida Extra</button>
+            <button onclick="testarTempoExtra()">Equipar Tempo Extra</button>
+            <button onclick="testarMultiplicador()">Equipar Multiplicador</button>
+            <button onclick="limparTudo()">Limpar Equipamentos</button>
+        </div>
+        
+        <div class="test-buttons">
+            <h3>Controles:</h3>
+            <button onclick="gameSystemActions.pausar()">Pausar Timer</button>
+            <button onclick="gameSystemActions.continuar()">Continuar Timer</button>
+            <button onclick="gameSystemActions.reiniciar()">Reiniciar Sistema</button>
+        </div>
+        
+        <p><strong>Instruções:</strong> Abra o console (F12) para ver os logs detalhados dos testes.</p>
+    </div>
+
+    <!-- Scripts necessários -->
+    <script src="js/gameSystemSimple.js"></script>
+    <script src="js/teste-rapido.js"></script>
+    
+    <script>
+        function testarVidaExtra() {
+            console.log('🧪 Equipando vida extra...');
+            let equipped = JSON.parse(localStorage.getItem('equippedItems') || '[]');
+            equipped = equipped.filter(item => (typeof item === 'object' ? item.id : item) !== 'vida-extra');
+            equipped.push({ id: 'vida-extra' });
+            localStorage.setItem('equippedItems', JSON.stringify(equipped));
+            window.simpleGameSystem = new SimpleGameSystem();
+            console.log('✅ Vida extra equipada! Vidas atuais:', window.simpleGameSystem.estado.vidas);
+        }
+        
+        function testarTempoExtra() {
+            console.log('🧪 Equipando tempo extra...');
+            let equipped = JSON.parse(localStorage.getItem('equippedItems') || '[]');
+            equipped = equipped.filter(item => (typeof item === 'object' ? item.id : item) !== 'cronometro-tempo-extra');
+            equipped.push({ id: 'cronometro-tempo-extra' });
+            localStorage.setItem('equippedItems', JSON.stringify(equipped));
+            window.simpleGameSystem = new SimpleGameSystem();
+            console.log('✅ Tempo extra equipado! Tempo atual:', window.simpleGameSystem.estado.tempo);
+        }
+        
+        function testarMultiplicador() {
+            console.log('🧪 Equipando multiplicador de pontos...');
+            let equipped = JSON.parse(localStorage.getItem('equippedItems') || '[]');
+            equipped = equipped.filter(item => (typeof item === 'object' ? item.id : item) !== 'multiplicador-pontos');
+            equipped.push({ id: 'multiplicador-pontos' });
+            localStorage.setItem('equippedItems', JSON.stringify(equipped));
+            window.simpleGameSystem = new SimpleGameSystem();
+            console.log('✅ Multiplicador equipado! Teste ganhando pontos...');
+        }
+        
+        function limparTudo() {
+            console.log('🧹 Limpando equipamentos...');
+            localStorage.setItem('equippedItems', '[]');
+            window.simpleGameSystem = new SimpleGameSystem();
+            console.log('✅ Equipamentos limpos! Sistema resetado.');
+        }
+    </script>
+</body>
+</html>

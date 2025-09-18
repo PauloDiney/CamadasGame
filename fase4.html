@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fase 4 - Camada de Transporte</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/fase.css">
+    <link href="https://fonts.googleapis.com/css2?family=Kdam+Thmor+Pro&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="fase-container">
+        <!-- Header da Fase -->
+        <header class="fase-header">
+            <div class="header-left">
+                <a href="trilha.html" class="btn-voltar-fase">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                        <path d="M19 12H5M5 12L12 19M5 12L12 5" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                    Voltar à Trilha
+                </a>
+                <div class="fase-titulo">
+                    <h1>Fase 4: Camada de Transporte</h1>
+                    <p>TCP, UDP e controle de fluxo</p>
+                </div>
+            </div>
+            <div class="header-right">
+                <div class="fase-pontos">
+                    <span id="pontos-fase">0 Pontos</span>
+                </div>
+                <div class="fase-progresso">
+                    <span>Progresso: <span id="progresso-atual">0</span>/4</span>
+                    <div class="progresso-bar-mini">
+                        <div class="progresso-fill-mini" id="progresso-fill"></div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Área Principal da Fase -->
+        <main class="fase-main">
+            <!-- Seção de Introdução -->
+            <section class="fase-secao ativa" id="secao-intro">
+                <div class="secao-content">
+                    <div class="intro-visual">
+                        <div class="transporte-animado">
+                            <div class="protocolo tcp">
+                                <span>TCP</span>
+                                <small>Confiável</small>
+                            </div>
+                            <div class="vs">VS</div>
+                            <div class="protocolo udp">
+                                <span>UDP</span>
+                                <small>Rápido</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="intro-texto">
+                        <h2>Camada de Transporte</h2>
+                        <p>A camada de transporte é responsável pela comunicação confiável entre aplicações. Ela oferece dois protocolos principais: TCP (confiável) e UDP (rápido).</p>
+                        
+                        <div class="conceitos-chave">
+                            <h3>Conceitos Principais:</h3>
+                            <ul>
+                                <li><strong>TCP:</strong> Transmission Control Protocol - confiável</li>
+                                <li><strong>UDP:</strong> User Datagram Protocol - rápido</li>
+                                <li><strong>Portas:</strong> Identificação de serviços</li>
+                                <li><strong>Controle de Fluxo:</strong> Gerenciamento de velocidade</li>
+                            </ul>
+                        </div>
+
+                        <button class="btn-continuar" onclick="iniciarDesafio(1)">
+                            Começar Desafios
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Desafio 1: TCP vs UDP -->
+            <section class="fase-secao" id="secao-desafio1">
+                <div class="secao-content">
+                    <div class="desafio-header">
+                        <h2>Desafio 1: Escolha o Protocolo Correto</h2>
+                        <p>Para cada aplicação, escolha se deve usar TCP ou UDP</p>
+                    </div>
+
+                    <div class="desafio-area">
+                        <div class="aplicacoes-lista">
+                            <div class="aplicacao-item" data-protocolo="TCP" onclick="selecionarProtocolo(this)">
+                                <div class="app-info">
+                                    <h3>🌐 Navegação Web (HTTP/HTTPS)</h3>
+                                    <p>Carregamento de páginas web</p>
+                                </div>
+                                <div class="protocolo-escolha">
+                                    <button class="btn-protocolo tcp" data-valor="TCP">TCP</button>
+                                    <button class="btn-protocolo udp" data-valor="UDP">UDP</button>
+                                </div>
+                            </div>
+
+                            <div class="aplicacao-item" data-protocolo="UDP" onclick="selecionarProtocolo(this)">
+                                <div class="app-info">
+                                    <h3>🎮 Jogos Online</h3>
+                                    <p>Ação em tempo real</p>
+                                </div>
+                                <div class="protocolo-escolha">
+                                    <button class="btn-protocolo tcp" data-valor="TCP">TCP</button>
+                                    <button class="btn-protocolo udp" data-valor="UDP">UDP</button>
+                                </div>
+                            </div>
+
+                            <div class="aplicacao-item" data-protocolo="TCP" onclick="selecionarProtocolo(this)">
+                                <div class="app-info">
+                                    <h3>📧 Email (SMTP)</h3>
+                                    <p>Envio de mensagens</p>
+                                </div>
+                                <div class="protocolo-escolha">
+                                    <button class="btn-protocolo tcp" data-valor="TCP">TCP</button>
+                                    <button class="btn-protocolo udp" data-valor="UDP">UDP</button>
+                                </div>
+                            </div>
+
+                            <div class="aplicacao-item" data-protocolo="UDP" onclick="selecionarProtocolo(this)">
+                                <div class="app-info">
+                                    <h3>📺 Streaming de Vídeo</h3>
+                                    <p>Transmissão ao vivo</p>
+                                </div>
+                                <div class="protocolo-escolha">
+                                    <button class="btn-protocolo tcp" data-valor="TCP">TCP</button>
+                                    <button class="btn-protocolo udp" data-valor="UDP">UDP</button>
+                                </div>
+                            </div>
+
+                            <div class="aplicacao-item" data-protocolo="TCP" onclick="selecionarProtocolo(this)">
+                                <div class="app-info">
+                                    <h3>📁 Transferência de Arquivos (FTP)</h3>
+                                    <p>Download/Upload de arquivos</p>
+                                </div>
+                                <div class="protocolo-escolha">
+                                    <button class="btn-protocolo tcp" data-valor="TCP">TCP</button>
+                                    <button class="btn-protocolo udp" data-valor="UDP">UDP</button>
+                                </div>
+                            </div>
+
+                            <div class="aplicacao-item" data-protocolo="UDP" onclick="selecionarProtocolo(this)">
+                                <div class="app-info">
+                                    <h3>🌍 DNS (Resolução de Nomes)</h3>
+                                    <p>Consultas rápidas</p>
+                                </div>
+                                <div class="protocolo-escolha">
+                                    <button class="btn-protocolo tcp" data-valor="TCP">TCP</button>
+                                    <button class="btn-protocolo udp" data-valor="UDP">UDP</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button class="btn-verificar" onclick="verificarProtocolos()" disabled>Verificar Escolhas</button>
+                    </div>
+
+                    <div class="desafio-feedback" id="feedback-desafio1"></div>
+                </div>
+            </section>
+
+            <!-- Desafio 2: Portas -->
+            <section class="fase-secao" id="secao-desafio2">
+                <div class="secao-content">
+                    <div class="desafio-header">
+                        <h2>Desafio 2: Associe Serviços às Portas</h2>
+                        <p>Conecte cada serviço à sua porta padrão correta</p>
+                    </div>
+
+                    <div class="desafio-area">
+                        <div class="portas-jogo">
+                            <div class="servicos-coluna">
+                                <h3>Serviços</h3>
+                                <div class="servico-item" draggable="true" data-servico="HTTP" data-porta="80">
+                                    <span>🌐 HTTP</span>
+                                </div>
+                                <div class="servico-item" draggable="true" data-servico="HTTPS" data-porta="443">
+                                    <span>🔒 HTTPS</span>
+                                </div>
+                                <div class="servico-item" draggable="true" data-servico="FTP" data-porta="21">
+                                    <span>📁 FTP</span>
+                                </div>
+                                <div class="servico-item" draggable="true" data-servico="SSH" data-porta="22">
+                                    <span>🔐 SSH</span>
+                                </div>
+                                <div class="servico-item" draggable="true" data-servico="TELNET" data-porta="23">
+                                    <span>📡 TELNET</span>
+                                </div>
+                                <div class="servico-item" draggable="true" data-servico="SMTP" data-porta="25">
+                                    <span>📧 SMTP</span>
+                                </div>
+                                <div class="servico-item" draggable="true" data-servico="DNS" data-porta="53">
+                                    <span>🌍 DNS</span>
+                                </div>
+                            </div>
+
+                            <div class="portas-coluna">
+                                <h3>Portas</h3>
+                                <div class="porta-slot" data-porta="21">
+                                    <span class="porta-numero">21</span>
+                                    <div class="slot-content"></div>
+                                </div>
+                                <div class="porta-slot" data-porta="22">
+                                    <span class="porta-numero">22</span>
+                                    <div class="slot-content"></div>
+                                </div>
+                                <div class="porta-slot" data-porta="23">
+                                    <span class="porta-numero">23</span>
+                                    <div class="slot-content"></div>
+                                </div>
+                                <div class="porta-slot" data-porta="25">
+                                    <span class="porta-numero">25</span>
+                                    <div class="slot-content"></div>
+                                </div>
+                                <div class="porta-slot" data-porta="53">
+                                    <span class="porta-numero">53</span>
+                                    <div class="slot-content"></div>
+                                </div>
+                                <div class="porta-slot" data-porta="80">
+                                    <span class="porta-numero">80</span>
+                                    <div class="slot-content"></div>
+                                </div>
+                                <div class="porta-slot" data-porta="443">
+                                    <span class="porta-numero">443</span>
+                                    <div class="slot-content"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button class="btn-verificar" onclick="verificarPortas()" disabled>Verificar Associações</button>
+                        <button class="btn-resetar" onclick="resetarPortas()">Resetar</button>
+                    </div>
+
+                    <div class="desafio-feedback" id="feedback-desafio2"></div>
+                </div>
+            </section>
+
+            <!-- Desafio 3: Simulação TCP -->
+            <section class="fase-secao" id="secao-desafio3">
+                <div class="secao-content">
+                    <div class="desafio-header">
+                        <h2>Desafio 3: Simule uma Conexão TCP</h2>
+                        <p>Organize as etapas do Three-Way Handshake na ordem correta</p>
+                    </div>
+
+                    <div class="desafio-area">
+                        <div class="tcp-simulacao">
+                            <div class="hosts">
+                                <div class="host cliente">
+                                    <h3>Cliente</h3>
+                                    <div class="estado" id="estado-cliente">Aguardando</div>
+                                </div>
+                                <div class="host servidor">
+                                    <h3>Servidor</h3>
+                                    <div class="estado" id="estado-servidor">Aguardando</div>
+                                </div>
+                            </div>
+
+                            <div class="etapas-tcp">
+                                <div class="etapa-item" data-ordem="1" onclick="selecionarEtapa(this)">
+                                    <span class="etapa-numero">1</span>
+                                    <div class="etapa-info">
+                                        <h4>SYN</h4>
+                                        <p>Cliente envia SYN</p>
+                                    </div>
+                                </div>
+                                <div class="etapa-item" data-ordem="2" onclick="selecionarEtapa(this)">
+                                    <span class="etapa-numero">2</span>
+                                    <div class="etapa-info">
+                                        <h4>SYN-ACK</h4>
+                                        <p>Servidor responde SYN-ACK</p>
+                                    </div>
+                                </div>
+                                <div class="etapa-item" data-ordem="3" onclick="selecionarEtapa(this)">
+                                    <span class="etapa-numero">3</span>
+                                    <div class="etapa-info">
+                                        <h4>ACK</h4>
+                                        <p>Cliente confirma com ACK</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="timeline-tcp">
+                                <div class="timeline-slot" data-posicao="1">
+                                    <span>1º</span>
+                                </div>
+                                <div class="timeline-slot" data-posicao="2">
+                                    <span>2º</span>
+                                </div>
+                                <div class="timeline-slot" data-posicao="3">
+                                    <span>3º</span>
+                                </div>
+                            </div>
+
+                            <button class="btn-simular" onclick="simularTCP()" disabled>Simular Handshake</button>
+                        </div>
+                    </div>
+
+                    <div class="desafio-feedback" id="feedback-desafio3"></div>
+                </div>
+            </section>
+
+            <!-- Conclusão da Fase -->
+            <section class="fase-secao" id="secao-conclusao">
+                <div class="secao-content">
+                    <div class="conclusao-visual">
+                        <div class="sucesso-icon">✓</div>
+                        <h2>Parabéns! Fase 4 Concluída!</h2>
+                        <p>Você dominou os conceitos da Camada de Transporte!</p>
+                    </div>
+
+                    <div class="conhecimentos-adquiridos">
+                        <h3>Conhecimentos Adquiridos:</h3>
+                        <ul>
+                            <li>✓ Diferenças entre TCP e UDP</li>
+                            <li>✓ Portas padrão de serviços</li>
+                            <li>✓ Three-Way Handshake do TCP</li>
+                            <li>✓ Funcionamento da camada de transporte</li>
+                        </ul>
+                    </div>
+
+                    <div class="resultados-fase">
+                        <div class="resultado-item">
+                            <span class="resultado-label">Desafios Concluídos:</span>
+                            <span class="resultado-valor">3/3</span>
+                        </div>
+                        <div class="resultado-item">
+                            <span class="resultado-label">Pontos Ganhos:</span>
+                            <span class="resultado-valor">+300</span>
+                        </div>
+                        <div class="resultado-item">
+                            <span class="resultado-label">Próxima Fase:</span>
+                            <span class="resultado-valor">Camada de Aplicação</span>
+                        </div>
+                    </div>
+
+                    <div class="conclusao-acoes">
+                        <button class="btn-continuar" onclick="voltarTrilha()">
+                            Voltar à Trilha
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- HUD de Progresso -->
+        <div class="hud-progresso">
+            <div class="hud-item">
+                <span>Fase:</span>
+                <span>4 - Transporte</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sistema de Jogo: Tempo, Vida e Habilidades -->
+    <script src="js/gameSystemSimple.js"></script>
+    <script src="js/global.js"></script>
+    <script src="js/audio.js"></script>
+    <script src="js/darkmode.js"></script>
+    <script src="js/fase4.js"></script>
+
+</body>
+
+</html>

@@ -165,6 +165,63 @@ body {
     background: rgba(255, 255, 255, 1);
 }
 
+/* Controles de música */
+.music-controls {
+    background: rgba(0, 221, 255, 0.1);
+    border: 2px solid rgba(0, 221, 255, 0.3);
+}
+
+.music-controls:hover {
+    background: rgba(0, 221, 255, 0.15);
+    border-color: rgba(0, 221, 255, 0.5);
+}
+
+.music-control-buttons {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.music-btn {
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #0DF, #00a8cc);
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0, 221, 255, 0.3);
+}
+
+.music-btn:hover {
+    background: linear-gradient(135deg, #00a8cc, #0DF);
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 4px 15px rgba(0, 221, 255, 0.5);
+}
+
+.music-btn:active {
+    transform: translateY(0) scale(0.95);
+}
+
+.music-btn:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+#current-track {
+    font-size: 12px;
+    color: #0DF;
+    font-weight: bold;
+    margin-top: 5px;
+}
+
 /* Botões de ação */
 .config-action {
     background: rgba(225, 234, 45, 0.7);
@@ -298,4 +355,132 @@ body {
 
 .config-action:nth-child(6) {
     animation-delay: 0.6s;
+}
+
+/* ==================== MODO ESCURO - CONFIGURAÇÕES ==================== */
+
+body.dark-mode .config-option .config-content {
+    background: rgba(30, 30, 45, 0.8);
+}
+
+body.dark-mode .config-text h3 {
+    color: #ffffff;
+}
+
+body.dark-mode .config-text p {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+body.dark-mode .config-slider {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+body.dark-mode .config-slider::-webkit-slider-thumb {
+    background: #E1EA2D;
+    border-color: #4dd0e1;
+    box-shadow: 0 0 10px rgba(225, 234, 45, 0.3);
+}
+
+body.dark-mode .config-slider::-webkit-slider-thumb:hover {
+    box-shadow: 0 0 15px rgba(225, 234, 45, 0.6);
+}
+
+body.dark-mode .toggle-slider {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+body.dark-mode .toggle-slider:before {
+    background-color: #666;
+}
+
+body.dark-mode .config-toggle input:checked + .toggle-slider {
+    background-color: #4dd0e1;
+}
+
+body.dark-mode .config-toggle input:checked + .toggle-slider:before {
+    background-color: #E1EA2D;
+}
+
+body.dark-mode .toggle-slider:hover {
+    box-shadow: 0 0 10px rgba(77, 208, 225, 0.3);
+}
+
+body.dark-mode .config-select {
+    background: rgba(30, 30, 45, 0.9);
+    border-color: rgba(0, 221, 255, 0.4);
+    color: #ffffff;
+}
+
+body.dark-mode .config-select:focus,
+body.dark-mode .config-select:hover {
+    border-color: #4dd0e1;
+    background: rgba(30, 30, 45, 1);
+    box-shadow: 0 0 10px rgba(77, 208, 225, 0.3);
+}
+
+body.dark-mode .config-action {
+    background: rgba(225, 234, 45, 0.2);
+    border: 2px solid rgba(225, 234, 45, 0.4);
+}
+
+body.dark-mode .config-action:hover {
+    background: rgba(225, 234, 45, 0.3);
+    border-color: rgba(225, 234, 45, 0.6);
+}
+
+body.dark-mode .config-button {
+    color: #ffffff;
+}
+
+body.dark-mode .config-button.reset {
+    color: #ff6b6b;
+}
+
+body.dark-mode .config-button.reset:hover {
+    color: #ff4757;
+}
+
+body.dark-mode .music-controls {
+    background: rgba(0, 221, 255, 0.15);
+    border-color: rgba(0, 221, 255, 0.4);
+}
+
+body.dark-mode .music-controls:hover {
+    background: rgba(0, 221, 255, 0.2);
+    border-color: rgba(0, 221, 255, 0.6);
+}
+
+body.dark-mode #current-track {
+    color: #4dd0e1;
+}
+
+body.dark-mode .music-btn {
+    background: linear-gradient(135deg, #4dd0e1, #0097A7);
+    box-shadow: 0 2px 8px rgba(77, 208, 225, 0.3);
+}
+
+body.dark-mode .music-btn:hover {
+    background: linear-gradient(135deg, #0097A7, #4dd0e1);
+    box-shadow: 0 4px 15px rgba(77, 208, 225, 0.5);
+}
+
+body.dark-mode .stat-number {
+    color: #4dd0e1;
+}
+
+body.dark-mode .progress-fill {
+    background: linear-gradient(90deg, #4dd0e1, #E1EA2D);
+}
+
+@keyframes progressGlowDark {
+    0% {
+        box-shadow: 0 0 5px rgba(77, 208, 225, 0.3);
+    }
+    100% {
+        box-shadow: 0 0 15px rgba(77, 208, 225, 0.6);
+    }
+}
+
+body.dark-mode .progress-fill {
+    animation: progressGlowDark 2s ease-in-out infinite alternate;
 }

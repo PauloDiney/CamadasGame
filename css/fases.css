@@ -1,0 +1,391 @@
+/* Estilos específicos para a página de fases */
+
+.fases-main {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    height: calc(100vh - 200px);
+    overflow-y: auto;
+}
+
+.voltar-container {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.voltar-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background: rgba(0, 221, 255, 0.2);
+    color: #0DF;
+    border: 2px solid #0DF;
+    border-radius: 10px;
+    text-decoration: none;
+    font-family: "Kdam Thmor Pro";
+    font-size: 16px;
+    transition: all 0.3s ease;
+    font-weight: 400;
+}
+
+.voltar-btn:hover {
+    background: rgba(0, 221, 255, 0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 221, 255, 0.3);
+}
+
+.fases-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 2rem;
+    padding: 1rem 0;
+}
+
+.fase-card {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+    border: 2px solid rgba(0, 221, 255, 0.3);
+    border-radius: 15px;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+}
+
+.fase-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(0, 221, 255, 0.1), transparent);
+    transition: left 0.8s ease;
+}
+
+.fase-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 221, 255, 0.2);
+    border-color: rgba(0, 221, 255, 0.6);
+}
+
+.fase-card:hover::before {
+    left: 100%;
+}
+
+/* Fase bloqueada */
+.fase-card[data-fase]:not([data-fase="1"]) {
+    opacity: 0.7;
+}
+
+.fase-card.locked {
+    background: linear-gradient(135deg, rgba(100, 100, 100, 0.1), rgba(50, 50, 50, 0.05));
+    border-color: rgba(100, 100, 100, 0.3);
+}
+
+.fase-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+    z-index: 2;
+}
+
+.fase-numero {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #0DF, #E1EA2D);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Kdam Thmor Pro";
+    font-size: 24px;
+    font-weight: bold;
+    color: #000;
+    box-shadow: 0 4px 15px rgba(0, 221, 255, 0.3);
+    transition: all 0.3s ease;
+}
+
+.fase-numero.locked {
+    background: linear-gradient(135deg, #666, #999);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.fase-info {
+    flex: 1;
+}
+
+.fase-info h3 {
+    color: #0DF;
+    font-family: "Kdam Thmor Pro";
+    font-size: 24px;
+    margin: 0;
+    margin-bottom: 0.5rem;
+}
+
+.fase-status {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: "Kdam Thmor Pro";
+    font-size: 14px;
+}
+
+.fase-status.unlocked {
+    color: #4CAF50;
+}
+
+.fase-status.locked {
+    color: #FF6B6B;
+}
+
+.status-icon {
+    font-size: 16px;
+}
+
+.fase-star {
+    transition: all 0.3s ease;
+}
+
+.fase-star:hover:not(.disabled) {
+    transform: rotate(15deg) scale(1.1);
+}
+
+.fase-star.disabled {
+    opacity: 0.3;
+}
+
+.fase-star.completed {
+    animation: starPulse 2s infinite;
+}
+
+@keyframes starPulse {
+    0%, 100% {
+        transform: scale(1);
+        filter: drop-shadow(0 0 5px rgba(225, 234, 45, 0.5));
+    }
+    50% {
+        transform: scale(1.1);
+        filter: drop-shadow(0 0 15px rgba(225, 234, 45, 0.8));
+    }
+}
+
+.fase-content {
+    position: relative;
+    z-index: 2;
+}
+
+.pontos-section {
+    margin-bottom: 1rem;
+    padding: 0.75rem 1rem;
+    background: linear-gradient(135deg, rgba(225, 234, 45, 0.2), rgba(225, 234, 45, 0.1));
+    border-radius: 8px;
+    border: 2px solid rgba(225, 234, 45, 0.3);
+    text-align: center;
+}
+
+.pontos-section h4 {
+    color: #E1EA2D;
+    font-family: "Kdam Thmor Pro";
+    font-size: 16px;
+    margin: 0;
+    text-shadow: 0 0 10px rgba(225, 234, 45, 0.5);
+}
+
+.teoria-section, .desafio-section {
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    border-left: 4px solid #0DF;
+}
+
+.teoria-section h4, .desafio-section h4 {
+    color: #E1EA2D;
+    font-family: "Kdam Thmor Pro";
+    font-size: 18px;
+    margin: 0 0 0.75rem 0;
+}
+
+.teoria-section p, .desafio-section p {
+    color: #FAFAFA;
+    font-family: "Kdam Thmor Pro";
+    font-size: 14px;
+    line-height: 1.5;
+    margin: 0 0 0.75rem 0;
+}
+
+.teoria-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.teoria-section li {
+    color: #FAFAFA;
+    font-family: "Kdam Thmor Pro";
+    font-size: 13px;
+    line-height: 1.4;
+    margin: 0.5rem 0;
+    padding-left: 1rem;
+    position: relative;
+}
+
+.teoria-section li::before {
+    content: "▶";
+    position: absolute;
+    left: 0;
+    color: #0DF;
+    font-size: 12px;
+}
+
+.teoria-section li strong {
+    color: #E1EA2D;
+}
+
+.desafio-section {
+    border-left-color: #E1EA2D;
+}
+
+.jogar-btn {
+    width: 100%;
+    padding: 1rem;
+    background: linear-gradient(135deg, #0DF, #E1EA2D);
+    color: #000;
+    border: none;
+    border-radius: 10px;
+    font-family: "Kdam Thmor Pro";
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.jogar-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s ease;
+}
+
+.jogar-btn:hover:not(.disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 221, 255, 0.4);
+}
+
+.jogar-btn:hover:not(.disabled)::before {
+    left: 100%;
+}
+
+.jogar-btn:active:not(.disabled) {
+    transform: translateY(0);
+}
+
+.jogar-btn.disabled {
+    background: linear-gradient(135deg, #666, #999);
+    color: #CCC;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.jogar-btn.disabled:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+/* Animações de entrada */
+.fase-card {
+    animation: slideInUp 0.6s ease-out forwards;
+}
+
+.fase-card:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.fase-card:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.fase-card:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+.fase-card:nth-child(4) {
+    animation-delay: 0.4s;
+}
+
+@keyframes slideInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .fases-container {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .fase-card {
+        padding: 1rem;
+    }
+    
+    .fase-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
+    }
+    
+    .fase-numero {
+        width: 50px;
+        height: 50px;
+        font-size: 20px;
+    }
+    
+    .fase-info h3 {
+        font-size: 20px;
+    }
+    
+    .teoria-section, .desafio-section {
+        padding: 0.75rem;
+    }
+}
+
+/* Scrollbar customizada */
+.fases-main::-webkit-scrollbar {
+    width: 8px;
+}
+
+.fases-main::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+}
+
+.fases-main::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #0DF, #E1EA2D);
+    border-radius: 4px;
+}
+
+.fases-main::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, #E1EA2D, #0DF);
+}

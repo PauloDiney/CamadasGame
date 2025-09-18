@@ -7,7 +7,7 @@
 
 html {
     font-size: 16px;
-    overflow: hidden;
+
 }
 
 body {
@@ -16,8 +16,7 @@ body {
     background: linear-gradient(62deg, #241D52 2.64%, #5042B8 97.22%);
     font-family: 'Kdam Thmor Pro', sans-serif;
     position: relative;
-    overflow: hidden;
-    overflow-x: hidden;
+  
 }
 
 body::before {
@@ -386,4 +385,229 @@ main {
 .suggestion a:hover {
     color: #0DF;
     text-shadow: 0 0 5px rgba(0, 221, 255, 0.5);
+}
+
+/* Animação para o indicador de música */
+@keyframes musicPulse {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 0 10px rgba(0, 221, 255, 0.3);
+    }
+    50% {
+        transform: scale(1.1);
+        box-shadow: 0 0 20px rgba(0, 221, 255, 0.6);
+    }
+}
+
+#music-indicator:hover {
+    background: rgba(0, 221, 255, 1) !important;
+    transform: scale(1.05);
+}
+
+/* ==================== MODO ESCURO ==================== */
+
+/* Modo escuro - Body e background */
+body.dark-mode {
+    background: linear-gradient(62deg, #0a0a0a 2.64%, #1a1a2e 97.22%);
+}
+
+body.dark-mode::before {
+    background: 
+        radial-gradient(2px 2px at 20px 30px, rgba(0, 221, 255, 0.2), transparent),
+        radial-gradient(2px 2px at 40px 70px, rgba(225, 234, 45, 0.3), transparent),
+        radial-gradient(1px 1px at 90px 40px, rgba(0, 221, 255, 0.15), transparent),
+        radial-gradient(1px 1px at 130px 80px, rgba(225, 234, 45, 0.2), transparent),
+        radial-gradient(2px 2px at 160px 30px, rgba(0, 221, 255, 0.15), transparent);
+    opacity: 0.4;
+}
+
+body.dark-mode::after {
+    background-image: 
+        linear-gradient(45deg, transparent 40%, rgba(0, 221, 255, 0.05) 50%, transparent 60%),
+        linear-gradient(-45deg, transparent 40%, rgba(225, 234, 45, 0.05) 50%, transparent 60%),
+        linear-gradient(90deg, transparent 40%, rgba(0, 221, 255, 0.03) 50%, transparent 60%);
+    opacity: 0.2;
+}
+
+/* Modo escuro - Headers */
+body.dark-mode .header-title {
+    color: #4dd0e1;
+    text-shadow: 0 0 10px rgba(77, 208, 225, 0.3);
+}
+
+body.dark-mode .header-subtitle {
+    color: rgba(77, 208, 225, 0.7);
+}
+
+body.dark-mode .header-points {
+    background: rgba(30, 30, 30, 0.9);
+    border: 2px solid rgba(0, 221, 255, 0.3);
+}
+
+body.dark-mode .header-points p {
+    color: #E1EA2D;
+}
+
+/* Modo escuro - Containers de input */
+body.dark-mode .input_container {
+    background: rgba(30, 30, 45, 0.8);
+    border: 2px solid rgba(0, 221, 255, 0.3);
+}
+
+body.dark-mode .input_container:hover {
+    background: rgba(30, 30, 45, 0.95);
+    border-color: rgba(0, 221, 255, 0.6);
+}
+
+body.dark-mode .input_container::before {
+    background: linear-gradient(90deg, transparent, rgba(0, 221, 255, 0.1), transparent);
+}
+
+/* Modo escuro - Textos */
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode h4 {
+    color: #ffffff;
+}
+
+body.dark-mode p {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+body.dark-mode .config-text h3 {
+    color: #ffffff;
+}
+
+body.dark-mode .config-text p {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Modo escuro - Botões e links */
+body.dark-mode .input_container a {
+    color: #4dd0e1;
+}
+
+body.dark-mode .input_container a:hover {
+    color: #E1EA2D;
+}
+
+body.dark-mode .config-button {
+    color: #ffffff;
+}
+
+body.dark-mode .config-button.reset {
+    color: #ff6b6b;
+}
+
+body.dark-mode .config-button.reset:hover {
+    color: #ff4757;
+}
+
+/* Modo escuro - Ações de configuração */
+body.dark-mode .config-action {
+    background: rgba(225, 234, 45, 0.2);
+    border: 2px solid rgba(225, 234, 45, 0.4);
+}
+
+body.dark-mode .config-action:hover {
+    background: rgba(225, 234, 45, 0.3);
+    border-color: rgba(225, 234, 45, 0.6);
+}
+
+/* Modo escuro - Equipamentos */
+body.dark-mode .equipamento.active-equipment {
+    background: rgba(30, 30, 45, 0.9);
+    border-color: rgba(225, 234, 45, 0.6);
+    color: #ffffff;
+}
+
+body.dark-mode .equipment-header h4 {
+    color: #ffffff;
+}
+
+body.dark-mode .no-equipment {
+    background: rgba(30, 30, 45, 0.6);
+    border-color: rgba(0, 221, 255, 0.4);
+}
+
+body.dark-mode .no-equipment p {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Modo escuro - Loja */
+body.dark-mode .shop-item {
+    background: rgba(30, 30, 45, 0.9);
+    border-color: rgba(0, 221, 255, 0.4);
+    color: #ffffff;
+}
+
+body.dark-mode .shop-item:hover {
+    border-color: rgba(0, 221, 255, 0.8);
+    box-shadow: 0 10px 25px rgba(0, 221, 255, 0.2);
+}
+
+body.dark-mode .item-name {
+    color: #ffffff;
+}
+
+body.dark-mode .item-description {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+body.dark-mode .item-icon {
+    background: rgba(0, 221, 255, 0.2);
+}
+
+/* Modo escuro - Fases */
+body.dark-mode .fase-card {
+    background: rgba(30, 30, 45, 0.9);
+    border-color: rgba(0, 221, 255, 0.4);
+}
+
+body.dark-mode .fase-card.desbloqueada {
+    border-color: rgba(225, 234, 45, 0.6);
+    background: rgba(30, 45, 30, 0.9);
+}
+
+body.dark-mode .fase-numero {
+    background: rgba(0, 221, 255, 0.3);
+    color: #ffffff;
+}
+
+body.dark-mode .fase-card.desbloqueada .fase-numero {
+    background: rgba(225, 234, 45, 0.8);
+    color: #000000;
+}
+
+body.dark-mode .fase-info h3 {
+    color: #ffffff;
+}
+
+body.dark-mode .fase-description {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* Modo escuro - Sliders e toggles */
+body.dark-mode .config-slider {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+body.dark-mode .toggle-slider {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+body.dark-mode .toggle-slider:before {
+    background-color: #666;
+}
+
+/* Modo escuro - Mensagens */
+body.dark-mode .message {
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Modo escuro - Botão de música */
+body.dark-mode #music-indicator {
+    background: rgba(0, 221, 255, 0.6);
+    border: 1px solid rgba(0, 221, 255, 0.8);
 }

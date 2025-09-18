@@ -18,13 +18,11 @@
                 <h1 class="header-title">Configurações</h1>
                 <p class="header-subtitle">Personalize sua experiência</p>
             </div>
-            <div class="header-info">
+            <div class="header-points">
                 <svg xmlns="http://www.w3.org/2000/svg" width="65" height="61" viewBox="0 0 65 61" fill="none">
-                    <path
-                        d="M32.5 0L40.0212 23.1479H64.3604L44.6696 37.4541L52.1908 60.6021L32.5 46.2959L12.8092 60.6021L20.3304 37.4541L0.639606 23.1479H24.9788L32.5 0Z"
-                        fill="#E1EA2D" />
+                    <path d="M32.5 0L40.0212 23.1479H64.3604L44.6696 37.4541L52.1908 60.6021L32.5 46.2959L12.8092 60.6021L20.3304 37.4541L0.639606 23.1479H24.9788L32.5 0Z" fill="#E1EA2D" />
                 </svg>
-                <p>0 Pontos</p>
+                <p id="pontos-display">0 Pontos</p>
             </div>
         </header>
 
@@ -33,10 +31,10 @@
                 <section class="input_container config-option">
                     <div class="config-content">
                         <div class="config-text">
-                            <h3>Volume do Som</h3>
-                            <p>Ajuste o volume dos efeitos sonoros</p>
+                            <h3>Volume da Música</h3>
+                            <p>Ajuste o volume da música de fundo</p>
                         </div>
-                        <input type="range" min="0" max="100" value="70" class="config-slider">
+                        <input type="range" min="0" max="100" value="50" class="config-slider" id="music-volume-slider">
                     </div>
                 </section>
 
@@ -47,25 +45,14 @@
                             <p>Ativar/desativar música ambiente</p>
                         </div>
                         <label class="config-toggle">
-                            <input type="checkbox" checked>
+                            <input type="checkbox" checked id="music-toggle">
                             <span class="toggle-slider"></span>
                         </label>
                     </div>
                 </section>
 
-                <section class="input_container config-option">
-                    <div class="config-content">
-                        <div class="config-text">
-                            <h3>Dificuldade</h3>
-                            <p>Escolha o nível de desafio</p>
-                        </div>
-                        <select class="config-select">
-                            <option value="facil">Fácil</option>
-                            <option value="medio" selected>Médio</option>
-                            <option value="dificil">Difícil</option>
-                        </select>
-                    </div>
-                </section>
+                
+
 
                 <section class="input_container config-option">
                     <div class="config-content">
@@ -74,7 +61,7 @@
                             <p>Interface com tema escuro</p>
                         </div>
                         <label class="config-toggle">
-                            <input type="checkbox">
+                            <input type="checkbox" id="dark-mode-toggle">
                             <span class="toggle-slider"></span>
                         </label>
                     </div>
@@ -100,72 +87,14 @@
                 </section>
             </section>
 
-            <section class="content_habilidades">
-                <h3>Estatísticas do Jogo</h3>
-                <div class="equipamentos stats-grid">
-                    <article class="equipamento stat-card">
-                        <h4>Fases Concluídas</h4>
-                        <p class="stat-number">3/7</p>
-                        <div class="progress-bar">
-                            <div class="progress-fill" style="width: 43%;"></div>
-                        </div>
-                    </article>
-                    <article class="equipamento stat-card">
-                        <h4>Pontuação Total</h4>
-                        <p class="stat-number">2.450</p>
-                        <p>Melhor pontuação: 850</p>
-                    </article>
-                    <article class="equipamento stat-card">
-                        <h4>Tempo de Jogo</h4>
-                        <p class="stat-number">2h 35min</p>
-                        <p>Sessão mais longa: 45min</p>
-                    </article>
-                </div>
-            </section>
+            
         </main>
     </section>
 
     <!-- JavaScript específico para configurações -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Funcionalidade do slider de volume
-            const volumeSlider = document.querySelector('.config-slider');
-            if (volumeSlider) {
-                volumeSlider.addEventListener('input', function() {
-                    console.log('Volume ajustado para:', this.value + '%');
-                });
-            }
-
-            // Funcionalidade dos toggles
-            const toggles = document.querySelectorAll('.config-toggle input[type="checkbox"]');
-            toggles.forEach(toggle => {
-                toggle.addEventListener('change', function() {
-                    const setting = this.closest('.config-content').querySelector('h3').textContent;
-                    console.log(setting + ':', this.checked ? 'Ativado' : 'Desativado');
-                });
-            });
-
-            // Funcionalidade do select de dificuldade
-            const difficultySelect = document.querySelector('.config-select');
-            if (difficultySelect) {
-                difficultySelect.addEventListener('change', function() {
-                    console.log('Dificuldade alterada para:', this.value);
-                });
-            }
-
-            // Botão de reset
-            const resetBtn = document.querySelector('.config-button.reset');
-            if (resetBtn) {
-                resetBtn.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    if (confirm('Tem certeza que deseja resetar todo o progresso? Esta ação não pode ser desfeita.')) {
-                        alert('Progresso resetado com sucesso!');
-                        // Aqui viria a lógica real de reset
-                    }
-                });
-            }
-        });
-    </script>
+    <script src="js/global.js"></script>
+    <script src="js/audio.js"></script>
+    <script src="js/darkmode.js"></script>
 </body>
 
 </html>

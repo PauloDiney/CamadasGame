@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fases - Camadas da Conexão</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/fases.css">
+    <link href="https://fonts.googleapis.com/css2?family=Kdam+Thmor+Pro&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+        <section id="fases-page" class="screen-section">
+            <header class="header">
+                <div>
+                    <h1 class="header-title">Trilha das Camadas OSI</h1>
+                    <p class="header-subtitle">Domine todas as camadas da rede</p>
+                </div>
+                <div class="header-points">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="65" height="61" viewBox="0 0 65 61" fill="none">
+                        <path d="M32.5 0L40.0212 23.1479H64.3604L44.6696 37.4541L52.1908 60.6021L32.5 46.2959L12.8092 60.6021L20.3304 37.4541L0.639606 23.1479H24.9788L32.5 0Z" fill="#E1EA2D" />
+                    </svg>
+                    <p id="pontos-display">0 Pontos</p>
+                </div>
+            </header>
+
+        <main class="fases-main">
+            
+            <div class="voltar-container">
+                <a href="index.html" class="voltar-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M19 12H5M12 19L5 12L12 5" stroke="#0DF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    Voltar ao Menu
+                </a>
+            </div>
+
+            <div class="fases-container">
+                <!-- Fase 1 - Camada Física -->
+                <article class="fase-card" data-fase="1">
+                    <div class="fase-header">
+                        <div class="fase-numero">
+                            <span class="numero">1</span>
+                        </div>
+                        <div class="fase-info">
+                            <h3>Camada Física</h3>
+                            <div class="fase-status unlocked">
+                                <span class="status-icon">🔓</span>
+                                <span class="status-text">Desbloqueada</span>
+                            </div>
+                        </div>
+                        <div class="fase-star">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="#E1EA2D">
+                                <path d="M20 0L24.4721 14.6446H40L28.7639 23.7108L33.236 38.3554L20 29.2892L6.764 38.3554L11.2361 23.7108L0 14.6446H15.5279L20 0Z"/>
+                            </svg>
+                        </div>
+                    </div>
+                    
+                    <div class="fase-content">
+                        <div class="pontos-section">
+                            <h4>🏆 Pontuação: 100 Pontos</h4>
+                        </div>
+                        
+                        <div class="teoria-section">
+                            <h4>📚 O que você aprenderá</h4>
+                            <ul>
+                                <li><strong>Tipos de cabos:</strong> Identificar cabos coaxiais, par trançado e fibra óptica</li>
+                                <li><strong>Velocidades:</strong> Compreender diferentes velocidades de transmissão</li>
+                                <li><strong>Transmissão:</strong> Simular como os dados viajam fisicamente</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="desafio-section">
+                            <h4>🎯 Objetivos da Fase</h4>
+                            <p>Configure cabos de rede, ajuste velocidades de transmissão e simule a transmissão de dados através da camada física.</p>
+                        </div>
+                        
+                        <button class="jogar-btn" onclick="iniciarFase(1)">
+                            <span>Iniciar Fase</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M6 4L14 10L6 16V4Z"/>
+                            </svg>
+                        </button>
+                    </div>
+                </article>
+
+                <!-- Fase 2 - Camada de Enlace -->
+                <article class="fase-card" data-fase="2">
+                    <div class="fase-header">
+                        <div class="fase-numero">
+                            <span class="numero">2</span>
+                        </div>
+                        <div class="fase-info">
+                            <h3>Camada de Enlace</h3>
+                            <div class="fase-status locked">
+                                <span class="status-icon">🔒</span>
+                                <span class="status-text">Bloqueada</span>
+                            </div>
+                        </div>
+                        <div class="fase-star disabled">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="#666">
+                                <path d="M20 0L24.4721 14.6446H40L28.7639 23.7108L33.236 38.3554L20 29.2892L6.764 38.3554L11.2361 23.7108L0 14.6446H15.5279L20 0Z"/>
+                            </svg>
+                        </div>
+                    </div>
+                    
+                    <div class="fase-content">
+                        <div class="pontos-section">
+                            <h4>🏆 Pontuação: 200 Pontos</h4>
+                        </div>
+                        
+                        <div class="teoria-section">
+                            <h4>📚 O que você aprenderá</h4>
+                            <ul>
+                                <li><strong>Endereços MAC:</strong> Validar e identificar endereços físicos</li>
+                                <li><strong>Quadros Ethernet:</strong> Montar estruturas de quadros</li>
+                                <li><strong>Detecção de erros:</strong> Usar CRC para verificar integridade</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="desafio-section">
+                            <h4>🎯 Objetivos da Fase</h4>
+                            <p>Trabalhe com endereçamento MAC, monte quadros Ethernet e implemente detecção de erros com CRC.</p>
+                        </div>
+                        
+                        <button class="jogar-btn disabled" disabled>
+                            <span>Complete a Fase 1</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M10 2L12 8H18L13.5 12L15.5 18L10 14L4.5 18L6.5 12L2 8H8L10 2Z"/>
+                            </svg>
+                        </button>
+                    </div>
+                </article>
+
+                <!-- Fase 3 - Camada de Rede -->
+                <article class="fase-card" data-fase="3">
+                    <div class="fase-header">
+                        <div class="fase-numero">
+                            <span class="numero">3</span>
+                        </div>
+                        <div class="fase-info">
+                            <h3>Camada de Rede</h3>
+                            <div class="fase-status locked">
+                                <span class="status-icon">🔒</span>
+                                <span class="status-text">Bloqueada</span>
+                            </div>
+                        </div>
+                        <div class="fase-star disabled">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="#666">
+                                <path d="M20 0L24.4721 14.6446H40L28.7639 23.7108L33.236 38.3554L20 29.2892L6.764 38.3554L11.2361 23.7108L0 14.6446H15.5279L20 0Z"/>
+                            </svg>
+                        </div>
+                    </div>
+                    
+                    <div class="fase-content">
+                        <div class="pontos-section">
+                            <h4>🏆 Pontuação: 250 Pontos</h4>
+                        </div>
+                        
+                        <div class="teoria-section">
+                            <h4>📚 O que você aprenderá</h4>
+                            <ul>
+                                <li><strong>Endereços IP:</strong> Classificar endereços IP (Classe A, B, C)</li>
+                                <li><strong>Roteamento:</strong> Configurar tabelas de roteamento</li>
+                                <li><strong>Subnetting:</strong> Calcular sub-redes e máscaras</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="desafio-section">
+                            <h4>🎯 Objetivos da Fase</h4>
+                            <p>Domine endereçamento IP, configure rotas de rede e aprenda a dividir redes em sub-redes.</p>
+                        </div>
+                        
+                        <button class="jogar-btn disabled" disabled>
+                            <span>Complete a Fase 2</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M10 2L12 8H18L13.5 12L15.5 18L10 14L4.5 18L6.5 12L2 8H8L10 2Z"/>
+                            </svg>
+                        </button>
+                    </div>
+                </article>
+
+                <!-- Fase 4 - Camada de Transporte -->
+                <article class="fase-card" data-fase="4">
+                    <div class="fase-header">
+                        <div class="fase-numero">
+                            <span class="numero">4</span>
+                        </div>
+                        <div class="fase-info">
+                            <h3>Camada de Transporte</h3>
+                            <div class="fase-status locked">
+                                <span class="status-icon">🔒</span>
+                                <span class="status-text">Bloqueada</span>
+                            </div>
+                        </div>
+                        <div class="fase-star disabled">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="#666">
+                                <path d="M20 0L24.4721 14.6446H40L28.7639 23.7108L33.236 38.3554L20 29.2892L6.764 38.3554L11.2361 23.7108L0 14.6446H15.5279L20 0Z"/>
+                            </svg>
+                        </div>
+                    </div>
+                    
+                    <div class="fase-content">
+                        <div class="pontos-section">
+                            <h4>🏆 Pontuação: 300 Pontos</h4>
+                        </div>
+                        
+                        <div class="teoria-section">
+                            <h4>📚 O que você aprenderá</h4>
+                            <ul>
+                                <li><strong>Protocolos:</strong> Comparar TCP vs UDP</li>
+                                <li><strong>Portas:</strong> Associar serviços às portas corretas</li>
+                                <li><strong>Handshake:</strong> Simular Three-Way Handshake do TCP</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="desafio-section">
+                            <h4>🎯 Objetivos da Fase</h4>
+                            <p>Entenda os protocolos de transporte, gerencie portas de serviços e simule conexões TCP.</p>
+                        </div>
+                        
+                        <button class="jogar-btn disabled" disabled>
+                            <span>Complete a Fase 3</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M10 2L12 8H18L13.5 12L15.5 18L10 14L4.5 18L6.5 12L2 8H8L10 2Z"/>
+                            </svg>
+                        </button>
+                    </div>
+                </article>
+
+                <!-- Fase 5 - Camada de Aplicação -->
+                <article class="fase-card" data-fase="5">
+                    <div class="fase-header">
+                        <div class="fase-numero">
+                            <span class="numero">5</span>
+                        </div>
+                        <div class="fase-info">
+                            <h3>Camada de Aplicação</h3>
+                            <div class="fase-status locked">
+                                <span class="status-icon">🔒</span>
+                                <span class="status-text">Bloqueada</span>
+                            </div>
+                        </div>
+                        <div class="fase-star disabled">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="#666">
+                                <path d="M20 0L24.4721 14.6446H40L28.7639 23.7108L33.236 38.3554L20 29.2892L6.764 38.3554L11.2361 23.7108L0 14.6446H15.5279L20 0Z"/>
+                            </svg>
+                        </div>
+                    </div>
+                    
+                    <div class="fase-content">
+                        <div class="pontos-section">
+                            <h4>🏆 Pontuação: 350 Pontos</h4>
+                        </div>
+                        
+                        <div class="teoria-section">
+                            <h4>📚 O que você aprenderá</h4>
+                            <ul>
+                                <li><strong>HTTP:</strong> Analisar requisições e respostas HTTP</li>
+                                <li><strong>DNS:</strong> Ordenar processo de resolução DNS</li>
+                                <li><strong>Email:</strong> Configurar fluxo de protocolos de email</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="desafio-section">
+                            <h4>🎯 Objetivos da Fase</h4>
+                            <p>Domine protocolos de aplicação, entenda resolução DNS e configure sistemas de email.</p>
+                        </div>
+                        
+                        <button class="jogar-btn disabled" disabled>
+                            <span>Complete a Fase 4</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M10 2L12 8H18L13.5 12L15.5 18L10 14L4.5 18L6.5 12L2 8H8L10 2Z"/>
+                            </svg>
+                        </button>
+                    </div>
+                </article>
+            </div>
+        </main>
+    </section>
+
+    <script src="js/global.js"></script>
+    <script src="js/audio.js"></script>
+    <script src="js/darkmode.js"></script>
+    <script>
+        // Sistema de progresso das fases conectado com trilha
+        class FasesManager {
+            constructor() {
+                this.fasesData = {
+                    1: {
+                        nome: "Camada Física",
+                        arquivo: "fase1.html",
+                        pontos: 100,
+                        desbloqueada: true,
+                        concluida: false
+                    },
+                    2: {
+                        nome: "Camada de Enlace",
+                        arquivo: "fase2.html",
+                        pontos: 200,
+                        desbloqueada: false,
+                        concluida: false
+                    },
+                    3: {
+                        nome: "Camada de Rede",
+                        arquivo: "fase3.html",
+                        pontos: 250,
+                        desbloqueada: false,
+                        concluida: false
+                    },
+                    4: {
+                        nome: "Camada de Transporte",
+                        arquivo: "fase4.html",
+                        pontos: 300,
+                        desbloqueada: false,
+                        concluida: false
+                    },
+                    5: {
+                        nome: "Camada de Aplicação",
+                        arquivo: "fase5.html",
+                        pontos: 350,
+                        desbloqueada: false,
+                        concluida: false
+                    }
+                };
+                
+                this.carregarProgresso();
+                this.atualizarPontos();
+                this.atualizarFasesStatus();
+            }
+
+            carregarProgresso() {
+                // Carrega progresso da trilha
+                const progressoTrilha = localStorage.getItem('trilhaProgresso');
+                if (progressoTrilha) {
+                    const progresso = JSON.parse(progressoTrilha);
+                    Object.keys(progresso).forEach(faseId => {
+                        if (this.fasesData[faseId]) {
+                            this.fasesData[faseId].desbloqueada = progresso[faseId].desbloqueada || false;
+                            this.fasesData[faseId].concluida = progresso[faseId].concluida || false;
+                        }
+                    });
+                }
+                
+                // Fallback: verificar se há progresso nas fases individuais
+                for (let i = 1; i <= 5; i++) {
+                    if (localStorage.getItem(`fase${i}Complete`) === 'true') {
+                        this.fasesData[i].concluida = true;
+                        // Desbloquear próxima fase
+                        if (i < 5 && this.fasesData[i + 1]) {
+                            this.fasesData[i + 1].desbloqueada = true;
+                        }
+                    }
+                }
+            }
+
+            atualizarPontos() {
+                const pontos = parseInt(localStorage.getItem('gamePoints') || '2450');
+                const pontosDisplay = document.getElementById('pontos-display');
+                if (pontosDisplay) {
+                    pontosDisplay.textContent = `${pontos} Pontos`;
+                }
+            }
+
+            atualizarFasesStatus() {
+                document.querySelectorAll('.fase-card').forEach(card => {
+                    const faseId = parseInt(card.getAttribute('data-fase'));
+                    if (!this.fasesData[faseId]) return;
+
+                    const fase = this.fasesData[faseId];
+                    const statusElement = card.querySelector('.fase-status');
+                    const starElement = card.querySelector('.fase-star');
+                    const botaoElement = card.querySelector('.jogar-btn');
+                    const numeroElement = card.querySelector('.fase-numero');
+
+                    // Atualizar status de desbloqueio
+                    if (fase.desbloqueada) {
+                        statusElement.className = 'fase-status unlocked';
+                        statusElement.innerHTML = `
+                            <span class="status-icon">🔓</span>
+                            <span class="status-text">Desbloqueada</span>
+                        `;
+                        
+                        // Atualizar botão
+                        if (fase.concluida) {
+                            botaoElement.innerHTML = `
+                                <span>Rejogar Fase</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                    <path d="M4 12L8 16L16 8"/>
+                                </svg>
+                            `;
+                            starElement.className = 'fase-star completed';
+                            starElement.querySelector('svg').setAttribute('fill', '#E1EA2D');
+                        } else {
+                            botaoElement.innerHTML = `
+                                <span>Iniciar Fase</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                    <path d="M6 4L14 10L6 16V4Z"/>
+                                </svg>
+                            `;
+                            starElement.className = 'fase-star';
+                            starElement.querySelector('svg').setAttribute('fill', '#E1EA2D');
+                        }
+                        
+                        botaoElement.className = 'jogar-btn';
+                        botaoElement.disabled = false;
+                        botaoElement.onclick = () => this.iniciarFase(faseId);
+                        numeroElement.className = 'fase-numero';
+                        
+                    } else {
+                        statusElement.className = 'fase-status locked';
+                        statusElement.innerHTML = `
+                            <span class="status-icon">🔒</span>
+                            <span class="status-text">Bloqueada</span>
+                        `;
+                        
+                        const fasePrevNecessaria = faseId - 1;
+                        botaoElement.innerHTML = `
+                            <span>Complete a Fase ${fasePrevNecessaria}</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M10 2L12 8H18L13.5 12L15.5 18L10 14L4.5 18L6.5 12L2 8H8L10 2Z"/>
+                            </svg>
+                        `;
+                        
+                        botaoElement.className = 'jogar-btn disabled';
+                        botaoElement.disabled = true;
+                        starElement.className = 'fase-star disabled';
+                        starElement.querySelector('svg').setAttribute('fill', '#666');
+                        numeroElement.className = 'fase-numero locked';
+                    }
+                });
+            }
+
+            iniciarFase(numeroFase) {
+                if (this.fasesData[numeroFase] && this.fasesData[numeroFase].desbloqueada) {
+                    const arquivo = this.fasesData[numeroFase].arquivo;
+                    console.log(`Navegando para ${arquivo}`);
+                    
+                    // Reproduzir som de clique
+                    if (window.audioManager) {
+                        window.audioManager.playClickSound();
+                    }
+                    
+                    // Navegar para a fase
+                    window.location.href = arquivo;
+                } else {
+                    console.log('Fase bloqueada!');
+                }
+            }
+        }
+
+        // Inicializar quando a página carregar
+        document.addEventListener('DOMContentLoaded', function() {
+            window.fasesManager = new FasesManager();
+        });
+
+        // Escutar mudanças no localStorage para atualizar em tempo real
+        window.addEventListener('storage', function(e) {
+            if (e.key && (e.key.includes('fase') || e.key === 'trilhaProgresso' || e.key === 'gamePoints')) {
+                if (window.fasesManager) {
+                    window.fasesManager.carregarProgresso();
+                    window.fasesManager.atualizarPontos();
+                    window.fasesManager.atualizarFasesStatus();
+                }
+            }
+        });
+
+        // Função global para compatibilidade
+        function iniciarFase(numeroFase) {
+            if (window.fasesManager) {
+                window.fasesManager.iniciarFase(numeroFase);
+            }
+        }
+    </script>
+</body>
+
+</html>

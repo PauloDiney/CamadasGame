@@ -1,0 +1,927 @@
+/* CSS para as Fases do Jogo */
+
+.fase-container {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f172a 100%);
+    position: relative;
+}
+
+/* Header da Fase */
+.fase-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(15px);
+    border-bottom: 2px solid rgba(225, 234, 45, 0.3);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.btn-voltar-fase {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    background: rgba(225, 234, 45, 0.2);
+    color: #E1EA2D;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(225, 234, 45, 0.3);
+    font-size: 14px;
+}
+
+.btn-voltar-fase:hover {
+    background: rgba(225, 234, 45, 0.3);
+    transform: translateY(-2px);
+}
+
+.fase-titulo h1 {
+    color: #E1EA2D;
+    margin: 0;
+    font-size: 24px;
+    font-family: 'Kdam Thmor Pro', cursive;
+}
+
+.fase-titulo p {
+    color: #fff;
+    margin: 0;
+    opacity: 0.8;
+    font-size: 14px;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.fase-pontos {
+    background: rgba(225, 234, 45, 0.1);
+    padding: 8px 16px;
+    border-radius: 20px;
+    border: 1px solid rgba(225, 234, 45, 0.3);
+}
+
+.fase-pontos span {
+    color: #E1EA2D;
+    font-weight: bold;
+}
+
+.fase-progresso {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #fff;
+    font-size: 14px;
+}
+
+.progresso-bar-mini {
+    width: 80px;
+    height: 6px;
+    background: rgba(128, 128, 128, 0.3);
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.progresso-fill-mini {
+    height: 100%;
+    background: linear-gradient(90deg, #E1EA2D, #4DD0E1);
+    width: 0%;
+    transition: width 0.5s ease;
+}
+
+/* Área Principal */
+.fase-main {
+    padding: 40px;
+}
+
+.fase-secao {
+    display: none;
+    animation: fadeInUp 0.5s ease;
+}
+
+.fase-secao.ativa {
+    display: block;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.secao-content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Seção de Introdução */
+.intro-visual {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
+}
+
+.cabo-animado {
+    position: relative;
+    width: 300px;
+    height: 60px;
+}
+
+.cabo-linha {
+    width: 100%;
+    height: 8px;
+    background: linear-gradient(90deg, #666, #999, #666);
+    border-radius: 4px;
+    position: absolute;
+    top: 26px;
+}
+
+.sinal-eletrico {
+    width: 20px;
+    height: 20px;
+    background: radial-gradient(circle, #E1EA2D, #B8C62F);
+    border-radius: 50%;
+    position: absolute;
+    top: 20px;
+    animation: sinalViajando 2s linear infinite;
+    box-shadow: 0 0 20px rgba(225, 234, 45, 0.6);
+}
+
+@keyframes sinalViajando {
+    0% { left: 0; }
+    100% { left: 280px; }
+}
+
+.intro-texto {
+    text-align: center;
+    color: #fff;
+}
+
+.intro-texto h2 {
+    color: #E1EA2D;
+    font-size: 32px;
+    margin-bottom: 20px;
+    font-family: 'Kdam Thmor Pro', cursive;
+}
+
+.intro-texto p {
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 30px;
+    opacity: 0.9;
+}
+
+.conceitos-chave {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 25px;
+    border-radius: 15px;
+    margin: 30px 0;
+    border: 1px solid rgba(225, 234, 45, 0.2);
+    text-align: left;
+}
+
+.conceitos-chave h3 {
+    color: #E1EA2D;
+    margin-bottom: 15px;
+    font-size: 20px;
+}
+
+.conceitos-chave ul {
+    list-style: none;
+    padding: 0;
+}
+
+.conceitos-chave li {
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.conceitos-chave li:last-child {
+    border-bottom: none;
+}
+
+.conceitos-chave strong {
+    color: #4DD0E1;
+}
+
+/* Botões */
+.btn-continuar {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 15px 30px;
+    background: linear-gradient(135deg, #E1EA2D, #B8C62F);
+    color: #000;
+    border: none;
+    border-radius: 25px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: inherit;
+}
+
+.btn-continuar:hover {
+    background: linear-gradient(135deg, #B8C62F, #E1EA2D);
+    transform: translateY(-3px);
+    box-shadow: 0 15px 30px rgba(225, 234, 45, 0.4);
+}
+
+.btn-secundario {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 15px 30px;
+    background: rgba(128, 128, 128, 0.2);
+    color: #fff;
+    border: 1px solid rgba(128, 128, 128, 0.3);
+    border-radius: 25px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: inherit;
+    text-decoration: none;
+}
+
+.btn-secundario:hover {
+    background: rgba(128, 128, 128, 0.3);
+    transform: translateY(-2px);
+}
+
+/* Desafios */
+.desafio-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.desafio-header h2 {
+    color: #E1EA2D;
+    font-size: 28px;
+    margin-bottom: 10px;
+    font-family: 'Kdam Thmor Pro', cursive;
+}
+
+.desafio-header p {
+    color: #fff;
+    opacity: 0.8;
+    font-size: 16px;
+}
+
+.desafio-area {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 40px;
+    border-radius: 20px;
+    border: 1px solid rgba(225, 234, 45, 0.2);
+    margin-bottom: 30px;
+}
+
+/* Desafio 1: Cabos */
+.cabos-container {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 40px;
+}
+
+.cabo-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    cursor: grab;
+    padding: 20px;
+    border-radius: 15px;
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid transparent;
+}
+
+.cabo-item:hover {
+    background: rgba(225, 234, 45, 0.1);
+    border-color: rgba(225, 234, 45, 0.3);
+    transform: translateY(-5px);
+}
+
+.cabo-item.dragging {
+    opacity: 0.5;
+    transform: scale(0.9);
+}
+
+.cabo-visual {
+    width: 80px;
+    height: 40px;
+    border-radius: 8px;
+    position: relative;
+}
+
+.cabo-ethernet {
+    background: linear-gradient(135deg, #4CAF50, #2E7D32);
+    border: 2px solid #1B5E20;
+}
+
+.cabo-fibra {
+    background: linear-gradient(135deg, #FF9800, #F57C00);
+    border: 2px solid #E65100;
+}
+
+.cabo-coaxial {
+    background: linear-gradient(135deg, #9C27B0, #7B1FA2);
+    border: 2px solid #4A148C;
+}
+
+.cabo-item span {
+    color: #fff;
+    font-weight: bold;
+}
+
+.tipos-container {
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+}
+
+.tipo-target {
+    flex: 1;
+    padding: 30px 20px;
+    background: rgba(77, 208, 225, 0.1);
+    border: 2px dashed rgba(77, 208, 225, 0.3);
+    border-radius: 15px;
+    text-align: center;
+    transition: all 0.3s ease;
+    min-height: 120px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.tipo-target.drag-over {
+    background: rgba(77, 208, 225, 0.2);
+    border-color: #4DD0E1;
+    border-style: solid;
+}
+
+.tipo-target.correto {
+    background: rgba(76, 175, 80, 0.2);
+    border-color: #4CAF50;
+    border-style: solid;
+}
+
+.tipo-target.incorreto {
+    background: rgba(244, 67, 54, 0.2);
+    border-color: #f44336;
+    border-style: solid;
+}
+
+.tipo-target h4 {
+    color: #4DD0E1;
+    margin: 0 0 10px 0;
+    font-size: 18px;
+}
+
+.tipo-target p {
+    color: #fff;
+    margin: 0;
+    opacity: 0.8;
+    font-size: 14px;
+}
+
+/* Desafio 2: Velocidades */
+.velocidades-container {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.velocidade-item {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 20px;
+    border-radius: 15px;
+    border: 2px solid rgba(225, 234, 45, 0.2);
+    cursor: grab;
+    transition: all 0.3s ease;
+    text-align: center;
+    min-width: 150px;
+}
+
+.velocidade-item:hover {
+    background: rgba(225, 234, 45, 0.1);
+    border-color: rgba(225, 234, 45, 0.4);
+    transform: translateY(-3px);
+}
+
+.velocidade-item.dragging {
+    opacity: 0.5;
+    transform: scale(0.9);
+}
+
+.tech-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin: 0 auto 15px;
+}
+
+.wifi-icon { background: linear-gradient(135deg, #2196F3, #1976D2); }
+.ethernet-icon { background: linear-gradient(135deg, #4CAF50, #2E7D32); }
+.fast-ethernet-icon { background: linear-gradient(135deg, #FF9800, #F57C00); }
+.adsl-icon { background: linear-gradient(135deg, #9C27B0, #7B1FA2); }
+.fibra-icon { background: linear-gradient(135deg, #E91E63, #C2185B); }
+
+.velocidade-item h4 {
+    color: #E1EA2D;
+    margin: 0 0 8px 0;
+    font-size: 16px;
+}
+
+.velocidade-item span {
+    color: #4DD0E1;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.ordenacao-area {
+    text-align: center;
+}
+
+.ordenacao-area h3 {
+    color: #E1EA2D;
+    margin-bottom: 20px;
+}
+
+.slots-ordenacao {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.slot-ordenacao {
+    width: 150px;
+    height: 80px;
+    border: 2px dashed rgba(77, 208, 225, 0.3);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #4DD0E1;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    background: rgba(77, 208, 225, 0.05);
+}
+
+.slot-ordenacao.drag-over {
+    border-color: #4DD0E1;
+    border-style: solid;
+    background: rgba(77, 208, 225, 0.15);
+}
+
+.slot-ordenacao.ocupado {
+    border-color: #4CAF50;
+    border-style: solid;
+    background: rgba(76, 175, 80, 0.1);
+}
+
+/* Desafio 3: Simulador */
+.simulador-container {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 30px;
+    border-radius: 20px;
+    border: 1px solid rgba(225, 234, 45, 0.2);
+}
+
+.simulador-controles {
+    display: flex;
+    gap: 20px;
+    align-items: end;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.controle-grupo {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.controle-grupo label {
+    color: #E1EA2D;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.controle-grupo select {
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(225, 234, 45, 0.3);
+    border-radius: 8px;
+    color: #fff;
+    font-size: 14px;
+}
+
+.btn-simular {
+    padding: 12px 24px;
+    background: linear-gradient(135deg, #4DD0E1, #26A69A);
+    color: #000;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-simular:hover {
+    background: linear-gradient(135deg, #26A69A, #4DD0E1);
+    transform: translateY(-2px);
+}
+
+.simulador-visual {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 40px 0;
+    position: relative;
+}
+
+.dispositivo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.dispositivo-icon {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #E1EA2D, #B8C62F);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.dispositivo-icon::before {
+    content: '💻';
+    font-size: 30px;
+}
+
+.dispositivo span {
+    color: #fff;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.cabo-transmissao {
+    flex: 1;
+    margin: 0 40px;
+    position: relative;
+    height: 60px;
+    display: flex;
+    align-items: center;
+}
+
+.cabo-linha-sim {
+    width: 100%;
+    height: 8px;
+    background: linear-gradient(90deg, #666, #999, #666);
+    border-radius: 4px;
+}
+
+.dados-viajando {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    background: radial-gradient(circle, #4DD0E1, #26A69A);
+    border-radius: 50%;
+    opacity: 0;
+    box-shadow: 0 0 20px rgba(77, 208, 225, 0.8);
+}
+
+.dados-viajando.transmitindo {
+    opacity: 1;
+    animation: transmissaoCompleta 3s linear;
+}
+
+@keyframes transmissaoCompleta {
+    0% { left: 0; }
+    100% { left: calc(100% - 20px); }
+}
+
+.velocidade-info {
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #4DD0E1;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.simulador-stats {
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    text-align: center;
+}
+
+.stat-item label {
+    color: #E1EA2D;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.stat-item span {
+    color: #fff;
+    font-size: 16px;
+}
+
+.progresso-transmissao {
+    width: 150px;
+    height: 8px;
+    background: rgba(128, 128, 128, 0.3);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progresso-fill-transmissao {
+    height: 100%;
+    background: linear-gradient(90deg, #4DD0E1, #26A69A);
+    width: 0%;
+    transition: width 0.1s linear;
+}
+
+/* Feedback dos Desafios */
+.desafio-feedback {
+    text-align: center;
+    padding: 20px;
+    border-radius: 15px;
+    margin-top: 20px;
+    display: none;
+}
+
+.desafio-feedback.sucesso {
+    background: rgba(76, 175, 80, 0.2);
+    border: 1px solid #4CAF50;
+    color: #4CAF50;
+    display: block;
+}
+
+.desafio-feedback.erro {
+    background: rgba(244, 67, 54, 0.2);
+    border: 1px solid #f44336;
+    color: #f44336;
+    display: block;
+}
+
+/* Conclusão */
+.conclusao-visual {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.sucesso-icon {
+    font-size: 80px;
+    color: #4CAF50;
+    margin-bottom: 20px;
+    display: block;
+}
+
+.conclusao-visual h2 {
+    color: #E1EA2D;
+    font-size: 32px;
+    margin-bottom: 15px;
+    font-family: 'Kdam Thmor Pro', cursive;
+}
+
+.conclusao-visual p {
+    color: #fff;
+    font-size: 18px;
+    opacity: 0.9;
+}
+
+.resultados-fase {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 30px;
+    border-radius: 20px;
+    border: 1px solid rgba(225, 234, 45, 0.2);
+    margin-bottom: 30px;
+}
+
+.resultado-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.resultado-item:last-child {
+    border-bottom: none;
+}
+
+.resultado-label {
+    color: #fff;
+    opacity: 0.8;
+}
+
+.resultado-valor {
+    color: #4DD0E1;
+    font-weight: bold;
+}
+
+.conclusao-acoes {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+/* HUD */
+.hud-progresso {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: rgba(0, 0, 0, 0.8);
+    padding: 15px 20px;
+    border-radius: 25px;
+    border: 1px solid rgba(225, 234, 45, 0.3);
+    backdrop-filter: blur(10px);
+    z-index: 200;
+}
+
+.hud-item {
+    color: #fff;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.hud-item span:first-child {
+    opacity: 0.8;
+}
+
+.hud-item span:last-child {
+    color: #E1EA2D;
+}
+
+/* Modo Escuro */
+body.dark-mode .fase-container {
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #2d2d2d 100%);
+}
+
+body.dark-mode .fase-header {
+    background: rgba(0, 0, 0, 0.8);
+    border-bottom-color: rgba(77, 208, 225, 0.3);
+}
+
+body.dark-mode .btn-voltar-fase {
+    background: rgba(77, 208, 225, 0.2);
+    color: #4DD0E1;
+    border-color: rgba(77, 208, 225, 0.3);
+}
+
+body.dark-mode .fase-titulo h1 {
+    color: #4DD0E1;
+}
+
+body.dark-mode .fase-pontos {
+    background: rgba(77, 208, 225, 0.1);
+    border-color: rgba(77, 208, 225, 0.3);
+}
+
+body.dark-mode .fase-pontos span {
+    color: #4DD0E1;
+}
+
+/* === FEEDBACKS DO GAMESYSTEM === */
+.game-feedbacks {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2000;
+    pointer-events: none;
+}
+
+.desafio-feedback {
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.9), rgba(0, 34, 68, 0.9));
+    border: 2px solid;
+    border-radius: 15px;
+    padding: 1.5rem 2rem;
+    margin: 1rem 0;
+    font-family: "Kdam Thmor Pro", cursive;
+    font-size: 1.1rem;
+    font-weight: bold;
+    text-align: center;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    animation: feedbackSlideIn 0.5s ease-out;
+    min-width: 300px;
+}
+
+.desafio-feedback.erro {
+    border-color: #FF6B6B;
+    color: #FF6B6B;
+    background: linear-gradient(135deg, rgba(255, 107, 107, 0.1), rgba(255, 0, 0, 0.1));
+}
+
+.desafio-feedback.sucesso {
+    border-color: #4CAF50;
+    color: #4CAF50;
+    background: linear-gradient(135deg, rgba(76, 175, 80, 0.1), rgba(0, 255, 0, 0.1));
+}
+
+.desafio-feedback.warning {
+    border-color: #FFA500;
+    color: #FFA500;
+    background: linear-gradient(135deg, rgba(255, 165, 0, 0.1), rgba(255, 140, 0, 0.1));
+}
+
+@keyframes feedbackSlideIn {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -60%) scale(0.8);
+    }
+    100% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .fase-header {
+        padding: 15px 20px;
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .header-left {
+        width: 100%;
+        justify-content: space-between;
+    }
+    
+    .fase-main {
+        padding: 20px;
+    }
+    
+    .cabos-container,
+    .tipos-container,
+    .velocidades-container,
+    .slots-ordenacao {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .simulador-controles {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .simulador-visual {
+        flex-direction: column;
+        gap: 30px;
+    }
+    
+    .cabo-transmissao {
+        margin: 0;
+        width: 200px;
+        transform: rotate(90deg);
+    }
+    
+    .conclusao-acoes {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .hud-progresso {
+        bottom: 15px;
+        right: 15px;
+        padding: 10px 15px;
+    }
+}

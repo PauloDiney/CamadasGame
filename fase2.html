@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fase 2 - Camada de Enlace</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/fase.css">
+    <link href="https://fonts.googleapis.com/css2?family=Kdam+Thmor+Pro&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="fase-container">
+        <!-- Header da Fase -->
+        <header class="fase-header">
+            <div class="header-left">
+                <a href="trilha.html" class="btn-voltar-fase">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                        <path d="M19 12H5M5 12L12 19M5 12L12 5" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                    Voltar à Trilha
+                </a>
+                <div class="fase-titulo">
+                    <h1>Fase 2: Camada de Enlace</h1>
+                    <p>Quadros e endereçamento MAC</p>
+                </div>
+            </div>
+            <div class="header-right">
+                <div class="fase-pontos">
+                    <span id="pontos-fase">0 Pontos</span>
+                </div>
+                <div class="fase-progresso">
+                    <span>Progresso: <span id="progresso-atual">0</span>/4</span>
+                    <div class="progresso-bar-mini">
+                        <div class="progresso-fill-mini" id="progresso-fill"></div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Área Principal da Fase -->
+        <main class="fase-main">
+            <!-- Seção de Introdução -->
+            <section class="fase-secao ativa" id="secao-intro">
+                <div class="secao-content">
+                    <div class="intro-visual">
+                        <div class="quadro-animado">
+                            <div class="quadro-header">Header</div>
+                            <div class="quadro-dados">Dados</div>
+                            <div class="quadro-trailer">Trailer</div>
+                        </div>
+                    </div>
+                    <div class="intro-texto">
+                        <h2>Camada de Enlace de Dados</h2>
+                        <p>A camada de enlace é responsável pela comunicação entre dispositivos diretamente conectados. Ela organiza os bits em quadros e usa endereços MAC para identificar dispositivos.</p>
+                        
+                        <div class="conceitos-chave">
+                            <h3>Conceitos Principais:</h3>
+                            <ul>
+                                <li><strong>Endereços MAC:</strong> Identificadores únicos de dispositivos</li>
+                                <li><strong>Quadros:</strong> Organização dos dados em pacotes</li>
+                                <li><strong>Controle de Erro:</strong> Detecção e correção de erros</li>
+                            </ul>
+                        </div>
+
+                        <button class="btn-continuar" onclick="iniciarDesafio(1)">
+                            Começar Desafios
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Desafio 1: Endereços MAC -->
+            <section class="fase-secao" id="secao-desafio1">
+                <div class="secao-content">
+                    <div class="desafio-header">
+                        <h2>Desafio 1: Identifique Endereços MAC Válidos</h2>
+                        <p>Selecione quais endereços MAC são válidos (formato: XX:XX:XX:XX:XX:XX com dígitos hexadecimais)</p>
+                    </div>
+
+                    <div class="desafio-area">
+                        <div class="mac-addresses">
+                            <div class="mac-item" data-valido="true" onclick="selecionarMAC(this)">
+                                <span class="mac-text">00:1B:44:11:3A:B7</span>
+                                <div class="mac-status"></div>
+                            </div>
+                            <div class="mac-item" data-valido="false" onclick="selecionarMAC(this)">
+                                <span class="mac-text">ZZ:1B:44:11:3A:B7</span>
+                                <div class="mac-status"></div>
+                            </div>
+                            <div class="mac-item" data-valido="true" onclick="selecionarMAC(this)">
+                                <span class="mac-text">AA:BB:CC:DD:EE:FF</span>
+                                <div class="mac-status"></div>
+                            </div>
+                            <div class="mac-item" data-valido="false" onclick="selecionarMAC(this)">
+                                <span class="mac-text">00:1B:44:11:3A</span>
+                                <div class="mac-status"></div>
+                            </div>
+                            <div class="mac-item" data-valido="true" onclick="selecionarMAC(this)">
+                                <span class="mac-text">12:34:56:78:9A:BC</span>
+                                <div class="mac-status"></div>
+                            </div>
+                            <div class="mac-item" data-valido="false" onclick="selecionarMAC(this)">
+                                <span class="mac-text">GG:HH:II:JJ:KK:LL</span>
+                                <div class="mac-status"></div>
+                            </div>
+                        </div>
+                        
+                        <button class="btn-verificar" onclick="verificarMACs()" disabled>Verificar Respostas</button>
+                    </div>
+
+                    <div class="desafio-feedback" id="feedback-desafio1"></div>
+                </div>
+            </section>
+
+            <!-- Desafio 2: Montagem de Quadros -->
+            <section class="fase-secao" id="secao-desafio2">
+                <div class="secao-content">
+                    <div class="desafio-header">
+                        <h2>Desafio 2: Monte o Quadro Ethernet</h2>
+                        <p>Arraste os componentes para formar um quadro Ethernet válido na ordem correta</p>
+                    </div>
+
+                    <div class="desafio-area">
+                        <div class="componentes-disponiveis">
+                            <div class="componente" draggable="true" data-tipo="preambulo" data-ordem="1">
+                                <span>Preâmbulo (8 bytes)</span>
+                                <small>Sincronização</small>
+                            </div>
+                            <div class="componente" draggable="true" data-tipo="destino" data-ordem="2">
+                                <span>MAC Destino (6 bytes)</span>
+                                <small>Para onde vai</small>
+                            </div>
+                            <div class="componente" draggable="true" data-tipo="origem" data-ordem="3">
+                                <span>MAC Origem (6 bytes)</span>
+                                <small>De onde vem</small>
+                            </div>
+                            <div class="componente" draggable="true" data-tipo="tipo" data-ordem="4">
+                                <span>Tipo/Tamanho (2 bytes)</span>
+                                <small>Protocolo</small>
+                            </div>
+                            <div class="componente" draggable="true" data-tipo="dados" data-ordem="5">
+                                <span>Dados (46-1500 bytes)</span>
+                                <small>Payload</small>
+                            </div>
+                            <div class="componente" draggable="true" data-tipo="fcs" data-ordem="6">
+                                <span>FCS (4 bytes)</span>
+                                <small>Verificação</small>
+                            </div>
+                        </div>
+
+                        <div class="quadro-montagem">
+                            <div class="slot-quadro" data-posicao="1">
+                                <span class="slot-label">1º</span>
+                            </div>
+                            <div class="slot-quadro" data-posicao="2">
+                                <span class="slot-label">2º</span>
+                            </div>
+                            <div class="slot-quadro" data-posicao="3">
+                                <span class="slot-label">3º</span>
+                            </div>
+                            <div class="slot-quadro" data-posicao="4">
+                                <span class="slot-label">4º</span>
+                            </div>
+                            <div class="slot-quadro" data-posicao="5">
+                                <span class="slot-label">5º</span>
+                            </div>
+                            <div class="slot-quadro" data-posicao="6">
+                                <span class="slot-label">6º</span>
+                            </div>
+                        </div>
+
+                        <button class="btn-verificar" onclick="verificarQuadro()" disabled>Verificar Quadro</button>
+                        <button class="btn-resetar" onclick="resetarQuadro()">Resetar</button>
+                    </div>
+
+                    <div class="desafio-feedback" id="feedback-desafio2"></div>
+                </div>
+            </section>
+
+            <!-- Desafio 3: Detecção de Erro -->
+            <section class="fase-secao" id="secao-desafio3">
+                <div class="secao-content">
+                    <div class="desafio-header">
+                        <h2>Desafio 3: Detecção de Erro com CRC</h2>
+                        <p>Identifique qual quadro possui erro usando a verificação CRC</p>
+                    </div>
+
+                    <div class="desafio-area">
+                        <div class="crc-explicacao">
+                            <h3>Como funciona o CRC:</h3>
+                            <p>O Frame Check Sequence (FCS) usa CRC-32 para detectar erros. Se o valor calculado não bater com o FCS, há erro no quadro.</p>
+                        </div>
+
+                        <div class="quadros-crc">
+                            <div class="quadro-crc" data-correto="true" onclick="selecionarQuadroCRC(this)">
+                                <div class="quadro-header-crc">Quadro A</div>
+                                <div class="quadro-dados-crc">
+                                    <div>Dados: 48 65 6C 6C 6F</div>
+                                    <div>FCS Calculado: A1B2C3D4</div>
+                                    <div>FCS Recebido: A1B2C3D4</div>
+                                </div>
+                                <div class="quadro-status-crc"></div>
+                            </div>
+
+                            <div class="quadro-crc" data-correto="false" onclick="selecionarQuadroCRC(this)">
+                                <div class="quadro-header-crc">Quadro B</div>
+                                <div class="quadro-dados-crc">
+                                    <div>Dados: 57 6F 72 6C 64</div>
+                                    <div>FCS Calculado: E5F6A7B8</div>
+                                    <div>FCS Recebido: E5F6A7B9</div>
+                                </div>
+                                <div class="quadro-status-crc"></div>
+                            </div>
+
+                            <div class="quadro-crc" data-correto="true" onclick="selecionarQuadroCRC(this)">
+                                <div class="quadro-header-crc">Quadro C</div>
+                                <div class="quadro-dados-crc">
+                                    <div>Dados: 54 65 73 74 65</div>
+                                    <div>FCS Calculado: 9C8D7E6F</div>
+                                    <div>FCS Recebido: 9C8D7E6F</div>
+                                </div>
+                                <div class="quadro-status-crc"></div>
+                            </div>
+                        </div>
+
+                        <button class="btn-verificar" onclick="verificarCRC()" disabled>Verificar Detecção</button>
+                    </div>
+
+                    <div class="desafio-feedback" id="feedback-desafio3"></div>
+                </div>
+            </section>
+
+            <!-- Conclusão da Fase -->
+            <section class="fase-secao" id="secao-conclusao">
+                <div class="secao-content">
+                    <div class="conclusao-visual">
+                        <div class="sucesso-icon">✓</div>
+                        <h2>Parabéns! Fase 2 Concluída!</h2>
+                        <p>Você dominou os conceitos da Camada de Enlace de Dados!</p>
+                    </div>
+
+                    <div class="conhecimentos-adquiridos">
+                        <h3>Conhecimentos Adquiridos:</h3>
+                        <ul>
+                            <li>✓ Identificação de endereços MAC válidos</li>
+                            <li>✓ Estrutura de quadros Ethernet</li>
+                            <li>✓ Detecção de erros com CRC</li>
+                            <li>✓ Funcionamento da camada de enlace</li>
+                        </ul>
+                    </div>
+
+                    <div class="resultados-fase">
+                        <div class="resultado-item">
+                            <span class="resultado-label">Desafios Concluídos:</span>
+                            <span class="resultado-valor">3/3</span>
+                        </div>
+                        <div class="resultado-item">
+                            <span class="resultado-label">Pontos Ganhos:</span>
+                            <span class="resultado-valor">+200</span>
+                        </div>
+                        <div class="resultado-item">
+                            <span class="resultado-label">Próxima Fase:</span>
+                            <span class="resultado-valor">Camada de Rede</span>
+                        </div>
+                    </div>
+
+                    <div class="conclusao-acoes">
+                        <button class="btn-continuar" onclick="voltarTrilha()">
+                            Voltar à Trilha
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- HUD de Progresso -->
+        <div class="hud-progresso">
+            <div class="hud-item">
+                <span>Fase:</span>
+                <span>2 - Enlace</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sistema de Jogo: Tempo, Vida e Habilidades -->
+    <script src="js/gameSystemSimple.js"></script>
+    <script src="js/global.js"></script>
+    <script src="js/audio.js"></script>
+    <script src="js/darkmode.js"></script>
+    <script src="js/fase2.js"></script>
+
+</body>
+
+</html>

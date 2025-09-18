@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste do Sistema de Jogo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background: #1a1a2e;
+            color: white;
+        }
+        .test-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .test-section {
+            background: rgba(255,255,255,0.1);
+            margin: 20px 0;
+            padding: 15px;
+            border-radius: 8px;
+        }
+        button {
+            background: #0DF;
+            color: black;
+            border: none;
+            padding: 10px 15px;
+            margin: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        button:hover {
+            background: #00bfff;
+        }
+        .status {
+            background: rgba(0,0,0,0.5);
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>🎮 Teste do Sistema de Jogo</h1>
+        
+        <div class="test-section">
+            <h2>Testes Básicos</h2>
+            <button onclick="gameSystemActions.status()">Ver Status</button>
+            <button onclick="gameSystemActions.testarVida()">Testar Perda de Vida</button>
+            <button onclick="gameSystemActions.acertou(100)">Simular Acerto (+100)</button>
+            <button onclick="gameSystemActions.errou()">Simular Erro</button>
+            <button onclick="gameSystemActions.reiniciar()">Reiniciar</button>
+        </div>
+        
+        <div class="test-section">
+            <h2>Teste de Habilidades</h2>
+            <button onclick="gameSystemActions.equiparTeste('vida-extra')">Equipar Vida Extra</button>
+            <button onclick="gameSystemActions.equiparTeste('cronometro-tempo-extra')">Equipar Tempo Extra</button>
+            <button onclick="gameSystemActions.equiparTeste('multiplicador-pontos')">Equipar Multiplicador</button>
+            <button onclick="limparEquipamentos()">Limpar Equipamentos</button>
+        </div>
+        
+        <div class="test-section">
+            <h2>Status do LocalStorage</h2>
+            <div id="localStorage-status" class="status"></div>
+            <button onclick="mostrarLocalStorage()">Atualizar Status</button>
+        </div>
+    </div>
+
+    <script src="js/gameSystemSimple.js"></script>
+    
+    <script>
+        function mostrarLocalStorage() {
+            const status = document.getElementById('localStorage-status');
+            const equippedItems = localStorage.getItem('equippedItems');
+            const gamePoints = localStorage.getItem('gamePoints');
+            
+            status.innerHTML = `
+                <strong>Itens Equipados:</strong><br>
+                ${equippedItems || 'null'}<br><br>
+                <strong>Pontos do Jogo:</strong><br>
+                ${gamePoints || 'null'}
+            `;
+        }
+        
+        function limparEquipamentos() {
+            localStorage.setItem('equippedItems', '[]');
+            console.log('🧹 Equipamentos limpos!');
+            mostrarLocalStorage();
+            
+            // Recriar sistema
+            if (window.simpleGameSystem) {
+                window.simpleGameSystem = new SimpleGameSystem();
+            }
+        }
+        
+        // Mostrar status inicial
+        setTimeout(() => {
+            mostrarLocalStorage();
+            if (window.gameSystemActions) {
+                gameSystemActions.status();
+            }
+        }, 1000);
+    </script>
+</body>
+</html>
