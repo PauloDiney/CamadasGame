@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste Modal Trilha</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/trilha.css">
+    <link rel="stylesheet" href="css/acessibilidade.css">
+    <link rel="stylesheet" href="css/reset-progresso.css">
+    <style>
+        body {
+            padding: 20px;
+            background: #1a1a2e;
+            color: white;
+        }
+        .test-button {
+            background: #e1ea2d;
+            color: #000;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 10px;
+            font-weight: bold;
+        }
+        .status {
+            background: rgba(255,255,255,0.1);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <h1>🧪 Teste Modal Trilha</h1>
+    
+    <div class="status" id="status">
+        Status: Modal deveria estar oculto
+    </div>
+    
+    <button class="test-button" onclick="abrirModalTeste()">
+        Abrir Modal de Teste
+    </button>
+    
+    <button class="test-button" onclick="verificarModalStatus()">
+        Verificar Status do Modal
+    </button>
+    
+    <button class="test-button" onclick="forcarFecharModal()">
+        Forçar Fechar Modal
+    </button>
+    
+    <!-- Modal da trilha (copiado do original) -->
+    <div class="modal-overlay" id="modal-fase">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modal-titulo">Teste Modal</h2>
+                <button class="modal-close" id="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="fase-preview">
+                    <div class="preview-icone" id="modal-icone">🎮</div>
+                    <div class="preview-info">
+                        <h3 id="modal-nome-fase">Fase de Teste</h3>
+                        <p id="modal-descricao">Esta é uma fase de teste para verificar o modal</p>
+                    </div>
+                </div>
+
+                <div class="fase-objetivos">
+                    <h4>Objetivos:</h4>
+                    <ul id="modal-objetivos">
+                        <li>Testar se o modal abre</li>
+                        <li>Testar se o modal fecha</li>
+                    </ul>
+                </div>
+
+                <div class="fase-recompensas">
+                    <div class="recompensa">
+                        <span class="recompensa-tipo">Pontos:</span>
+                        <span class="recompensa-valor" id="modal-pontos">+100</span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secundario" id="btn-cancelar">Cancelar</button>
+                <button class="btn-primario" id="btn-iniciar-fase">Testar</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function updateStatus(msg) {
+            document.getElementById('status').textContent = 'Status: ' + msg;
+            console.log('Status:', msg);
+        }
+
+        function abrirModalTeste() {
+            const modal = document.getElementById('modal-fase');
+            if (modal) {
+                modal.classList.add('ativo');
+                updateStatus('Modal deveria estar visível agora');
+            } else {
+                updateStatus('ERROR: Modal não encontrado!');
+            }
+        }
+
+        function verificarModalStatus() {
+            const modal = document.getElementById('modal-fase');
+            if (modal) {
+                const isVisible = modal.classList.contains('ativo');
+                const computedStyle = getComputedStyle(modal);
+                updateStatus(`Modal encontrado. Classe ativo: ${isVisible}. Display: ${computedStyle.display}`);
+            } else {
+                updateStatus('ERROR: Modal não encontrado!');
+            }
+        }
+
+        function forcarFecharModal() {
+            const modal = document.getElementById('modal-fase');
+            if (modal) {
+                modal.classList.remove('ativo');
+                updateStatus('Modal fechado forçadamente');
+            } else {
+                updateStatus('ERROR: Modal não encontrado!');
+            }
+        }
+
+        // Configurar eventos
+        document.addEventListener('DOMContentLoaded', function() {
+            const modal = document.getElementById('modal-fase');
+            const btnClose = document.getElementById('modal-close');
+            const btnCancelar = document.getElementById('btn-cancelar');
+            
+            if (btnClose) {
+                btnClose.addEventListener('click', () => {
+                    forcarFecharModal();
+                    updateStatus('Modal fechado via botão X');
+                });
+            }
+            
+            if (btnCancelar) {
+                btnCancelar.addEventListener('click', () => {
+                    forcarFecharModal();
+                    updateStatus('Modal fechado via botão Cancelar');
+                });
+            }
+
+            // Verificar status inicial
+            setTimeout(() => {
+                verificarModalStatus();
+            }, 100);
+        });
+    </script>
+</body>
+</html>

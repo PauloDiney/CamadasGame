@@ -4,6 +4,12 @@ console.log('🎮 GameSystem Simples carregado!');
 
 class SimpleGameSystem {
     constructor() {
+        // Limpar qualquer timer anterior se existir
+        if (window.simpleGameSystem && window.simpleGameSystem.gameState.timerId) {
+            console.log('🧹 Limpando timer anterior...');
+            clearInterval(window.simpleGameSystem.gameState.timerId);
+        }
+        
         this.gameState = {
             vidas: 3,
             tempo: 60,
@@ -215,15 +221,25 @@ class SimpleGameSystem {
     iniciarTimer() {
         console.log('🚀 Iniciando timer...');
         
+        // Limpeza robusta de timers anteriores
         if (this.gameState.timerId) {
+            console.log('🧹 Limpando timer anterior ID:', this.gameState.timerId);
             clearInterval(this.gameState.timerId);
+            this.gameState.timerId = null;
+        }
+        
+        // Verificar se há outros timers globais rodando
+        if (window.gameSystemTimer) {
+            console.log('🧹 Limpando timer global anterior...');
+            clearInterval(window.gameSystemTimer);
+            window.gameSystemTimer = null;
         }
         
         this.gameState.ativo = true;
         
         this.gameState.timerId = setInterval(() => {
             this.gameState.tempo--;
-            this.gameState.pontos += 5; // Pontos por segundo
+            // Removido ganho automático de pontos - pontos apenas por acertos
             
             this.atualizarInterface();
             
@@ -231,6 +247,10 @@ class SimpleGameSystem {
                 this.tempoEsgotado();
             }
         }, 1000);
+        
+        // Armazenar referência global para controle adicional
+        window.gameSystemTimer = this.gameState.timerId;
+        console.log('⏲️ Timer iniciado com ID:', this.gameState.timerId);
     }
     
     atualizarInterface() {
@@ -262,8 +282,8 @@ class SimpleGameSystem {
     }
     
     tempoEsgotado() {
-        console.log('⏰ Tempo esgotado!');
-        this.perderVida();
+        console.log('⏰ Tempo esgotado! Game Over!');
+        this.gameOver();
     }
     
     perderVida() {
@@ -310,8 +330,13 @@ class SimpleGameSystem {
         const vidasEl = document.getElementById('hud-vidas');
         if (vidasEl) vidasEl.style.color = '#FF6B6B';
         
-        // Mostrar mensagem de game over
+        // Mostrar mensagem de game over e redirecionar
         alert('Game Over! Pontuação: ' + this.gameState.pontos);
+        
+        // Redirecionar para trilha após 1 segundo
+        setTimeout(() => {
+            window.location.href = 'trilha.html';
+        }, 1000);
     }
     
     ganharPontos(pontos) {
@@ -325,6 +350,8 @@ class SimpleGameSystem {
         this.gameState.pontos += pontosFinais;
         this.atualizarInterface();
         console.log('🏆 Pontos ganhos:', pontosFinais, '(base:', pontos, ') | Total:', this.gameState.pontos);
+        
+        return pontosFinais; // Retorna os pontos finais ganhos
     }
     
     // Métodos públicos para controle
@@ -427,6 +454,12 @@ class SimpleGameSystem {
 
 // Auto-inicialização
 function initSimpleGameSystem() {
+    // Verificar se já existe uma instância
+    if (window.simpleGameSystem) {
+        console.log('⚠️ SimpleGameSystem já existe, não criando duplicado');
+        return window.simpleGameSystem;
+    }
+    
     const currentPage = window.location.pathname;
     console.log('📍 Página atual:', currentPage);
     
@@ -442,21 +475,49 @@ function initSimpleGameSystem() {
     } else {
         console.log('ℹ️ Não é uma página de fase');
     }
+    
+    return window.simpleGameSystem;
 }
 
-// Múltiplas tentativas de inicialização
+// Controle de inicialização única
+let gameSystemInitialized = false;
+
+function initializeOnce() {
+    if (!gameSystemInitialized && !window.simpleGameSystem) {
+        gameSystemInitialized = true;
+        console.log('🚀 Inicializando SimpleGameSystem pela primeira vez...');
+        return initSimpleGameSystem();
+    } else {
+        console.log('⏭️ SimpleGameSystem já inicializado, pulando...');
+        return window.simpleGameSystem;
+    }
+}
+
+// Tentativa de inicialização única
 if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initSimpleGameSystem);
+    document.addEventListener('DOMContentLoaded', initializeOnce);
 } else {
-    initSimpleGameSystem();
+    initializeOnce();
 }
 
-setTimeout(initSimpleGameSystem, 500);
+// Fallback apenas se ainda não foi inicializado
+setTimeout(() => {
+    if (!window.simpleGameSystem && !gameSystemInitialized) {
+        console.log('🔄 Fallback: tentando inicializar após timeout...');
+        initializeOnce();
+    }
+}, 500);
 
 // Função global para debug
 window.createSimpleGameSystem = function() {
+    if (window.simpleGameSystem) {
+        console.log('🔧 SimpleGameSystem já existe:', window.simpleGameSystem);
+        return window.simpleGameSystem;
+    }
+    
     console.log('🔧 Criando SimpleGameSystem manualmente...');
     window.simpleGameSystem = new SimpleGameSystem();
+    gameSystemInitialized = true;
     return window.simpleGameSystem;
 };
 
@@ -476,8 +537,9 @@ window.gameSystemActions = {
     
     ganharPontos: function(pontos) {
         if (window.simpleGameSystem) {
-            window.simpleGameSystem.ganharPontos(pontos);
+            return window.simpleGameSystem.ganharPontos(pontos);
         }
+        return pontos; // Fallback
     },
     
     pausar: function() {
@@ -505,6 +567,48 @@ window.gameSystemActions = {
             window.simpleGameSystem.jogadorErrou('Teste de vida');
         } else {
             console.log('❌ GameSystem não encontrado!');
+        }
+    },
+    
+    // Função para testar game over por tempo (para debug)
+    testarTempoEsgotado: function() {
+        console.log('🧪 Testando tempo esgotado (Game Over direto)...');
+        if (window.simpleGameSystem) {
+            window.simpleGameSystem.tempoEsgotado();
+        } else {
+            console.log('❌ GameSystem não encontrado!');
+        }
+    },
+    
+    // Função para definir tempo baixo para teste
+    definirTempoBaixo: function(segundos = 3) {
+        console.log('🧪 Definindo tempo para', segundos, 'segundos...');
+        if (window.simpleGameSystem) {
+            window.simpleGameSystem.gameState.tempo = segundos;
+            window.simpleGameSystem.atualizarInterface();
+        } else {
+            console.log('❌ GameSystem não encontrado!');
+        }
+    },
+    
+    // Função para testar pontos
+    testarPontos: function() {
+        console.log('🧪 Testando sistema de pontos...');
+        
+        // Verificar localStorage
+        const pontosAtual = localStorage.getItem('gamePoints');
+        console.log('📊 Pontos no localStorage:', pontosAtual);
+        
+        // Testar ganhar pontos
+        if (window.simpleGameSystem) {
+            const pontosGanhos = window.simpleGameSystem.ganharPontos(50);
+            console.log('✅ Pontos ganhos:', pontosGanhos);
+        }
+        
+        // Verificar se há NaN
+        if (pontosAtual === 'NaN' || pontosAtual === null) {
+            console.warn('⚠️ Pontos inválidos detectados, resetando para 0');
+            localStorage.setItem('gamePoints', '0');
         }
     },
     
@@ -541,6 +645,45 @@ window.gameSystemActions = {
             console.log('ℹ️ Item já equipado');
         }
     }
+};
+
+// Função global de limpeza emergencial
+window.cleanupGameSystem = function() {
+    console.log('🧹 Limpeza emergencial do GameSystem...');
+    
+    // Limpar timer global
+    if (window.gameSystemTimer) {
+        clearInterval(window.gameSystemTimer);
+        window.gameSystemTimer = null;
+    }
+    
+    // Limpar timer da instância se existir
+    if (window.simpleGameSystem && window.simpleGameSystem.gameState.timerId) {
+        clearInterval(window.simpleGameSystem.gameState.timerId);
+        window.simpleGameSystem.gameState.timerId = null;
+    }
+    
+    // Remover interface se existir
+    const interface = document.getElementById('simple-game-hud');
+    if (interface) {
+        interface.remove();
+    }
+    
+    // Reset da instância
+    window.simpleGameSystem = null;
+    window.gameSystemInitialized = false;
+    
+    console.log('✅ Limpeza concluída!');
+};
+
+// Função para reiniciar completamente o sistema
+window.restartGameSystem = function() {
+    console.log('🔄 Reiniciando GameSystem completamente...');
+    window.cleanupGameSystem();
+    
+    setTimeout(() => {
+        initializeOnce();
+    }, 100);
 };
 
 console.log('🎮 SimpleGameSystem script carregado completamente!');

@@ -1,0 +1,445 @@
+/* ==========================================================================
+   CSS para Sistema de Reset de Progresso - CamadasGame
+   ========================================================================== */
+
+/* Modal de Reset */
+.modal-overlay#modal-reset {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.modal-content {
+    background: var(--bg-color, #1a1a2e);
+    border: 2px solid var(--primary-color, #16213e);
+    border-radius: 15px;
+    width: 90%;
+    max-width: 500px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    animation: slideIn 0.3s ease-out;
+}
+
+.modal-header {
+    padding: 20px 20px 10px;
+    border-bottom: 1px solid var(--border-color, #333);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header h2 {
+    color: var(--warning-color, #ff6b35);
+    margin: 0;
+    font-size: 1.4em;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.btn-fechar-modal {
+    background: none;
+    border: none;
+    color: var(--text-color, #fff);
+    font-size: 1.5em;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 5px;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-fechar-modal:hover,
+.btn-fechar-modal:focus {
+    background: rgba(255, 107, 53, 0.1);
+    color: var(--warning-color, #ff6b35);
+    outline: 2px solid var(--warning-color, #ff6b35);
+    outline-offset: 2px;
+}
+
+/* Corpo do Modal */
+.modal-body {
+    padding: 20px;
+}
+
+.reset-warning {
+    margin-bottom: 25px;
+}
+
+.reset-warning p {
+    color: var(--text-color, #fff);
+    margin-bottom: 15px;
+    line-height: 1.5;
+}
+
+.reset-warning strong {
+    color: var(--warning-color, #ff6b35);
+    font-weight: bold;
+}
+
+.reset-warning ul {
+    list-style: none;
+    padding-left: 0;
+    margin: 15px 0;
+}
+
+.reset-warning li {
+    color: var(--text-secondary, #ccc);
+    margin-bottom: 8px;
+    padding-left: 10px;
+    position: relative;
+}
+
+.reset-warning li:before {
+    content: attr(data-icon);
+    position: absolute;
+    left: -20px;
+    width: 20px;
+}
+
+/* Opções de Reset */
+.reset-opcoes {
+    background: rgba(255, 107, 53, 0.1);
+    border: 1px solid var(--warning-color, #ff6b35);
+    border-radius: 10px;
+    padding: 15px;
+    margin: 20px 0;
+}
+
+.opcao-reset {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    color: var(--text-color, #fff);
+    cursor: pointer;
+    font-size: 0.95em;
+}
+
+.opcao-reset:last-child {
+    margin-bottom: 0;
+}
+
+.opcao-reset input[type="checkbox"] {
+    margin-right: 10px;
+    width: 18px;
+    height: 18px;
+    accent-color: var(--primary-color, #16213e);
+}
+
+.opcao-reset:hover {
+    background: rgba(255, 107, 53, 0.05);
+    border-radius: 5px;
+    padding: 5px;
+    margin: 5px -5px;
+}
+
+/* Footer do Modal */
+.modal-footer {
+    padding: 10px 20px 20px;
+    display: flex;
+    gap: 15px;
+    justify-content: flex-end;
+}
+
+.btn-secundario,
+.btn-perigo {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    min-width: 120px;
+}
+
+.btn-secundario {
+    background: var(--bg-secondary, #333);
+    color: var(--text-color, #fff);
+    border: 2px solid var(--border-color, #555);
+}
+
+.btn-secundario:hover,
+.btn-secundario:focus {
+    background: var(--bg-hover, #444);
+    outline: 2px solid var(--primary-color, #16213e);
+    outline-offset: 2px;
+}
+
+.btn-perigo {
+    background: var(--danger-color, #dc3545);
+    color: white;
+    border: 2px solid var(--danger-color, #dc3545);
+}
+
+.btn-perigo:hover,
+.btn-perigo:focus {
+    background: #c82333;
+    border-color: #c82333;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(220, 53, 69, 0.3);
+    outline: 2px solid #fff;
+    outline-offset: 2px;
+}
+
+/* Toast de Confirmação */
+.toast-confirmacao {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 10001;
+    border-radius: 10px;
+    padding: 15px;
+    min-width: 300px;
+    max-width: 400px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    animation: slideInRight 0.5s ease-out;
+}
+
+.reset-sucesso {
+    background: linear-gradient(135deg, #28a745, #20c997);
+    border: 2px solid #155724;
+    color: white;
+}
+
+.reset-erro {
+    background: linear-gradient(135deg, #dc3545, #fd7e14);
+    border: 2px solid #721c24;
+    color: white;
+}
+
+.toast-content {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.toast-icone {
+    font-size: 1.5em;
+    flex-shrink: 0;
+}
+
+.toast-texto strong {
+    display: block;
+    font-size: 1.1em;
+    margin-bottom: 5px;
+}
+
+.toast-texto p {
+    margin: 0;
+    font-size: 0.9em;
+    opacity: 0.9;
+}
+
+/* Animações */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-50px) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(100px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .modal-content {
+        width: 95%;
+        margin: 20px 10px;
+    }
+    
+    .modal-header h2 {
+        font-size: 1.2em;
+    }
+    
+    .modal-footer {
+        flex-direction: column;
+    }
+    
+    .btn-secundario,
+    .btn-perigo {
+        width: 100%;
+    }
+    
+    .toast-confirmacao {
+        right: 10px;
+        left: 10px;
+        min-width: auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .modal-body {
+        padding: 15px;
+    }
+    
+    .modal-header {
+        padding: 15px 15px 10px;
+    }
+    
+    .modal-footer {
+        padding: 10px 15px 15px;
+    }
+    
+    .reset-warning ul {
+        font-size: 0.9em;
+    }
+}
+
+/* Acessibilidade - Alto Contraste */
+@media (prefers-contrast: high) {
+    .modal-overlay#modal-reset {
+        background: rgba(0, 0, 0, 0.95);
+    }
+    
+    .modal-content {
+        border-width: 3px;
+        box-shadow: 0 0 0 2px #fff;
+    }
+    
+    .btn-fechar-modal:focus,
+    .btn-secundario:focus,
+    .btn-perigo:focus {
+        outline-width: 3px;
+    }
+}
+
+/* Modo Escuro Personalizado */
+.dark-mode .modal-content {
+    background: #0d1117;
+    border-color: #30363d;
+}
+
+.dark-mode .reset-warning li {
+    color: #8b949e;
+}
+
+.dark-mode .opcao-reset {
+    color: #f0f6fc;
+}
+
+/* Animações Reduzidas */
+@media (prefers-reduced-motion: reduce) {
+    .modal-overlay#modal-reset,
+    .modal-content,
+    .toast-confirmacao,
+    .btn-secundario,
+    .btn-perigo {
+        animation: none;
+        transition: none;
+    }
+}
+
+/* Botão Reset Global */
+.btn-reset-global {
+    background: linear-gradient(135deg, var(--danger-color, #dc3545), #c82333);
+    color: white;
+    border: 2px solid var(--danger-color, #dc3545);
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9em;
+}
+
+.btn-reset-global:hover,
+.btn-reset-global:focus {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(220, 53, 69, 0.4);
+    outline: 2px solid #fff;
+    outline-offset: 2px;
+}
+
+.btn-reset-global svg {
+    width: 18px;
+    height: 18px;
+    stroke-width: 2.5px;
+}
+
+/* Estados de carregamento */
+.btn-reset-loading {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.btn-reset-loading::after {
+    content: '⏳';
+    margin-left: 5px;
+}
+
+/* Indicador de ação irreversível */
+.irreversivel-indicator {
+    color: var(--danger-color, #dc3545);
+    font-weight: bold;
+    font-size: 0.9em;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 10px;
+}
+
+.irreversivel-indicator::before {
+    content: '⚠️';
+}
+
+/* Acessibilidade para leitores de tela */
+.sr-only-reset {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Focus trap para modal */
+.modal-content:focus-within {
+    outline: none;
+}
+
+/* Estilo para quando JavaScript está desabilitado */
+.no-js .btn-reset-global {
+    display: none;
+}
+
+.no-js::after {
+    content: 'JavaScript é necessário para a funcionalidade de reset.';
+    color: var(--warning-color, #ff6b35);
+    font-style: italic;
+}

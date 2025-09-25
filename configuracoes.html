@@ -4,37 +4,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Configurações do jogo Camadas da Conexão, incluindo opções de acessibilidade, áudio e personalização visual.">
     <title>Configurações - Camadas da Conexão</title>
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/configuracoes.css">
+    <link rel="stylesheet" href="css/acessibilidade.css">
+    <link rel="stylesheet" href="css/reset-progresso.css">
     <link href="https://fonts.googleapis.com/css2?family=Kdam+Thmor+Pro&display=swap" rel="stylesheet">
 </head>
 
 <body>
-    <section id="configuracoes" class="screen-section">
-        <header class="header">
+    <main id="configuracoes" class="screen-section" role="main">
+        <header class="header" role="banner">
             <div>
                 <h1 class="header-title">Configurações</h1>
-                <p class="header-subtitle">Personalize sua experiência</p>
+                <p class="header-subtitle">Personalize sua experiência de jogo</p>
             </div>
-            <div class="header-points">
-                <svg xmlns="http://www.w3.org/2000/svg" width="65" height="61" viewBox="0 0 65 61" fill="none">
+            <div class="header-points" role="status" aria-live="polite">
+                <svg xmlns="http://www.w3.org/2000/svg" width="65" height="61" viewBox="0 0 65 61" fill="none" aria-hidden="true">
                     <path d="M32.5 0L40.0212 23.1479H64.3604L44.6696 37.4541L52.1908 60.6021L32.5 46.2959L12.8092 60.6021L20.3304 37.4541L0.639606 23.1479H24.9788L32.5 0Z" fill="#E1EA2D" />
                 </svg>
-                <p id="pontos-display">0 Pontos</p>
+                <p id="pontos-display" aria-label="Pontuação atual">0 Pontos</p>
             </div>
         </header>
 
-        <main>
-            <section class="content_inputs">
+        <section class="content_inputs" role="region" aria-labelledby="configs-titulo">
+            <h2 id="configs-titulo" class="sr-only">Opções de Configuração</h2>
+            
+            <!-- Seção de Acessibilidade -->
+            <fieldset class="config-group">
+                <legend>Opções de Acessibilidade</legend>
+                
+                <section class="input_container config-option">
+                    <div class="config-content">
+                        <div class="config-text">
+                            <h3>Modo Alto Contraste</h3>
+                            <p>Aumenta o contraste visual para melhor legibilidade</p>
+                        </div>
+                        <label class="config-toggle">
+                            <input type="checkbox" id="alto-contraste-toggle" aria-describedby="alto-contraste-desc">
+                            <span class="toggle-slider" role="presentation"></span>
+                            <span id="alto-contraste-desc" class="sr-only">Ativa ou desativa modo de alto contraste</span>
+                        </label>
+                    </div>
+                </section>
+                
+                <section class="input_container config-option">
+                    <div class="config-content">
+                        <div class="config-text">
+                            <h3>Tamanho da Fonte</h3>
+                            <p>Ajuste o tamanho do texto para melhor leitura</p>
+                        </div>
+                        <select id="tamanho-fonte-select" class="config-select" aria-describedby="fonte-desc">
+                            <option value="pequena">Pequena</option>
+                            <option value="normal" selected>Normal</option>
+                            <option value="grande">Grande</option>
+                            <option value="extra-grande">Extra Grande</option>
+                        </select>
+                        <span id="fonte-desc" class="sr-only">Selecione o tamanho preferido da fonte</span>
+                    </div>
+                </section>
+                
+                <section class="input_container config-option">
+                    <div class="config-content">
+                        <div class="config-text">
+                            <h3>Animações</h3>
+                            <p>Reduzir animações pode ajudar usuários sensíveis ao movimento</p>
+                        </div>
+                        <label class="config-toggle">
+                            <input type="checkbox" checked id="animacoes-toggle" aria-describedby="animacoes-desc">
+                            <span class="toggle-slider" role="presentation"></span>
+                            <span id="animacoes-desc" class="sr-only">Ativa ou desativa animações visuais</span>
+                        </label>
+                    </div>
+                </section>
+            </fieldset>
+            
+            <!-- Seção de Áudio -->
+            <fieldset class="config-group">
+                <legend>Opções de Áudio</legend>
+                
                 <section class="input_container config-option">
                     <div class="config-content">
                         <div class="config-text">
                             <h3>Volume da Música</h3>
                             <p>Ajuste o volume da música de fundo</p>
                         </div>
-                        <input type="range" min="0" max="100" value="50" class="config-slider" id="music-volume-slider">
+                        <input type="range" min="0" max="100" value="50" class="config-slider" id="music-volume-slider" aria-label="Volume da música de fundo" aria-valuetext="50%">
                     </div>
                 </section>
 
@@ -45,8 +102,9 @@
                             <p>Ativar/desativar música ambiente</p>
                         </div>
                         <label class="config-toggle">
-                            <input type="checkbox" checked id="music-toggle">
-                            <span class="toggle-slider"></span>
+                            <input type="checkbox" checked id="music-toggle" aria-describedby="music-desc">
+                            <span class="toggle-slider" role="presentation"></span>
+                            <span id="music-desc" class="sr-only">Liga ou desliga a música de fundo</span>
                         </label>
                     </div>
                 </section>
@@ -67,14 +125,22 @@
                     </div>
                 </section>
 
-                <section class="input_container config-action">
-                    <a href="#" class="config-button reset">
+                <section class="input_container config-action reset-section">
+                    <div class="config-warning">
+                        <h3>⚠️ Zona de Perigo</h3>
+                        <p>Esta ação é irreversível e apagará todo o seu progresso no jogo.</p>
+                    </div>
+                    <button onclick="resetarProgresso()" class="config-button reset btn-reset-global" 
+                            aria-describedby="reset-warning" id="reset-progress-btn">
                         Resetar Progresso
-                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
-                            <path d="M20 5V15L12.5 7.5" stroke="#E1EA2D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M12.5 7.5C16.5 3.5 22 3.5 26.5 7.5C31 11.5 31 18.5 26.5 22.5C22 26.5 16.5 26.5 12.5 22.5" stroke="#E1EA2D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M3 12C3 7.03 7.03 3 12 3C16.97 3 21 7.03 21 12C21 16.97 16.97 21 12 21C10.39 21 8.89 20.55 7.64 19.78" stroke="currentColor" stroke-width="2"/>
+                            <path d="M3 12L7 8M3 12L7 16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
-                    </a>
+                    </button>
+                    <div id="reset-warning" class="irreversivel-indicator" role="alert">
+                        Ação irreversível - Todo progresso será perdido permanentemente
+                    </div>
                 </section>
 
                 <section class="input_container config-action">
@@ -91,10 +157,16 @@
         </main>
     </section>
 
+    <!-- Live region para anúncios de acessibilidade -->
+    <div id="aria-live-region" aria-live="polite" aria-atomic="true" class="sr-only"></div>
+
     <!-- JavaScript específico para configurações -->
+    <script src="js/acessibilidade.js"></script>
+    <script src="js/reset-progresso.js"></script>
     <script src="js/global.js"></script>
     <script src="js/audio.js"></script>
     <script src="js/darkmode.js"></script>
+    <script src="js/configuracoes-acessibilidade.js"></script>
 </body>
 
 </html>

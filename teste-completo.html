@@ -75,8 +75,14 @@
             equipped = equipped.filter(item => (typeof item === 'object' ? item.id : item) !== 'vida-extra');
             equipped.push({ id: 'vida-extra' });
             localStorage.setItem('equippedItems', JSON.stringify(equipped));
-            window.simpleGameSystem = new SimpleGameSystem();
-            console.log('✅ Vida extra equipada! Vidas atuais:', window.simpleGameSystem.estado.vidas);
+            // Limpar instância existente e recriar
+            if (window.cleanupGameSystem) window.cleanupGameSystem();
+            setTimeout(() => {
+                if (window.createSimpleGameSystem) {
+                    window.createSimpleGameSystem();
+                    console.log('✅ Vida extra equipada! Vidas atuais:', window.simpleGameSystem.estado.vidas);
+                }
+            }, 100);
         }
         
         function testarTempoExtra() {
@@ -85,8 +91,14 @@
             equipped = equipped.filter(item => (typeof item === 'object' ? item.id : item) !== 'cronometro-tempo-extra');
             equipped.push({ id: 'cronometro-tempo-extra' });
             localStorage.setItem('equippedItems', JSON.stringify(equipped));
-            window.simpleGameSystem = new SimpleGameSystem();
-            console.log('✅ Tempo extra equipado! Tempo atual:', window.simpleGameSystem.estado.tempo);
+            // Limpar instância existente e recriar
+            if (window.cleanupGameSystem) window.cleanupGameSystem();
+            setTimeout(() => {
+                if (window.createSimpleGameSystem) {
+                    window.createSimpleGameSystem();
+                    console.log('✅ Tempo extra equipado! Tempo atual:', window.simpleGameSystem.estado.tempo);
+                }
+            }, 100);
         }
         
         function testarMultiplicador() {
@@ -95,15 +107,27 @@
             equipped = equipped.filter(item => (typeof item === 'object' ? item.id : item) !== 'multiplicador-pontos');
             equipped.push({ id: 'multiplicador-pontos' });
             localStorage.setItem('equippedItems', JSON.stringify(equipped));
-            window.simpleGameSystem = new SimpleGameSystem();
-            console.log('✅ Multiplicador equipado! Teste ganhando pontos...');
+            // Limpar instância existente e recriar
+            if (window.cleanupGameSystem) window.cleanupGameSystem();
+            setTimeout(() => {
+                if (window.createSimpleGameSystem) {
+                    window.createSimpleGameSystem();
+                    console.log('✅ Multiplicador equipado! Teste ganhando pontos...');
+                }
+            }, 100);
         }
         
         function limparTudo() {
             console.log('🧹 Limpando equipamentos...');
             localStorage.setItem('equippedItems', '[]');
-            window.simpleGameSystem = new SimpleGameSystem();
-            console.log('✅ Equipamentos limpos! Sistema resetado.');
+            // Limpar instância existente e recriar
+            if (window.cleanupGameSystem) window.cleanupGameSystem();
+            setTimeout(() => {
+                if (window.createSimpleGameSystem) {
+                    window.createSimpleGameSystem();
+                    console.log('✅ Equipamentos limpos! Sistema resetado.');
+                }
+            }, 100);
         }
     </script>
 </body>

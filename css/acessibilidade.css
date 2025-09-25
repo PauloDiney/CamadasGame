@@ -1,0 +1,442 @@
+/* ===========================================
+   CSS DE ACESSIBILIDADE - CamadasGame
+   =========================================== */
+
+/* Classes de utilidade para screen readers */
+.sr-only {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+}
+
+.sr-only-focusable:focus {
+    position: static !important;
+    width: auto !important;
+    height: auto !important;
+    padding: inherit !important;
+    margin: inherit !important;
+    overflow: visible !important;
+    clip: auto !important;
+    white-space: inherit !important;
+}
+
+/* ===========================================
+   FOCUS VISÍVEL E NAVEGAÇÃO POR TECLADO
+   =========================================== */
+.focus-visible *:focus {
+    outline: 3px solid #E1EA2D !important;
+    outline-offset: 2px !important;
+    z-index: 1000 !important;
+}
+
+.focus-visible button:focus,
+.focus-visible a:focus,
+.focus-visible input:focus,
+.focus-visible select:focus,
+.focus-visible [tabindex]:focus {
+    box-shadow: 0 0 0 3px rgba(225, 234, 45, 0.5) !important;
+}
+
+/* Indicador visual para elementos arrastáveis */
+[draggable="true"]:focus {
+    transform: scale(1.05);
+    transition: transform 0.2s ease;
+}
+
+/* ===========================================
+   TAMANHOS DE FONTE
+   =========================================== */
+.fonte-pequena {
+    font-size: 0.875rem;
+}
+
+.fonte-normal {
+    font-size: 1rem;
+}
+
+.fonte-grande {
+    font-size: 1.25rem;
+}
+
+.fonte-extra-grande {
+    font-size: 1.5rem;
+}
+
+.fonte-grande h1, .fonte-extra-grande h1 {
+    font-size: 2rem !important;
+}
+
+.fonte-grande h2, .fonte-extra-grande h2 {
+    font-size: 1.75rem !important;
+}
+
+.fonte-grande h3, .fonte-extra-grande h3 {
+    font-size: 1.5rem !important;
+}
+
+.fonte-grande button, .fonte-extra-grande button {
+    font-size: 1.125rem !important;
+    padding: 12px 20px !important;
+}
+
+/* ===========================================
+   MODO ALTO CONTRASTE
+   =========================================== */
+.alto-contraste {
+    background-color: #000000 !important;
+    color: #FFFFFF !important;
+}
+
+.alto-contraste * {
+    background-color: transparent !important;
+    color: #FFFFFF !important;
+    border-color: #FFFFFF !important;
+}
+
+.alto-contraste .header,
+.alto-contraste .fase-header,
+.alto-contraste .trilha-header {
+    background-color: #1a1a1a !important;
+    border-bottom: 2px solid #FFFFFF !important;
+}
+
+.alto-contraste button,
+.alto-contraste .btn-continuar,
+.alto-contraste .btn-voltar,
+.alto-contraste .btn-secundario {
+    background-color: #FFFFFF !important;
+    color: #000000 !important;
+    border: 2px solid #FFFFFF !important;
+}
+
+.alto-contraste button:hover,
+.alto-contraste button:focus {
+    background-color: #E1EA2D !important;
+    color: #000000 !important;
+    border-color: #E1EA2D !important;
+}
+
+.alto-contraste a {
+    color: #E1EA2D !important;
+    text-decoration: underline !important;
+}
+
+.alto-contraste a:hover,
+.alto-contraste a:focus {
+    color: #FFFFFF !important;
+    background-color: #E1EA2D !important;
+}
+
+.alto-contraste .cabo-visual,
+.alto-contraste .tech-icon,
+.alto-contraste .fase-circle {
+    border: 2px solid #FFFFFF !important;
+    background-color: #333333 !important;
+}
+
+.alto-contraste svg,
+.alto-contraste svg path {
+    fill: #FFFFFF !important;
+    stroke: #FFFFFF !important;
+}
+
+.alto-contraste .sucesso {
+    background-color: #008000 !important;
+    color: #FFFFFF !important;
+}
+
+.alto-contraste .erro {
+    background-color: #FF0000 !important;
+    color: #FFFFFF !important;
+}
+
+/* ===========================================
+   BOTÃO DE ACESSIBILIDADE
+   =========================================== */
+.btn-acessibilidade {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #E1EA2D;
+    color: #000;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-acessibilidade:hover,
+.btn-acessibilidade:focus {
+    background-color: #d4d626;
+    transform: scale(1.1);
+}
+
+/* ===========================================
+   MODAIS DE ACESSIBILIDADE
+   =========================================== */
+.modal-acessibilidade {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+}
+
+.modal-content {
+    background-color: #fff;
+    color: #000;
+    padding: 2rem;
+    border-radius: 8px;
+    max-width: 500px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.alto-contraste .modal-content {
+    background-color: #1a1a1a !important;
+    color: #FFFFFF !important;
+    border: 2px solid #FFFFFF !important;
+}
+
+.modal-content h2 {
+    margin-top: 0;
+    color: #E1EA2D;
+}
+
+.modal-content h3 {
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.modal-content ul {
+    margin: 1rem 0;
+    padding-left: 1.5rem;
+}
+
+.modal-content li {
+    margin-bottom: 0.5rem;
+}
+
+.modal-content kbd {
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 2px 6px;
+    font-family: monospace;
+    font-size: 0.875rem;
+}
+
+.alto-contraste .modal-content kbd {
+    background-color: #333 !important;
+    border-color: #FFFFFF !important;
+    color: #FFFFFF !important;
+}
+
+.opcoes-acess {
+    margin: 1.5rem 0;
+}
+
+.opcao-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 1rem;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.alto-contraste .opcao-item {
+    border-color: #FFFFFF !important;
+}
+
+.opcao-item input,
+.opcao-item select {
+    margin: 0;
+}
+
+/* ===========================================
+   MELHORIAS DE CONTRASTE E LEGIBILIDADE
+   =========================================== */
+
+/* Aumenta contraste de textos */
+body {
+    line-height: 1.6;
+}
+
+button, a {
+    min-height: 44px; /* Tamanho mínimo recomendado para touch targets */
+    min-width: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+/* Melhora contraste de placeholders */
+input::placeholder,
+select option {
+    color: #666;
+    opacity: 1;
+}
+
+.alto-contraste input::placeholder {
+    color: #ccc !important;
+}
+
+/* ===========================================
+   INDICADORES DE STATUS PARA SCREEN READERS
+   =========================================== */
+.status-sucesso::before {
+    content: "Sucesso: ";
+    font-weight: bold;
+}
+
+.status-erro::before {
+    content: "Erro: ";
+    font-weight: bold;
+}
+
+.status-info::before {
+    content: "Informação: ";
+    font-weight: bold;
+}
+
+/* ===========================================
+   ANIMAÇÕES REDUZIDAS PARA ACESSIBILIDADE
+   =========================================== */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    
+    .sinal-eletrico,
+    .dados-viajando {
+        animation: none !important;
+    }
+}
+
+/* ===========================================
+   RESPONSIVIDADE PARA DIFERENTES DISPOSITIVOS
+   =========================================== */
+@media (max-width: 768px) {
+    .btn-acessibilidade {
+        width: 60px;
+        height: 60px;
+        top: 10px;
+        right: 10px;
+    }
+    
+    .modal-content {
+        padding: 1rem;
+        margin: 1rem;
+    }
+    
+    .opcao-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+/* ===========================================
+   SUPORTE A IMPRESSÃO ACESSÍVEL
+   =========================================== */
+@media print {
+    .btn-acessibilidade,
+    .modal-acessibilidade {
+        display: none !important;
+    }
+    
+    .sr-only {
+        position: static !important;
+        width: auto !important;
+        height: auto !important;
+        clip: auto !important;
+        overflow: visible !important;
+    }
+}
+
+/* ===========================================
+   ESTADOS HOVER/FOCUS MELHORADOS
+   =========================================== */
+button:hover,
+a:hover,
+[tabindex]:hover {
+    transform: translateY(-1px);
+    transition: transform 0.2s ease;
+}
+
+button:active,
+a:active,
+[tabindex]:active {
+    transform: translateY(0);
+}
+
+/* Feedback visual para drag and drop */
+[draggable="true"]:hover {
+    cursor: grab;
+}
+
+[draggable="true"]:active {
+    cursor: grabbing;
+}
+
+.drag-over {
+    background-color: rgba(225, 234, 45, 0.2) !important;
+    border: 2px dashed #E1EA2D !important;
+}
+
+/* ===========================================
+   INDICADORES VISUAIS PARA ELEMENTOS INTERATIVOS
+   =========================================== */
+.cabo-item::after,
+.velocidade-item::after,
+.fase-node::after {
+    content: attr(aria-label);
+    position: absolute;
+    bottom: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #333;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 1000;
+}
+
+.cabo-item:focus::after,
+.velocidade-item:focus::after,
+.fase-node:focus::after,
+.cabo-item:hover::after,
+.velocidade-item:hover::after,
+.fase-node:hover::after {
+    opacity: 1;
+}

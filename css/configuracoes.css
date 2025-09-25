@@ -24,6 +24,8 @@ body {
     height: auto;
     transition: opacity 0.3s ease-in-out;
     overflow: visible;
+    display: flex;
+    flex-direction: column;
 }
 
 /* Layout dos itens de configuração */

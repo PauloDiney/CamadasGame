@@ -43,11 +43,238 @@ class Fase1Manager {
         this.atualizarPontos();
         this.configurarDragAndDrop();
         this.configurarEventos();
+        this.configurarAcessibilidade();
         this.atualizarProgresso();
+    }
+    
+    // Configurações específicas de acessibilidade para a fase
+    configurarAcessibilidade() {
+        // Configurar navegação por teclado para elementos drag-and-drop
+        this.configurarNavegacaoTeclado();
+        
+        // Configurar atalhos específicos da fase
+        this.configurarAtalhosFase();
+        
+        // Configurar feedback para leitores de tela
+        this.configurarFeedbackLeitorTela();
+    }
+    
+    configurarNavegacaoTeclado() {
+        // Navegação por teclado nos cabos
+        const cabos = document.querySelectorAll('.cabo-item');
+        cabos.forEach((cabo, index) => {
+            cabo.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    this.selecionarCaboTeclado(cabo);
+                }
+            });
+        });
+        
+        // Navegação nos alvos de tipo
+        const alvos = document.querySelectorAll('.tipo-target');
+        alvos.forEach(alvo => {
+            alvo.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    this.conectarCaboTeclado(alvo);
+                }
+            });
+        });
+        
+        // Navegação nas velocidades
+        const velocidades = document.querySelectorAll('.velocidade-item');
+        velocidades.forEach(item => {
+            item.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    this.selecionarVelocidadeTeclado(item);
+                }
+            });
+        });
+        
+        // Navegação nos slots de ordenação
+        const slots = document.querySelectorAll('.slot-ordenacao');
+        slots.forEach(slot => {
+            slot.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    this.colocarVelocidadeTeclado(slot);
+                }
+            });
+        });
+    }
+    
+    configurarAtalhosFase() {
+        document.addEventListener('keydown', (e) => {
+            // Ctrl + 1, 2, 3 para navegar entre desafios
+            if (e.ctrlKey && ['1', '2', '3'].includes(e.key)) {
+                e.preventDefault();
+                const numeroDesafio = parseInt(e.key);
+                if (this.progressoDesafios[numeroDesafio - 1] || numeroDesafio === 1) {
+                    this.iniciarDesafio(numeroDesafio);
+                    anunciarParaLeitorTela(`Navegando para desafio ${numeroDesafio}`);
+                }
+            }
+            
+            // R = Resetar desafio atual
+            if (e.key === 'r' || e.key === 'R') {
+                if (this.desafioAtual > 0) {
+                    e.preventDefault();
+                    this.resetarDesafioAtual();
+                    anunciarParaLeitorTela('Desafio resetado');
+                }
+            }
+        });
+    }
+    
+    configurarFeedbackLeitorTela() {
+        // Observer para mudanças no progresso
+        const progressoElement = document.getElementById('progresso-atual');
+        if (progressoElement) {
+            const observer = new MutationObserver((mutations) => {
+                mutations.forEach((mutation) => {
+                    if (mutation.type === 'childList' || mutation.type === 'characterData') {
+                        const progresso = progressoElement.textContent;
+                        anunciarParaLeitorTela(`Progresso atualizado: ${progresso} de 3 desafios concluídos`);
+                    }
+                });
+            });
+            observer.observe(progressoElement, { 
+                childList: true, 
+                characterData: true, 
+                subtree: true 
+            });
+        }
+    }
+    
+    // Variáveis para navegação por teclado
+    caboSelecionado = null;
+    velocidadeSelecionada = null;
+    
+    selecionarCaboTeclado(cabo) {
+        // Remove seleção anterior
+        document.querySelectorAll('.cabo-item').forEach(c => c.classList.remove('selecionado-teclado'));
+        
+        // Seleciona novo cabo
+        cabo.classList.add('selecionado-teclado');
+        this.caboSelecionado = cabo;
+        
+        const tipo = cabo.getAttribute('data-tipo');
+        const nome = cabo.querySelector('span').textContent;
+        anunciarParaLeitorTela(`${nome} selecionado. Use Tab para navegar até o tipo correto e Enter para conectar.`);
+    }
+    
+    conectarCaboTeclado(alvo) {
+        if (!this.caboSelecionado) {
+            anunciarParaLeitorTela('Selecione um cabo primeiro usando Enter ou Espaço');
+            return;
+        }
+        
+        const tipoCabo = this.caboSelecionado.getAttribute('data-tipo');
+        const tipoAlvo = alvo.getAttribute('data-aceita');
+        
+        if (tipoCabo === tipoAlvo) {
+            // Conexão correta
+            this.conectarCabo(this.caboSelecionado, alvo);
+            this.caboSelecionado.classList.remove('selecionado-teclado');
+            this.caboSelecionado = null;
+            anunciarParaLeitorTela('Cabo conectado corretamente!');
+        } else {
+            anunciarParaLeitorTela('Cabo não é compatível com este tipo. Tente outro local.');
+        }
+    }
+    
+    selecionarVelocidadeTeclado(item) {
+        // Remove seleção anterior
+        document.querySelectorAll('.velocidade-item').forEach(v => v.classList.remove('selecionado-teclado'));
+        
+        // Seleciona nova velocidade
+        item.classList.add('selecionado-teclado');
+        this.velocidadeSelecionada = item;
+        
+        const nome = item.querySelector('h4').textContent;
+        const velocidade = item.querySelector('span').textContent;
+        anunciarParaLeitorTela(`${nome} ${velocidade} selecionado. Use Tab para navegar até uma posição e Enter para colocar.`);
+    }
+    
+    colocarVelocidadeTeclado(slot) {
+        if (!this.velocidadeSelecionada) {
+            anunciarParaLeitorTela('Selecione uma tecnologia primeiro usando Enter ou Espaço');
+            return;
+        }
+        
+        const posicao = slot.getAttribute('data-posicao');
+        
+        // Remove de posição anterior se já estava colocado
+        this.velocidadeSelecionada.classList.remove('colocado');
+        
+        // Coloca na nova posição
+        this.velocidadeSelecionada.style.order = posicao;
+        this.velocidadeSelecionada.classList.add('colocado');
+        this.velocidadeSelecionada.setAttribute('data-posicao-atual', posicao);
+        
+        const nome = this.velocidadeSelecionada.querySelector('h4').textContent;
+        anunciarParaLeitorTela(`${nome} colocado na posição ${posicao}`);
+        
+        this.velocidadeSelecionada.classList.remove('selecionado-teclado');
+        this.velocidadeSelecionada = null;
+        
+        // Verifica se completou o desafio
+        setTimeout(() => this.verificarDesafio2(), 500);
+    }
+    
+    resetarDesafioAtual() {
+        switch(this.desafioAtual) {
+            case 1:
+                this.resetarDesafio1();
+                break;
+            case 2:
+                this.resetarDesafio2();
+                break;
+            case 3:
+                this.resetarDesafio3();
+                break;
+        }
+    }
+    
+    resetarDesafio1() {
+        document.querySelectorAll('.cabo-item').forEach(cabo => {
+            cabo.classList.remove('conectado', 'selecionado-teclado');
+            cabo.style.display = 'block';
+        });
+        document.querySelectorAll('.tipo-target').forEach(alvo => {
+            alvo.classList.remove('preenchido');
+        });
+        document.getElementById('feedback-desafio1').innerHTML = '';
+        this.caboSelecionado = null;
+    }
+    
+    resetarDesafio2() {
+        document.querySelectorAll('.velocidade-item').forEach(item => {
+            item.classList.remove('colocado', 'selecionado-teclado');
+            item.style.order = '';
+            item.removeAttribute('data-posicao-atual');
+        });
+        document.getElementById('feedback-desafio2').innerHTML = '';
+        this.velocidadeSelecionada = null;
+    }
+    
+    resetarDesafio3() {
+        // Reset do simulador
+        document.getElementById('dados-viajando').style.display = 'none';
+        document.getElementById('progresso-transmissao').style.width = '0%';
+        document.getElementById('dados-enviados').textContent = '0 MB';
+        document.getElementById('tempo-estimado').textContent = '--';
+        document.getElementById('feedback-desafio3').innerHTML = '';
     }
 
     atualizarPontos() {
-        const pontos = parseInt(localStorage.getItem('gamePoints') || '2450');
+        const pontosRaw = localStorage.getItem('gamePoints') || '0';
+        const pontos = parseInt(pontosRaw) || 0; // Garante que seja um número válido
+        
+        console.log('📊 Atualizando pontos - Raw:', pontosRaw, '| Parsed:', pontos);
+        
         const pontosDisplay = document.getElementById('pontos-fase');
         if (pontosDisplay) {
             pontosDisplay.textContent = `${pontos} Pontos`;
@@ -132,6 +359,7 @@ class Fase1Manager {
                 target.classList.remove('drag-over');
 
                 if (tipoArrastado === tipoEsperado) {
+                    console.log('🟢 Cabo correto conectado!', tipoArrastado, '→', tipoEsperado);
                     target.classList.add('correto');
                     target.innerHTML += '<div class="cabo-conectado">✓ Conectado!</div>';
                     this.verificarDesafio1();
@@ -141,6 +369,12 @@ class Fase1Manager {
                         target.classList.remove('incorreto');
                     }, 1000);
                     this.mostrarFeedback('feedback-desafio1', 'Cabo incorreto! Tente novamente.', 'erro');
+                    
+                    // Penalizar erro individual
+                    if (window.gameSystemActions) {
+                        console.log('🔴 Cabo errado detectado! Perdendo vida...');
+                        window.gameSystemActions.errou('Cabo conectado incorretamente!');
+                    }
                 }
             });
         });
@@ -161,12 +395,9 @@ class Fase1Manager {
             setTimeout(() => {
                 this.iniciarDesafio(2);
             }, 2000);
-        } else {
-            // Se não acertou tudo, pode penalizar
-            if (window.gameSystemActions && corretos < 2) {
-                window.gameSystemActions.errou('Nem todos os cabos foram identificados corretamente!');
-            }
         }
+        // Removida lógica incorreta que penalizava quando ainda estava completando o desafio
+        // A penalização agora ocorre apenas quando erra um cabo individual (no evento drop)
     }
 
     configurarDesafio2() {
@@ -346,9 +577,18 @@ class Fase1Manager {
         }
 
         // Adiciona pontos
-        const pontosAtuais = parseInt(localStorage.getItem('gamePoints') || '2450');
-        const pontosGanhos = this.gameSystem ? this.gameSystem.ganharPontos(100) : 100;
-        const novosPontos = pontosAtuais + pontosGanhos;
+        const pontosAtuais = parseInt(localStorage.getItem('gamePoints') || '0') || 0;
+        
+        // Adiciona pontos de conclusão da fase ao GameSystem
+        if (this.gameSystem && typeof this.gameSystem.ganharPontos === 'function') {
+            this.gameSystem.ganharPontos(100); // Pontos base por completar fase
+        }
+        
+        // Pega o total de pontos acumulados no GameSystem (exercícios + conclusão)
+        const pontosDoGameSystem = this.gameSystem ? this.gameSystem.gameState.pontos : 100;
+        const novosPontos = pontosAtuais + pontosDoGameSystem;
+        
+        console.log('📋 Pontos - Atuais localStorage:', pontosAtuais, '| GameSystem acumulados:', pontosDoGameSystem, '| Novo total:', novosPontos);
         localStorage.setItem('gamePoints', novosPontos.toString());
 
         // Marca fase como concluída
@@ -462,6 +702,21 @@ class Fase1Manager {
         feedback.textContent = mensagem;
         feedback.className = `desafio-feedback ${tipo}`;
         feedback.style.display = 'block';
+
+        // Adiciona classes de status para leitores de tela
+        if (tipo === 'sucesso') {
+            feedback.classList.add('status-sucesso');
+        } else if (tipo === 'erro') {
+            feedback.classList.add('status-erro');
+        } else {
+            feedback.classList.add('status-info');
+        }
+
+        // Anuncia para leitores de tela
+        if (typeof anunciarParaLeitorTela === 'function') {
+            const urgente = tipo === 'erro' || elementId.includes('game-over') || elementId.includes('tempo-esgotado');
+            anunciarParaLeitorTela(mensagem, urgente);
+        }
 
         if (tipo === 'erro') {
             setTimeout(() => {

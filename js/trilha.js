@@ -109,17 +109,22 @@ class TrilhaManager {
 
     configurarEventos() {
         // Eventos dos nós das fases
-        document.querySelectorAll('.fase-node').forEach(node => {
+        const faseNodes = document.querySelectorAll('.fase-node');
+        console.log('Configurando eventos para', faseNodes.length, 'nós de fase'); // Debug
+        
+        faseNodes.forEach(node => {
+            const faseId = node.getAttribute('data-fase');
+            console.log('Configurando evento para fase:', faseId); // Debug
+            
             node.addEventListener('click', (e) => {
                 e.preventDefault();
                 e.stopPropagation();
-                const faseId = node.getAttribute('data-fase');
                 console.log('Clicou na fase:', faseId); // Debug
                 
                 if (faseId && this.fasesData[faseId] && this.fasesData[faseId].desbloqueada) {
                     this.abrirModalFase(faseId);
                 } else {
-                    console.log('Fase bloqueada ou inválida:', faseId);
+                    console.log('Fase bloqueada ou inválida:', faseId, this.fasesData[faseId]);
                 }
             });
         });
@@ -130,18 +135,46 @@ class TrilhaManager {
         const btnCancelar = document.getElementById('btn-cancelar');
         const btnIniciar = document.getElementById('btn-iniciar-fase');
 
-        if (btnClose) btnClose.addEventListener('click', () => this.fecharModal());
-        if (btnCancelar) btnCancelar.addEventListener('click', () => this.fecharModal());
-        if (btnIniciar) btnIniciar.addEventListener('click', () => this.iniciarFase());
+        console.log('Elementos do modal encontrados:', {modal, btnClose, btnCancelar, btnIniciar}); // Debug
+
+        if (btnClose) {
+            btnClose.addEventListener('click', () => {
+                console.log('Botão fechar clicado');
+                this.fecharModal();
+            });
+        }
+        
+        if (btnCancelar) {
+            btnCancelar.addEventListener('click', () => {
+                console.log('Botão cancelar clicado');
+                this.fecharModal();
+            });
+        }
+        
+        if (btnIniciar) {
+            btnIniciar.addEventListener('click', () => {
+                console.log('Botão iniciar clicado');
+                this.iniciarFase();
+            });
+        }
 
         // Fechar modal clicando fora
         if (modal) {
             modal.addEventListener('click', (e) => {
                 if (e.target === modal) {
+                    console.log('Clicou fora do modal');
                     this.fecharModal();
                 }
             });
         }
+
+        // Tecla ESC para fechar modal
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal && modal.classList.contains('ativo')) {
+                console.log('ESC pressionado, fechando modal');
+                this.fecharModal();
+            }
+        });
     }
 
     atualizarPontos() {
@@ -250,7 +283,11 @@ class TrilhaManager {
     }
 
     fecharModal() {
-        document.getElementById('modal-fase').classList.remove('ativo');
+        const modal = document.getElementById('modal-fase');
+        if (modal) {
+            modal.classList.remove('ativo');
+            console.log('Modal fechado, classe ativo removida');
+        }
         this.faseAtual = null;
     }
 
@@ -388,7 +425,17 @@ class TrilhaManager {
 
 // Inicializa quando a página carrega
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOM carregado, inicializando TrilhaManager'); // Debug
+    
+    // Força o modal a ficar oculto inicialmente
+    const modal = document.getElementById('modal-fase');
+    if (modal) {
+        modal.classList.remove('ativo');
+        console.log('Modal inicializado como oculto');
+    }
+    
     window.trilhaManager = new TrilhaManager();
+    console.log('TrilhaManager inicializado', window.trilhaManager);
     
     // Sincroniza com sistema global
     if (typeof sincronizarGlobais === 'function') {

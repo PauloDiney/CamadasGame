@@ -4,20 +4,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fase 1 - Camada Física</title>
+    <meta name="description" content="Fase 1 do jogo - Aprenda sobre a Camada Física das redes de computadores através de exercícios interativos e acessíveis.">
+    <title>Fase 1 - Camada Física - Camadas da Conexão</title>
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/fase.css">
+    <link rel="stylesheet" href="css/acessibilidade.css">
     <link href="https://fonts.googleapis.com/css2?family=Kdam+Thmor+Pro&display=swap" rel="stylesheet">
 </head>
 
 <body>
     <div class="fase-container">
         <!-- Header da Fase -->
-        <header class="fase-header">
+        <header class="fase-header" role="banner">
             <div class="header-left">
-                <a href="trilha.html" class="btn-voltar-fase">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                <a href="trilha.html" class="btn-voltar-fase" aria-label="Voltar à tela da trilha principal">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true" role="img">
                         <path d="M19 12H5M5 12L12 19M5 12L12 5" stroke="currentColor" stroke-width="2"/>
                     </svg>
                     Voltar à Trilha
@@ -28,12 +30,12 @@
                 </div>
             </div>
             <div class="header-right">
-                <div class="fase-pontos">
-                    <span id="pontos-fase">0 Pontos</span>
+                <div class="fase-pontos" role="status" aria-live="polite">
+                    <span id="pontos-fase" aria-label="Pontos acumulados na fase">0 Pontos</span>
                 </div>
-                <div class="fase-progresso">
+                <div class="fase-progresso" role="status" aria-live="polite">
                     <span>Progresso: <span id="progresso-atual">0</span>/3</span>
-                    <div class="progresso-bar-mini">
+                    <div class="progresso-bar-mini" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="3" aria-label="Progresso dos desafios">
                         <div class="progresso-fill-mini" id="progresso-fill"></div>
                     </div>
                 </div>
@@ -41,32 +43,33 @@
         </header>
 
         <!-- Área Principal da Fase -->
-        <main class="fase-main">
+        <main class="fase-main" role="main">
             <!-- Seção de Introdução -->
-            <section class="fase-secao ativa" id="secao-intro">
+            <section class="fase-secao ativa" id="secao-intro" role="region" aria-labelledby="intro-titulo">
                 <div class="secao-content">
-                    <div class="intro-visual">
+                    <div class="intro-visual" role="img" aria-label="Animação de cabo com sinal elétrico demonstrando transmissão de dados">
                         <div class="cabo-animado">
                             <div class="cabo-linha"></div>
                             <div class="sinal-eletrico"></div>
                         </div>
                     </div>
                     <div class="intro-texto">
-                        <h2>Bem-vindo à Camada Física!</h2>
+                        <h2 id="intro-titulo">Bem-vindo à Camada Física!</h2>
                         <p>A camada física é a base de toda comunicação digital. Ela é responsável pela transmissão dos bits através de meios físicos como cabos, fibra óptica ou ondas de rádio.</p>
                         
                         <div class="conceitos-chave">
                             <h3>Conceitos Principais:</h3>
-                            <ul>
-                                <li><strong>Sinais Elétricos:</strong> Como os dados viram eletricidade</li>
-                                <li><strong>Tipos de Cabo:</strong> Cobre, fibra óptica, wireless</li>
-                                <li><strong>Velocidade:</strong> Medida em bits por segundo</li>
+                            <ul role="list">
+                                <li role="listitem"><strong>Sinais Elétricos:</strong> Como os dados viram eletricidade</li>
+                                <li role="listitem"><strong>Tipos de Cabo:</strong> Cobre, fibra óptica, wireless</li>
+                                <li role="listitem"><strong>Velocidade:</strong> Medida em bits por segundo</li>
                             </ul>
                         </div>
 
-                        <button class="btn-continuar" onclick="iniciarDesafio(1)">
+                        <button class="btn-continuar" onclick="iniciarDesafio(1)" aria-describedby="desc-iniciar">
+                            <span class="sr-only" id="desc-iniciar">Começar os três desafios da camada física</span>
                             Começar Desafios
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                                 <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2"/>
                             </svg>
                         </button>
@@ -75,99 +78,102 @@
             </section>
 
             <!-- Desafio 1: Identificar Tipos de Cabo -->
-            <section class="fase-secao" id="secao-desafio1">
+            <section class="fase-secao" id="secao-desafio1" role="region" aria-labelledby="desafio1-titulo">
                 <div class="secao-content">
                     <div class="desafio-header">
-                        <h2>Desafio 1: Identifique os Tipos de Cabo</h2>
-                        <p>Conecte cada cabo ao seu tipo correto</p>
+                        <h2 id="desafio1-titulo">Desafio 1: Identifique os Tipos de Cabo</h2>
+                        <p>Conecte cada cabo ao seu tipo correto usando arrastar e soltar ou navegação por teclado</p>
                     </div>
 
-                    <div class="desafio-area">
-                        <div class="cabos-container">
-                            <div class="cabo-item" data-tipo="ethernet" draggable="true">
-                                <div class="cabo-visual cabo-ethernet"></div>
+                    <div class="desafio-area" role="application" aria-label="Exercício de arrastar e soltar para identificar tipos de cabo">
+                        <div class="cabos-container" role="group" aria-label="Cabos para identificar">
+                            <div class="cabo-item" data-tipo="ethernet" draggable="true" tabindex="0" role="button" aria-label="Cabo A - Cabo ethernet com conector RJ45" aria-describedby="cabo-a-desc">
+                                <div class="cabo-visual cabo-ethernet" role="img" aria-hidden="true"></div>
                                 <span>Cabo A</span>
+                                <span id="cabo-a-desc" class="sr-only">Cabo com conector retangular típico de redes locais</span>
                             </div>
-                            <div class="cabo-item" data-tipo="fibra" draggable="true">
-                                <div class="cabo-visual cabo-fibra"></div>
+                            <div class="cabo-item" data-tipo="fibra" draggable="true" tabindex="0" role="button" aria-label="Cabo B - Cabo de fibra óptica" aria-describedby="cabo-b-desc">
+                                <div class="cabo-visual cabo-fibra" role="img" aria-hidden="true"></div>
                                 <span>Cabo B</span>
+                                <span id="cabo-b-desc" class="sr-only">Cabo fino e brilhante que transmite sinais luminosos</span>
                             </div>
-                            <div class="cabo-item" data-tipo="coaxial" draggable="true">
-                                <div class="cabo-visual cabo-coaxial"></div>
+                            <div class="cabo-item" data-tipo="coaxial" draggable="true" tabindex="0" role="button" aria-label="Cabo C - Cabo coaxial" aria-describedby="cabo-c-desc">
+                                <div class="cabo-visual cabo-coaxial" role="img" aria-hidden="true"></div>
                                 <span>Cabo C</span>
+                                <span id="cabo-c-desc" class="sr-only">Cabo redondo e grosso usado em TV e internet a cabo</span>
                             </div>
                         </div>
 
-                        <div class="tipos-container">
-                            <div class="tipo-target" data-aceita="ethernet">
+                        <div class="tipos-container" role="group" aria-label="Tipos de cabo - áreas de destino">
+                            <div class="tipo-target" data-aceita="ethernet" tabindex="0" role="button" aria-label="Ethernet RJ45 - Para redes locais">
                                 <h4>Cabo Ethernet (RJ45)</h4>
                                 <p>Para redes locais, 8 fios internos</p>
                             </div>
-                            <div class="tipo-target" data-aceita="fibra">
+                            <div class="tipo-target" data-aceita="fibra" tabindex="0" role="button" aria-label="Fibra Óptica - Transmissão por luz">
                                 <h4>Fibra Óptica</h4>
                                 <p>Transmite luz, alta velocidade</p>
                             </div>
-                            <div class="tipo-target" data-aceita="coaxial">
+                            <div class="tipo-target" data-aceita="coaxial" tabindex="0" role="button" aria-label="Cabo Coaxial - Para TV e internet">
                                 <h4>Cabo Coaxial</h4>
                                 <p>Para TV e internet a cabo</p>
                             </div>
                         </div>
                     </div>
 
-                    <div class="desafio-feedback" id="feedback-desafio1"></div>
+                    <div class="desafio-feedback" id="feedback-desafio1" role="status" aria-live="polite" aria-atomic="true"></div>
                 </div>
             </section>
 
             <!-- Desafio 2: Velocidades de Transmissão -->
-            <section class="fase-secao" id="secao-desafio2">
+            <section class="fase-secao" id="secao-desafio2" role="region" aria-labelledby="desafio2-titulo">
                 <div class="secao-content">
                     <div class="desafio-header">
-                        <h2>Desafio 2: Velocidades de Transmissão</h2>
-                        <p>Ordene as tecnologias da menor para a maior velocidade</p>
+                        <h2 id="desafio2-titulo">Desafio 2: Velocidades de Transmissão</h2>
+                        <p>Ordene as tecnologias da menor para a maior velocidade usando arrastar e soltar ou navegação por teclado</p>
                     </div>
 
-                    <div class="desafio-area">
-                        <div class="velocidades-container">
-                            <div class="velocidade-item" data-ordem="4">
-                                <div class="tech-icon wifi-icon"></div>
+                    <div class="desafio-area" role="application" aria-label="Exercício de ordenação de velocidades de rede">
+                        <div class="velocidades-container" role="group" aria-label="Tecnologias para ordenar por velocidade">
+                            <div class="velocidade-item" data-ordem="4" draggable="true" tabindex="0" role="button" aria-label="Wi-Fi 802.11n - 300 Megabits por segundo">
+                                <div class="tech-icon wifi-icon" role="img" aria-hidden="true"></div>
                                 <h4>Wi-Fi 802.11n</h4>
-                                <span>300 Mbps</span>
+                                <span aria-label="300 Megabits por segundo">300 Mbps</span>
                             </div>
-                            <div class="velocidade-item" data-ordem="1">
-                                <div class="tech-icon ethernet-icon"></div>
+                            <div class="velocidade-item" data-ordem="1" draggable="true" tabindex="0" role="button" aria-label="Ethernet 10BASE-T - 10 Megabits por segundo">
+                                <div class="tech-icon ethernet-icon" role="img" aria-hidden="true"></div>
                                 <h4>Ethernet 10BASE-T</h4>
-                                <span>10 Mbps</span>
+                                <span aria-label="10 Megabits por segundo">10 Mbps</span>
                             </div>
-                            <div class="velocidade-item" data-ordem="3">
-                                <div class="tech-icon fast-ethernet-icon"></div>
+                            <div class="velocidade-item" data-ordem="3" draggable="true" tabindex="0" role="button" aria-label="Fast Ethernet - 100 Megabits por segundo">
+                                <div class="tech-icon fast-ethernet-icon" role="img" aria-hidden="true"></div>
                                 <h4>Fast Ethernet</h4>
-                                <span>100 Mbps</span>
+                                <span aria-label="100 Megabits por segundo">100 Mbps</span>
                             </div>
-                            <div class="velocidade-item" data-ordem="2">
-                                <div class="tech-icon adsl-icon"></div>
+                            <div class="velocidade-item" data-ordem="2" draggable="true" tabindex="0" role="button" aria-label="ADSL - 24 Megabits por segundo">
+                                <div class="tech-icon adsl-icon" role="img" aria-hidden="true"></div>
                                 <h4>ADSL</h4>
-                                <span>24 Mbps</span>
+                                <span aria-label="24 Megabits por segundo">24 Mbps</span>
                             </div>
-                            <div class="velocidade-item" data-ordem="5">
-                                <div class="tech-icon fibra-icon"></div>
+                            <div class="velocidade-item" data-ordem="5" draggable="true" tabindex="0" role="button" aria-label="Fibra Óptica - 1 Gigabit por segundo">
+                                <div class="tech-icon fibra-icon" role="img" aria-hidden="true"></div>
                                 <h4>Fibra Óptica</h4>
-                                <span>1 Gbps</span>
+                                <span aria-label="1 Gigabit por segundo">1 Gbps</span>
                             </div>
                         </div>
 
                         <div class="ordenacao-area">
-                            <h3>Ordene aqui (arraste):</h3>
-                            <div class="slots-ordenacao">
-                                <div class="slot-ordenacao" data-posicao="1">1º mais lento</div>
-                                <div class="slot-ordenacao" data-posicao="2">2º</div>
-                                <div class="slot-ordenacao" data-posicao="3">3º</div>
-                                <div class="slot-ordenacao" data-posicao="4">4º</div>
-                                <div class="slot-ordenacao" data-posicao="5">5º mais rápido</div>
+                            <h3>Ordene aqui (arraste ou use Enter para selecionar):</h3>
+                            <div class="slots-ordenacao" role="group" aria-label="Slots para ordenação das tecnologias">
+                                <div class="slot-ordenacao" data-posicao="1" tabindex="0" role="button" aria-label="Primeira posição - mais lento">1º mais lento</div>
+                                <div class="slot-ordenacao" data-posicao="2" tabindex="0" role="button" aria-label="Segunda posição">2º</div>
+                                <div class="slot-ordenacao" data-posicao="3" tabindex="0" role="button" aria-label="Terceira posição">3º</div>
+                                <div class="slot-ordenacao" data-posicao="4" tabindex="0" role="button" aria-label="Quarta posição">4º</div>
+                                <div class="slot-ordenacao" data-posicao="5" tabindex="0" role="button" aria-label="Quinta posição - mais rápido">5º mais rápido</div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="desafio-feedback" id="feedback-desafio2"></div>
+                    <div class="desafio-feedback" id="feedback-desafio2" role="status" aria-live="polite" aria-atomic="true"></div>
                 </div>
             </section>
 
@@ -295,7 +301,11 @@
         </div>
     </div>
 
+    <!-- Live region para anúncios de acessibilidade -->
+    <div id="aria-live-region" aria-live="polite" aria-atomic="true" class="sr-only"></div>
+
     <!-- Sistema de Jogo: Tempo, Vida e Habilidades -->
+    <script src="js/acessibilidade.js"></script>
     <script src="js/gameSystemSimple.js"></script>
     <script src="js/global.js"></script>
     <script src="js/audio.js"></script>

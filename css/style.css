@@ -16,6 +16,7 @@ body {
     background: linear-gradient(62deg, #241D52 2.64%, #5042B8 97.22%);
     font-family: 'Kdam Thmor Pro', sans-serif;
     position: relative;
+
   
 }
 
@@ -145,9 +146,9 @@ header {
 
 main {
 
-
     padding: 2rem;
     display: flex;
+    
     gap: 9.5rem;
     align-items: center;
 

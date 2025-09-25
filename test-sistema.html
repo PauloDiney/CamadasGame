@@ -93,10 +93,15 @@
             console.log('🧹 Equipamentos limpos!');
             mostrarLocalStorage();
             
-            // Recriar sistema
-            if (window.simpleGameSystem) {
-                window.simpleGameSystem = new SimpleGameSystem();
+            // Recriar sistema de forma controlada
+            if (window.cleanupGameSystem) {
+                window.cleanupGameSystem();
             }
+            setTimeout(() => {
+                if (window.createSimpleGameSystem) {
+                    window.createSimpleGameSystem();
+                }
+            }, 100);
         }
         
         // Mostrar status inicial
