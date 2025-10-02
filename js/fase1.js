@@ -726,7 +726,7 @@ class Fase1Manager {
     }
 
     voltarTrilha() {
-        window.location.href = 'trilha.html';
+        window.location.href = '../trilha.html';
     }
 
     proximaFase() {

@@ -312,7 +312,7 @@ class TrilhaManager {
         this.fecharModal();
         
         // Redireciona para a fase correspondente
-        const url = `fase${faseParaIniciar}.html`;
+        const url = `fases/fase${faseParaIniciar}.html`;
         console.log('Redirecionando para:', url);
         window.location.href = url;
     }

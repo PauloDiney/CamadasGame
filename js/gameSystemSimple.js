@@ -335,7 +335,10 @@ class SimpleGameSystem {
         
         // Redirecionar para trilha após 1 segundo
         setTimeout(() => {
-            window.location.href = 'trilha.html';
+            // Verificar se está na pasta fases para ajustar o caminho
+            const isInFasesFolder = window.location.pathname.includes('/fases/');
+            const trilhaPath = isInFasesFolder ? '../trilha.html' : 'trilha.html';
+            window.location.href = trilhaPath;
         }, 1000);
     }
     

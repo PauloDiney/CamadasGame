@@ -436,7 +436,7 @@ class Fase4Manager {
     }
 
     voltarTrilha() {
-        window.location.href = 'trilha.html';
+        window.location.href = '../trilha.html';
     }
 }
 

@@ -329,7 +329,7 @@ class Fase5Manager {
     }
 
     voltarTrilha() {
-        window.location.href = 'trilha.html';
+        window.location.href = '../trilha.html';
     }
 }
 
