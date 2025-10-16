@@ -6,6 +6,8 @@ class AudioManager {
         this.isPlaying = false;
         this.volume = parseFloat(localStorage.getItem('musicVolume') || '0.5');
         this.musicEnabled = localStorage.getItem('musicEnabled') !== 'false';
+        this.sfxEnabled = localStorage.getItem('sfxEnabled') !== 'false';
+        this.sfxVolume = parseFloat(localStorage.getItem('sfxVolume') || '0.3');
         
         // Lista de músicas disponíveis
         this.musicTracks = [
@@ -194,6 +196,93 @@ class AudioManager {
             volume: this.volume,
             currentSrc: this.backgroundMusic.src
         };
+    }
+    
+    // Efeitos sonoros simples usando Web Audio API ou síntese
+    playClickSound() {
+        if (!this.sfxEnabled) return;
+        
+        try {
+            // Cria um contexto de áudio se não existir
+            if (!this.audioContext) {
+                this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            
+            const oscillator = this.audioContext.createOscillator();
+            const gainNode = this.audioContext.createGain();
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(this.audioContext.destination);
+            
+            // Som de clique: frequência alta, curta duração
+            oscillator.frequency.value = 800;
+            oscillator.type = 'sine';
+            
+            gainNode.gain.setValueAtTime(this.sfxVolume, this.audioContext.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, this.audioContext.currentTime + 0.1);
+            
+            oscillator.start(this.audioContext.currentTime);
+            oscillator.stop(this.audioContext.currentTime + 0.1);
+        } catch (e) {
+            console.log('Erro ao tocar som de clique:', e);
+        }
+    }
+    
+    playSuccessSound() {
+        if (!this.sfxEnabled) return;
+        
+        try {
+            if (!this.audioContext) {
+                this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            
+            const oscillator = this.audioContext.createOscillator();
+            const gainNode = this.audioContext.createGain();
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(this.audioContext.destination);
+            
+            // Som de sucesso: duas notas agradáveis
+            oscillator.frequency.setValueAtTime(523, this.audioContext.currentTime); // C5
+            oscillator.frequency.setValueAtTime(659, this.audioContext.currentTime + 0.1); // E5
+            oscillator.type = 'sine';
+            
+            gainNode.gain.setValueAtTime(this.sfxVolume * 0.5, this.audioContext.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, this.audioContext.currentTime + 0.3);
+            
+            oscillator.start(this.audioContext.currentTime);
+            oscillator.stop(this.audioContext.currentTime + 0.3);
+        } catch (e) {
+            console.log('Erro ao tocar som de sucesso:', e);
+        }
+    }
+    
+    playErrorSound() {
+        if (!this.sfxEnabled) return;
+        
+        try {
+            if (!this.audioContext) {
+                this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            
+            const oscillator = this.audioContext.createOscillator();
+            const gainNode = this.audioContext.createGain();
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(this.audioContext.destination);
+            
+            // Som de erro: frequência baixa
+            oscillator.frequency.value = 200;
+            oscillator.type = 'sawtooth';
+            
+            gainNode.gain.setValueAtTime(this.sfxVolume * 0.3, this.audioContext.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, this.audioContext.currentTime + 0.2);
+            
+            oscillator.start(this.audioContext.currentTime);
+            oscillator.stop(this.audioContext.currentTime + 0.2);
+        } catch (e) {
+            console.log('Erro ao tocar som de erro:', e);
+        }
     }
 }
 

@@ -1,21 +1,19 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description"
-        content="Trilha interativa das camadas de rede. Navegue pelas fases e aprenda sobre protocolos de comunicação de forma acessível.">
-    <title>Trilha das Camadas - Jogo Educativo</title>
+    <meta name="description" content="Trilha interativa das camadas de rede. Navegue pelas fases e aprenda sobre protocolos de comunicação de forma acessível.">
+    <title>Trilha das Camadas - Camadas da Conexão</title>
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/trilha.css">
+    <link rel="stylesheet" href="css/trilha-simple.css">
     <link rel="stylesheet" href="css/acessibilidade.css">
-    <link rel="stylesheet" href="css/reset-progresso.css">
     <link href="https://fonts.googleapis.com/css2?family=Kdam+Thmor+Pro&display=swap" rel="stylesheet">
 </head>
 
 <body>
+    
     <header class="trilha-header" role="banner">
         <div class="header-left">
             <a href="index.html" class="btn-voltar" aria-label="Voltar ao menu principal">
@@ -31,14 +29,6 @@
             </div>
         </div>
         <div class="header-right">
-            <button class="btn-resetar" onclick="resetarProgresso()" aria-label="Resetar todo o progresso do jogo" title="Resetar Progresso">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                    <path d="M3 12C3 7.03125 7.03125 3 12 3C16.9688 3 21 7.03125 21 12C21 16.9688 16.9688 21 12 21C7.03125 21 3 16.9688 3 12Z" stroke="currentColor" stroke-width="2"/>
-                    <path d="M12 7V12L15 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                    <path d="M7 7L12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                </svg>
-                Resetar
-            </button>
             <div class="pontos-trilha" role="status" aria-live="polite">
                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="30" viewBox="0 0 65 61" fill="none"
                     aria-hidden="true">
@@ -61,7 +51,8 @@
 
                 <!-- Fase 1 - Camada Física -->
                 <div class="fase-node fase-disponivel" data-fase="1" tabindex="0" role="button"
-                    aria-label="Fase 1: Camada Física - Disponível" aria-describedby="fase1-desc">
+                    aria-label="Fase 1: Camada Física - Disponível" aria-describedby="fase1-desc"
+                    data-voice="Fase 1. Camada Física. Aprenda sobre cabos, sinais e conexões físicas de rede. Recompensa: 100 pontos. Disponível">
                     <div class="fase-circle">
                         <div class="fase-numero">1</div>
                         <div class="fase-icone" role="img" aria-label="Ícone representando camadas de rede">
@@ -79,11 +70,11 @@
                         <h3>Camada Física</h3>
                         <p id="fase1-desc">Aprenda sobre cabos, sinais e conexões físicas de rede</p>
                         <div class="fase-recompensa" aria-label="Recompensa da fase">
-                            <span>+100 pontos</span>
+                            <span>⭐ +100 pontos</span>
                         </div>
                     </div>
                     <div class="fase-status">
-                        <span class="status-disponivel">Disponível</span>
+                        <span class="status-disponivel">✓ Disponível</span>
                     </div>
                 </div>
 
@@ -92,7 +83,8 @@
 
                 <!-- Fase 2 - Camada de Enlace -->
                 <div class="fase-node fase-bloqueada" data-fase="2" tabindex="0" role="button"
-                    aria-label="Fase 2: Camada de Enlace - Bloqueada" aria-describedby="fase2-desc">
+                    aria-label="Fase 2: Camada de Enlace - Bloqueada" aria-describedby="fase2-desc"
+                    data-voice="Fase 2. Camada de Enlace. Quadros e endereçamento. Recompensa: 200 pontos. Bloqueada">
                     <div class="fase-circle">
                         <div class="fase-numero">2</div>
                         <div class="fase-icone" role="img" aria-label="Ícone representando enlace de dados">
@@ -110,9 +102,9 @@
                     </div>
                     <div class="fase-info">
                         <h3>Camada de Enlace</h3>
-                        <p>Quadros e endereçamento</p>
+                        <p id="fase2-desc">Quadros e endereçamento MAC</p>
                         <div class="fase-recompensa">
-                            <span>+150 pontos</span>
+                            <span>⭐ +200 pontos</span>
                         </div>
                     </div>
                     <div class="fase-status">
@@ -123,7 +115,9 @@
                 <div class="trilha-conector"></div>
 
                 <!-- Fase 3 - Camada de Rede -->
-                <div class="fase-node fase-bloqueada" data-fase="3">
+                <div class="fase-node fase-bloqueada" data-fase="3" tabindex="0" role="button"
+                    aria-label="Fase 3: Camada de Rede - Bloqueada"
+                    data-voice="Fase 3. Camada de Rede. Roteamento e endereçamento IP. Recompensa: 250 pontos. Bloqueada">
                     <div class="fase-circle">
                         <div class="fase-numero">3</div>
                         <div class="fase-icone">
@@ -146,9 +140,9 @@
                     </div>
                     <div class="fase-info">
                         <h3>Camada de Rede</h3>
-                        <p>Roteamento e IP</p>
+                        <p>Roteamento e endereçamento IP</p>
                         <div class="fase-recompensa">
-                            <span>+200 pontos</span>
+                            <span>⭐ +250 pontos</span>
                         </div>
                     </div>
                     <div class="fase-status">
@@ -159,7 +153,9 @@
                 <div class="trilha-conector"></div>
 
                 <!-- Fase 4 - Camada de Transporte -->
-                <div class="fase-node fase-bloqueada" data-fase="4">
+                <div class="fase-node fase-bloqueada" data-fase="4" tabindex="0" role="button"
+                    aria-label="Fase 4: Camada de Transporte - Bloqueada"
+                    data-voice="Fase 4. Camada de Transporte. TCP, UDP e confiabilidade. Recompensa: 300 pontos. Bloqueada">
                     <div class="fase-circle">
                         <div class="fase-numero">4</div>
                         <div class="fase-icone">
@@ -183,7 +179,7 @@
                         <h3>Camada de Transporte</h3>
                         <p>TCP/UDP e confiabilidade</p>
                         <div class="fase-recompensa">
-                            <span>+250 pontos</span>
+                            <span>⭐ +300 pontos</span>
                         </div>
                     </div>
                     <div class="fase-status">
@@ -194,7 +190,9 @@
                 <div class="trilha-conector"></div>
 
                 <!-- Fase 5 - Camada de Aplicação -->
-                <div class="fase-node fase-bloqueada" data-fase="5">
+                <div class="fase-node fase-bloqueada" data-fase="5" tabindex="0" role="button"
+                    aria-label="Fase 5: Camada de Aplicação - Bloqueada"
+                    data-voice="Fase 5. Camada de Aplicação. HTTP, HTTPS e protocolos de aplicação. Recompensa: 350 pontos. Bloqueada">
                     <div class="fase-circle">
                         <div class="fase-numero">5</div>
                         <div class="fase-icone">
@@ -210,7 +208,7 @@
                         <h3>Camada de Aplicação</h3>
                         <p>HTTP, HTTPS e aplicações</p>
                         <div class="fase-recompensa">
-                            <span>+300 pontos</span>
+                            <span>⭐ +350 pontos</span>
                         </div>
                     </div>
                     <div class="fase-status">
@@ -219,59 +217,76 @@
                 </div>
 
             </div>
-    </main>
+        </section>
 
-    <!-- Painel Lateral de Informações -->
-    <aside class="fase-detalhes" id="fase-detalhes">
-        <div class="detalhes-content">
-            <h2>Selecione uma fase</h2>
-            <p>Clique em uma fase disponível para ver mais detalhes e começar o desafio.</p>
+    <!-- Modal de Prévia da Fase -->
+    <div class="modal-overlay" id="modalFase" role="dialog" aria-modal="true" aria-labelledby="modalTitulo">
+        <div class="modal-container">
+            <button class="modal-close" aria-label="Fechar modal" data-voice="Fechar modal">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <line x1="18" y1="6" x2="6" y2="18" stroke-width="2" />
+                    <line x1="6" y1="6" x2="18" y2="18" stroke-width="2" />
+                </svg>
+            </button>
 
-            <div class="progresso-geral">
-                <h3>Progresso Geral</h3>
-                <div class="progresso-bar">
-                    <div class="progresso-fill" style="width: 0%"></div>
-                </div>
-                <span>0 de 5 fases concluídas</span>
-            </div>
-        </div>
-    </aside>
-    </section>
-
-    <!-- Modal de Confirmação da Fase -->
-    <div class="modal-overlay" id="modal-fase">
-        <div class="modal-content">
             <div class="modal-header">
-                <h2 id="modal-titulo">Iniciar Fase</h2>
-                <button class="modal-close" id="modal-close">&times;</button>
+                <div class="modal-icone">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" id="modalIcone">
+                        <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                        <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                </div>
+                <h2 id="modalTitulo">Camada Física</h2>
+                <p class="modal-numero">Fase <span id="modalNumero">1</span></p>
             </div>
+
             <div class="modal-body">
-                <div class="fase-preview">
-                    <div class="preview-icone" id="modal-icone"></div>
-                    <div class="preview-info">
-                        <h3 id="modal-nome-fase">Nome da Fase</h3>
-                        <p id="modal-descricao">Descrição da fase</p>
-                    </div>
+                <div class="modal-descricao">
+                    <h3>Sobre esta fase</h3>
+                    <p id="modalDescricao">Aprenda sobre os fundamentos das conexões físicas de rede.</p>
                 </div>
 
-                <div class="fase-objetivos">
-                    <h4>Objetivos:</h4>
-                    <ul id="modal-objetivos">
-                        <li>Objetivo 1</li>
-                        <li>Objetivo 2</li>
+                <div class="modal-objetivos">
+                    <h3>Objetivos de Aprendizado</h3>
+                    <ul id="modalObjetivos">
+                        <li>Compreender cabos e conectores de rede</li>
+                        <li>Identificar tipos de sinais elétricos</li>
+                        <li>Conhecer padrões de comunicação física</li>
                     </ul>
                 </div>
 
-                <div class="fase-recompensas">
-                    <div class="recompensa">
-                        <span class="recompensa-tipo">Pontos:</span>
-                        <span class="recompensa-valor" id="modal-pontos">+100</span>
+                <div class="modal-info">
+                    <div class="info-item">
+                        <span class="info-label">Recompensa:</span>
+                        <span class="info-value" id="modalRecompensa">⭐ +100 pontos</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Dificuldade:</span>
+                        <span class="info-value" id="modalDificuldade">⚡ Iniciante</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Tempo estimado:</span>
+                        <span class="info-value">⏱️ 10-15 minutos</span>
                     </div>
                 </div>
             </div>
+
             <div class="modal-footer">
-                <button class="btn-secundario" id="btn-cancelar">Cancelar</button>
-                <button class="btn-primario" id="btn-iniciar-fase">Iniciar Fase</button>
+                <button class="btn-secondary btn-modal" id="btnFechar" data-voice="Cancelar e fechar modal">
+                    Cancelar
+                </button>
+                <button class="btn-primary btn-modal" id="btnIniciar"
+                    data-voice="Iniciar fase. Começar desafio agora">
+                    <span>Iniciar Fase</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                </button>
             </div>
         </div>
     </div>
@@ -279,8 +294,8 @@
     <!-- Live region para anúncios de acessibilidade -->
     <div id="aria-live-region" aria-live="polite" aria-atomic="true" class="sr-only"></div>
 
-    <script src="js/acessibilidade.js"></script>
-    <script src="js/reset-progresso.js"></script>
+    <!-- Scripts essenciais -->
+    <script src="js/voice-accessibility.js"></script>
     <script src="js/global.js"></script>
     <script src="js/audio.js"></script>
     <script src="js/darkmode.js"></script>

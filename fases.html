@@ -4,284 +4,339 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Explore todas as 5 fases do jogo Camadas da Conexão. Aprenda sobre as camadas OSI de forma interativa e acessível.">
     <title>Fases - Camadas da Conexão</title>
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/fases.css">
+    <link rel="stylesheet" href="css/fases-modern.css">
+    <link rel="stylesheet" href="css/acessibilidade.css">
     <link href="https://fonts.googleapis.com/css2?family=Kdam+Thmor+Pro&display=swap" rel="stylesheet">
 </head>
 
 <body>
+    <!-- Controles de Acessibilidade -->
+    <div class="accessibility-bar" role="toolbar" aria-label="Controles de acessibilidade">
+        <button id="toggle-voice" class="accessibility-btn" aria-label="Ativar ou desativar leitura por voz" title="Leitura por Voz">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z" stroke="currentColor" stroke-width="2"/>
+                <path d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v3M8 22h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+        </button>
+        <button id="increase-font" class="accessibility-btn" aria-label="Aumentar tamanho da fonte" title="Aumentar Fonte">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <text x="4" y="18" font-size="16" fill="currentColor" font-weight="bold">A+</text>
+            </svg>
+        </button>
+        <button id="decrease-font" class="accessibility-btn" aria-label="Diminuir tamanho da fonte" title="Diminuir Fonte">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <text x="5" y="18" font-size="14" fill="currentColor" font-weight="bold">A-</text>
+            </svg>
+        </button>
+        <button id="toggle-contrast" class="accessibility-btn" aria-label="Alternar alto contraste" title="Alto Contraste">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                <path d="M12 2v20" stroke="currentColor" stroke-width="2"/>
+            </svg>
+        </button>
+    </div>
 
-        <section id="fases-page" class="screen-section">
-            <header class="header">
-                <div>
-                    <h1 class="header-title">Trilha das Camadas OSI</h1>
-                    <p class="header-subtitle">Domine todas as camadas da rede</p>
-                </div>
-                <div class="header-points">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="65" height="61" viewBox="0 0 65 61" fill="none">
-                        <path d="M32.5 0L40.0212 23.1479H64.3604L44.6696 37.4541L52.1908 60.6021L32.5 46.2959L12.8092 60.6021L20.3304 37.4541L0.639606 23.1479H24.9788L32.5 0Z" fill="#E1EA2D" />
+    <main class="main-container" role="main">
+        <!-- Header da Página -->
+        <header class="page-header">
+            <div class="header-content">
+                <a href="index.html" class="back-btn" aria-label="Voltar ao menu principal">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M19 12H5M12 19L5 12L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
-                    <p id="pontos-display">0 Pontos</p>
-                </div>
-            </header>
-
-        <main class="fases-main">
-            
-            <div class="voltar-container">
-                <a href="index.html" class="voltar-btn">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                        <path d="M19 12H5M12 19L5 12L12 5" stroke="#0DF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                    Voltar ao Menu
+                    <span>Voltar</span>
                 </a>
+                
+                <div class="header-info">
+                    <h1 class="page-title">Trilha das Camadas OSI</h1>
+                    <p class="page-subtitle">Domine todas as 5 camadas da rede</p>
+                </div>
+                
+                <div class="header-stats">
+                    <div class="stat-item" role="status" aria-live="polite">
+                        <svg width="28" height="28" viewBox="0 0 65 61" fill="none">
+                            <path d="M32.5 0L40.0212 23.1479H64.3604L44.6696 37.4541L52.1908 60.6021L32.5 46.2959L12.8092 60.6021L20.3304 37.4541L0.639606 23.1479H24.9788L32.5 0Z" fill="#E1EA2D"/>
+                        </svg>
+                        <span class="stat-value" id="pontos-display">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+                            <path d="M9 11l3 3L22 4" stroke="#4CAF50" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11" stroke="#4CAF50" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span class="stat-value" id="fases-completas">0/5</span>
+                    </div>
+                </div>
             </div>
+            
+            <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+                <div class="progress-fill" id="progress-fill" style="width: 0%"></div>
+                <span class="progress-text" id="progress-text">0% Concluído</span>
+            </div>
+        </header>
 
-            <div class="fases-container">
+        <!-- Grid de Fases -->
+        <section class="fases-section" role="region" aria-label="Lista de fases disponíveis">
+            <div class="fases-grid">
                 <!-- Fase 1 - Camada Física -->
-                <article class="fase-card" data-fase="1">
-                    <div class="fase-header">
-                        <div class="fase-numero">
-                            <span class="numero">1</span>
-                        </div>
-                        <div class="fase-info">
-                            <h3>Camada Física</h3>
-                            <div class="fase-status unlocked">
-                                <span class="status-icon">🔓</span>
-                                <span class="status-text">Desbloqueada</span>
+                <article class="fase-card" data-fase="1" data-voice="Fase 1. Camada Física. Aprenda sobre cabos, velocidades e transmissão de dados">
+                    <div class="fase-badge">
+                        <span class="badge-number">1</span>
+                    </div>
+                    
+                    <div class="fase-icon">
+                        <svg width="64" height="64" viewBox="0 0 24 24" fill="none">
+                            <path d="M21 16V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2h14a2 2 0 002-2z" stroke="currentColor" stroke-width="2"/>
+                            <path d="M9 22v-4M15 22v-4M8 6h.01M12 6h.01M16 6h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    
+                    <div class="fase-info">
+                        <h2 class="fase-title">Camada Física</h2>
+                        <p class="fase-description">Tipos de cabos, velocidades de transmissão e sinais</p>
+                        
+                        <div class="fase-meta">
+                            <div class="meta-item">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="#E1EA2D"/>
+                                </svg>
+                                <span>100 Pontos</span>
+                            </div>
+                            <div class="meta-item">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                                    <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                                    <path d="M12 6v6l4 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                </svg>
+                                <span>10 min</span>
                             </div>
                         </div>
-                        <div class="fase-star">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="#E1EA2D">
-                                <path d="M20 0L24.4721 14.6446H40L28.7639 23.7108L33.236 38.3554L20 29.2892L6.764 38.3554L11.2361 23.7108L0 14.6446H15.5279L20 0Z"/>
-                            </svg>
+                        
+                        <div class="fase-status unlocked">
+                            <span class="status-icon">🔓</span>
+                            <span>Desbloqueada</span>
                         </div>
                     </div>
                     
-                    <div class="fase-content">
-                        <div class="pontos-section">
-                            <h4>🏆 Pontuação: 100 Pontos</h4>
-                        </div>
-                        
-                        <div class="teoria-section">
-                            <h4>📚 O que você aprenderá</h4>
-                            <ul>
-                                <li><strong>Tipos de cabos:</strong> Identificar cabos coaxiais, par trançado e fibra óptica</li>
-                                <li><strong>Velocidades:</strong> Compreender diferentes velocidades de transmissão</li>
-                                <li><strong>Transmissão:</strong> Simular como os dados viajam fisicamente</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="desafio-section">
-                            <h4>🎯 Objetivos da Fase</h4>
-                            <p>Configure cabos de rede, ajuste velocidades de transmissão e simule a transmissão de dados através da camada física.</p>
-                        </div>
-                        
-                        <button class="jogar-btn" onclick="iniciarFase(1)">
-                            <span>Iniciar Fase</span>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
-                                <path d="M6 4L14 10L6 16V4Z"/>
-                            </svg>
-                        </button>
-                    </div>
+                    <button class="fase-btn" aria-label="Iniciar Fase 1: Camada Física">
+                        <span>Iniciar Fase</span>
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M6 4L14 10L6 16V4Z"/>
+                        </svg>
+                    </button>
                 </article>
 
                 <!-- Fase 2 - Camada de Enlace -->
-                <article class="fase-card" data-fase="2">
-                    <div class="fase-header">
-                        <div class="fase-numero">
-                            <span class="numero">2</span>
-                        </div>
-                        <div class="fase-info">
-                            <h3>Camada de Enlace</h3>
-                            <div class="fase-status locked">
-                                <span class="status-icon">🔒</span>
-                                <span class="status-text">Bloqueada</span>
+                <article class="fase-card" data-fase="2" data-voice="Fase 2. Camada de Enlace. Aprenda sobre endereços MAC e quadros Ethernet">
+                    <div class="fase-badge locked">
+                        <span class="badge-number">2</span>
+                    </div>
+                    
+                    <div class="fase-icon">
+                        <svg width="64" height="64" viewBox="0 0 24 24" fill="none">
+                            <rect x="2" y="4" width="20" height="16" rx="2" stroke="currentColor" stroke-width="2"/>
+                            <path d="M7 9h10M7 13h10M7 17h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    
+                    <div class="fase-info">
+                        <h2 class="fase-title">Camada de Enlace</h2>
+                        <p class="fase-description">Endereços MAC, quadros Ethernet e detecção de erros</p>
+                        
+                        <div class="fase-meta">
+                            <div class="meta-item">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="#E1EA2D"/>
+                                </svg>
+                                <span>200 Pontos</span>
+                            </div>
+                            <div class="meta-item">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                                    <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                                    <path d="M12 6v6l4 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                </svg>
+                                <span>15 min</span>
                             </div>
                         </div>
-                        <div class="fase-star disabled">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="#666">
-                                <path d="M20 0L24.4721 14.6446H40L28.7639 23.7108L33.236 38.3554L20 29.2892L6.764 38.3554L11.2361 23.7108L0 14.6446H15.5279L20 0Z"/>
-                            </svg>
+                        
+                        <div class="fase-status locked">
+                            <span class="status-icon">🔒</span>
+                            <span>Bloqueada</span>
                         </div>
                     </div>
                     
-                    <div class="fase-content">
-                        <div class="pontos-section">
-                            <h4>🏆 Pontuação: 200 Pontos</h4>
-                        </div>
-                        
-                        <div class="teoria-section">
-                            <h4>📚 O que você aprenderá</h4>
-                            <ul>
-                                <li><strong>Endereços MAC:</strong> Validar e identificar endereços físicos</li>
-                                <li><strong>Quadros Ethernet:</strong> Montar estruturas de quadros</li>
-                                <li><strong>Detecção de erros:</strong> Usar CRC para verificar integridade</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="desafio-section">
-                            <h4>🎯 Objetivos da Fase</h4>
-                            <p>Trabalhe com endereçamento MAC, monte quadros Ethernet e implemente detecção de erros com CRC.</p>
-                        </div>
-                        
-                        <button class="jogar-btn disabled" disabled>
-                            <span>Complete a Fase 1</span>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
-                                <path d="M10 2L12 8H18L13.5 12L15.5 18L10 14L4.5 18L6.5 12L2 8H8L10 2Z"/>
-                            </svg>
-                        </button>
-                    </div>
+                    <button class="fase-btn disabled" disabled aria-label="Fase bloqueada: Complete a Fase 1 primeiro">
+                        <span>Complete a Fase 1</span>
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M10 2C14.4183 2 18 5.58172 18 10C18 14.4183 14.4183 18 10 18C5.58172 18 2 14.4183 2 10C2 5.58172 5.58172 2 10 2ZM13 7L9 11L7 9" stroke="currentColor" stroke-width="2" fill="none"/>
+                        </svg>
+                    </button>
                 </article>
 
                 <!-- Fase 3 - Camada de Rede -->
-                <article class="fase-card" data-fase="3">
-                    <div class="fase-header">
-                        <div class="fase-numero">
-                            <span class="numero">3</span>
-                        </div>
-                        <div class="fase-info">
-                            <h3>Camada de Rede</h3>
-                            <div class="fase-status locked">
-                                <span class="status-icon">🔒</span>
-                                <span class="status-text">Bloqueada</span>
+                <article class="fase-card" data-fase="3" data-voice="Fase 3. Camada de Rede. Aprenda sobre endereços IP e roteamento">
+                    <div class="fase-badge locked">
+                        <span class="badge-number">3</span>
+                    </div>
+                    
+                    <div class="fase-icon">
+                        <svg width="64" height="64" viewBox="0 0 24 24" fill="none">
+                            <circle cx="12" cy="5" r="3" stroke="currentColor" stroke-width="2"/>
+                            <circle cx="5" cy="19" r="3" stroke="currentColor" stroke-width="2"/>
+                            <circle cx="19" cy="19" r="3" stroke="currentColor" stroke-width="2"/>
+                            <path d="M10.5 7L7.5 17M13.5 7L16.5 17" stroke="currentColor" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    
+                    <div class="fase-info">
+                        <h2 class="fase-title">Camada de Rede</h2>
+                        <p class="fase-description">Endereços IP, roteamento e subnetting</p>
+                        
+                        <div class="fase-meta">
+                            <div class="meta-item">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="#E1EA2D"/>
+                                </svg>
+                                <span>250 Pontos</span>
+                            </div>
+                            <div class="meta-item">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                                    <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                                    <path d="M12 6v6l4 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                </svg>
+                                <span>20 min</span>
                             </div>
                         </div>
-                        <div class="fase-star disabled">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="#666">
-                                <path d="M20 0L24.4721 14.6446H40L28.7639 23.7108L33.236 38.3554L20 29.2892L6.764 38.3554L11.2361 23.7108L0 14.6446H15.5279L20 0Z"/>
-                            </svg>
+                        
+                        <div class="fase-status locked">
+                            <span class="status-icon">🔒</span>
+                            <span>Bloqueada</span>
                         </div>
                     </div>
                     
-                    <div class="fase-content">
-                        <div class="pontos-section">
-                            <h4>🏆 Pontuação: 250 Pontos</h4>
-                        </div>
-                        
-                        <div class="teoria-section">
-                            <h4>📚 O que você aprenderá</h4>
-                            <ul>
-                                <li><strong>Endereços IP:</strong> Classificar endereços IP (Classe A, B, C)</li>
-                                <li><strong>Roteamento:</strong> Configurar tabelas de roteamento</li>
-                                <li><strong>Subnetting:</strong> Calcular sub-redes e máscaras</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="desafio-section">
-                            <h4>🎯 Objetivos da Fase</h4>
-                            <p>Domine endereçamento IP, configure rotas de rede e aprenda a dividir redes em sub-redes.</p>
-                        </div>
-                        
-                        <button class="jogar-btn disabled" disabled>
-                            <span>Complete a Fase 2</span>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
-                                <path d="M10 2L12 8H18L13.5 12L15.5 18L10 14L4.5 18L6.5 12L2 8H8L10 2Z"/>
-                            </svg>
-                        </button>
-                    </div>
+                    <button class="fase-btn disabled" disabled aria-label="Fase bloqueada: Complete a Fase 2 primeiro">
+                        <span>Complete a Fase 2</span>
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M10 2C14.4183 2 18 5.58172 18 10C18 14.4183 14.4183 18 10 18C5.58172 18 2 14.4183 2 10C2 5.58172 5.58172 2 10 2ZM13 7L9 11L7 9" stroke="currentColor" stroke-width="2" fill="none"/>
+                        </svg>
+                    </button>
                 </article>
 
                 <!-- Fase 4 - Camada de Transporte -->
-                <article class="fase-card" data-fase="4">
-                    <div class="fase-header">
-                        <div class="fase-numero">
-                            <span class="numero">4</span>
-                        </div>
-                        <div class="fase-info">
-                            <h3>Camada de Transporte</h3>
-                            <div class="fase-status locked">
-                                <span class="status-icon">🔒</span>
-                                <span class="status-text">Bloqueada</span>
+                <article class="fase-card" data-fase="4" data-voice="Fase 4. Camada de Transporte. Aprenda sobre TCP, UDP e portas">
+                    <div class="fase-badge locked">
+                        <span class="badge-number">4</span>
+                    </div>
+                    
+                    <div class="fase-icon">
+                        <svg width="64" height="64" viewBox="0 0 24 24" fill="none">
+                            <path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M20 6L9 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="2 2"/>
+                        </svg>
+                    </div>
+                    
+                    <div class="fase-info">
+                        <h2 class="fase-title">Camada de Transporte</h2>
+                        <p class="fase-description">Protocolos TCP/UDP, portas e handshake</p>
+                        
+                        <div class="fase-meta">
+                            <div class="meta-item">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="#E1EA2D"/>
+                                </svg>
+                                <span>300 Pontos</span>
+                            </div>
+                            <div class="meta-item">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                                    <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                                    <path d="M12 6v6l4 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                </svg>
+                                <span>25 min</span>
                             </div>
                         </div>
-                        <div class="fase-star disabled">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="#666">
-                                <path d="M20 0L24.4721 14.6446H40L28.7639 23.7108L33.236 38.3554L20 29.2892L6.764 38.3554L11.2361 23.7108L0 14.6446H15.5279L20 0Z"/>
-                            </svg>
+                        
+                        <div class="fase-status locked">
+                            <span class="status-icon">🔒</span>
+                            <span>Bloqueada</span>
                         </div>
                     </div>
                     
-                    <div class="fase-content">
-                        <div class="pontos-section">
-                            <h4>🏆 Pontuação: 300 Pontos</h4>
-                        </div>
-                        
-                        <div class="teoria-section">
-                            <h4>📚 O que você aprenderá</h4>
-                            <ul>
-                                <li><strong>Protocolos:</strong> Comparar TCP vs UDP</li>
-                                <li><strong>Portas:</strong> Associar serviços às portas corretas</li>
-                                <li><strong>Handshake:</strong> Simular Three-Way Handshake do TCP</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="desafio-section">
-                            <h4>🎯 Objetivos da Fase</h4>
-                            <p>Entenda os protocolos de transporte, gerencie portas de serviços e simule conexões TCP.</p>
-                        </div>
-                        
-                        <button class="jogar-btn disabled" disabled>
-                            <span>Complete a Fase 3</span>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
-                                <path d="M10 2L12 8H18L13.5 12L15.5 18L10 14L4.5 18L6.5 12L2 8H8L10 2Z"/>
-                            </svg>
-                        </button>
-                    </div>
+                    <button class="fase-btn disabled" disabled aria-label="Fase bloqueada: Complete a Fase 3 primeiro">
+                        <span>Complete a Fase 3</span>
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M10 2C14.4183 2 18 5.58172 18 10C18 14.4183 14.4183 18 10 18C5.58172 18 2 14.4183 2 10C2 5.58172 5.58172 2 10 2ZM13 7L9 11L7 9" stroke="currentColor" stroke-width="2" fill="none"/>
+                        </svg>
+                    </button>
                 </article>
 
                 <!-- Fase 5 - Camada de Aplicação -->
-                <article class="fase-card" data-fase="5">
-                    <div class="fase-header">
-                        <div class="fase-numero">
-                            <span class="numero">5</span>
-                        </div>
-                        <div class="fase-info">
-                            <h3>Camada de Aplicação</h3>
-                            <div class="fase-status locked">
-                                <span class="status-icon">🔒</span>
-                                <span class="status-text">Bloqueada</span>
+                <article class="fase-card" data-fase="5" data-voice="Fase 5. Camada de Aplicação. Aprenda sobre HTTP, DNS e protocolos de email">
+                    <div class="fase-badge locked">
+                        <span class="badge-number">5</span>
+                    </div>
+                    
+                    <div class="fase-icon">
+                        <svg width="64" height="64" viewBox="0 0 24 24" fill="none">
+                            <rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2"/>
+                            <path d="M7 2v4M17 2v4M3 10h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            <rect x="7" y="14" width="3" height="3" fill="currentColor"/>
+                            <rect x="14" y="14" width="3" height="3" fill="currentColor"/>
+                        </svg>
+                    </div>
+                    
+                    <div class="fase-info">
+                        <h2 class="fase-title">Camada de Aplicação</h2>
+                        <p class="fase-description">HTTP, DNS, Email e protocolos de aplicação</p>
+                        
+                        <div class="fase-meta">
+                            <div class="meta-item">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="#E1EA2D"/>
+                                </svg>
+                                <span>350 Pontos</span>
+                            </div>
+                            <div class="meta-item">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                                    <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                                    <path d="M12 6v6l4 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                </svg>
+                                <span>30 min</span>
                             </div>
                         </div>
-                        <div class="fase-star disabled">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="#666">
-                                <path d="M20 0L24.4721 14.6446H40L28.7639 23.7108L33.236 38.3554L20 29.2892L6.764 38.3554L11.2361 23.7108L0 14.6446H15.5279L20 0Z"/>
-                            </svg>
+                        
+                        <div class="fase-status locked">
+                            <span class="status-icon">🔒</span>
+                            <span>Bloqueada</span>
                         </div>
                     </div>
                     
-                    <div class="fase-content">
-                        <div class="pontos-section">
-                            <h4>🏆 Pontuação: 350 Pontos</h4>
-                        </div>
-                        
-                        <div class="teoria-section">
-                            <h4>📚 O que você aprenderá</h4>
-                            <ul>
-                                <li><strong>HTTP:</strong> Analisar requisições e respostas HTTP</li>
-                                <li><strong>DNS:</strong> Ordenar processo de resolução DNS</li>
-                                <li><strong>Email:</strong> Configurar fluxo de protocolos de email</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="desafio-section">
-                            <h4>🎯 Objetivos da Fase</h4>
-                            <p>Domine protocolos de aplicação, entenda resolução DNS e configure sistemas de email.</p>
-                        </div>
-                        
-                        <button class="jogar-btn disabled" disabled>
-                            <span>Complete a Fase 4</span>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
-                                <path d="M10 2L12 8H18L13.5 12L15.5 18L10 14L4.5 18L6.5 12L2 8H8L10 2Z"/>
-                            </svg>
-                        </button>
-                    </div>
+                    <button class="fase-btn disabled" disabled aria-label="Fase bloqueada: Complete a Fase 4 primeiro">
+                        <span>Complete a Fase 4</span>
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M10 2C14.4183 2 18 5.58172 18 10C18 14.4183 14.4183 18 10 18C5.58172 18 2 14.4183 2 10C2 5.58172 5.58172 2 10 2ZM13 7L9 11L7 9" stroke="currentColor" stroke-width="2" fill="none"/>
+                        </svg>
+                    </button>
                 </article>
             </div>
-        </main>
-    </section>
+        </section>
+    </main>
 
+    <!-- Live region para anúncios de acessibilidade -->
+    <div id="aria-live-region" aria-live="polite" aria-atomic="true" class="sr-only"></div>
+    
+    <!-- Indicador de Voz Ativa -->
+    <div id="voice-indicator" class="voice-indicator" aria-hidden="true">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <circle cx="12" cy="12" r="10" fill="currentColor" opacity="0.2"/>
+            <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z" fill="currentColor"/>
+        </svg>
+        <span>Leitura ativa</span>
+    </div>
+
+    <script src="js/path-utils.js"></script>
+    <script src="js/voice-accessibility.js"></script>
     <script src="js/global.js"></script>
     <script src="js/audio.js"></script>
     <script src="js/darkmode.js"></script>
@@ -361,7 +416,30 @@
                 const pontos = parseInt(localStorage.getItem('gamePoints') || '2450');
                 const pontosDisplay = document.getElementById('pontos-display');
                 if (pontosDisplay) {
-                    pontosDisplay.textContent = `${pontos} Pontos`;
+                    pontosDisplay.textContent = pontos;
+                }
+            }
+
+            atualizarProgresso() {
+                const completadas = Object.values(this.fasesData).filter(f => f.concluida).length;
+                const total = Object.keys(this.fasesData).length;
+                const porcentagem = Math.round((completadas / total) * 100);
+                
+                // Atualizar contador
+                const contadorEl = document.getElementById('fases-completas');
+                if (contadorEl) {
+                    contadorEl.textContent = `${completadas}/${total}`;
+                }
+                
+                // Atualizar barra de progresso
+                const progressFill = document.getElementById('progress-fill');
+                const progressText = document.getElementById('progress-text');
+                if (progressFill) {
+                    progressFill.style.width = `${porcentagem}%`;
+                    progressFill.setAttribute('aria-valuenow', porcentagem);
+                }
+                if (progressText) {
+                    progressText.textContent = `${porcentagem}% Concluído`;
                 }
             }
 
@@ -372,80 +450,90 @@
 
                     const fase = this.fasesData[faseId];
                     const statusElement = card.querySelector('.fase-status');
-                    const starElement = card.querySelector('.fase-star');
-                    const botaoElement = card.querySelector('.jogar-btn');
-                    const numeroElement = card.querySelector('.fase-numero');
+                    const badgeElement = card.querySelector('.fase-badge');
+                    const botaoElement = card.querySelector('.fase-btn');
+                    const iconElement = card.querySelector('.fase-icon');
 
                     // Atualizar status de desbloqueio
                     if (fase.desbloqueada) {
+                        card.classList.remove('locked');
+                        card.classList.add('unlocked');
+                        
                         statusElement.className = 'fase-status unlocked';
                         statusElement.innerHTML = `
                             <span class="status-icon">🔓</span>
-                            <span class="status-text">Desbloqueada</span>
+                            <span>Desbloqueada</span>
                         `;
+                        
+                        badgeElement.classList.remove('locked');
+                        iconElement.style.opacity = '1';
                         
                         // Atualizar botão
                         if (fase.concluida) {
+                            card.classList.add('completed');
                             botaoElement.innerHTML = `
-                                <span>Rejogar Fase</span>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                <span>Jogar Novamente</span>
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
                                     <path d="M4 12L8 16L16 8"/>
                                 </svg>
                             `;
-                            starElement.className = 'fase-star completed';
-                            starElement.querySelector('svg').setAttribute('fill', '#E1EA2D');
+                            badgeElement.classList.add('completed');
                         } else {
                             botaoElement.innerHTML = `
                                 <span>Iniciar Fase</span>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
                                     <path d="M6 4L14 10L6 16V4Z"/>
                                 </svg>
                             `;
-                            starElement.className = 'fase-star';
-                            starElement.querySelector('svg').setAttribute('fill', '#E1EA2D');
                         }
                         
-                        botaoElement.className = 'jogar-btn';
+                        botaoElement.className = 'fase-btn';
                         botaoElement.disabled = false;
                         botaoElement.onclick = () => this.iniciarFase(faseId);
-                        numeroElement.className = 'fase-numero';
                         
                     } else {
+                        card.classList.add('locked');
+                        card.classList.remove('unlocked', 'completed');
+                        
                         statusElement.className = 'fase-status locked';
                         statusElement.innerHTML = `
                             <span class="status-icon">🔒</span>
-                            <span class="status-text">Bloqueada</span>
+                            <span>Bloqueada</span>
                         `;
+                        
+                        badgeElement.classList.add('locked');
+                        iconElement.style.opacity = '0.3';
                         
                         const fasePrevNecessaria = faseId - 1;
                         botaoElement.innerHTML = `
                             <span>Complete a Fase ${fasePrevNecessaria}</span>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
-                                <path d="M10 2L12 8H18L13.5 12L15.5 18L10 14L4.5 18L6.5 12L2 8H8L10 2Z"/>
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M10 2C14.4183 2 18 5.58172 18 10C18 14.4183 14.4183 18 10 18C5.58172 18 2 14.4183 2 10C2 5.58172 5.58172 2 10 2ZM13 7L9 11L7 9" stroke="currentColor" stroke-width="2" fill="none"/>
                             </svg>
                         `;
                         
-                        botaoElement.className = 'jogar-btn disabled';
+                        botaoElement.className = 'fase-btn disabled';
                         botaoElement.disabled = true;
-                        starElement.className = 'fase-star disabled';
-                        starElement.querySelector('svg').setAttribute('fill', '#666');
-                        numeroElement.className = 'fase-numero locked';
                     }
                 });
+                
+                this.atualizarProgresso();
             }
 
             iniciarFase(numeroFase) {
                 if (this.fasesData[numeroFase] && this.fasesData[numeroFase].desbloqueada) {
-                    const arquivo = this.fasesData[numeroFase].arquivo;
-                    console.log(`Navegando para ${arquivo}`);
+                    console.log(`Navegando para trilha.html na fase ${numeroFase}`);
+                    
+                    // Salvar a fase selecionada no localStorage
+                    localStorage.setItem('faseInicial', numeroFase);
                     
                     // Reproduzir som de clique
-                    if (window.audioManager) {
+                    if (window.audioManager && typeof window.audioManager.playClickSound === 'function') {
                         window.audioManager.playClickSound();
                     }
                     
-                    // Navegar para a fase
-                    window.location.href = arquivo;
+                    // Navegar para a trilha
+                    window.location.href = 'trilha.html';
                 } else {
                     console.log('Fase bloqueada!');
                 }

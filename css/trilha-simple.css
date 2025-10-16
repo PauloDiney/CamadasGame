@@ -1,0 +1,694 @@
+/* ==========================================
+   TRILHA SIMPLES - CAMADAS DA CONEXÃO
+   Design limpo e funcional sem animações
+   ========================================== */
+
+/* Reset e Base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    overflow-y: auto;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Kdam Thmor Pro', cursive;
+    background: #0f1419;
+    min-height: 100vh;
+    overflow-x: hidden;
+    color: #ffffff;
+}
+
+/* ==================== BARRA DE ACESSIBILIDADE ==================== */
+.accessibility-bar {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 9999;
+    display: flex;
+    gap: 0.75rem;
+    background: rgba(20, 25, 35, 0.95);
+    padding: 0.75rem;
+    border-radius: 12px;
+    border: 1px solid rgba(13, 223, 255, 0.3);
+}
+
+.accessibility-btn {
+    width: 48px;
+    height: 48px;
+    border-radius: 8px;
+    border: 2px solid rgba(13, 223, 255, 0.3);
+    background: rgba(13, 223, 255, 0.05);
+    color: #0DF;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.accessibility-btn:hover {
+    background: rgba(13, 223, 255, 0.15);
+    border-color: #0DF;
+}
+
+.accessibility-btn.active {
+    background: rgba(225, 234, 45, 0.2);
+    border-color: #E1EA2D;
+    color: #E1EA2D;
+}
+
+.accessibility-btn svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* Indicador de Voz */
+.voice-indicator {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 9998;
+    display: none;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.875rem 1.5rem;
+    background: rgba(13, 223, 255, 0.15);
+    border: 2px solid rgba(13, 223, 255, 0.4);
+    border-radius: 8px;
+    color: #0DF;
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+
+.voice-indicator.active {
+    display: flex;
+}
+
+/* ==================== HEADER ==================== */
+.trilha-header {
+    position: relative;
+    z-index: 10;
+    background: rgba(20, 25, 35, 0.95);
+    border-bottom: 1px solid rgba(13, 223, 255, 0.2);
+    padding: 1.5rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    flex: 1;
+}
+
+.btn-voltar {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.875rem 1.5rem;
+    background: rgba(13, 223, 255, 0.1);
+    color: #0DF;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    border: 2px solid rgba(13, 223, 255, 0.3);
+}
+
+.btn-voltar:hover {
+    background: rgba(13, 223, 255, 0.2);
+    border-color: #0DF;
+}
+
+.btn-voltar svg {
+    width: 20px;
+    height: 20px;
+}
+
+.trilha-info h1 {
+    font-size: 2rem;
+    color: #0DF;
+    margin-bottom: 0.25rem;
+}
+
+.trilha-info p {
+    font-size: 0.9375rem;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+}
+
+.pontos-trilha {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.75rem 1.5rem;
+    background: rgba(20, 25, 35, 0.95);
+    border-radius: 12px;
+    border: 2px solid rgba(225, 234, 45, 0.4);
+}
+
+.pontos-trilha svg {
+    width: 28px;
+    height: 28px;
+}
+
+.pontos-trilha span {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #E1EA2D;
+}
+
+/* ==================== CONTAINER PRINCIPAL ==================== */
+.trilha-container {
+    position: relative;
+    z-index: 1;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+    min-height: calc(100vh - 100px);
+}
+
+/* ==================== MAPA DA TRILHA ==================== */
+.trilha-mapa {
+    position: relative;
+}
+
+.trilha-caminho {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    position: relative;
+}
+
+/* ==================== NÓS DAS FASES ==================== */
+.fase-node {
+    position: relative;
+    background: rgba(20, 25, 35, 0.8);
+    border-radius: 12px;
+    padding: 2rem;
+    border: 2px solid rgba(13, 223, 255, 0.3);
+    cursor: pointer;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 2rem;
+}
+
+/* Estados das fases */
+.fase-node.fase-disponivel {
+    border-color: rgba(13, 223, 255, 0.5);
+}
+
+.fase-node.fase-disponivel:hover {
+    border-color: #0DF;
+    background: rgba(13, 223, 255, 0.1);
+}
+
+.fase-node.fase-bloqueada {
+    opacity: 0.5;
+    cursor: not-allowed;
+    border-color: rgba(128, 128, 128, 0.3);
+}
+
+.fase-node.fase-concluida {
+    border-color: rgba(225, 234, 45, 0.6);
+    background: rgba(225, 234, 45, 0.05);
+}
+
+/* ==================== CÍRCULO DA FASE ==================== */
+.fase-circle {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    background: rgba(13, 223, 255, 0.1);
+    border: 3px solid rgba(13, 223, 255, 0.5);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.fase-numero {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #0DF;
+}
+
+.fase-icone svg {
+    width: 32px;
+    height: 32px;
+    stroke: #0DF;
+}
+
+.fase-node.fase-bloqueada .fase-circle {
+    background: rgba(128, 128, 128, 0.1);
+    border-color: rgba(128, 128, 128, 0.3);
+}
+
+.fase-node.fase-bloqueada .fase-numero {
+    color: #888;
+}
+
+.fase-node.fase-bloqueada .fase-icone svg {
+    stroke: #888;
+}
+
+.fase-node.fase-concluida .fase-circle {
+    background: rgba(225, 234, 45, 0.2);
+    border-color: rgba(225, 234, 45, 0.8);
+}
+
+.fase-node.fase-concluida .fase-numero {
+    color: #E1EA2D;
+}
+
+.fase-node.fase-concluida .fase-icone svg {
+    stroke: #E1EA2D;
+}
+
+/* ==================== INFORMAÇÕES DA FASE ==================== */
+.fase-info {
+    flex: 1;
+}
+
+.fase-info h3 {
+    font-size: 1.5rem;
+    color: #0DF;
+    margin-bottom: 0.5rem;
+}
+
+.fase-info p {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 1rem;
+}
+
+.fase-recompensa {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: rgba(225, 234, 45, 0.15);
+    border: 1px solid rgba(225, 234, 45, 0.4);
+    border-radius: 8px;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: #E1EA2D;
+}
+
+/* ==================== STATUS DA FASE ==================== */
+.fase-status {
+    padding-left: 1.5rem;
+    border-left: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.fase-status span {
+    display: inline-block;
+    padding: 0.625rem 1.25rem;
+    border-radius: 8px;
+    font-size: 0.9375rem;
+    font-weight: 600;
+}
+
+.status-disponivel {
+    background: rgba(13, 223, 255, 0.2);
+    color: #0DF;
+    border: 1px solid rgba(13, 223, 255, 0.4);
+}
+
+.status-bloqueada {
+    background: rgba(128, 128, 128, 0.2);
+    color: #888;
+    border: 1px solid rgba(128, 128, 128, 0.4);
+}
+
+.status-concluida {
+    background: rgba(225, 234, 45, 0.2);
+    color: #E1EA2D;
+    border: 1px solid rgba(225, 234, 45, 0.4);
+}
+
+/* ==================== CONECTORES DA TRILHA ==================== */
+.trilha-conector {
+    width: 4px;
+    height: 40px;
+    background: linear-gradient(to bottom, rgba(13, 223, 255, 0.3) 0%, rgba(13, 223, 255, 0.1) 100%);
+    margin: 0 auto;
+    border-radius: 2px;
+}
+
+/* ==================== MODAL ==================== */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.modal-overlay.active {
+    display: flex;
+    opacity: 1;
+}
+
+.modal-container {
+    position: relative;
+    background: rgba(20, 25, 35, 0.95);
+    border-radius: 16px;
+    padding: 2rem;
+    max-width: 600px;
+    width: 90%;
+    border: 2px solid rgba(13, 223, 255, 0.3);
+}
+
+.modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.6);
+    cursor: pointer;
+    padding: 0.5rem;
+}
+
+.modal-close:hover {
+    color: #0DF;
+}
+
+.modal-header {
+    text-align: center;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.modal-icone {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 1rem;
+    background: rgba(13, 223, 255, 0.1);
+    border: 3px solid rgba(13, 223, 255, 0.5);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-icone svg {
+    stroke: #0DF;
+}
+
+.modal-header h2 {
+    font-size: 1.75rem;
+    color: #0DF;
+    margin-bottom: 0.5rem;
+}
+
+.modal-numero {
+    font-size: 0.9375rem;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.modal-body {
+    padding: 1.5rem 0;
+}
+
+.modal-descricao,
+.modal-objetivos {
+    margin-bottom: 1.5rem;
+}
+
+.modal-descricao h3,
+.modal-objetivos h3 {
+    font-size: 1.125rem;
+    color: #0DF;
+    margin-bottom: 0.75rem;
+}
+
+.modal-descricao p {
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.6;
+}
+
+.modal-objetivos ul {
+    list-style: none;
+    padding: 0;
+}
+
+.modal-objetivos li {
+    color: rgba(255, 255, 255, 0.8);
+    padding: 0.5rem 0;
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.modal-objetivos li:before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: #0DF;
+}
+
+.modal-info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+    padding: 1rem;
+    background: rgba(13, 223, 255, 0.05);
+    border-radius: 8px;
+    border: 1px solid rgba(13, 223, 255, 0.2);
+}
+
+.info-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.info-label {
+    font-size: 0.8125rem;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.info-value {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #0DF;
+}
+
+.modal-footer {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.btn-modal {
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: 2px solid;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.btn-primary {
+    background: rgba(13, 223, 255, 0.2);
+    color: #0DF;
+    border-color: rgba(13, 223, 255, 0.5);
+}
+
+.btn-primary:hover {
+    background: rgba(13, 223, 255, 0.3);
+    border-color: #0DF;
+}
+
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.05);
+    color: rgba(255, 255, 255, 0.8);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+/* ==================== ACESSIBILIDADE ==================== */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+/* ==================== RESPONSIVO ==================== */
+@media (max-width: 768px) {
+    .accessibility-bar {
+        top: 10px;
+        left: 10px;
+        gap: 0.5rem;
+        padding: 0.5rem;
+    }
+    
+    .accessibility-btn {
+        width: 45px;
+        height: 45px;
+    }
+    
+    .trilha-header {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem;
+    }
+    
+    .header-left {
+        flex-direction: column;
+        gap: 1rem;
+        width: 100%;
+        flex: none;
+    }
+    
+    .header-right {
+        width: 100%;
+        flex: none;
+    }
+    
+    .btn-voltar {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .trilha-info {
+        text-align: center;
+    }
+    
+    .trilha-info h1 {
+        font-size: 1.5rem;
+    }
+    
+    .pontos-trilha {
+        justify-content: center;
+    }
+    
+    .trilha-container {
+        padding: 2rem 1rem;
+    }
+    
+    .fase-node {
+        grid-template-columns: auto 1fr;
+        padding: 1.5rem;
+        gap: 1rem;
+    }
+    
+    .fase-status {
+        grid-column: 1 / -1;
+        border-left: none;
+        border-top: 2px solid rgba(255, 255, 255, 0.1);
+        padding-left: 0;
+        padding-top: 1rem;
+        margin-top: 1rem;
+    }
+    
+    .fase-circle {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .fase-numero {
+        font-size: 1.5rem;
+    }
+    
+    .fase-icone svg {
+        width: 24px;
+        height: 24px;
+    }
+    
+    .fase-info h3 {
+        font-size: 1.25rem;
+    }
+    
+    .modal-container {
+        width: 95%;
+        padding: 1.5rem;
+    }
+    
+    .modal-footer {
+        flex-direction: column;
+    }
+    
+    .btn-modal {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .accessibility-bar {
+        gap: 0.375rem;
+        padding: 0.375rem;
+    }
+    
+    .accessibility-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+    
+    .trilha-info h1 {
+        font-size: 1.25rem;
+    }
+    
+    .fase-node {
+        padding: 1rem;
+    }
+    
+    .fase-circle {
+        width: 70px;
+        height: 70px;
+    }
+    
+    .fase-numero {
+        font-size: 1.25rem;
+    }
+    
+    .fase-info h3 {
+        font-size: 1.125rem;
+    }
+    
+    .fase-info p {
+        font-size: 0.875rem;
+    }
+}

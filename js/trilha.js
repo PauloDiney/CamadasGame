@@ -74,6 +74,18 @@ class TrilhaManager {
         this.configurarEventos();
         this.atualizarEstadoFases();
         this.atualizarProgresso();
+        
+        // Verifica se há uma fase para abrir automaticamente
+        const faseInicial = localStorage.getItem('faseInicial');
+        if (faseInicial) {
+            console.log('Abrindo fase inicial automaticamente:', faseInicial);
+            localStorage.removeItem('faseInicial'); // Remove após uso
+            
+            // Pequeno delay para garantir que tudo foi carregado
+            setTimeout(() => {
+                this.abrirModalFase(faseInicial);
+            }, 300);
+        }
     }
 
     carregarProgresso() {
@@ -110,37 +122,51 @@ class TrilhaManager {
     configurarEventos() {
         // Eventos dos nós das fases
         const faseNodes = document.querySelectorAll('.fase-node');
-        console.log('Configurando eventos para', faseNodes.length, 'nós de fase'); // Debug
+        console.log('Configurando eventos para', faseNodes.length, 'nós de fase');
         
         faseNodes.forEach(node => {
             const faseId = node.getAttribute('data-fase');
-            console.log('Configurando evento para fase:', faseId); // Debug
+            console.log('Configurando evento para fase:', faseId);
             
             node.addEventListener('click', (e) => {
                 e.preventDefault();
                 e.stopPropagation();
-                console.log('Clicou na fase:', faseId); // Debug
+                console.log('Clicou na fase:', faseId);
                 
                 if (faseId && this.fasesData[faseId] && this.fasesData[faseId].desbloqueada) {
                     this.abrirModalFase(faseId);
                 } else {
                     console.log('Fase bloqueada ou inválida:', faseId, this.fasesData[faseId]);
+                    if (window.audioManager && typeof window.audioManager.playErrorSound === 'function') {
+                        window.audioManager.playErrorSound();
+                    }
+                }
+            });
+            
+            // Adiciona suporte para Enter/Space quando focado
+            node.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    node.click();
                 }
             });
         });
 
-        // Eventos do modal
-        const modal = document.getElementById('modal-fase');
-        const btnClose = document.getElementById('modal-close');
-        const btnCancelar = document.getElementById('btn-cancelar');
-        const btnIniciar = document.getElementById('btn-iniciar-fase');
+        // Eventos do modal - USANDO OS IDs CORRETOS DO HTML
+        const modal = document.getElementById('modalFase');
+        const btnClose = document.querySelector('.modal-close');
+        const btnCancelar = document.getElementById('btnFechar');
+        const btnIniciar = document.getElementById('btnIniciar');
 
-        console.log('Elementos do modal encontrados:', {modal, btnClose, btnCancelar, btnIniciar}); // Debug
+        console.log('Elementos do modal encontrados:', {modal, btnClose, btnCancelar, btnIniciar});
 
         if (btnClose) {
             btnClose.addEventListener('click', () => {
                 console.log('Botão fechar clicado');
                 this.fecharModal();
+                if (window.audioManager && typeof window.audioManager.playClickSound === 'function') {
+                    window.audioManager.playClickSound();
+                }
             });
         }
         
@@ -148,6 +174,9 @@ class TrilhaManager {
             btnCancelar.addEventListener('click', () => {
                 console.log('Botão cancelar clicado');
                 this.fecharModal();
+                if (window.audioManager && typeof window.audioManager.playClickSound === 'function') {
+                    window.audioManager.playClickSound();
+                }
             });
         }
         
@@ -155,6 +184,9 @@ class TrilhaManager {
             btnIniciar.addEventListener('click', () => {
                 console.log('Botão iniciar clicado');
                 this.iniciarFase();
+                if (window.audioManager && typeof window.audioManager.playClickSound === 'function') {
+                    window.audioManager.playClickSound();
+                }
             });
         }
 
@@ -170,7 +202,7 @@ class TrilhaManager {
 
         // Tecla ESC para fechar modal
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && modal && modal.classList.contains('ativo')) {
+            if (e.key === 'Escape' && modal && modal.classList.contains('active')) {
                 console.log('ESC pressionado, fechando modal');
                 this.fecharModal();
             }
@@ -230,63 +262,79 @@ class TrilhaManager {
     }
 
     abrirModalFase(faseId) {
-        console.log('Abrindo modal para fase:', faseId); // Debug
+        console.log('Abrindo modal para fase:', faseId);
         const fase = this.fasesData[faseId];
         if (!fase || !fase.desbloqueada) {
             console.log('Fase não disponível:', faseId, fase);
             return;
         }
 
-        // Preenche os dados do modal
-        const modalTitulo = document.getElementById('modal-titulo');
-        const modalNomeFase = document.getElementById('modal-nome-fase');
-        const modalDescricao = document.getElementById('modal-descricao');
-        const modalPontos = document.getElementById('modal-pontos');
+        // Preenche os dados do modal - USANDO OS IDs CORRETOS DO HTML
+        const modalTitulo = document.getElementById('modalTitulo');
+        const modalNumero = document.getElementById('modalNumero');
+        const modalDescricao = document.getElementById('modalDescricao');
+        const modalRecompensa = document.getElementById('modalRecompensa');
+        const modalDificuldade = document.getElementById('modalDificuldade');
+        const modalObjetivos = document.getElementById('modalObjetivos');
+        const modalIcone = document.getElementById('modalIcone');
 
-        if (modalTitulo) modalTitulo.textContent = `Iniciar ${fase.nome}`;
-        if (modalNomeFase) modalNomeFase.textContent = fase.nome;
+        if (modalTitulo) modalTitulo.textContent = fase.nome;
+        if (modalNumero) modalNumero.textContent = faseId;
         if (modalDescricao) modalDescricao.textContent = fase.descricao;
-        if (modalPontos) modalPontos.textContent = `+${fase.pontos}`;
+        if (modalRecompensa) modalRecompensa.textContent = `⭐ +${fase.pontos} pontos`;
+        
+        // Define dificuldade baseada na fase
+        const dificuldades = {
+            '1': '⚡ Iniciante',
+            '2': '⚡⚡ Fácil',
+            '3': '⚡⚡⚡ Médio',
+            '4': '⚡⚡⚡⚡ Difícil',
+            '5': '⚡⚡⚡⚡⚡ Avançado'
+        };
+        if (modalDificuldade) modalDificuldade.textContent = dificuldades[faseId] || '⚡ Normal';
 
         // Preenche objetivos
-        const objetivosList = document.getElementById('modal-objetivos');
-        if (objetivosList) {
-            objetivosList.innerHTML = fase.objetivos.map(obj => `<li>${obj}</li>`).join('');
+        if (modalObjetivos) {
+            modalObjetivos.innerHTML = fase.objetivos.map(obj => `<li>${obj}</li>`).join('');
         }
 
-        // Configura o ícone
-        const modalIcone = document.getElementById('modal-icone');
-        const originalIcone = document.querySelector(`[data-fase="${faseId}"] .fase-icone`);
+        // Copia o ícone da fase para o modal
+        const originalIcone = document.querySelector(`[data-fase="${faseId}"] .fase-icone svg`);
         if (modalIcone && originalIcone) {
-            modalIcone.innerHTML = originalIcone.innerHTML;
+            modalIcone.innerHTML = originalIcone.outerHTML;
         }
 
         // Armazena a fase atual
         this.faseAtual = faseId;
-        console.log('Fase atual definida como:', this.faseAtual); // Debug
+        console.log('Fase atual definida como:', this.faseAtual);
 
         // Configura o botão de iniciar
-        const btnIniciar = document.getElementById('btn-iniciar-fase');
+        const btnIniciar = document.getElementById('btnIniciar');
         if (btnIniciar) {
-            if (fase.concluida) {
-                btnIniciar.textContent = 'Refazer Fase';
-            } else {
-                btnIniciar.textContent = 'Iniciar Fase';
+            const btnText = btnIniciar.querySelector('span');
+            if (btnText) {
+                btnText.textContent = fase.concluida ? 'Refazer Fase' : 'Iniciar Fase';
             }
         }
 
-        // Abre o modal
-        const modal = document.getElementById('modal-fase');
+        // Abre o modal - USA A CLASSE 'active' CONFORME O CSS
+        const modal = document.getElementById('modalFase');
         if (modal) {
-            modal.classList.add('ativo');
+            modal.classList.add('active');
+            console.log('Modal aberto com classe active');
+        }
+        
+        // Som de sucesso
+        if (window.audioManager && typeof window.audioManager.playSuccessSound === 'function') {
+            window.audioManager.playSuccessSound();
         }
     }
 
     fecharModal() {
-        const modal = document.getElementById('modal-fase');
+        const modal = document.getElementById('modalFase');
         if (modal) {
-            modal.classList.remove('ativo');
-            console.log('Modal fechado, classe ativo removida');
+            modal.classList.remove('active');
+            console.log('Modal fechado, classe active removida');
         }
         this.faseAtual = null;
     }
@@ -425,12 +473,12 @@ class TrilhaManager {
 
 // Inicializa quando a página carrega
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('DOM carregado, inicializando TrilhaManager'); // Debug
+    console.log('DOM carregado, inicializando TrilhaManager');
     
     // Força o modal a ficar oculto inicialmente
-    const modal = document.getElementById('modal-fase');
+    const modal = document.getElementById('modalFase');
     if (modal) {
-        modal.classList.remove('ativo');
+        modal.classList.remove('active');
         console.log('Modal inicializado como oculto');
     }
     

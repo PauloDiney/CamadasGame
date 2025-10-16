@@ -1,6 +1,6 @@
-/* CSS específico para a página de configurações */
+/* ===== CONFIGURAÇÕES - DESIGN MODERNO E LIMPO ===== */
 
-/* Permitir scroll apenas na página de configurações */
+/* Reset e scroll */
 * {
     overflow: visible;
 }
@@ -15,6 +15,679 @@ body {
     min-height: 100vh;
     overflow-y: auto;
     overflow-x: hidden;
+}
+
+/* Container Principal */
+.config-container {
+    width: 100%;
+    min-height: 100vh;
+    height: auto;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ===== HEADER ===== */
+.config-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem 2rem;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border-bottom: 2px solid rgba(0, 221, 255, 0.2);
+}
+
+.btn-voltar-config {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 221, 255, 0.2);
+    border: 2px solid rgba(0, 221, 255, 0.4);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: #0DF;
+}
+
+.btn-voltar-config:hover {
+    background: rgba(0, 221, 255, 0.3);
+    transform: translateX(-5px);
+    box-shadow: 0 4px 15px rgba(0, 221, 255, 0.3);
+}
+
+.config-header-content {
+    flex: 1;
+    text-align: center;
+}
+
+.config-title {
+    font-family: "Kdam Thmor Pro";
+    font-size: 36px;
+    color: #0DF;
+    margin: 0;
+    text-shadow: 0 2px 10px rgba(0, 221, 255, 0.3);
+}
+
+.config-subtitle {
+    font-family: "Kdam Thmor Pro";
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.7);
+    margin: 0.25rem 0 0 0;
+}
+
+.config-header .header-points {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(225, 234, 45, 0.2);
+    padding: 0.5rem 1rem;
+    border-radius: 12px;
+    border: 2px solid rgba(225, 234, 45, 0.4);
+}
+
+.config-header .header-points p {
+    font-family: "Kdam Thmor Pro";
+    font-size: 18px;
+    color: #E1EA2D;
+    margin: 0;
+    font-weight: bold;
+}
+
+/* ===== CONTEÚDO ===== */
+.config-content {
+    flex: 1;
+    padding: 2rem;
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+/* ===== GRID DE CARDS ===== */
+.config-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.config-card {
+    background: rgba(255, 255, 255, 0.95);
+    border: 2px solid rgba(0, 221, 255, 0.2);
+    border-radius: 16px;
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    transition: all 0.3s ease;
+    animation: slideInFromBottom 0.5s ease-out forwards;
+}
+
+.config-card:hover {
+    transform: translateY(-5px);
+    border-color: #0DF;
+    box-shadow: 0 8px 25px rgba(0, 221, 255, 0.2);
+}
+
+.config-card-icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 221, 255, 0.1);
+    border-radius: 12px;
+    color: #0DF;
+    flex-shrink: 0;
+}
+
+.config-card-content {
+    flex: 1;
+}
+
+.config-card-content h3 {
+    font-family: "Kdam Thmor Pro";
+    font-size: 18px;
+    color: #000;
+    margin: 0 0 0.25rem 0;
+}
+
+.config-card-content p {
+    font-family: "Kdam Thmor Pro";
+    font-size: 13px;
+    color: #666;
+    margin: 0;
+}
+
+/* ===== TOGGLE SWITCH ===== */
+.config-toggle {
+    position: relative;
+    display: inline-block;
+    width: 52px;
+    height: 28px;
+    flex-shrink: 0;
+}
+
+.config-toggle input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.toggle-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+    border-radius: 28px;
+}
+
+.toggle-slider:before {
+    position: absolute;
+    content: "";
+    height: 20px;
+    width: 20px;
+    left: 4px;
+    bottom: 4px;
+    background-color: #fff;
+    transition: 0.3s;
+    border-radius: 50%;
+}
+
+.config-toggle input:checked + .toggle-slider {
+    background-color: #0DF;
+}
+
+.config-toggle input:checked + .toggle-slider:before {
+    transform: translateX(24px);
+}
+
+/* ===== CONTROLES ADICIONAIS ===== */
+.config-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.config-control-item {
+    background: rgba(255, 255, 255, 0.95);
+    border: 2px solid rgba(0, 221, 255, 0.2);
+    border-radius: 16px;
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    transition: all 0.3s ease;
+}
+
+.config-control-item:hover {
+    border-color: #0DF;
+    box-shadow: 0 4px 15px rgba(0, 221, 255, 0.15);
+}
+
+.control-label {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-family: "Kdam Thmor Pro";
+    font-size: 16px;
+    color: #000;
+    cursor: pointer;
+}
+
+.control-label svg {
+    color: #0DF;
+}
+
+/* Select */
+.config-select {
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    border: 2px solid rgba(0, 221, 255, 0.3);
+    background: #fff;
+    color: #000;
+    font-family: "Kdam Thmor Pro";
+    font-size: 14px;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.3s ease;
+    min-width: 150px;
+}
+
+.config-select:hover,
+.config-select:focus {
+    border-color: #0DF;
+    box-shadow: 0 0 10px rgba(0, 221, 255, 0.2);
+}
+
+/* Slider */
+.config-slider {
+    width: 200px;
+    height: 6px;
+    border-radius: 3px;
+    background: rgba(0, 221, 255, 0.2);
+    outline: none;
+    appearance: none;
+    -webkit-appearance: none;
+    cursor: pointer;
+}
+
+.config-slider::-webkit-slider-thumb {
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #0DF;
+    cursor: pointer;
+    border: 2px solid #fff;
+    box-shadow: 0 2px 8px rgba(0, 221, 255, 0.3);
+    transition: all 0.3s ease;
+}
+
+.config-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+    box-shadow: 0 4px 12px rgba(0, 221, 255, 0.5);
+}
+
+.config-slider::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #0DF;
+    cursor: pointer;
+    border: 2px solid #fff;
+    box-shadow: 0 2px 8px rgba(0, 221, 255, 0.3);
+}
+
+/* ===== ZONA DE PERIGO ===== */
+.danger-zone {
+    background: linear-gradient(135deg, rgba(255, 71, 87, 0.05), rgba(255, 71, 87, 0.1));
+    border: 2px solid rgba(255, 71, 87, 0.3);
+    border-radius: 16px;
+    padding: 2rem;
+    text-align: center;
+    animation: dangerPulse 3s ease-in-out infinite;
+}
+
+@keyframes dangerPulse {
+    0%, 100% {
+        border-color: rgba(255, 71, 87, 0.3);
+        box-shadow: 0 0 0 rgba(255, 71, 87, 0);
+    }
+    50% {
+        border-color: rgba(255, 71, 87, 0.6);
+        box-shadow: 0 0 20px rgba(255, 71, 87, 0.2);
+    }
+}
+
+.danger-zone-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+    color: #ff4757;
+}
+
+.danger-zone-header svg {
+    color: #ff4757;
+}
+
+.danger-zone-header h3 {
+    font-family: "Kdam Thmor Pro";
+    font-size: 22px;
+    color: #ff4757;
+    margin: 0;
+}
+
+.danger-warning {
+    font-family: "Kdam Thmor Pro";
+    font-size: 14px;
+    color: #666;
+    margin: 0 0 1.5rem 0;
+    line-height: 1.6;
+}
+
+.btn-danger {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 1rem 2rem;
+    background: linear-gradient(135deg, #ff4757, #d32f2f);
+    color: #fff;
+    font-family: "Kdam Thmor Pro";
+    font-size: 16px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255, 71, 87, 0.3);
+}
+
+.btn-danger:hover {
+    background: linear-gradient(135deg, #d32f2f, #b71c1c);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 71, 87, 0.5);
+}
+
+.btn-danger:active {
+    transform: translateY(0);
+}
+
+/* ===== ANIMAÇÕES ===== */
+@keyframes slideInFromBottom {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.config-card:nth-child(1) { animation-delay: 0.1s; opacity: 0; }
+.config-card:nth-child(2) { animation-delay: 0.2s; opacity: 0; }
+.config-card:nth-child(3) { animation-delay: 0.3s; opacity: 0; }
+.config-card:nth-child(4) { animation-delay: 0.4s; opacity: 0; }
+
+/* ===== RESPONSIVIDADE ===== */
+@media (max-width: 768px) {
+    .config-header {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem;
+    }
+    
+    .btn-voltar-config {
+        align-self: flex-start;
+    }
+    
+    .config-title {
+        font-size: 28px;
+    }
+    
+    .config-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .config-content {
+        padding: 1rem;
+    }
+    
+    .config-control-item {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .config-slider {
+        width: 100%;
+    }
+}
+
+/* ==================== MODO ESCURO ==================== */
+
+body.dark-mode .config-header {
+    background: rgba(0, 0, 0, 0.3);
+    border-bottom-color: rgba(77, 208, 225, 0.3);
+}
+
+body.dark-mode .btn-voltar-config {
+    background: rgba(77, 208, 225, 0.2);
+    border-color: rgba(77, 208, 225, 0.4);
+    color: #4dd0e1;
+}
+
+body.dark-mode .btn-voltar-config:hover {
+    background: rgba(77, 208, 225, 0.3);
+    box-shadow: 0 4px 15px rgba(77, 208, 225, 0.3);
+}
+
+body.dark-mode .config-title {
+    color: #4dd0e1;
+    text-shadow: 0 2px 10px rgba(77, 208, 225, 0.3);
+}
+
+body.dark-mode .config-subtitle {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+body.dark-mode .config-header .header-points {
+    background: rgba(225, 234, 45, 0.15);
+    border-color: rgba(225, 234, 45, 0.3);
+}
+
+body.dark-mode .config-card {
+    background: rgba(30, 30, 45, 0.9);
+    border-color: rgba(77, 208, 225, 0.3);
+}
+
+body.dark-mode .config-card:hover {
+    border-color: #4dd0e1;
+    box-shadow: 0 8px 25px rgba(77, 208, 225, 0.2);
+}
+
+body.dark-mode .config-card-icon {
+    background: rgba(77, 208, 225, 0.15);
+    color: #4dd0e1;
+}
+
+body.dark-mode .config-card-content h3 {
+    color: #fff;
+}
+
+body.dark-mode .config-card-content p {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+body.dark-mode .toggle-slider {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+body.dark-mode .toggle-slider:before {
+    background-color: #ccc;
+}
+
+body.dark-mode .config-toggle input:checked + .toggle-slider {
+    background-color: #4dd0e1;
+}
+
+body.dark-mode .config-toggle input:checked + .toggle-slider:before {
+    background-color: #E1EA2D;
+}
+
+body.dark-mode .config-control-item {
+    background: rgba(30, 30, 45, 0.9);
+    border-color: rgba(77, 208, 225, 0.3);
+}
+
+body.dark-mode .config-control-item:hover {
+    border-color: #4dd0e1;
+    box-shadow: 0 4px 15px rgba(77, 208, 225, 0.15);
+}
+
+body.dark-mode .control-label {
+    color: #fff;
+}
+
+body.dark-mode .control-label svg {
+    color: #4dd0e1;
+}
+
+body.dark-mode .config-select {
+    background: rgba(20, 20, 35, 0.9);
+    border-color: rgba(77, 208, 225, 0.3);
+    color: #fff;
+}
+
+body.dark-mode .config-select:hover,
+body.dark-mode .config-select:focus {
+    border-color: #4dd0e1;
+    box-shadow: 0 0 10px rgba(77, 208, 225, 0.2);
+}
+
+body.dark-mode .config-slider {
+    background: rgba(77, 208, 225, 0.2);
+}
+
+body.dark-mode .config-slider::-webkit-slider-thumb {
+    background: #4dd0e1;
+    box-shadow: 0 2px 8px rgba(77, 208, 225, 0.4);
+}
+
+body.dark-mode .config-slider::-webkit-slider-thumb:hover {
+    box-shadow: 0 4px 12px rgba(77, 208, 225, 0.6);
+}
+
+body.dark-mode .config-slider::-moz-range-thumb {
+    background: #4dd0e1;
+    box-shadow: 0 2px 8px rgba(77, 208, 225, 0.4);
+}
+
+body.dark-mode .danger-zone {
+    background: linear-gradient(135deg, rgba(255, 71, 87, 0.1), rgba(255, 71, 87, 0.15));
+    border-color: rgba(255, 71, 87, 0.5);
+}
+
+body.dark-mode .danger-zone-header {
+    color: #ff6b6b;
+}
+
+body.dark-mode .danger-zone-header svg {
+    color: #ff6b6b;
+}
+
+body.dark-mode .danger-zone-header h3 {
+    color: #ff6b6b;
+}
+
+body.dark-mode .danger-warning {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+body.dark-mode .btn-danger {
+    background: linear-gradient(135deg, #ff6b6b, #ff4757);
+}
+
+body.dark-mode .btn-danger:hover {
+    background: linear-gradient(135deg, #ff4757, #ff3838);
+}
+
+.danger-zone-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+    color: #ff4757;
+}
+
+.danger-zone-header svg {
+    color: #ff4757;
+}
+
+.danger-zone-header h3 {
+    font-family: "Kdam Thmor Pro";
+    font-size: 22px;
+    color: #ff4757;
+    margin: 0;
+}
+
+.danger-warning {
+    font-family: "Kdam Thmor Pro";
+    font-size: 14px;
+    color: #666;
+    margin: 0 0 1.5rem 0;
+    line-height: 1.6;
+}
+
+.btn-danger {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 1rem 2rem;
+    background: linear-gradient(135deg, #ff4757, #d32f2f);
+    color: #fff;
+    font-family: "Kdam Thmor Pro";
+    font-size: 16px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255, 71, 87, 0.3);
+}
+
+.btn-danger:hover {
+    background: linear-gradient(135deg, #d32f2f, #b71c1c);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 71, 87, 0.5);
+}
+
+.btn-danger:active {
+    transform: translateY(0);
+}
+
+/* ===== ANIMAÇÕES ===== */
+@keyframes slideInFromBottom {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.config-card:nth-child(1) { animation-delay: 0.1s; }
+.config-card:nth-child(2) { animation-delay: 0.2s; }
+.config-card:nth-child(3) { animation-delay: 0.3s; }
+.config-card:nth-child(4) { animation-delay: 0.4s; }
+
+/* ===== RESPONSIVIDADE ===== */
+@media (max-width: 768px) {
+    .config-header {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem;
+    }
+    
+    .btn-voltar-config {
+        align-self: flex-start;
+    }
+    
+    .config-title {
+        font-size: 28px;
+    }
+    
+    .config-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .config-content {
+        padding: 1rem;
+    }
+    
+    .config-control-item {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .config-slider {
+        width: 100%;
+    }
 }
 
 /* Configurações gerais da tela */
@@ -248,10 +921,27 @@ body {
 
 .config-button.reset {
     color: #d32f2f;
+    justify-content: center;
+    gap: 1rem;
+    font-size: 20px;
+    padding: 1rem 2rem;
+    background: linear-gradient(135deg, #ff4757, #d32f2f);
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(211, 47, 47, 0.3);
+    transition: all 0.3s ease;
 }
 
 .config-button.reset:hover {
-    color: #b71c1c;
+    background: linear-gradient(135deg, #d32f2f, #b71c1c);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(211, 47, 47, 0.5);
+}
+
+.config-button.reset:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 10px rgba(211, 47, 47, 0.4);
 }
 
 .config-button svg {
@@ -262,6 +952,105 @@ body {
 
 .config-action:hover svg {
     transform: translateX(5px) scale(1.05);
+}
+
+/* Zona de Perigo */
+.config-group.danger-zone {
+    background: rgba(255, 71, 87, 0.05);
+    border: 3px solid rgba(255, 71, 87, 0.3);
+    border-radius: 15px;
+    padding: 1.5rem;
+    margin-top: 2rem;
+    animation: dangerPulse 3s ease-in-out infinite;
+}
+
+@keyframes dangerPulse {
+    0%, 100% {
+        border-color: rgba(255, 71, 87, 0.3);
+        box-shadow: 0 0 0 rgba(255, 71, 87, 0.2);
+    }
+    50% {
+        border-color: rgba(255, 71, 87, 0.6);
+        box-shadow: 0 0 20px rgba(255, 71, 87, 0.3);
+    }
+}
+
+.config-group.danger-zone legend {
+    color: #ff4757;
+    font-weight: bold;
+    font-size: 24px;
+    padding: 0 1rem;
+}
+
+.reset-section {
+    background: rgba(255, 71, 87, 0.1) !important;
+    border: 2px solid rgba(255, 71, 87, 0.4);
+}
+
+.reset-section:hover {
+    background: rgba(255, 71, 87, 0.15) !important;
+    border-color: rgba(255, 71, 87, 0.6);
+}
+
+.config-warning {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.config-warning h3 {
+    color: #d32f2f;
+    font-size: 22px;
+    margin-bottom: 1rem;
+}
+
+.config-warning p {
+    color: #555;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.config-warning strong {
+    color: #d32f2f;
+    font-weight: bold;
+}
+
+.reset-info-list {
+    list-style: none;
+    padding: 1rem;
+    margin: 1rem 0;
+    background: rgba(255, 71, 87, 0.05);
+    border-radius: 8px;
+    text-align: left;
+}
+
+.reset-info-list li {
+    font-family: "Kdam Thmor Pro";
+    font-size: 16px;
+    color: #555;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgba(255, 71, 87, 0.1);
+}
+
+.reset-info-list li:last-child {
+    border-bottom: none;
+}
+
+.irreversivel-indicator {
+    background: rgba(255, 193, 7, 0.9);
+    color: #000;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-family: "Kdam Thmor Pro";
+    font-size: 14px;
+    text-align: center;
+    margin-top: 1rem;
+    border: 2px solid rgba(255, 152, 0, 0.8);
+    box-shadow: 0 2px 10px rgba(255, 193, 7, 0.3);
+}
+
+.irreversivel-indicator strong {
+    font-weight: bold;
+    color: #d32f2f;
 }
 
 /* Estatísticas */
@@ -435,11 +1224,62 @@ body.dark-mode .config-button {
 }
 
 body.dark-mode .config-button.reset {
-    color: #ff6b6b;
+    color: #ffffff;
+    background: linear-gradient(135deg, #ff6b6b, #ff4757);
 }
 
 body.dark-mode .config-button.reset:hover {
+    background: linear-gradient(135deg, #ff4757, #ff3838);
+}
+
+body.dark-mode .config-group.danger-zone {
+    background: rgba(255, 71, 87, 0.1);
+    border-color: rgba(255, 71, 87, 0.5);
+}
+
+body.dark-mode .config-group.danger-zone legend {
+    color: #ff6b6b;
+}
+
+body.dark-mode .reset-section {
+    background: rgba(255, 71, 87, 0.15) !important;
+    border-color: rgba(255, 71, 87, 0.6);
+}
+
+body.dark-mode .reset-section:hover {
+    background: rgba(255, 71, 87, 0.2) !important;
+    border-color: rgba(255, 71, 87, 0.8);
+}
+
+body.dark-mode .config-warning h3 {
+    color: #ff6b6b;
+}
+
+body.dark-mode .config-warning p {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+body.dark-mode .config-warning strong {
     color: #ff4757;
+}
+
+body.dark-mode .reset-info-list {
+    background: rgba(255, 71, 87, 0.1);
+}
+
+body.dark-mode .reset-info-list li {
+    color: rgba(255, 255, 255, 0.8);
+    border-bottom-color: rgba(255, 71, 87, 0.2);
+}
+
+body.dark-mode .irreversivel-indicator {
+    background: rgba(255, 193, 7, 0.3);
+    color: #ffffff;
+    border-color: rgba(255, 193, 7, 0.5);
+}
+
+body.dark-mode .irreversivel-indicator strong {
+    color: #ffca28;
 }
 
 body.dark-mode .music-controls {

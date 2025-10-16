@@ -1,0 +1,765 @@
+/* ==========================================
+   TRILHA MODERNA - CAMADAS DA CONEXÃO
+   Design moderno com caminho interativo
+   ========================================== */
+
+/* Reset e Base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    overflow-y: auto;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Kdam Thmor Pro', cursive;
+    background: #0f1419;
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* ==================== BARRA DE ACESSIBILIDADE ==================== */
+.accessibility-bar {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+    display: flex;
+    gap: 0.75rem;
+    background: rgba(20, 25, 35, 0.95);
+    padding: 0.75rem;
+    border-radius: 12px;
+    border: 1px solid rgba(13, 223, 255, 0.3);
+}
+
+.accessibility-btn {
+    width: 48px;
+    height: 48px;
+    border-radius: 8px;
+    border: 2px solid rgba(13, 223, 255, 0.3);
+    background: rgba(13, 223, 255, 0.05);
+    color: #0DF;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.accessibility-btn:hover {
+    background: rgba(13, 223, 255, 0.15);
+    border-color: #0DF;
+}
+
+.accessibility-btn.active {
+    background: rgba(225, 234, 45, 0.2);
+    border-color: #E1EA2D;
+    color: #E1EA2D;
+}
+
+.accessibility-btn svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* Indicador de Voz */
+.voice-indicator {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 9998;
+    display: none;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.875rem 1.5rem;
+    background: rgba(13, 223, 255, 0.15);
+    border: 2px solid rgba(13, 223, 255, 0.4);
+    border-radius: 8px;
+    color: #0DF;
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+
+.voice-indicator.active {
+    display: flex;
+}
+
+/* ==================== HEADER ==================== */
+.trilha-header {
+    position: relative;
+    z-index: 10;
+    background: rgba(20, 25, 35, 0.95);
+    border-bottom: 1px solid rgba(13, 223, 255, 0.2);
+    padding: 1.5rem 2rem;
+}
+
+.trilha-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.btn-voltar {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.875rem 1.5rem;
+    background: rgba(13, 223, 255, 0.1);
+    color: #0DF;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    border: 2px solid rgba(13, 223, 255, 0.3);
+}
+
+.btn-voltar:hover {
+    background: rgba(13, 223, 255, 0.2);
+    border-color: #0DF;
+}
+
+.btn-voltar svg {
+    width: 20px;
+    height: 20px;
+}
+
+.trilha-info h1 {
+    font-size: 2rem;
+    color: #0DF;
+    margin-bottom: 0.25rem;
+}
+
+.trilha-info p {
+    font-size: 0.9375rem;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+}
+
+.pontos-trilha {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.75rem 1.5rem;
+    background: rgba(20, 25, 35, 0.95);
+    border-radius: 8px;
+    border: 1px solid rgba(13, 223, 255, 0.3);
+}
+
+.pontos-trilha svg {
+    width: 24px;
+    height: 24px;
+}
+
+.pontos-trilha span {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #E1EA2D;
+}
+
+/* ==================== CONTAINER PRINCIPAL ==================== */
+.trilha-container {
+    position: relative;
+    z-index: 1;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+    min-height: calc(100vh - 100px);
+}
+
+/* ==================== MAPA DA TRILHA ==================== */
+.trilha-mapa {
+    position: relative;
+}
+
+.trilha-caminho {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    position: relative;
+}
+
+/* ==================== NÓS DAS FASES ==================== */
+.fase-node {
+    position: relative;
+    background: rgba(20, 25, 35, 0.8);
+    border-radius: 12px;
+    padding: 2rem;
+    border: 2px solid rgba(13, 223, 255, 0.3);
+    cursor: pointer;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 2rem;
+}
+
+/* Estados das fases */
+.fase-node.fase-disponivel {
+    border-color: rgba(13, 223, 255, 0.5);
+}
+
+.fase-node.fase-disponivel:hover {
+    border-color: #0DF;
+    background: rgba(13, 223, 255, 0.1);
+}
+
+.fase-node.fase-bloqueada {
+    opacity: 0.5;
+    cursor: not-allowed;
+    border-color: rgba(128, 128, 128, 0.3);
+}
+
+.fase-node.fase-concluida {
+    border-color: rgba(225, 234, 45, 0.6);
+    background: rgba(225, 234, 45, 0.05);
+}
+
+/* ==================== CÍRCULO DA FASE ==================== */
+.fase-circle {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    background: rgba(13, 223, 255, 0.1);
+    border: 3px solid rgba(13, 223, 255, 0.5);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.fase-numero {
+    position: relative;
+    z-index: 1;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #0DF;
+    text-shadow: 0 0 10px rgba(0, 221, 255, 0.8);
+}
+
+.fase-icone {
+    position: relative;
+    z-index: 1;
+}
+
+.fase-icone svg {
+    width: 32px;
+    height: 32px;
+    stroke: #0DF;
+    filter: drop-shadow(0 0 5px rgba(0, 221, 255, 0.5));
+}
+
+.fase-node.fase-bloqueada .fase-circle {
+    background: rgba(128, 128, 128, 0.1);
+    border-color: rgba(128, 128, 128, 0.3);
+}
+
+.fase-node.fase-bloqueada .fase-numero,
+.fase-node.fase-bloqueada .fase-icone svg {
+    color: #888;
+    stroke: #888;
+    text-shadow: none;
+    filter: none;
+}
+
+.fase-node.fase-concluida .fase-circle {
+    background: rgba(225, 234, 45, 0.15);
+    border-color: rgba(225, 234, 45, 0.6);
+}
+
+.fase-node.fase-concluida .fase-numero,
+.fase-node.fase-concluida .fase-icone svg {
+    color: #E1EA2D;
+    stroke: #E1EA2D;
+}
+
+/* ==================== INFO DA FASE ==================== */
+.fase-info {
+    flex: 1;
+    position: relative;
+    z-index: 1;
+}
+
+.fase-info h3 {
+    font-size: 1.5rem;
+    color: #fff;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+}
+
+.fase-info p {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 1rem;
+    line-height: 1.5;
+}
+
+.fase-recompensa {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: rgba(225, 234, 45, 0.2);
+    border: 1px solid rgba(225, 234, 45, 0.4);
+    border-radius: 20px;
+    font-size: 0.875rem;
+    color: #E1EA2D;
+    font-weight: 600;
+}
+
+/* ==================== STATUS DA FASE ==================== */
+.fase-status {
+    position: relative;
+    z-index: 1;
+}
+
+.fase-status span {
+    padding: 0.75rem 1.5rem;
+    border-radius: 50px;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    display: inline-block;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.status-disponivel {
+    background: linear-gradient(135deg, #0DF, #00a8cc);
+    color: white;
+    animation: disponivel-pulse 2s ease-in-out infinite;
+}
+
+@keyframes disponivel-pulse {
+    0%, 100% {
+        box-shadow: 0 4px 15px rgba(0, 221, 255, 0.4);
+    }
+    50% {
+        box-shadow: 0 6px 20px rgba(0, 221, 255, 0.6);
+    }
+}
+
+.status-bloqueada {
+    background: rgba(128, 128, 128, 0.3);
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.status-concluida {
+    background: rgba(225, 234, 45, 0.9);
+    color: #000;
+}
+
+/* ==================== CONECTORES DA TRILHA ==================== */
+.trilha-conector {
+    height: 40px;
+    width: 4px;
+    background: linear-gradient(
+        180deg,
+        rgba(0, 221, 255, 0.5) 0%,
+        rgba(0, 221, 255, 0.2) 50%,
+        rgba(0, 221, 255, 0.5) 100%
+    );
+    margin: 0 auto;
+    position: relative;
+    animation: conectFlow 2s ease-in-out infinite;
+}
+
+@keyframes conectFlow {
+    0%, 100% {
+        opacity: 0.5;
+        box-shadow: 0 0 10px rgba(0, 221, 255, 0.3);
+    }
+    50% {
+        opacity: 1;
+        box-shadow: 0 0 20px rgba(0, 221, 255, 0.6);
+    }
+}
+
+/* ==================== MODAL ==================== */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.modal-overlay.ativo {
+    display: flex;
+}
+
+.modal-content {
+    background: rgba(26, 26, 46, 0.95);
+    backdrop-filter: blur(20px);
+    border: 2px solid rgba(0, 221, 255, 0.3);
+    border-radius: 25px;
+    max-width: 600px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    animation: modalSlide 0.4s ease-out;
+}
+
+@keyframes modalSlide {
+    from {
+        opacity: 0;
+        transform: translateY(-50px) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.modal-header h2 {
+    font-size: 1.75rem;
+    color: #0DF;
+    margin: 0;
+}
+
+.modal-close {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-close:hover {
+    background: rgba(255, 71, 87, 0.3);
+    border-color: #ff4757;
+    transform: rotate(90deg);
+}
+
+.modal-body {
+    padding: 2rem;
+}
+
+.fase-preview {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.preview-icone {
+    width: 80px;
+    height: 80px;
+    background: rgba(0, 221, 255, 0.15);
+    border: 3px solid rgba(0, 221, 255, 0.5);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.preview-icone svg {
+    width: 40px;
+    height: 40px;
+    stroke: #0DF;
+}
+
+.preview-info h3 {
+    font-size: 1.5rem;
+    color: #fff;
+    margin-bottom: 0.5rem;
+}
+
+.preview-info p {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.fase-objetivos {
+    margin-bottom: 2rem;
+}
+
+.fase-objetivos h4 {
+    color: #0DF;
+    margin-bottom: 1rem;
+    font-size: 1.125rem;
+}
+
+.fase-objetivos ul {
+    list-style: none;
+    padding: 0;
+}
+
+.fase-objetivos li {
+    padding: 0.75rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-left: 3px solid rgba(0, 221, 255, 0.5);
+    margin-bottom: 0.5rem;
+    color: rgba(255, 255, 255, 0.8);
+    border-radius: 4px;
+}
+
+.fase-objetivos li::before {
+    content: '✓';
+    color: #0DF;
+    margin-right: 0.75rem;
+    font-weight: bold;
+}
+
+.fase-recompensas {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.recompensa {
+    flex: 1;
+    padding: 1rem;
+    background: rgba(225, 234, 45, 0.1);
+    border: 1px solid rgba(225, 234, 45, 0.3);
+    border-radius: 15px;
+    text-align: center;
+}
+
+.recompensa-tipo {
+    display: block;
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 0.5rem;
+}
+
+.recompensa-valor {
+    display: block;
+    font-size: 1.5rem;
+    color: #E1EA2D;
+    font-weight: 700;
+}
+
+.modal-footer {
+    display: flex;
+    gap: 1rem;
+    padding: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.btn-secundario,
+.btn-primario {
+    flex: 1;
+    padding: 1rem;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid;
+}
+
+.btn-secundario {
+    background: transparent;
+    border-color: rgba(255, 255, 255, 0.3);
+    color: #fff;
+}
+
+.btn-secundario:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.btn-primario {
+    background: linear-gradient(135deg, #0DF, #00a8cc);
+    border-color: #0DF;
+    color: white;
+    box-shadow: 0 4px 15px rgba(0, 221, 255, 0.4);
+}
+
+.btn-primario:hover {
+    background: linear-gradient(135deg, #00a8cc, #0DF);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 221, 255, 0.6);
+}
+
+/* ==================== RESPONSIVIDADE ==================== */
+@media (max-width: 1024px) {
+    .fase-node {
+        grid-template-columns: auto 1fr;
+        gap: 1.5rem;
+    }
+    
+    .fase-status {
+        grid-column: 1 / -1;
+        text-align: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .accessibility-bar {
+        top: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        gap: 0.5rem;
+        padding: 0.5rem;
+    }
+    
+    .accessibility-btn {
+        width: 45px;
+        height: 45px;
+    }
+    
+    .trilha-header {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem;
+    }
+    
+    .header-left {
+        flex-direction: column;
+        gap: 1rem;
+        width: 100%;
+    }
+    
+    .btn-voltar {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .trilha-info {
+        text-align: center;
+    }
+    
+    .trilha-info h1 {
+        font-size: 1.5rem;
+    }
+    
+    .trilha-container {
+        padding: 2rem 1rem;
+    }
+    
+    .fase-node {
+        padding: 1.5rem;
+        gap: 1rem;
+    }
+    
+    .fase-circle {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .fase-numero {
+        font-size: 1.5rem;
+    }
+    
+    .fase-icone svg {
+        width: 24px;
+        height: 24px;
+    }
+    
+    .fase-info h3 {
+        font-size: 1.25rem;
+    }
+    
+    .modal-content {
+        width: 95%;
+    }
+    
+    .fase-preview {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .accessibility-bar {
+        gap: 0.375rem;
+        padding: 0.375rem;
+    }
+    
+    .accessibility-btn {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .fase-node {
+        grid-template-columns: 1fr;
+        text-align: center;
+        padding: 1.25rem;
+    }
+    
+    .fase-circle {
+        margin: 0 auto;
+    }
+    
+    .modal-header,
+    .modal-body,
+    .modal-footer {
+        padding: 1.5rem;
+    }
+    
+    .modal-footer {
+        flex-direction: column;
+    }
+}
+
+/* ==================== ACESSIBILIDADE ==================== */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+*:focus-visible {
+    outline: 3px solid #E1EA2D;
+    outline-offset: 3px;
+    border-radius: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
