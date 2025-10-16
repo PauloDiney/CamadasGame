@@ -1,3 +1,34 @@
+// Função helper para verificar a página atual (funciona em Live Server e Netlify)
+function isPaginaAtual(pageName) {
+    const path = window.location.pathname;
+    const pageNameWithoutExt = pageName.replace('.html', '');
+    
+    // Log para debug
+    console.log(`[isPaginaAtual] Verificando "${pageName}"`);
+    console.log(`[isPaginaAtual] Path atual: "${path}"`);
+    
+    // Normaliza o path removendo barras duplas
+    const normalizedPath = path.replace(/\/+/g, '/');
+    
+    // Verifica múltiplas condições
+    const checks = {
+        'endsWith .html': normalizedPath.endsWith(`${pageNameWithoutExt}.html`),
+        'endsWith /nome': normalizedPath.endsWith(`/${pageNameWithoutExt}`),
+        'endsWith nome': normalizedPath.endsWith(`${pageNameWithoutExt}`),
+        'is /nome': normalizedPath === `/${pageNameWithoutExt}`,
+        'is nome': normalizedPath === `${pageNameWithoutExt}`,
+        'includes /nome.html': normalizedPath.includes(`/${pageNameWithoutExt}.html`),
+        'includes /nome/': normalizedPath.includes(`/${pageNameWithoutExt}/`)
+    };
+    
+    console.log('[isPaginaAtual] Verificações:', checks);
+    
+    const result = Object.values(checks).some(check => check);
+    console.log(`[isPaginaAtual] Resultado: ${result}`);
+    
+    return result;
+}
+
 // Inicialização robusta do localStorage para evitar bugs de estado
 function inicializarLocalStorageLoja() {
     if (!localStorage.getItem('gamePoints')) localStorage.setItem('gamePoints', '2450');
@@ -50,12 +81,32 @@ function getCategoryDisplayName(category) {
 }
 
 function atualizarEquipamentos() {
+    console.log('[atualizarEquipamentos] Iniciando atualização de equipamentos...');
+    console.log('[atualizarEquipamentos] URL completa:', window.location.href);
+    console.log('[atualizarEquipamentos] Pathname:', window.location.pathname);
+    
     // Só mostra equipamentos no menu inicial e loja
-    const path = window.location.pathname;
-    if (!path.endsWith('index.html') && !path.endsWith('loja.html')) return;
+    const isIndex = isPaginaAtual('index');
+    const isLoja = isPaginaAtual('loja');
+    
+    console.log(`[atualizarEquipamentos] É index? ${isIndex}, É loja? ${isLoja}`);
+    
+    if (!isIndex && !isLoja) {
+        console.log('[atualizarEquipamentos] Não é index nem loja, saindo...');
+        return;
+    }
+    
     const container = document.getElementById('equipamentos-container');
-    if (!container) return;
+    if (!container) {
+        console.log('[atualizarEquipamentos] Container não encontrado!');
+        return;
+    }
+    
+    console.log('[atualizarEquipamentos] Container encontrado:', container);
+    
     const items = JSON.parse(localStorage.getItem('equippedItems') || '[]');
+    console.log('[atualizarEquipamentos] Items equipados:', items);
+    
     if (items.length === 0) {
         container.innerHTML = `
             <div class="no-equipment">
@@ -63,9 +114,11 @@ function atualizarEquipamentos() {
                 <p class="suggestion">Visite a <a href="loja.html">Loja</a> para comprar equipamentos!</p>
             </div>
         `;
+        console.log('[atualizarEquipamentos] Nenhum equipamento, exibindo mensagem padrão');
     } else {
         // Se for na loja, mostra botão de desequipar
-        if (path.endsWith('loja.html')) {
+        if (isLoja) {
+            console.log('[atualizarEquipamentos] Na loja, exibindo com botão desequipar');
             container.innerHTML = items.map(item => `
                 <article class="equipamento active-equipment">
                     <div class="equipment-header">
@@ -88,6 +141,7 @@ function atualizarEquipamentos() {
                 });
             });
         } else {
+            console.log('[atualizarEquipamentos] No index, exibindo sem botão desequipar');
             // Menu inicial: só mostra
             container.innerHTML = items.map(item => `
                 <article class="equipamento active-equipment">
@@ -104,6 +158,7 @@ function atualizarEquipamentos() {
             `).join('');
         }
     }
+    console.log('[atualizarEquipamentos] Atualização concluída!');
 }
 
 function sincronizarGlobais() {
@@ -113,13 +168,20 @@ function sincronizarGlobais() {
 
 // Atualiza ao carregar a página
 window.addEventListener('DOMContentLoaded', function() {
+    console.log('[DOMContentLoaded] Página carregada!');
+    console.log('[DOMContentLoaded] URL:', window.location.href);
+    console.log('[DOMContentLoaded] Pathname:', window.location.pathname);
     inicializarLocalStorageLoja();
     sincronizarGlobais();
 });
 // Atualiza ao voltar para a aba
-window.addEventListener('focus', sincronizarGlobais);
+window.addEventListener('focus', function() {
+    console.log('[focus] Foco na página, atualizando...');
+    sincronizarGlobais();
+});
 // Atualiza ao mudar localStorage
 window.addEventListener('storage', function(e) {
+    console.log('[storage] LocalStorage alterado:', e.key);
     if ([
         'gamePoints',
         'equippedItems'
@@ -258,7 +320,7 @@ function filtrarItensLoja(categoria) {
     });
 }
 
-if (window.location.pathname.endsWith('loja')){
+if (isPaginaAtual('loja')){
     window.addEventListener('DOMContentLoaded', function() {
         inicializarLocalStorageLoja();
         document.querySelectorAll('.buy-btn').forEach(btn => {

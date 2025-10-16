@@ -283,7 +283,8 @@ function atualizarInterfaceAposReset() {
     }
 
     // Recarregar página se necessário
-    if (window.location.pathname.includes('trilha.html')) {
+    const path = window.location.pathname;
+    if (path.includes('trilha') || path.endsWith('/trilha')) {
         setTimeout(() => {
             window.location.reload();
         }, 1000);
