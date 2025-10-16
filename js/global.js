@@ -258,14 +258,16 @@ function filtrarItensLoja(categoria) {
     });
 }
 
-if (window.location.pathname.endsWith('loja.html')) {
+if (window.location.pathname.endsWith('loja.html')){
     window.addEventListener('DOMContentLoaded', function() {
         inicializarLocalStorageLoja();
         document.querySelectorAll('.buy-btn').forEach(btn => {
             btn.addEventListener('click', function() {
+                console.log('Botão de comprar clicado!');
                 const article = btn.closest('.shop-item');
                 if (!article) return;
                 const itemId = article.getAttribute('data-item-id');
+                console.log('Item ID:', itemId);
                 comprarOuEquiparItem(itemId);
                 atualizarBotoesLoja();
                 atualizarEquipamentos();
