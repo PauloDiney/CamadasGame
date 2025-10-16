@@ -258,7 +258,7 @@ function filtrarItensLoja(categoria) {
     });
 }
 
-if (window.location.pathname.endsWith('loja.html')){
+if (window.location.pathname.endsWith('loja')){
     window.addEventListener('DOMContentLoaded', function() {
         inicializarLocalStorageLoja();
         document.querySelectorAll('.buy-btn').forEach(btn => {
