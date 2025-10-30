@@ -1,4 +1,4 @@
-/* CSS para as Fases do Jogo */
+/* CSS para as Fases do Jogo - Design Simples e Moderno */
 
 .fase-container {
     min-height: 100vh;
@@ -11,10 +11,10 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 40px;
-    background: rgba(0, 0, 0, 0.4);
-    backdrop-filter: blur(15px);
-    border-bottom: 2px solid rgba(225, 234, 45, 0.3);
+    padding: 1.5rem 2.5rem;
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(225, 234, 45, 0.2);
     position: sticky;
     top: 0;
     z-index: 100;
@@ -23,72 +23,73 @@
 .header-left {
     display: flex;
     align-items: center;
-    gap: 25px;
+    gap: 2rem;
 }
 
 .btn-voltar-fase {
     display: flex;
     align-items: center;
-    gap: 8px;
-    padding: 10px 16px;
-    background: rgba(225, 234, 45, 0.2);
+    gap: 0.5rem;
+    padding: 0.75rem 1.25rem;
+    background: transparent;
     color: #E1EA2D;
     text-decoration: none;
     border-radius: 8px;
-    transition: all 0.3s ease;
+    transition: all 0.2s;
     border: 1px solid rgba(225, 234, 45, 0.3);
-    font-size: 14px;
+    font-size: 0.9rem;
 }
 
 .btn-voltar-fase:hover {
-    background: rgba(225, 234, 45, 0.3);
-    transform: translateY(-2px);
+    background: rgba(225, 234, 45, 0.1);
+    border-color: #E1EA2D;
 }
 
 .fase-titulo h1 {
     color: #E1EA2D;
     margin: 0;
-    font-size: 24px;
+    font-size: 1.5rem;
     font-family: 'Kdam Thmor Pro', cursive;
 }
 
 .fase-titulo p {
     color: #fff;
-    margin: 0;
-    opacity: 0.8;
-    font-size: 14px;
+    margin: 0.25rem 0 0 0;
+    opacity: 0.7;
+    font-size: 0.85rem;
 }
 
 .header-right {
     display: flex;
     align-items: center;
-    gap: 25px;
+    gap: 1.5rem;
 }
 
 .fase-pontos {
     background: rgba(225, 234, 45, 0.1);
-    padding: 8px 16px;
+    padding: 0.6rem 1.2rem;
     border-radius: 20px;
-    border: 1px solid rgba(225, 234, 45, 0.3);
+    border: 1px solid rgba(225, 234, 45, 0.2);
 }
 
 .fase-pontos span {
     color: #E1EA2D;
-    font-weight: bold;
+    font-weight: 600;
+    font-size: 0.9rem;
 }
 
 .fase-progresso {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 0.75rem;
     color: #fff;
-    font-size: 14px;
+    font-size: 0.85rem;
 }
 
 .progresso-bar-mini {
     width: 80px;
     height: 6px;
-    background: rgba(128, 128, 128, 0.3);
+    background: rgba(255, 255, 255, 0.1);
     border-radius: 3px;
     overflow: hidden;
 }
@@ -97,40 +98,36 @@
     height: 100%;
     background: linear-gradient(90deg, #E1EA2D, #4DD0E1);
     width: 0%;
-    transition: width 0.5s ease;
+    transition: width 0.4s ease;
 }
 
 /* Área Principal */
+/* Área Principal */
 .fase-main {
-    padding: 40px;
+    padding: 2.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .fase-secao {
     display: none;
-    animation: fadeInUp 0.5s ease;
+    animation: fadeIn 0.3s ease;
 }
 
 .fase-secao.ativa {
     display: block;
 }
 
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
 .secao-content {
-    max-width: 1200px;
-    margin: 0 auto;
+    max-width: 100%;
 }
 
-/* Seção de Introdução */
+/* === SEÇÃO DE INTRODUÇÃO === */
 .intro-visual {
     display: flex;
     justify-content: center;
@@ -265,241 +262,474 @@
     transform: translateY(-2px);
 }
 
-/* Desafios */
+/* === DESAFIOS === */
 .desafio-header {
     text-align: center;
-    margin-bottom: 40px;
+    margin-bottom: var(--spacing-xl);
 }
 
 .desafio-header h2 {
-    color: #E1EA2D;
-    font-size: 28px;
-    margin-bottom: 10px;
+    color: var(--primary-color);
+    font-size: clamp(1.5rem, 4vw, 1.75rem);
+    margin-bottom: var(--spacing-sm);
     font-family: 'Kdam Thmor Pro', cursive;
+    line-height: 1.2;
 }
 
 .desafio-header p {
-    color: #fff;
-    opacity: 0.8;
-    font-size: 16px;
+    color: var(--text-light);
+    opacity: 0.9;
+    font-size: clamp(0.95rem, 2vw, 1.1rem);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
 }
 
 .desafio-area {
     background: rgba(255, 255, 255, 0.05);
-    padding: 40px;
-    border-radius: 20px;
+    padding: var(--spacing-xl);
+    border-radius: var(--radius-lg);
     border: 1px solid rgba(225, 234, 45, 0.2);
-    margin-bottom: 30px;
+    margin-bottom: var(--spacing-lg);
+    box-shadow: var(--shadow-md);
 }
 
-/* Desafio 1: Cabos */
+/* === DESAFIO 1: CABOS === */
 .cabos-container {
-    display: flex;
-    justify-content: space-around;
-    margin-bottom: 40px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-xl);
+    justify-items: center;
 }
 
 .cabo-item {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 15px;
+    gap: var(--spacing-sm);
     cursor: grab;
-    padding: 20px;
-    border-radius: 15px;
-    transition: all 0.3s ease;
+    padding: var(--spacing-md);
+    border-radius: var(--radius-md);
+    transition: all var(--transition-normal);
     background: rgba(255, 255, 255, 0.05);
-    border: 2px solid transparent;
+    border: 3px solid transparent;
+    width: 100%;
+    max-width: 160px;
+    min-height: 180px;
+    position: relative;
 }
 
-.cabo-item:hover {
-    background: rgba(225, 234, 45, 0.1);
-    border-color: rgba(225, 234, 45, 0.3);
-    transform: translateY(-5px);
+.cabo-item:hover,
+.cabo-item:focus {
+    background: rgba(225, 234, 45, 0.15);
+    border-color: rgba(225, 234, 45, 0.5);
+    transform: translateY(-8px) scale(1.05);
+    box-shadow: var(--shadow-lg);
+    outline: none;
+}
+
+.cabo-item:focus {
+    outline: 3px solid var(--primary-color);
+    outline-offset: 4px;
+}
+
+.cabo-item:active {
+    cursor: grabbing;
+    transform: scale(0.95);
+}
+
+.cabo-item.selecionado-teclado {
+    border-color: var(--secondary-color);
+    background: rgba(77, 208, 225, 0.2);
+    box-shadow: 0 0 20px rgba(77, 208, 225, 0.4);
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
 }
 
 .cabo-item.dragging {
     opacity: 0.5;
-    transform: scale(0.9);
+    transform: scale(0.9) rotate(5deg);
+    cursor: grabbing;
+}
+
+.cabo-item.conectado {
+    opacity: 0.3;
+    pointer-events: none;
 }
 
 .cabo-visual {
-    width: 80px;
-    height: 40px;
-    border-radius: 8px;
+    width: 100px;
+    height: 60px;
+    border-radius: var(--radius-sm);
     position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-sm);
+    transition: all var(--transition-normal);
+}
+
+.cabo-conector {
+    font-size: 2rem;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
 }
 
 .cabo-ethernet {
-    background: linear-gradient(135deg, #4CAF50, #2E7D32);
-    border: 2px solid #1B5E20;
+    background: linear-gradient(135deg, #4CAF50 0%, #2E7D32 100%);
+    border: 3px solid #1B5E20;
 }
 
 .cabo-fibra {
-    background: linear-gradient(135deg, #FF9800, #F57C00);
-    border: 2px solid #E65100;
+    background: linear-gradient(135deg, #FF9800 0%, #F57C00 100%);
+    border: 3px solid #E65100;
 }
 
 .cabo-coaxial {
-    background: linear-gradient(135deg, #9C27B0, #7B1FA2);
-    border: 2px solid #4A148C;
+    background: linear-gradient(135deg, #9C27B0 0%, #7B1FA2 100%);
+    border: 3px solid #4A148C;
 }
 
-.cabo-item span {
-    color: #fff;
+.cabo-nome {
+    color: var(--text-light);
     font-weight: bold;
+    font-size: 1rem;
 }
 
+.cabo-desc {
+    color: var(--text-light);
+    opacity: 0.8;
+    font-size: 0.85rem;
+    text-align: center;
+}
+
+/* === TIPOS DE CABO (DESTINOS) === */
 .tipos-container {
-    display: flex;
-    justify-content: space-around;
-    gap: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--spacing-md);
 }
 
 .tipo-target {
-    flex: 1;
-    padding: 30px 20px;
-    background: rgba(77, 208, 225, 0.1);
-    border: 2px dashed rgba(77, 208, 225, 0.3);
-    border-radius: 15px;
+    padding: var(--spacing-lg) var(--spacing-md);
+    background: rgba(77, 208, 225, 0.08);
+    border: 3px dashed rgba(77, 208, 225, 0.3);
+    border-radius: var(--radius-md);
     text-align: center;
-    transition: all 0.3s ease;
-    min-height: 120px;
+    transition: all var(--transition-normal);
+    min-height: 180px;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
+    gap: var(--spacing-sm);
+    cursor: pointer;
+    position: relative;
+}
+
+.tipo-target:hover,
+.tipo-target:focus {
+    background: rgba(77, 208, 225, 0.15);
+    border-color: var(--secondary-color);
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+    outline: none;
+}
+
+.tipo-target:focus {
+    outline: 3px solid var(--secondary-color);
+    outline-offset: 4px;
+}
+
+.tipo-icon {
+    font-size: 2.5rem;
+    line-height: 1;
+    margin-bottom: var(--spacing-xs);
 }
 
 .tipo-target.drag-over {
-    background: rgba(77, 208, 225, 0.2);
-    border-color: #4DD0E1;
+    background: rgba(77, 208, 225, 0.25);
+    border-color: var(--secondary-color);
     border-style: solid;
+    transform: scale(1.05);
+    box-shadow: 0 0 30px rgba(77, 208, 225, 0.4);
+    animation: shake 0.5s ease-in-out infinite;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0) scale(1.05); }
+    25% { transform: translateX(-5px) scale(1.05); }
+    75% { transform: translateX(5px) scale(1.05); }
 }
 
 .tipo-target.correto {
     background: rgba(76, 175, 80, 0.2);
-    border-color: #4CAF50;
+    border-color: var(--success-color);
     border-style: solid;
+    animation: successPulse 0.6s ease-out;
+}
+
+@keyframes successPulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); box-shadow: 0 0 40px rgba(76, 175, 80, 0.6); }
+    100% { transform: scale(1); }
 }
 
 .tipo-target.incorreto {
     background: rgba(244, 67, 54, 0.2);
-    border-color: #f44336;
+    border-color: var(--error-color);
     border-style: solid;
+    animation: errorShake 0.4s ease-out;
 }
 
-.tipo-target h4 {
-    color: #4DD0E1;
-    margin: 0 0 10px 0;
-    font-size: 18px;
+@keyframes errorShake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-10px); }
+    75% { transform: translateX(10px); }
 }
 
-.tipo-target p {
-    color: #fff;
+.tipo-target h3 {
+    color: var(--secondary-color);
     margin: 0;
-    opacity: 0.8;
-    font-size: 14px;
+    font-size: 1.1rem;
+    font-weight: 600;
 }
 
-/* Desafio 2: Velocidades */
+.tipo-desc {
+    color: var(--text-light);
+    margin: 0;
+    opacity: 0.85;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.tipo-status {
+    position: absolute;
+    top: var(--spacing-sm);
+    right: var(--spacing-sm);
+    font-size: 1.5rem;
+}
+
+.tipo-status {
+    position: absolute;
+    top: var(--spacing-sm);
+    right: var(--spacing-sm);
+    font-size: 1.5rem;
+}
+
+.cabo-conectado-visual {
+    position: absolute;
+    bottom: var(--spacing-sm);
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--success-color);
+    color: white;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--radius-sm);
+    font-weight: bold;
+    font-size: 0.85rem;
+    animation: slideInFromBottom 0.4s ease-out;
+}
+
+@keyframes slideInFromBottom {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+/* === DESAFIO 2: VELOCIDADES === */
+/* === DESAFIO 2: VELOCIDADES === */
 .velocidades-container {
-    display: flex;
-    gap: 15px;
-    margin-bottom: 40px;
-    flex-wrap: wrap;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-xl);
+    justify-items: center;
 }
 
 .velocidade-item {
     background: rgba(255, 255, 255, 0.05);
-    padding: 20px;
-    border-radius: 15px;
-    border: 2px solid rgba(225, 234, 45, 0.2);
+    padding: var(--spacing-md);
+    border-radius: var(--radius-md);
+    border: 3px solid rgba(225, 234, 45, 0.2);
     cursor: grab;
-    transition: all 0.3s ease;
+    transition: all var(--transition-normal);
     text-align: center;
-    min-width: 150px;
+    min-width: 160px;
+    width: 100%;
+    max-width: 180px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-sm);
 }
 
-.velocidade-item:hover {
-    background: rgba(225, 234, 45, 0.1);
-    border-color: rgba(225, 234, 45, 0.4);
-    transform: translateY(-3px);
+.velocidade-item:hover,
+.velocidade-item:focus {
+    background: rgba(225, 234, 45, 0.15);
+    border-color: rgba(225, 234, 45, 0.5);
+    transform: translateY(-5px) scale(1.03);
+    box-shadow: var(--shadow-lg);
+    outline: none;
+}
+
+.velocidade-item:focus {
+    outline: 3px solid var(--primary-color);
+    outline-offset: 4px;
+}
+
+.velocidade-item:active {
+    cursor: grabbing;
+}
+
+.velocidade-item.selecionado-teclado {
+    border-color: var(--secondary-color);
+    background: rgba(77, 208, 225, 0.2);
+    box-shadow: 0 0 20px rgba(77, 208, 225, 0.4);
+    animation: pulse 1.5s ease-in-out infinite;
 }
 
 .velocidade-item.dragging {
     opacity: 0.5;
-    transform: scale(0.9);
+    transform: scale(0.9) rotate(3deg);
+    cursor: grabbing;
+}
+
+.velocidade-item.colocado {
+    opacity: 0.3;
+    pointer-events: none;
 }
 
 .tech-icon {
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
-    margin: 0 auto 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-sm);
+    flex-shrink: 0;
 }
 
-.wifi-icon { background: linear-gradient(135deg, #2196F3, #1976D2); }
-.ethernet-icon { background: linear-gradient(135deg, #4CAF50, #2E7D32); }
-.fast-ethernet-icon { background: linear-gradient(135deg, #FF9800, #F57C00); }
-.adsl-icon { background: linear-gradient(135deg, #9C27B0, #7B1FA2); }
-.fibra-icon { background: linear-gradient(135deg, #E91E63, #C2185B); }
+.wifi-icon { 
+    background: linear-gradient(135deg, #2196F3, #1976D2); 
+}
+
+.ethernet-icon { 
+    background: linear-gradient(135deg, #4CAF50, #2E7D32); 
+}
+
+.fast-ethernet-icon { 
+    background: linear-gradient(135deg, #FF9800, #F57C00); 
+}
+
+.adsl-icon { 
+    background: linear-gradient(135deg, #9C27B0, #7B1FA2); 
+}
+
+.fibra-icon { 
+    background: linear-gradient(135deg, #E91E63, #C2185B); 
+}
 
 .velocidade-item h4 {
-    color: #E1EA2D;
-    margin: 0 0 8px 0;
-    font-size: 16px;
+    color: var(--primary-color);
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.3;
 }
 
 .velocidade-item span {
-    color: #4DD0E1;
+    color: var(--secondary-color);
     font-weight: bold;
-    font-size: 14px;
+    font-size: 1.05rem;
 }
 
+/* === ORDENAÇÃO === */
 .ordenacao-area {
     text-align: center;
 }
 
 .ordenacao-area h3 {
-    color: #E1EA2D;
-    margin-bottom: 20px;
+    color: var(--primary-color);
+    margin-bottom: var(--spacing-md);
+    font-size: 1.2rem;
 }
 
 .slots-ordenacao {
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: var(--spacing-sm);
+    justify-items: center;
 }
 
 .slot-ordenacao {
-    width: 150px;
-    height: 80px;
-    border: 2px dashed rgba(77, 208, 225, 0.3);
-    border-radius: 10px;
+    min-width: 140px;
+    width: 100%;
+    max-width: 180px;
+    min-height: 100px;
+    border: 3px dashed rgba(77, 208, 225, 0.3);
+    border-radius: var(--radius-sm);
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    color: #4DD0E1;
+    color: var(--secondary-color);
     font-weight: bold;
-    transition: all 0.3s ease;
+    transition: all var(--transition-normal);
     background: rgba(77, 208, 225, 0.05);
+    cursor: pointer;
+    padding: var(--spacing-sm);
+    font-size: 0.9rem;
+}
+
+.slot-ordenacao:hover,
+.slot-ordenacao:focus {
+    border-color: var(--secondary-color);
+    border-style: solid;
+    background: rgba(77, 208, 225, 0.15);
+    transform: translateY(-3px);
+    outline: none;
+}
+
+.slot-ordenacao:focus {
+    outline: 3px solid var(--secondary-color);
+    outline-offset: 4px;
 }
 
 .slot-ordenacao.drag-over {
-    border-color: #4DD0E1;
+    border-color: var(--secondary-color);
     border-style: solid;
-    background: rgba(77, 208, 225, 0.15);
+    background: rgba(77, 208, 225, 0.25);
+    transform: scale(1.05);
+    box-shadow: 0 0 25px rgba(77, 208, 225, 0.4);
 }
 
 .slot-ordenacao.ocupado {
-    border-color: #4CAF50;
+    border-color: var(--primary-color);
     border-style: solid;
-    background: rgba(76, 175, 80, 0.1);
+    background: rgba(225, 234, 45, 0.1);
+    padding: var(--spacing-xs);
 }
 
-/* Desafio 3: Simulador */
+.slot-ordenacao.ocupado .velocidade-item {
+    opacity: 1;
+    pointer-events: none;
+    margin: 0;
+    width: 100%;
+    max-width: none;
+}
+
+/* === DESAFIO 3: SIMULADOR === */
 .simulador-container {
     background: rgba(255, 255, 255, 0.05);
     padding: 30px;
@@ -875,53 +1105,242 @@ body.dark-mode .fase-pontos span {
 
 /* Responsividade */
 @media (max-width: 768px) {
+    :root {
+        --spacing-xl: 1.5rem;
+        --spacing-lg: 1.25rem;
+    }
+    
     .fase-header {
-        padding: 15px 20px;
+        padding: var(--spacing-md);
         flex-direction: column;
-        gap: 15px;
+        gap: var(--spacing-md);
+        position: relative;
     }
     
     .header-left {
         width: 100%;
-        justify-content: space-between;
+        flex-direction: column;
+        align-items: stretch;
+        gap: var(--spacing-md);
+        min-width: auto;
+    }
+    
+    .btn-voltar-fase {
+        justify-content: center;
+        width: 100%;
+    }
+    
+    .fase-titulo {
+        text-align: center;
+    }
+    
+    .header-right {
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
     }
     
     .fase-main {
-        padding: 20px;
+        padding: var(--spacing-md);
     }
     
-    .cabos-container,
-    .tipos-container,
-    .velocidades-container,
+    .desafios-navegacao {
+        gap: var(--spacing-xs);
+        padding: var(--spacing-sm);
+    }
+    
+    .desafio-nav-btn {
+        min-width: 70px;
+        padding: 10px 12px;
+    }
+    
+    .desafio-nav-icon {
+        font-size: 1.25rem;
+    }
+    
+    .desafio-nav-label {
+        font-size: 0.65rem;
+    }
+    
+    .desafio-area {
+        padding: var(--spacing-md);
+    }
+    
+    .instrucoes-acessibilidade {
+        padding: var(--spacing-sm);
+    }
+    
+    .instrucoes-lista {
+        font-size: 0.85rem;
+    }
+    
+    /* Desafio 1 - Mobile */
+    .cabos-container {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-md);
+        max-width: 200px;
+        margin: 0 auto var(--spacing-lg) auto;
+    }
+    
+    .cabo-item {
+        max-width: 100%;
+    }
+    
+    .tipos-container {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-sm);
+    }
+    
+    .tipo-target {
+        min-height: 140px;
+        padding: var(--spacing-md);
+    }
+    
+    /* Desafio 2 - Mobile */
+    .velocidades-container {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-sm);
+    }
+    
+    .velocidade-item {
+        min-width: 100%;
+    }
+    
     .slots-ordenacao {
-        flex-direction: column;
-        align-items: center;
+        grid-template-columns: 1fr;
+        gap: var(--spacing-xs);
     }
     
+    .slot-ordenacao {
+        width: 100%;
+    }
+    
+    /* Simulador - Mobile */
     .simulador-controles {
         flex-direction: column;
         align-items: stretch;
+        gap: var(--spacing-sm);
+    }
+    
+    .controle-grupo {
+        width: 100%;
+    }
+    
+    .btn-simular {
+        width: 100%;
     }
     
     .simulador-visual {
         flex-direction: column;
-        gap: 30px;
+        gap: var(--spacing-lg);
     }
     
     .cabo-transmissao {
         margin: 0;
-        width: 200px;
+        width: 60px;
+        height: 150px;
         transform: rotate(90deg);
     }
     
-    .conclusao-acoes {
-        flex-direction: column;
-        align-items: center;
+    .velocidade-info {
+        top: 50%;
+        left: auto;
+        right: -60px;
+        transform: translateY(-50%) rotate(-90deg);
     }
     
+    /* Conclusão - Mobile */
+    .conclusao-acoes {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .btn-continuar,
+    .btn-secundario {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    /* HUD - Mobile */
     .hud-progresso {
-        bottom: 15px;
-        right: 15px;
+        bottom: var(--spacing-sm);
+        right: var(--spacing-sm);
+        left: var(--spacing-sm);
         padding: 10px 15px;
+    }
+    
+    /* Feedbacks - Mobile */
+    .desafio-feedback {
+        font-size: 0.95rem;
+        padding: 1rem 1.25rem;
+        min-width: 280px;
+        max-width: 90vw;
+    }
+}
+
+/* Tablet */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .cabos-container {
+        grid-template-columns: repeat(3, 1fr);
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    .tipos-container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .velocidades-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .slots-ordenacao {
+        grid-template-columns: repeat(5, 1fr);
+    }
+}
+
+/* Desktop Grande */
+@media (min-width: 1440px) {
+    .fase-main {
+        max-width: 1600px;
+    }
+    
+    .desafio-area {
+        padding: var(--spacing-xl) calc(var(--spacing-xl) * 1.5);
+    }
+}
+
+/* Alto Contraste e Modo de Alto Contraste do Windows */
+@media (prefers-contrast: high) {
+    .cabo-item,
+    .tipo-target,
+    .velocidade-item,
+    .slot-ordenacao {
+        border-width: 3px;
+    }
+    
+    .cabo-item:focus,
+    .tipo-target:focus,
+    .velocidade-item:focus,
+    .slot-ordenacao:focus {
+        outline-width: 4px;
+    }
+}
+
+/* Redução de Movimento */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    
+    .cabo-item:hover,
+    .tipo-target:hover,
+    .velocidade-item:hover {
+        transform: none;
     }
 }

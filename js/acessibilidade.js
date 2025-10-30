@@ -209,30 +209,118 @@ class SistemaAcessibilidade {
         const ajudaModal = document.createElement('div');
         ajudaModal.className = 'modal-acessibilidade';
         ajudaModal.innerHTML = `
-            <div class="modal-content" role="dialog" aria-labelledby="ajuda-titulo" aria-describedby="ajuda-descricao">
-                <h2 id="ajuda-titulo">Ajuda de Acessibilidade</h2>
-                <div id="ajuda-descricao">
-                    <h3>Atalhos de Teclado:</h3>
-                    <ul>
-                        <li><kbd>Tab</kbd> - Navegar entre elementos</li>
-                        <li><kbd>Setas</kbd> - Navegar em listas e grids</li>
-                        <li><kbd>Enter/Espaço</kbd> - Ativar botões</li>
-                        <li><kbd>Alt + C</kbd> - Toggle alto contraste</li>
-                        <li><kbd>Alt + +</kbd> - Aumentar fonte</li>
-                        <li><kbd>Alt + -</kbd> - Diminuir fonte</li>
-                        <li><kbd>Alt + H</kbd> - Esta ajuda</li>
-                        <li><kbd>Esc</kbd> - Fechar modais</li>
-                    </ul>
-                    
-                    <h3>Navegação:</h3>
-                    <p>Use Tab para navegar entre botões e links. Use as setas do teclado para navegar entre itens em exercícios.</p>
+            <div class="modal-content modal-ajuda" role="dialog" aria-labelledby="ajuda-titulo" aria-describedby="ajuda-descricao">
+                <button class="btn-fechar" onclick="this.parentElement.parentElement.remove()" aria-label="Fechar ajuda">×</button>
+                <div class="ajuda-header">
+                    <div class="ajuda-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                            <path d="M20 5H4C2.9 5 2 5.9 2 7V17C2 18.1 2.9 19 4 19H20C21.1 19 22 18.1 22 17V7C22 5.9 21.1 5 20 5ZM20 17H4V7H20V17Z" fill="currentColor"/>
+                            <rect x="6" y="9" width="2" height="6" fill="currentColor"/>
+                            <rect x="11" y="9" width="2" height="6" fill="currentColor"/>
+                            <rect x="16" y="9" width="2" height="6" fill="currentColor"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <h2 id="ajuda-titulo">Atalhos de Teclado</h2>
+                        <p class="ajuda-subtitulo">Navegue mais rápido com estes comandos</p>
+                    </div>
                 </div>
-                <button type="button" onclick="this.parentElement.parentElement.remove()">Fechar</button>
+                
+                <div id="ajuda-descricao" class="ajuda-content">
+                    <div class="atalhos-grid">
+                        <div class="atalho-card">
+                            <div class="atalho-icon">⌨️</div>
+                            <div class="atalho-info">
+                                <div class="atalho-keys">
+                                    <kbd>Tab</kbd>
+                                </div>
+                                <p class="atalho-desc">Navegar entre elementos interativos</p>
+                            </div>
+                        </div>
+                        
+                        <div class="atalho-card">
+                            <div class="atalho-icon">⬆️</div>
+                            <div class="atalho-info">
+                                <div class="atalho-keys">
+                                    <kbd>↑</kbd> <kbd>↓</kbd> <kbd>←</kbd> <kbd>→</kbd>
+                                </div>
+                                <p class="atalho-desc">Navegar em listas e grids</p>
+                            </div>
+                        </div>
+                        
+                        <div class="atalho-card">
+                            <div class="atalho-icon">✅</div>
+                            <div class="atalho-info">
+                                <div class="atalho-keys">
+                                    <kbd>Enter</kbd> <span class="ou">ou</span> <kbd>Espaço</kbd>
+                                </div>
+                                <p class="atalho-desc">Ativar botões e confirmar ações</p>
+                            </div>
+                        </div>
+                        
+                        <div class="atalho-card">
+                            <div class="atalho-icon">🎨</div>
+                            <div class="atalho-info">
+                                <div class="atalho-keys">
+                                    <kbd>Alt</kbd> + <kbd>C</kbd>
+                                </div>
+                                <p class="atalho-desc">Alternar modo alto contraste</p>
+                            </div>
+                        </div>
+                        
+                        <div class="atalho-card">
+                            <div class="atalho-icon">🔍</div>
+                            <div class="atalho-info">
+                                <div class="atalho-keys">
+                                    <kbd>Alt</kbd> + <kbd>+</kbd>
+                                </div>
+                                <p class="atalho-desc">Aumentar tamanho da fonte</p>
+                            </div>
+                        </div>
+                        
+                        <div class="atalho-card">
+                            <div class="atalho-icon">🔎</div>
+                            <div class="atalho-info">
+                                <div class="atalho-keys">
+                                    <kbd>Alt</kbd> + <kbd>-</kbd>
+                                </div>
+                                <p class="atalho-desc">Diminuir tamanho da fonte</p>
+                            </div>
+                        </div>
+                        
+                        <div class="atalho-card">
+                            <div class="atalho-icon">❓</div>
+                            <div class="atalho-info">
+                                <div class="atalho-keys">
+                                    <kbd>Alt</kbd> + <kbd>H</kbd>
+                                </div>
+                                <p class="atalho-desc">Abrir esta ajuda</p>
+                            </div>
+                        </div>
+                        
+                        <div class="atalho-card">
+                            <div class="atalho-icon">❌</div>
+                            <div class="atalho-info">
+                                <div class="atalho-keys">
+                                    <kbd>Esc</kbd>
+                                </div>
+                                <p class="atalho-desc">Fechar modais e diálogos</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="ajuda-dica">
+                        <div class="dica-icon">💡</div>
+                        <div class="dica-texto">
+                            <strong>Dica:</strong> Use <kbd>Tab</kbd> para navegar e as setas do teclado para mover-se entre itens em exercícios de arrastar e soltar.
+                        </div>
+                    </div>
+                </div>
             </div>
         `;
         
         document.body.appendChild(ajudaModal);
-        ajudaModal.querySelector('button').focus();
+        ajudaModal.querySelector('.btn-fechar').focus();
     }
 
     // Fecha modais com Escape
@@ -263,35 +351,28 @@ class SistemaAcessibilidade {
         menuModal.className = 'modal-acessibilidade';
         menuModal.innerHTML = `
             <div class="modal-content" role="dialog" aria-labelledby="menu-titulo">
+                <button class="btn-fechar" onclick="this.parentElement.parentElement.remove()" aria-label="Fechar menu de acessibilidade">×</button>
                 <h2 id="menu-titulo">Opções de Acessibilidade</h2>
                 
                 <div class="opcoes-acess">
-                    <label class="opcao-item">
-                        <input type="checkbox" ${this.altoContraste ? 'checked' : ''} onchange="sistemaAcessibilidade.toggleAltoContraste()">
-                        Alto Contraste
-                    </label>
-                    
-                    <div class="opcao-item">
-                        <label>Tamanho da Fonte:</label>
-                        <select onchange="sistemaAcessibilidade.alterarTamanhoFonte(this.value)">
-                            <option value="pequena" ${this.tamanhoFonte === 'pequena' ? 'selected' : ''}>Pequena</option>
-                            <option value="normal" ${this.tamanhoFonte === 'normal' ? 'selected' : ''}>Normal</option>
-                            <option value="grande" ${this.tamanhoFonte === 'grande' ? 'selected' : ''}>Grande</option>
-                            <option value="extra-grande" ${this.tamanhoFonte === 'extra-grande' ? 'selected' : ''}>Extra Grande</option>
-                        </select>
-                    </div>
-                    
-                    <button type="button" onclick="sistemaAcessibilidade.mostrarAjudaAcessibilidade(); this.parentElement.parentElement.parentElement.remove();">
-                        Ver Atalhos de Teclado
+                    <button type="button" class="btn-ver-atalhos" onclick="sistemaAcessibilidade.mostrarAjudaAcessibilidade(); this.parentElement.parentElement.parentElement.remove();">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                            <path d="M20 5H4C2.9 5 2 5.9 2 7V17C2 18.1 2.9 19 4 19H20C21.1 19 22 18.1 22 17V7C22 5.9 21.1 5 20 5ZM20 17H4V7H20V17ZM7 9H9V15H7V9ZM11 9H13V15H11V9ZM15 9H17V15H15V9Z" fill="currentColor"/>
+                        </svg>
+                        <div class="btn-texto">
+                            <span class="btn-titulo">Ver Atalhos de Teclado</span>
+                            <span class="btn-descricao">Aprenda todos os comandos disponíveis</span>
+                        </div>
+                        <svg class="btn-seta" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                            <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
                     </button>
                 </div>
-                
-                <button type="button" onclick="this.parentElement.parentElement.remove()">Fechar</button>
             </div>
         `;
         
         document.body.appendChild(menuModal);
-        menuModal.querySelector('input').focus();
+        menuModal.querySelector('.btn-ver-atalhos').focus();
     }
 
     // Altera tamanho da fonte via select

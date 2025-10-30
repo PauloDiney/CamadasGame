@@ -9,7 +9,7 @@
     <title>Fase 1 - Camada Física - Camadas da Conexão</title>
     <link rel="icon" type="image/svg+xml" href="../favicon.svg">
     <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/fase.css">
+    <link rel="stylesheet" href="../css/fase-simple.css">
     <link rel="stylesheet" href="../css/acessibilidade.css">
     <link href="https://fonts.googleapis.com/css2?family=Kdam+Thmor+Pro&display=swap" rel="stylesheet">
 </head>
@@ -20,7 +20,7 @@
         <header class="fase-header" role="banner">
             <div class="header-left">
                 <a href="../trilha.html" class="btn-voltar-fase" aria-label="Voltar à tela da trilha principal">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true" role="img">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                         <path d="M19 12H5M5 12L12 19M5 12L12 5" stroke="currentColor" stroke-width="2"/>
                     </svg>
                     Voltar à Trilha
@@ -83,40 +83,37 @@
                 <div class="secao-content">
                     <div class="desafio-header">
                         <h2 id="desafio1-titulo">Desafio 1: Identifique os Tipos de Cabo</h2>
-                        <p>Conecte cada cabo ao seu tipo correto usando arrastar e soltar ou navegação por teclado</p>
+                        <p>Arraste cada cabo para o tipo correto</p>
                     </div>
 
                     <div class="desafio-area" role="application" aria-label="Exercício de arrastar e soltar para identificar tipos de cabo">
                         <div class="cabos-container" role="group" aria-label="Cabos para identificar">
-                            <div class="cabo-item" data-tipo="ethernet" draggable="true" tabindex="0" role="button" aria-label="Cabo A - Cabo ethernet com conector RJ45" aria-describedby="cabo-a-desc">
-                                <div class="cabo-visual cabo-ethernet" role="img" aria-hidden="true"></div>
-                                <span>Cabo A</span>
-                                <span id="cabo-a-desc" class="sr-only">Cabo com conector retangular típico de redes locais</span>
+                            <div class="cabo-item" data-tipo="ethernet" draggable="true" tabindex="0" role="button" aria-label="Cabo Ethernet RJ45">
+                                <div class="cabo-visual cabo-ethernet"></div>
+                                <span>Ethernet</span>
                             </div>
-                            <div class="cabo-item" data-tipo="fibra" draggable="true" tabindex="0" role="button" aria-label="Cabo B - Cabo de fibra óptica" aria-describedby="cabo-b-desc">
-                                <div class="cabo-visual cabo-fibra" role="img" aria-hidden="true"></div>
-                                <span>Cabo B</span>
-                                <span id="cabo-b-desc" class="sr-only">Cabo fino e brilhante que transmite sinais luminosos</span>
+                            <div class="cabo-item" data-tipo="fibra" draggable="true" tabindex="0" role="button" aria-label="Cabo Fibra Óptica">
+                                <div class="cabo-visual cabo-fibra"></div>
+                                <span>Fibra Óptica</span>
                             </div>
-                            <div class="cabo-item" data-tipo="coaxial" draggable="true" tabindex="0" role="button" aria-label="Cabo C - Cabo coaxial" aria-describedby="cabo-c-desc">
-                                <div class="cabo-visual cabo-coaxial" role="img" aria-hidden="true"></div>
-                                <span>Cabo C</span>
-                                <span id="cabo-c-desc" class="sr-only">Cabo redondo e grosso usado em TV e internet a cabo</span>
+                            <div class="cabo-item" data-tipo="coaxial" draggable="true" tabindex="0" role="button" aria-label="Cabo Coaxial">
+                                <div class="cabo-visual cabo-coaxial"></div>
+                                <span>Coaxial</span>
                             </div>
                         </div>
 
                         <div class="tipos-container" role="group" aria-label="Tipos de cabo - áreas de destino">
                             <div class="tipo-target" data-aceita="ethernet" tabindex="0" role="button" aria-label="Ethernet RJ45 - Para redes locais">
-                                <h4>Cabo Ethernet (RJ45)</h4>
-                                <p>Para redes locais, 8 fios internos</p>
+                                <h4>Ethernet (RJ45)</h4>
+                                <p>Redes locais • 8 fios</p>
                             </div>
                             <div class="tipo-target" data-aceita="fibra" tabindex="0" role="button" aria-label="Fibra Óptica - Transmissão por luz">
                                 <h4>Fibra Óptica</h4>
-                                <p>Transmite luz, alta velocidade</p>
+                                <p>Luz • Alta velocidade</p>
                             </div>
                             <div class="tipo-target" data-aceita="coaxial" tabindex="0" role="button" aria-label="Cabo Coaxial - Para TV e internet">
-                                <h4>Cabo Coaxial</h4>
-                                <p>Para TV e internet a cabo</p>
+                                <h4>Coaxial</h4>
+                                <p>TV • Internet a cabo</p>
                             </div>
                         </div>
                     </div>
@@ -130,7 +127,7 @@
                 <div class="secao-content">
                     <div class="desafio-header">
                         <h2 id="desafio2-titulo">Desafio 2: Velocidades de Transmissão</h2>
-                        <p>Ordene as tecnologias da menor para a maior velocidade usando arrastar e soltar ou navegação por teclado</p>
+                        <p>Ordene do mais lento para o mais rápido</p>
                     </div>
 
                     <div class="desafio-area" role="application" aria-label="Exercício de ordenação de velocidades de rede">
