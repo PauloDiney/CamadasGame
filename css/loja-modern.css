@@ -661,6 +661,21 @@ body::before {
     opacity: 0.5;
 }
 
+.buy-btn.equipped {
+    background: linear-gradient(135deg, #4CAF50, #66BB6A);
+    cursor: pointer;
+    opacity: 1;
+}
+
+.buy-btn.equipped:hover {
+    background: linear-gradient(135deg, #66BB6A, #4CAF50);
+    transform: translateY(-2px);
+}
+
+.buy-btn.equipped::before {
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+}
+
 .buy-btn:focus-visible {
     outline: 3px solid #E1EA2D;
     outline-offset: 3px;

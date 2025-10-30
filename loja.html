@@ -385,6 +385,7 @@
                 this.atualizarPontos();
                 this.atualizarVisualizacao();
                 this.mostrarEquipamentosAtivos();
+                this.sincronizarComGlobal();
 
                 // Feedback
                 this.mostrarMensagem('Equipamento comprado com sucesso!', 'success');
@@ -410,11 +411,32 @@
                     if (this.itensComprados.includes(itemId)) {
                         card.classList.add('purchased');
                         if (btn) {
-                            btn.disabled = true;
-                            btn.textContent = 'Comprado';
+                            // Verifica se está equipado
+                            if (this.equipamentosAtivos.includes(itemId)) {
+                                btn.disabled = false;
+                                btn.textContent = 'Equipado';
+                                btn.classList.add('equipped');
+                                btn.onclick = () => this.removerEquipamento(itemId);
+                            } else {
+                                btn.disabled = false;
+                                btn.textContent = 'Equipar';
+                                btn.classList.remove('equipped');
+                                btn.onclick = () => this.equiparItem(itemId);
+                            }
                         }
                     }
                 });
+            }
+            
+            equiparItem(itemId) {
+                if (!this.equipamentosAtivos.includes(itemId)) {
+                    this.equipamentosAtivos.push(itemId);
+                    localStorage.setItem('equipamentosAtivos', JSON.stringify(this.equipamentosAtivos));
+                    this.atualizarVisualizacao();
+                    this.mostrarEquipamentosAtivos();
+                    this.sincronizarComGlobal();
+                    this.mostrarMensagem('Equipamento equipado!', 'success');
+                }
             }
 
             mostrarEquipamentosAtivos() {
@@ -502,13 +524,63 @@
                 if (index > -1) {
                     this.equipamentosAtivos.splice(index, 1);
                     localStorage.setItem('equipamentosAtivos', JSON.stringify(this.equipamentosAtivos));
+                    this.atualizarVisualizacao();
                     this.mostrarEquipamentosAtivos();
-                    this.mostrarMensagem('Equipamento removido!', 'info');
+                    this.sincronizarComGlobal();
+                    this.mostrarMensagem('Equipamento desequipado!', 'info');
                     
                     if (window.audioManager && typeof window.audioManager.playClickSound === 'function') {
                         window.audioManager.playClickSound();
                     }
                 }
+            }
+            
+            sincronizarComGlobal() {
+                // Mapeamento de itens para formato global
+                const itensInfo = {
+                    'cronometro-tempo-extra': {
+                        id: 'cronometro-tempo-extra',
+                        name: 'Cronômetro de Tempo Extra',
+                        description: '+30s por pergunta',
+                        price: 1200,
+                        category: 'tempo'
+                    },
+                    'camera-lenta': {
+                        id: 'camera-lenta',
+                        name: 'Câmera Lenta',
+                        description: 'Tempo 50% mais lento',
+                        price: 1800,
+                        category: 'tempo'
+                    },
+                    'multiplicador-pontos': {
+                        id: 'multiplicador-pontos',
+                        name: 'Multiplicador de Pontos',
+                        description: '2x pontos por acerto',
+                        price: 2000,
+                        category: 'bonus'
+                    },
+                    'dica-magica': {
+                        id: 'dica-magica',
+                        name: 'Dica Mágica',
+                        description: 'Remove 1 alternativa errada',
+                        price: 1500,
+                        category: 'ajuda'
+                    },
+                    'vida-extra': {
+                        id: 'vida-extra',
+                        name: 'Vida Extra',
+                        description: '1 chance extra sem penalidade',
+                        price: 1000,
+                        category: 'protecao'
+                    }
+                };
+                
+                // Converte para formato que o global.js entende
+                const equippedItems = this.equipamentosAtivos.map(itemId => itensInfo[itemId]).filter(item => item);
+                localStorage.setItem('equippedItems', JSON.stringify(equippedItems));
+                
+                // Dispara evento para atualizar outras páginas
+                window.dispatchEvent(new Event('storage'));
             }
 
             mostrarMensagem(texto, tipo = 'info') {
