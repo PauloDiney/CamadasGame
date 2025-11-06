@@ -89,33 +89,20 @@ class TrilhaManager {
     }
 
     carregarProgresso() {
-        const progressoSalvo = localStorage.getItem('trilhaProgresso');
-        if (progressoSalvo) {
-            const progresso = JSON.parse(progressoSalvo);
-            Object.keys(progresso).forEach(faseId => {
-                if (this.fasesData[faseId]) {
-                    this.fasesData[faseId] = { ...this.fasesData[faseId], ...progresso[faseId] };
-                }
-            });
-        }
+        // Progresso agora fica apenas na memória
+        // Não carrega do localStorage
         this.verificarDesbloqueios();
     }
 
     salvarProgresso() {
-        localStorage.setItem('trilhaProgresso', JSON.stringify(this.fasesData));
+        // Não salva mais no localStorage
+        // Progresso fica apenas na memória
     }
 
     verificarDesbloqueios() {
-        let faseAnteriorConcluida = true;
-        
+        // Todas as fases sempre desbloqueadas
         Object.keys(this.fasesData).forEach(faseId => {
-            if (faseAnteriorConcluida) {
-                this.fasesData[faseId].desbloqueada = true;
-            }
-            
-            if (!this.fasesData[faseId].concluida) {
-                faseAnteriorConcluida = false;
-            }
+            this.fasesData[faseId].desbloqueada = true;
         });
     }
 
@@ -369,19 +356,20 @@ class TrilhaManager {
         const fase = this.fasesData[faseId];
         if (!fase || fase.concluida) return;
 
-        // Marca a fase como concluída
+        // Marca a fase como concluída (apenas na memória)
         fase.concluida = true;
 
-        // Adiciona pontos
+        // Adiciona pontos (apenas na memória, não salva no localStorage)
+        // Pontos são mantidos apenas durante a sessão
         const pontosAtuais = parseInt(localStorage.getItem('gamePoints') || '2450');
         const novosPontos = pontosAtuais + fase.pontos;
-        localStorage.setItem('gamePoints', novosPontos.toString());
-
-        // Verifica desbloqueios
+        // Não salva mais no localStorage
+        
+        // Verifica desbloqueios (todas sempre desbloqueadas)
         this.verificarDesbloqueios();
 
-        // Salva progresso
-        this.salvarProgresso();
+        // Não salva progresso no localStorage
+        // this.salvarProgresso();
 
         // Atualiza interface
         this.atualizarPontos();
@@ -459,12 +447,12 @@ class TrilhaManager {
         }, 3000);
     }
 
-    // Método para resetar progresso (útil para desenvolvimento)
+    // Método para resetar progresso (apenas na memória)
     resetarProgresso() {
-        localStorage.removeItem('trilhaProgresso');
+        // Não remove do localStorage pois progresso não é mais salvo
         Object.keys(this.fasesData).forEach(faseId => {
             this.fasesData[faseId].concluida = false;
-            this.fasesData[faseId].desbloqueada = faseId === '1';
+            this.fasesData[faseId].desbloqueada = true; // Todas sempre desbloqueadas
         });
         this.atualizarEstadoFases();
         this.atualizarProgresso();

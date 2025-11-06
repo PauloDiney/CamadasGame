@@ -9,6 +9,12 @@ class AudioManager {
         this.sfxEnabled = localStorage.getItem('sfxEnabled') !== 'false';
         this.sfxVolume = parseFloat(localStorage.getItem('sfxVolume') || '0.3');
         
+        // Controle de tentativas para evitar loop infinito
+        this.loadAttempts = 0;
+        this.maxLoadAttempts = 3;
+        this.errorTimeout = null;
+        this.isLoading = false;
+        
         // Lista de músicas disponíveis
         this.musicTracks = [
             'musicas/musica 1.mp3',
@@ -27,20 +33,40 @@ class AudioManager {
         // Event listeners
         this.backgroundMusic.addEventListener('ended', () => {
             console.log('Música terminada, passando para próxima...');
+            this.isLoading = false;
+            this.loadAttempts = 0; // Reset contador
             this.nextTrack();
         });
         
         this.backgroundMusic.addEventListener('error', (e) => {
-            console.log('Erro ao carregar música:', e);
-            this.nextTrack();
+            console.error('Erro ao carregar música:', e);
+            this.isLoading = false;
+            
+            // Prevenir loop infinito - só tenta novamente se não excedeu o limite
+            if (this.loadAttempts < this.maxLoadAttempts) {
+                // Aguarda 2 segundos antes de tentar próxima música
+                if (this.errorTimeout) clearTimeout(this.errorTimeout);
+                this.errorTimeout = setTimeout(() => {
+                    this.loadAttempts++;
+                    console.log(`Tentativa ${this.loadAttempts}/${this.maxLoadAttempts} de carregar música`);
+                    this.nextTrack();
+                }, 2000);
+            } else {
+                console.warn('Máximo de tentativas de carregamento atingido. Parando reprodução automática.');
+                this.isPlaying = false;
+                this.loadAttempts = 0;
+            }
         });
         
         this.backgroundMusic.addEventListener('loadstart', () => {
             console.log('Carregando música:', this.getCurrentTrackName());
+            this.isLoading = true;
         });
         
         this.backgroundMusic.addEventListener('canplay', () => {
             console.log('Música pronta para reproduzir:', this.getCurrentTrackName());
+            this.isLoading = false;
+            this.loadAttempts = 0; // Reset contador em sucesso
         });
         
         // Inicia a música se estiver habilitada
@@ -65,6 +91,12 @@ class AudioManager {
     }
     
     loadTrack(trackIndex) {
+        // Prevenir múltiplas chamadas simultâneas
+        if (this.isLoading) {
+            console.log('Já está carregando uma música, ignorando...');
+            return;
+        }
+        
         if (trackIndex >= 0 && trackIndex < this.musicTracks.length) {
             const newSrc = this.musicTracks[trackIndex];
             console.log(`Carregando música: ${newSrc}`);
@@ -79,14 +111,22 @@ class AudioManager {
     }
     
     play() {
-        if (this.musicEnabled && this.backgroundMusic.src) {
+        if (this.musicEnabled && this.backgroundMusic.src && !this.isLoading) {
             this.backgroundMusic.play().then(() => {
                 this.isPlaying = true;
+                this.loadAttempts = 0; // Reset em sucesso
                 console.log('Música iniciada:', this.getCurrentTrackName());
             }).catch(e => {
-                console.log('Erro ao reproduzir música:', e);
-                // Tenta novamente após interação do usuário
-                this.waitForUserInteraction();
+                console.error('Erro ao reproduzir música:', e);
+                this.isPlaying = false;
+                
+                // Só tenta novamente se não excedeu o limite
+                if (this.loadAttempts < this.maxLoadAttempts) {
+                    // Tenta novamente após interação do usuário
+                    this.waitForUserInteraction();
+                } else {
+                    console.warn('Máximo de tentativas de reprodução atingido.');
+                }
             });
         }
     }
@@ -103,27 +143,43 @@ class AudioManager {
     }
     
     nextTrack() {
+        // Prevenir múltiplas chamadas
+        if (this.isLoading) {
+            console.log('Carregamento em andamento, ignorando nextTrack');
+            return;
+        }
+        
         const previousTrack = this.currentTrack;
         this.currentTrack = (this.currentTrack + 1) % this.musicTracks.length;
         console.log(`Mudando da música ${previousTrack + 1} para música ${this.currentTrack + 1}`);
         this.loadTrack(this.currentTrack);
-        if (this.musicEnabled) {
+        if (this.musicEnabled && !this.isLoading) {
             // Pequeno delay para garantir que a música carregou
             setTimeout(() => {
-                this.play();
+                if (!this.isLoading) {
+                    this.play();
+                }
             }, 100);
         }
     }
     
     previousTrack() {
+        // Prevenir múltiplas chamadas
+        if (this.isLoading) {
+            console.log('Carregamento em andamento, ignorando previousTrack');
+            return;
+        }
+        
         const previousTrack = this.currentTrack;
         this.currentTrack = this.currentTrack === 0 ? this.musicTracks.length - 1 : this.currentTrack - 1;
         console.log(`Mudando da música ${previousTrack + 1} para música ${this.currentTrack + 1}`);
         this.loadTrack(this.currentTrack);
-        if (this.musicEnabled) {
+        if (this.musicEnabled && !this.isLoading) {
             // Pequeno delay para garantir que a música carregou
             setTimeout(() => {
-                this.play();
+                if (!this.isLoading) {
+                    this.play();
+                }
             }, 100);
         }
     }
