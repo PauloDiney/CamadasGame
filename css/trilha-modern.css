@@ -92,7 +92,7 @@ body {
 
 /* ==================== HEADER ==================== */
 .trilha-header {
-    position: relative;
+   
     z-index: 10;
     background: rgba(20, 25, 35, 0.95);
     border-bottom: 1px solid rgba(13, 223, 255, 0.2);

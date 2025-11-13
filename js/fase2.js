@@ -9,7 +9,25 @@ class Fase2Manager {
         this.quadroMontado = {};
         this.selecaoCRC = null;
         this.desafiosConcluidos = [];
+        
+        // Integração com GameSystem
+        this.gameSystem = null;
+        this.waitForGameSystem();
+        
         this.inicializar();
+    }
+    
+    // Aguarda o GameSystem ser carregado
+    waitForGameSystem() {
+        const checkGameSystem = () => {
+            if (window.simpleGameSystem) {
+                this.gameSystem = window.simpleGameSystem;
+                console.log('SimpleGameSystem conectado à Fase 2');
+            } else {
+                setTimeout(checkGameSystem, 100);
+            }
+        };
+        checkGameSystem();
     }
 
     inicializar() {
@@ -57,6 +75,18 @@ class Fase2Manager {
         this.desafioAtual = numero;
         this.progressoAtual++;
         this.atualizarProgresso();
+        
+        // Iniciar timer na primeira vez que iniciar um desafio
+        if (this.gameSystem && !this.gameSystem.gameState.timerIniciado) {
+            console.log('🎮 Iniciando timer do jogo...');
+            this.gameSystem.iniciarTimer();
+        }
+        
+        // Mostrar HUD quando iniciar desafio
+        const hud = document.querySelector('.hud-progresso');
+        if (hud) {
+            hud.classList.add('visivel');
+        }
         
         // Esconde seção atual e mostra nova
         document.querySelectorAll('.fase-secao').forEach(secao => {
@@ -129,54 +159,64 @@ class Fase2Manager {
         setTimeout(() => {
             const componentes = document.querySelectorAll('.componente');
             const slots = document.querySelectorAll('.slot-quadro');
+            let componenteSelecionado = null;
 
+            // Configurar cliques nos componentes
             componentes.forEach(comp => {
-                comp.addEventListener('dragstart', (e) => {
-                    e.dataTransfer.setData('text/plain', comp.dataset.tipo);
-                    e.dataTransfer.setData('ordem', comp.dataset.ordem);
-                    comp.classList.add('arrastando');
-                });
-
-                comp.addEventListener('dragend', () => {
-                    comp.classList.remove('arrastando');
+                comp.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    
+                    // Não permitir selecionar se já foi usado
+                    if (comp.style.display === 'none') return;
+                    
+                    // Remove seleção anterior
+                    document.querySelectorAll('.componente').forEach(c => c.classList.remove('selecionado'));
+                    
+                    // Seleciona novo componente
+                    comp.classList.add('selecionado');
+                    componenteSelecionado = comp;
+                    
+                    if (typeof anunciarParaLeitorTela === 'function') {
+                        const nome = comp.querySelector('span').textContent;
+                        anunciarParaLeitorTela(`${nome} selecionado. Clique em um slot para colocar.`);
+                    }
                 });
             });
 
+            // Configurar cliques nos slots
             slots.forEach(slot => {
-                slot.addEventListener('dragover', (e) => {
+                slot.addEventListener('click', (e) => {
                     e.preventDefault();
-                    slot.classList.add('hover');
-                });
-
-                slot.addEventListener('dragleave', () => {
-                    slot.classList.remove('hover');
-                });
-
-                slot.addEventListener('drop', (e) => {
-                    e.preventDefault();
-                    slot.classList.remove('hover');
                     
-                    const tipo = e.dataTransfer.getData('text/plain');
-                    const ordem = e.dataTransfer.getData('ordem');
-                    const posicao = slot.dataset.posicao;
+                    if (!componenteSelecionado) {
+                        const feedback = document.getElementById('feedback-desafio2');
+                        feedback.textContent = 'Selecione um componente primeiro!';
+                        feedback.className = 'desafio-feedback erro';
+                        feedback.style.display = 'block';
+                        setTimeout(() => feedback.style.display = 'none', 2000);
+                        return;
+                    }
+                    
+                    const tipo = componenteSelecionado.getAttribute('data-tipo');
+                    const posicao = slot.getAttribute('data-posicao');
                     
                     // Remove componente anterior se existir
                     if (this.quadroMontado[posicao]) {
                         const compAnterior = document.querySelector(`[data-tipo="${this.quadroMontado[posicao]}"]`);
                         if (compAnterior) {
                             compAnterior.style.display = 'block';
+                            compAnterior.classList.remove('selecionado');
                         }
                     }
                     
                     // Adiciona novo componente
                     this.quadroMontado[posicao] = tipo;
-                    slot.innerHTML = `<span class="slot-conteudo">${document.querySelector(`[data-tipo="${tipo}"] span`).textContent}</span>`;
+                    slot.innerHTML = `<span class="slot-conteudo">${componenteSelecionado.querySelector('span').textContent}</span>`;
                     
                     // Esconde componente da lista
-                    const componente = document.querySelector(`[data-tipo="${tipo}"]`);
-                    if (componente) {
-                        componente.style.display = 'none';
-                    }
+                    componenteSelecionado.style.display = 'none';
+                    componenteSelecionado.classList.remove('selecionado');
+                    componenteSelecionado = null;
                     
                     // Verifica se pode habilitar botão
                     this.verificarQuadroCompleto();

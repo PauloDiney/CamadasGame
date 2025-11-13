@@ -1,0 +1,1307 @@
+/* ============================================
+   FASE 5 - CAMADA DE APLICAÇÃO
+   Tema: Verde (#4CAF50)
+   ============================================ */
+
+/* ===== RESET E BASE ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Kdam Thmor Pro', sans-serif;
+    background: linear-gradient(135deg, #0A0E27 0%, #1a1f3a 100%);
+    color: #fff;
+    min-height: 100vh;
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 100vw;
+}
+
+.fase-container {
+    width: 100%;
+    max-width: 100vw;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+}
+
+/* ===== HEADER DA FASE ===== */
+.fase-header {
+    background: linear-gradient(135deg, #2E7D32 0%, #4CAF50 100%);
+    padding: 1.5rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 4px 20px rgba(76, 175, 80, 0.3);
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.btn-voltar-fase {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 12px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-voltar-fase:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateX(-5px);
+}
+
+.fase-titulo h1 {
+    font-size: 1.8rem;
+    margin-bottom: 0.25rem;
+    color: #fff;
+}
+
+.fase-titulo p {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.fase-pontos {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 0.75rem 1.5rem;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #E1EA2D;
+}
+
+.fase-progresso {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    min-width: 200px;
+}
+
+.fase-progresso > span {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.progresso-bar-mini {
+    width: 100%;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progresso-fill-mini {
+    height: 100%;
+    background: linear-gradient(90deg, #E1EA2D 0%, #FFF176 100%);
+    border-radius: 10px;
+    transition: width 0.5s ease;
+    width: 0%;
+}
+
+/* ===== MAIN CONTENT ===== */
+.fase-main {
+    flex: 1;
+    padding: 2rem;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+.fase-secao {
+    display: none;
+    animation: fadeIn 0.5s ease;
+}
+
+.fase-secao.ativa {
+    display: block;
+}
+
+.secao-content {
+    max-width: 1400px;
+    width: 100%;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    padding: 2.5rem;
+    border: 2px solid rgba(76, 175, 80, 0.3);
+    overflow-x: hidden;
+    box-sizing: border-box;
+}
+
+/* ===== SEÇÃO DE INTRODUÇÃO ===== */
+#secao-intro .secao-content {
+    display: flex;
+    flex-direction: row;
+    gap: 3rem;
+    align-items: center;
+}
+
+#secao-intro .intro-visual,
+#secao-intro .intro-texto {
+    flex: 1;
+}
+
+.intro-visual {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.aplicacao-animada {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    padding: 2rem;
+    width: 100%;
+    max-width: 100%;
+}
+
+.servico {
+    background: linear-gradient(135deg, rgba(76, 175, 80, 0.2) 0%, rgba(46, 125, 50, 0.1) 100%);
+    border: 2px solid rgba(76, 175, 80, 0.5);
+    border-radius: 20px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    transition: all 0.3s ease;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.servico:nth-child(2) {
+    animation-delay: 0.5s;
+}
+
+.servico:nth-child(3) {
+    animation-delay: 1s;
+}
+
+.servico:nth-child(4) {
+    animation-delay: 1.5s;
+}
+
+.servico:hover {
+    transform: scale(1.1);
+    border-color: #4CAF50;
+    box-shadow: 0 10px 40px rgba(76, 175, 80, 0.4);
+}
+
+.servico span {
+    font-size: 3rem;
+}
+
+.servico small {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #4CAF50;
+}
+
+.intro-texto h2 {
+    font-size: 2.5rem;
+    color: #4CAF50;
+    margin-bottom: 1rem;
+}
+
+.intro-texto > p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 2rem;
+}
+
+.conceitos-chave {
+    background: rgba(76, 175, 80, 0.1);
+    border-left: 4px solid #4CAF50;
+    padding: 1.5rem;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+}
+
+.conceitos-chave h3 {
+    font-size: 1.5rem;
+    color: #4CAF50;
+    margin-bottom: 1rem;
+}
+
+.conceitos-chave ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.conceitos-chave li {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.9);
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.conceitos-chave li::before {
+    content: "▸";
+    position: absolute;
+    left: 0;
+    color: #4CAF50;
+    font-size: 1.2rem;
+}
+
+.conceitos-chave li strong {
+    color: #4CAF50;
+}
+
+.btn-continuar {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 2.5rem;
+    background: linear-gradient(135deg, #4CAF50 0%, #66BB6A 100%);
+    border: none;
+    border-radius: 12px;
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(76, 175, 80, 0.4);
+}
+
+.btn-continuar:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 25px rgba(76, 175, 80, 0.5);
+}
+
+/* ===== DESAFIOS ===== */
+.desafio-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+}
+
+.desafio-header h2 {
+    font-size: 2.2rem;
+    color: #4CAF50;
+    margin-bottom: 0.75rem;
+}
+
+.desafio-header p {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.desafio-area {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+/* ===== DESAFIO 1: HTTP ===== */
+.requisicao-http {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 12px;
+    padding: 1.5rem;
+    border: 2px solid rgba(76, 175, 80, 0.3);
+}
+
+.codigo-http pre {
+    margin: 0;
+    font-family: 'Courier New', monospace;
+}
+
+.codigo-http code {
+    color: #4CAF50;
+    font-size: 1rem;
+    line-height: 1.8;
+}
+
+.analise-componentes {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    width: 100%;
+    max-width: 100%;
+}
+
+.componente-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.componente-item label {
+    font-size: 1rem;
+    color: #4CAF50;
+    font-weight: 600;
+}
+
+.componente-item select,
+.componente-item input {
+    padding: 0.875rem 1rem;
+    background: rgba(0, 0, 0, 0.3);
+    border: 2px solid rgba(76, 175, 80, 0.3);
+    border-radius: 8px;
+    color: #fff;
+    font-size: 1rem;
+    font-family: 'Kdam Thmor Pro', sans-serif;
+    transition: all 0.3s ease;
+}
+
+.componente-item select:focus,
+.componente-item input:focus {
+    outline: none;
+    border-color: #4CAF50;
+    box-shadow: 0 0 15px rgba(76, 175, 80, 0.3);
+}
+
+.componente-item select option {
+    background: #1a1f3a;
+    color: #fff;
+}
+
+.componente-item input::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+/* ===== DESAFIO 2: DNS ===== */
+.dns-cenario {
+    background: rgba(76, 175, 80, 0.1);
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-align: center;
+    border: 2px solid rgba(76, 175, 80, 0.3);
+}
+
+.dns-cenario h3 {
+    font-size: 1.5rem;
+    color: #4CAF50;
+    margin-bottom: 0.75rem;
+}
+
+.dns-cenario p {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.etapas-dns {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+    width: 100%;
+    max-width: 100%;
+}
+
+.etapa-dns {
+    background: rgba(76, 175, 80, 0.1);
+    border: 2px solid rgba(76, 175, 80, 0.3);
+    border-radius: 12px;
+    padding: 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.etapa-dns:hover {
+    transform: translateY(-5px);
+    border-color: #4CAF50;
+    box-shadow: 0 8px 25px rgba(76, 175, 80, 0.3);
+}
+
+.etapa-dns.selecionada {
+    background: rgba(76, 175, 80, 0.3);
+    border-color: #4CAF50;
+    box-shadow: 0 0 20px rgba(76, 175, 80, 0.5);
+}
+
+.etapa-dns.usada {
+    opacity: 0.4;
+    pointer-events: none;
+}
+
+.numero-etapa {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    width: 35px;
+    height: 35px;
+    background: rgba(76, 175, 80, 0.3);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    color: #4CAF50;
+}
+
+.etapa-conteudo h4 {
+    font-size: 1.2rem;
+    color: #4CAF50;
+    margin-bottom: 0.5rem;
+}
+
+.etapa-conteudo p {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.5;
+}
+
+.sequencia-dns {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 12px;
+    padding: 1.5rem;
+    border: 2px solid rgba(76, 175, 80, 0.3);
+}
+
+.sequencia-dns h4 {
+    font-size: 1.3rem;
+    color: #4CAF50;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.sequencia-slots {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 1rem;
+    width: 100%;
+    max-width: 100%;
+}
+
+.slot-dns {
+    background: rgba(76, 175, 80, 0.1);
+    border: 2px dashed rgba(76, 175, 80, 0.3);
+    border-radius: 8px;
+    padding: 2rem 1rem;
+    text-align: center;
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.5);
+    min-height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.slot-dns.preenchido {
+    background: rgba(76, 175, 80, 0.2);
+    border-style: solid;
+    border-color: #4CAF50;
+    color: #4CAF50;
+    font-weight: 700;
+}
+
+/* ===== DESAFIO 3: EMAIL ===== */
+.email-cenario {
+    background: rgba(76, 175, 80, 0.1);
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-align: center;
+    border: 2px solid rgba(76, 175, 80, 0.3);
+}
+
+.email-cenario h3 {
+    font-size: 1.3rem;
+    color: #4CAF50;
+}
+
+.email-fluxo {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    margin-bottom: 2rem;
+    width: 100%;
+    max-width: 100%;
+}
+
+.participante,
+.servidor {
+    background: rgba(76, 175, 80, 0.1);
+    border: 2px solid rgba(76, 175, 80, 0.3);
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-align: center;
+}
+
+.participante h4,
+.servidor h4 {
+    font-size: 1.3rem;
+    color: #4CAF50;
+    margin-bottom: 0.75rem;
+}
+
+.participante p,
+.servidor p {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 1rem;
+}
+
+.protocolo-usado {
+    margin-top: 1rem;
+}
+
+.protocolo-select {
+    width: 100%;
+    padding: 0.875rem 1rem;
+    background: rgba(0, 0, 0, 0.3);
+    border: 2px solid rgba(76, 175, 80, 0.3);
+    border-radius: 8px;
+    color: #fff;
+    font-size: 0.95rem;
+    font-family: 'Kdam Thmor Pro', sans-serif;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.protocolo-select:focus {
+    outline: none;
+    border-color: #4CAF50;
+    box-shadow: 0 0 15px rgba(76, 175, 80, 0.3);
+}
+
+.protocolo-select option {
+    background: #1a1f3a;
+    color: #fff;
+}
+
+.email-info {
+    background: rgba(76, 175, 80, 0.1);
+    border-left: 4px solid #4CAF50;
+    padding: 1.5rem;
+    border-radius: 12px;
+}
+
+.email-info h4 {
+    font-size: 1.3rem;
+    color: #4CAF50;
+    margin-bottom: 1rem;
+}
+
+.email-info ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.email-info li {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.9);
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.email-info li::before {
+    content: "▸";
+    position: absolute;
+    left: 0;
+    color: #4CAF50;
+    font-size: 1.2rem;
+}
+
+.email-info li strong {
+    color: #4CAF50;
+}
+
+/* ===== BOTÕES DE AÇÃO ===== */
+.btn-verificar {
+    padding: 1rem 2.5rem;
+    background: linear-gradient(135deg, #4CAF50 0%, #66BB6A 100%);
+    border: none;
+    border-radius: 12px;
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(76, 175, 80, 0.4);
+    margin-top: 1rem;
+}
+
+.btn-verificar:hover:not(:disabled) {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 25px rgba(76, 175, 80, 0.5);
+}
+
+.btn-verificar:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.btn-resetar {
+    padding: 1rem 2.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 12px;
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 1rem;
+    margin-left: 1rem;
+}
+
+.btn-resetar:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+/* ===== FEEDBACK DOS DESAFIOS ===== */
+.desafio-feedback {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    border-radius: 12px;
+    display: none;
+    animation: fadeIn 0.5s ease;
+}
+
+.desafio-feedback.sucesso {
+    display: block;
+    background: rgba(76, 175, 80, 0.2);
+    border: 2px solid #4CAF50;
+    color: #4CAF50;
+}
+
+.desafio-feedback.erro {
+    display: block;
+    background: rgba(244, 67, 54, 0.2);
+    border: 2px solid #F44336;
+    color: #F44336;
+}
+
+.desafio-feedback h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.desafio-feedback p {
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+/* ===== CONCLUSÃO DA FASE ===== */
+#secao-conclusao .secao-content {
+    text-align: center;
+    max-width: 900px;
+    padding: 3rem;
+}
+
+.conclusao-visual {
+    margin-bottom: 3rem;
+}
+
+.sucesso-icon {
+    font-size: 6rem;
+    margin-bottom: 1.5rem;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.conclusao-visual h2 {
+    font-size: 2.5rem;
+    color: #4CAF50;
+    margin-bottom: 1rem;
+}
+
+.conclusao-visual p {
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.conquista-final {
+    background: linear-gradient(135deg, rgba(76, 175, 80, 0.2) 0%, rgba(46, 125, 50, 0.1) 100%);
+    border: 2px solid #4CAF50;
+    border-radius: 20px;
+    padding: 2rem;
+    margin-bottom: 2.5rem;
+}
+
+.conquista-final h3 {
+    font-size: 1.8rem;
+    color: #4CAF50;
+    margin-bottom: 1.5rem;
+}
+
+.camadas-dominadas {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.camada-item {
+    background: rgba(76, 175, 80, 0.2);
+    border: 2px solid #4CAF50;
+    border-radius: 12px;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #4CAF50;
+}
+
+.conhecimentos-adquiridos {
+    background: rgba(76, 175, 80, 0.1);
+    border-left: 4px solid #4CAF50;
+    padding: 2rem;
+    border-radius: 12px;
+    margin-bottom: 2.5rem;
+    text-align: left;
+}
+
+.conhecimentos-adquiridos h3 {
+    font-size: 1.8rem;
+    color: #4CAF50;
+    margin-bottom: 1.5rem;
+}
+
+.conhecimentos-adquiridos ul {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+.conhecimentos-adquiridos li {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.9);
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.conhecimentos-adquiridos li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: #4CAF50;
+    font-size: 1.3rem;
+    font-weight: 700;
+}
+
+.resultados-fase {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-bottom: 2.5rem;
+}
+
+.resultado-item {
+    background: rgba(76, 175, 80, 0.1);
+    border: 2px solid rgba(76, 175, 80, 0.3);
+    border-radius: 12px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.resultado-label {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.resultado-valor {
+    font-size: 2rem;
+    color: #4CAF50;
+    font-weight: 700;
+}
+
+.conclusao-acoes {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+}
+
+/* ===== ANIMAÇÕES ===== */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-10px); }
+    75% { transform: translateX(10px); }
+}
+
+/* ===== RESPONSIVO - TABLET (768px) ===== */
+@media (max-width: 768px) {
+    .fase-header {
+        flex-direction: column;
+        gap: 1.5rem;
+        padding: 1.5rem 1rem;
+    }
+
+    .header-left {
+        flex-direction: column;
+        gap: 1rem;
+        width: 100%;
+    }
+
+    .btn-voltar-fase {
+        width: 100%;
+        justify-content: center;
+        padding: 0.875rem 1.25rem;
+        font-size: 0.95rem;
+    }
+
+    .fase-titulo {
+        text-align: center;
+    }
+
+    .fase-titulo h1 {
+        font-size: 1.5rem;
+    }
+
+    .fase-titulo p {
+        font-size: 0.9rem;
+    }
+
+    .header-right {
+        flex-direction: column;
+        gap: 1rem;
+        width: 100%;
+    }
+
+    .fase-pontos {
+        width: 100%;
+        text-align: center;
+        padding: 0.75rem 1rem;
+        font-size: 1rem;
+    }
+
+    .fase-progresso {
+        width: 100%;
+        min-width: auto;
+    }
+
+    .fase-progresso > span {
+        text-align: center;
+        font-size: 0.9rem;
+    }
+
+    .fase-main {
+        padding: 1.5rem 1rem;
+    }
+
+    .secao-content {
+        padding: 1.5rem;
+    }
+
+    /* Introdução */
+    #secao-intro .secao-content {
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    #secao-intro .intro-visual,
+    #secao-intro .intro-texto {
+        width: 100%;
+    }
+
+    .aplicacao-animada {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+        padding: 1rem;
+    }
+
+    .servico {
+        padding: 1.5rem;
+    }
+
+    .servico span {
+        font-size: 2.5rem;
+    }
+
+    .intro-texto h2 {
+        font-size: 2rem;
+        text-align: center;
+    }
+
+    .intro-texto > p {
+        font-size: 1rem;
+        text-align: center;
+    }
+
+    .conceitos-chave {
+        padding: 1.25rem;
+    }
+
+    .conceitos-chave h3 {
+        font-size: 1.3rem;
+    }
+
+    .conceitos-chave li {
+        font-size: 0.95rem;
+    }
+
+    .btn-continuar {
+        width: 100%;
+        justify-content: center;
+        padding: 0.875rem 2rem;
+        font-size: 1rem;
+    }
+
+    /* Desafios */
+    .desafio-header h2 {
+        font-size: 1.8rem;
+    }
+
+    .desafio-header p {
+        font-size: 1rem;
+    }
+
+    /* Desafio 1 - HTTP */
+    .analise-componentes {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+    }
+
+    .componente-item label {
+        font-size: 0.95rem;
+    }
+
+    .componente-item select,
+    .componente-item input {
+        padding: 0.75rem;
+        font-size: 0.95rem;
+    }
+
+    /* Desafio 2 - DNS */
+    .etapas-dns {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .etapa-dns {
+        padding: 1.25rem;
+    }
+
+    .etapa-conteudo h4 {
+        font-size: 1.1rem;
+    }
+
+    .etapa-conteudo p {
+        font-size: 0.9rem;
+    }
+
+    .sequencia-slots {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.75rem;
+    }
+
+    .slot-dns {
+        padding: 1.5rem 0.5rem;
+        font-size: 1rem;
+        min-height: 80px;
+    }
+
+    /* Desafio 3 - Email */
+    .email-fluxo {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .participante,
+    .servidor {
+        padding: 1.25rem;
+    }
+
+    .participante h4,
+    .servidor h4 {
+        font-size: 1.2rem;
+    }
+
+    .protocolo-select {
+        padding: 0.75rem;
+        font-size: 0.9rem;
+    }
+
+    .email-info {
+        padding: 1.25rem;
+    }
+
+    .email-info h4 {
+        font-size: 1.2rem;
+    }
+
+    .email-info li {
+        font-size: 0.95rem;
+    }
+
+    /* Botões */
+    .btn-verificar {
+        width: 100%;
+        padding: 0.875rem 2rem;
+        font-size: 1rem;
+    }
+
+    .btn-resetar {
+        width: 100%;
+        padding: 0.875rem 2rem;
+        font-size: 1rem;
+        margin-left: 0;
+        margin-top: 0.75rem;
+    }
+
+    /* Conclusão */
+    #secao-conclusao .secao-content {
+        padding: 2rem 1.5rem;
+    }
+
+    .sucesso-icon {
+        font-size: 4.5rem;
+    }
+
+    .conclusao-visual h2 {
+        font-size: 2rem;
+    }
+
+    .conclusao-visual p {
+        font-size: 1.1rem;
+    }
+
+    .conquista-final {
+        padding: 1.5rem;
+    }
+
+    .conquista-final h3 {
+        font-size: 1.5rem;
+    }
+
+    .camadas-dominadas {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .camada-item {
+        width: 100%;
+        text-align: center;
+    }
+
+    .conhecimentos-adquiridos {
+        padding: 1.5rem;
+    }
+
+    .conhecimentos-adquiridos h3 {
+        font-size: 1.5rem;
+    }
+
+    .conhecimentos-adquiridos ul {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+    }
+
+    .conhecimentos-adquiridos li {
+        font-size: 1rem;
+    }
+
+    .resultados-fase {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+    }
+
+    .resultado-item {
+        padding: 1.25rem;
+    }
+
+    .resultado-label {
+        font-size: 0.95rem;
+    }
+
+    .resultado-valor {
+        font-size: 1.8rem;
+    }
+
+    .conclusao-acoes {
+        flex-direction: column;
+    }
+
+    .conclusao-acoes .btn-continuar {
+        width: 100%;
+    }
+}
+
+/* ===== RESPONSIVO - MOBILE (480px) ===== */
+@media (max-width: 480px) {
+    .fase-header {
+        padding: 1.25rem 0.75rem;
+    }
+
+    .fase-titulo h1 {
+        font-size: 1.3rem;
+    }
+
+    .fase-titulo p {
+        font-size: 0.85rem;
+    }
+
+    .fase-pontos {
+        font-size: 0.95rem;
+        padding: 0.625rem 0.875rem;
+    }
+
+    .fase-main {
+        padding: 1rem 0.75rem;
+    }
+
+    .secao-content {
+        padding: 1.25rem;
+    }
+
+    /* Introdução */
+    .aplicacao-animada {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .servico {
+        padding: 1.25rem;
+    }
+
+    .servico span {
+        font-size: 2rem;
+    }
+
+    .intro-texto h2 {
+        font-size: 1.75rem;
+    }
+
+    .intro-texto > p {
+        font-size: 0.95rem;
+    }
+
+    .conceitos-chave h3 {
+        font-size: 1.2rem;
+    }
+
+    .conceitos-chave li {
+        font-size: 0.9rem;
+    }
+
+    /* Desafios */
+    .desafio-header h2 {
+        font-size: 1.5rem;
+    }
+
+    .desafio-header p {
+        font-size: 0.95rem;
+    }
+
+    /* Desafio 2 - DNS */
+    .sequencia-slots {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.5rem;
+    }
+
+    .slot-dns {
+        padding: 1rem 0.5rem;
+        font-size: 0.9rem;
+        min-height: 70px;
+    }
+
+    /* Conclusão */
+    .sucesso-icon {
+        font-size: 3.5rem;
+    }
+
+    .conclusao-visual h2 {
+        font-size: 1.75rem;
+    }
+
+    .conclusao-visual p {
+        font-size: 1rem;
+    }
+
+    .conquista-final h3 {
+        font-size: 1.3rem;
+    }
+
+    .conhecimentos-adquiridos h3 {
+        font-size: 1.3rem;
+    }
+
+    .conhecimentos-adquiridos li {
+        font-size: 0.95rem;
+    }
+
+    .resultado-valor {
+        font-size: 1.6rem;
+    }
+}
+
+/* ===== LANDSCAPE MOBILE ===== */
+@media (max-width: 768px) and (orientation: landscape) {
+    .fase-header {
+        padding: 1rem;
+    }
+
+    .header-left {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .header-right {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .fase-main {
+        padding: 1.5rem 2rem;
+    }
+
+    .aplicacao-animada {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .etapas-dns {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .sequencia-slots {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .email-fluxo {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}

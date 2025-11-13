@@ -92,7 +92,7 @@ body {
 
 /* ==================== HEADER ==================== */
 .trilha-header {
-    position: relative;
+    
     z-index: 10;
     background: rgba(20, 25, 35, 0.95);
     border-bottom: 1px solid rgba(13, 223, 255, 0.2);
@@ -381,6 +381,8 @@ body {
     padding: 2rem;
     max-width: 600px;
     width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
     border: 2px solid rgba(13, 223, 255, 0.3);
 }
 
@@ -418,6 +420,8 @@ body {
 }
 
 .modal-icone svg {
+    width: 48px;
+    height: 48px;
     stroke: #0DF;
 }
 
@@ -503,7 +507,7 @@ body {
     display: flex;
     gap: 1rem;
     justify-content: flex-end;
-    padding-top: 1.5rem;
+    /* padding-top: 1.5rem; */
     border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
@@ -642,11 +646,36 @@ body {
     
     .modal-container {
         width: 95%;
+        max-width: 95%;
+        max-height: 85vh;
         padding: 1.5rem;
+        margin: 1rem;
+    }
+    
+    .modal-header {
+        padding-bottom: 1rem;
+    }
+    
+    .modal-icone {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .modal-header h2 {
+        font-size: 1.5rem;
+    }
+    
+    .modal-body {
+        padding: 1rem 0;
+    }
+    
+    .modal-info {
+        grid-template-columns: 1fr;
     }
     
     .modal-footer {
         flex-direction: column;
+        padding-top: 1rem;
     }
     
     .btn-modal {
@@ -689,6 +718,52 @@ body {
     }
     
     .fase-info p {
+        font-size: 0.875rem;
+    }
+    
+    .modal-container {
+        width: 98%;
+        max-width: 98%;
+        max-height: 90vh;
+        padding: 1rem;
+        margin: 0.5rem;
+    }
+    
+    .modal-close {
+        top: 0.5rem;
+        right: 0.5rem;
+    }
+    
+    .modal-icone {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .modal-icone svg {
+        width: 28px;
+        height: 28px;
+    }
+    
+    .modal-header h2 {
+        font-size: 1.25rem;
+    }
+    
+    .modal-numero {
+        font-size: 0.875rem;
+    }
+    
+    .modal-descricao h3,
+    .modal-objetivos h3 {
+        font-size: 1rem;
+    }
+    
+    .modal-descricao p,
+    .modal-objetivos li {
+        font-size: 0.875rem;
+    }
+    
+    .btn-modal {
+        padding: 0.625rem 1rem;
         font-size: 0.875rem;
     }
 }

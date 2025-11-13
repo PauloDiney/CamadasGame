@@ -240,13 +240,18 @@ class Fase1Manager {
     
     resetarDesafio1() {
         document.querySelectorAll('.cabo-item').forEach(cabo => {
-            cabo.classList.remove('conectado', 'selecionado-teclado');
+            cabo.classList.remove('conectado', 'selecionado-teclado', 'selecionado');
             cabo.style.display = 'block';
+            cabo.style.opacity = '1';
+            cabo.style.pointerEvents = 'all';
         });
         document.querySelectorAll('.tipo-target').forEach(alvo => {
-            alvo.classList.remove('preenchido');
+            alvo.classList.remove('preenchido', 'correto');
+            const conectado = alvo.querySelector('.cabo-conectado');
+            if (conectado) conectado.remove();
         });
         document.getElementById('feedback-desafio1').innerHTML = '';
+        document.getElementById('feedback-desafio1').style.display = 'none';
         this.caboSelecionado = null;
     }
     
@@ -309,6 +314,18 @@ class Fase1Manager {
     iniciarDesafio(numero) {
         this.desafioAtual = numero;
         
+        // Iniciar timer na primeira vez que iniciar um desafio
+        if (this.gameSystem && !this.gameSystem.gameState.timerIniciado) {
+            console.log('🎮 Iniciando timer do jogo...');
+            this.gameSystem.iniciarTimer();
+        }
+        
+        // Mostrar HUD quando iniciar desafio
+        const hud = document.querySelector('.hud-progresso');
+        if (hud) {
+            hud.classList.add('visivel');
+        }
+        
         // Esconde seção atual e mostra nova
         document.querySelectorAll('.fase-secao').forEach(secao => {
             secao.classList.remove('ativa');
@@ -319,49 +336,68 @@ class Fase1Manager {
     }
 
     configurarDragAndDrop() {
-        // Desafio 1: Drag and Drop dos cabos
+        // Desafio 1: Sistema de cliques para cabos
         this.configurarDesafio1();
         
-        // Desafio 2: Ordenação de velocidades
+        // Desafio 2: Sistema de cliques para ordenação
         this.configurarDesafio2();
     }
 
     configurarDesafio1() {
         const cabos = document.querySelectorAll('.cabo-item');
         const targets = document.querySelectorAll('.tipo-target');
+        
+        let caboSelecionadoAtual = null;
 
+        // Configurar cliques nos cabos
         cabos.forEach(cabo => {
-            cabo.addEventListener('dragstart', (e) => {
-                e.dataTransfer.setData('text/plain', cabo.dataset.tipo);
-                cabo.classList.add('dragging');
-            });
-
-            cabo.addEventListener('dragend', () => {
-                cabo.classList.remove('dragging');
+            cabo.addEventListener('click', (e) => {
+                e.preventDefault();
+                
+                // Remove seleção anterior
+                document.querySelectorAll('.cabo-item').forEach(c => c.classList.remove('selecionado'));
+                
+                // Seleciona novo cabo
+                cabo.classList.add('selecionado');
+                caboSelecionadoAtual = cabo;
+                
+                // Feedback visual
+                const tipo = cabo.getAttribute('data-tipo');
+                const nome = cabo.querySelector('span').textContent;
+                
+                if (typeof anunciarParaLeitorTela === 'function') {
+                    anunciarParaLeitorTela(`${nome} selecionado. Clique no tipo correto para conectar.`);
+                }
             });
         });
 
+        // Configurar cliques nos alvos
         targets.forEach(target => {
-            target.addEventListener('dragover', (e) => {
+            target.addEventListener('click', (e) => {
                 e.preventDefault();
-                target.classList.add('drag-over');
-            });
-
-            target.addEventListener('dragleave', () => {
-                target.classList.remove('drag-over');
-            });
-
-            target.addEventListener('drop', (e) => {
-                e.preventDefault();
-                const tipoArrastado = e.dataTransfer.getData('text/plain');
-                const tipoEsperado = target.dataset.aceita;
                 
-                target.classList.remove('drag-over');
-
+                if (!caboSelecionadoAtual) {
+                    this.mostrarFeedback('feedback-desafio1', 'Selecione um cabo primeiro!', 'erro');
+                    setTimeout(() => {
+                        document.getElementById('feedback-desafio1').style.display = 'none';
+                    }, 2000);
+                    return;
+                }
+                
+                const tipoArrastado = caboSelecionadoAtual.getAttribute('data-tipo');
+                const tipoEsperado = target.getAttribute('data-aceita');
+                
                 if (tipoArrastado === tipoEsperado) {
                     console.log('🟢 Cabo correto conectado!', tipoArrastado, '→', tipoEsperado);
                     target.classList.add('correto');
                     target.innerHTML += '<div class="cabo-conectado">✓ Conectado!</div>';
+                    
+                    // Esconde o cabo usado
+                    caboSelecionadoAtual.style.opacity = '0.3';
+                    caboSelecionadoAtual.style.pointerEvents = 'none';
+                    caboSelecionadoAtual.classList.remove('selecionado');
+                    caboSelecionadoAtual = null;
+                    
                     this.verificarDesafio1();
                 } else {
                     target.classList.add('incorreto');
@@ -375,6 +411,10 @@ class Fase1Manager {
                         console.log('🔴 Cabo errado detectado! Perdendo vida...');
                         window.gameSystemActions.errou('Cabo conectado incorretamente!');
                     }
+                    
+                    setTimeout(() => {
+                        document.getElementById('feedback-desafio1').style.display = 'none';
+                    }, 2000);
                 }
             });
         });
@@ -403,52 +443,70 @@ class Fase1Manager {
     configurarDesafio2() {
         const velocidades = document.querySelectorAll('.velocidade-item');
         const slots = document.querySelectorAll('.slot-ordenacao');
+        
+        let velocidadeSelecionadaAtual = null;
 
+        // Configurar cliques nas velocidades
         velocidades.forEach(item => {
-            item.addEventListener('dragstart', (e) => {
-                e.dataTransfer.setData('text/plain', JSON.stringify({
-                    ordem: item.dataset.ordem,
-                    html: item.outerHTML
-                }));
-                item.classList.add('dragging');
-            });
-
-            item.addEventListener('dragend', () => {
-                item.classList.remove('dragging');
+            item.addEventListener('click', (e) => {
+                e.preventDefault();
+                
+                // Não permitir selecionar se já foi colocado
+                if (item.classList.contains('colocado')) {
+                    return;
+                }
+                
+                // Remove seleção anterior
+                document.querySelectorAll('.velocidade-item').forEach(v => v.classList.remove('selecionado'));
+                
+                // Seleciona nova velocidade
+                item.classList.add('selecionado');
+                velocidadeSelecionadaAtual = item;
+                
+                const nome = item.querySelector('h4').textContent;
+                const velocidade = item.querySelector('span').textContent;
+                
+                if (typeof anunciarParaLeitorTela === 'function') {
+                    anunciarParaLeitorTela(`${nome} ${velocidade} selecionado. Clique em uma posição para colocar.`);
+                }
             });
         });
 
+        // Configurar cliques nos slots
         slots.forEach(slot => {
-            slot.addEventListener('dragover', (e) => {
+            slot.addEventListener('click', (e) => {
                 e.preventDefault();
-                if (!slot.classList.contains('ocupado')) {
-                    slot.classList.add('drag-over');
+                
+                if (!velocidadeSelecionadaAtual) {
+                    this.mostrarFeedback('feedback-desafio2', 'Selecione uma tecnologia primeiro!', 'erro');
+                    setTimeout(() => {
+                        document.getElementById('feedback-desafio2').style.display = 'none';
+                    }, 2000);
+                    return;
                 }
-            });
-
-            slot.addEventListener('dragleave', () => {
-                slot.classList.remove('drag-over');
-            });
-
-            slot.addEventListener('drop', (e) => {
-                e.preventDefault();
                 
-                if (slot.classList.contains('ocupado')) return;
+                if (slot.classList.contains('ocupado')) {
+                    this.mostrarFeedback('feedback-desafio2', 'Esta posição já está ocupada!', 'erro');
+                    setTimeout(() => {
+                        document.getElementById('feedback-desafio2').style.display = 'none';
+                    }, 2000);
+                    return;
+                }
 
-                const data = JSON.parse(e.dataTransfer.getData('text/plain'));
-                const posicaoSlot = slot.dataset.posicao;
+                const ordem = velocidadeSelecionadaAtual.getAttribute('data-ordem');
+                const posicaoSlot = slot.getAttribute('data-posicao');
                 
-                slot.classList.remove('drag-over');
                 slot.classList.add('ocupado');
-                slot.innerHTML = data.html;
-                slot.dataset.ordemCorreta = data.ordem;
-
-                // Remove o item original
-                const itemOriginal = document.querySelector(`.velocidades-container .velocidade-item[data-ordem="${data.ordem}"]`);
-                if (itemOriginal) {
-                    itemOriginal.style.opacity = '0.3';
-                    itemOriginal.style.pointerEvents = 'none';
-                }
+                slot.innerHTML = velocidadeSelecionadaAtual.outerHTML;
+                slot.setAttribute('data-ordem-correta', ordem);
+                
+                // Marca como colocado e esconde original
+                velocidadeSelecionadaAtual.classList.add('colocado');
+                velocidadeSelecionadaAtual.style.opacity = '0.3';
+                velocidadeSelecionadaAtual.style.pointerEvents = 'none';
+                velocidadeSelecionadaAtual.classList.remove('selecionado');
+                
+                velocidadeSelecionadaAtual = null;
 
                 this.verificarDesafio2();
             });
@@ -509,9 +567,12 @@ class Fase1Manager {
 
             // Reset dos itens
             document.querySelectorAll('.velocidades-container .velocidade-item').forEach(item => {
+                item.classList.remove('colocado', 'selecionado');
                 item.style.opacity = '1';
                 item.style.pointerEvents = 'all';
             });
+            
+            document.getElementById('feedback-desafio2').style.display = 'none';
         }, 2000);
     }
 

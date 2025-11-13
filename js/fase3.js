@@ -8,7 +8,25 @@ class Fase3Manager {
         this.classificacoesIP = {};
         this.rotasConfiguracao = {};
         this.desafiosConcluidos = [];
+        
+        // Integração com GameSystem
+        this.gameSystem = null;
+        this.waitForGameSystem();
+        
         this.inicializar();
+    }
+    
+    // Aguarda o GameSystem ser carregado
+    waitForGameSystem() {
+        const checkGameSystem = () => {
+            if (window.simpleGameSystem) {
+                this.gameSystem = window.simpleGameSystem;
+                console.log('SimpleGameSystem conectado à Fase 3');
+            } else {
+                setTimeout(checkGameSystem, 100);
+            }
+        };
+        checkGameSystem();
     }
 
     inicializar() {
@@ -63,6 +81,18 @@ class Fase3Manager {
         this.desafioAtual = numero;
         this.progressoAtual++;
         this.atualizarProgresso();
+        
+        // Iniciar timer na primeira vez que iniciar um desafio
+        if (this.gameSystem && !this.gameSystem.gameState.timerIniciado) {
+            console.log('🎮 Iniciando timer do jogo...');
+            this.gameSystem.iniciarTimer();
+        }
+        
+        // Mostrar HUD quando iniciar desafio
+        const hud = document.querySelector('.hud-progresso');
+        if (hud) {
+            hud.classList.add('visivel');
+        }
         
         // Esconde seção atual e mostra nova
         document.querySelectorAll('.fase-secao').forEach(secao => {

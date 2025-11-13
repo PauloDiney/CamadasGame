@@ -1,0 +1,1111 @@
+/* ============================================
+   FASE 4 - CAMADA DE TRANSPORTE
+   CSS Completo e Independente
+   ============================================ */
+
+/* === RESET E BASE === */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body.has-fase-container {
+    background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 100%);
+    color: #fff;
+    font-family: 'Kdam Thmor Pro', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* === CONTAINER PRINCIPAL === */
+.fase-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* === HEADER DA FASE === */
+.fase-header {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 152, 0, 0.2);
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    flex: 1;
+    min-width: 250px;
+}
+
+.btn-voltar-fase {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.25rem;
+    background: rgba(255, 255, 255, 0.05);
+    color: #FF9800;
+    border: 1px solid rgba(255, 152, 0, 0.3);
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: all 0.3s;
+}
+
+.btn-voltar-fase:hover {
+    background: rgba(255, 152, 0, 0.1);
+    border-color: #FF9800;
+    transform: translateX(-3px);
+}
+
+.fase-titulo h1 {
+    font-size: 1.5rem;
+    color: #E1EA2D;
+    margin-bottom: 0.25rem;
+}
+
+.fase-titulo p {
+    font-size: 0.9rem;
+    color: #FF9800;
+    opacity: 0.8;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.fase-pontos {
+    background: rgba(225, 234, 45, 0.1);
+    padding: 0.75rem 1.5rem;
+    border-radius: 25px;
+    border: 1px solid rgba(225, 234, 45, 0.3);
+}
+
+.fase-pontos span {
+    color: #E1EA2D;
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.fase-progresso {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.fase-progresso span {
+    font-size: 0.9rem;
+    color: #fff;
+}
+
+.progresso-bar-mini {
+    width: 120px;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progresso-fill-mini {
+    height: 100%;
+    background: linear-gradient(90deg, #FF9800, #F57C00);
+    border-radius: 10px;
+    transition: width 0.5s ease;
+    width: 0%;
+}
+
+/* === MAIN CONTENT === */
+.fase-main {
+    flex: 1;
+    padding: 2rem;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+.fase-secao {
+    display: none;
+    animation: fadeIn 0.5s;
+}
+
+.fase-secao.ativa {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* === INTRODUÇÃO === */
+.intro-visual {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+
+.transporte-animado {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 2rem;
+    background: rgba(255, 152, 0, 0.05);
+    border-radius: 15px;
+    border: 2px solid rgba(255, 152, 0, 0.3);
+    max-width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.protocolo-box {
+    padding: 1.5rem 2rem;
+    border-radius: 12px;
+    text-align: center;
+    min-width: 120px;
+}
+
+.tcp-box {
+    background: rgba(76, 175, 80, 0.2);
+    border: 2px solid #4CAF50;
+    color: #4CAF50;
+}
+
+.udp-box {
+    background: rgba(33, 150, 243, 0.2);
+    border: 2px solid #2196F3;
+    color: #2196F3;
+}
+
+.protocolo-box h3 {
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+}
+
+.protocolo-box p {
+    font-size: 0.85rem;
+    opacity: 0.9;
+}
+
+.intro-texto {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.intro-texto h2 {
+    font-size: 2rem;
+    color: #E1EA2D;
+    margin-bottom: 1rem;
+}
+
+.intro-texto > p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+}
+
+.conceitos-chave {
+    background: rgba(255, 255, 255, 0.03);
+    padding: 2rem;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 152, 0, 0.2);
+    margin-bottom: 2rem;
+    text-align: left;
+}
+
+.conceitos-chave h3 {
+    color: #FF9800;
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+}
+
+.conceitos-chave ul {
+    list-style: none;
+}
+
+.conceitos-chave li {
+    padding: 0.75rem 0;
+    font-size: 1rem;
+    line-height: 1.6;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.conceitos-chave li:last-child {
+    border-bottom: none;
+}
+
+.btn-continuar {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1.25rem 2.5rem;
+    background: linear-gradient(135deg, #E1EA2D, #C5D41F);
+    color: #000;
+    border: none;
+    border-radius: 30px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-family: inherit;
+}
+
+.btn-continuar:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(225, 234, 45, 0.4);
+}
+
+/* === DESAFIOS === */
+.desafio-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.desafio-header h2 {
+    font-size: 1.8rem;
+    color: #E1EA2D;
+    margin-bottom: 0.75rem;
+}
+
+.desafio-header p {
+    font-size: 1rem;
+    opacity: 0.9;
+}
+
+.desafio-area {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* === DESAFIO 1: TCP vs UDP === */
+.aplicacoes-lista {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    margin-bottom: 2rem;
+}
+
+.aplicacao-item {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 1.5rem;
+    border-radius: 15px;
+    border: 2px solid rgba(255, 152, 0, 0.3);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.5rem;
+    transition: all 0.3s;
+}
+
+.aplicacao-item:hover {
+    background: rgba(255, 152, 0, 0.1);
+    border-color: #FF9800;
+}
+
+.aplicacao-item.correto {
+    background: rgba(76, 175, 80, 0.15);
+    border-color: #4CAF50;
+}
+
+.aplicacao-item.incorreto {
+    background: rgba(244, 67, 54, 0.15);
+    border-color: #f44336;
+    animation: shake 0.5s;
+}
+
+.app-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.app-info h3 {
+    color: #FF9800;
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+}
+
+.app-info p {
+    color: #fff;
+    opacity: 0.8;
+    font-size: 0.9rem;
+}
+
+.protocolo-escolha {
+    display: flex;
+    gap: 0.75rem;
+    flex-shrink: 0;
+}
+
+.btn-protocolo {
+    padding: 0.75rem 1.5rem;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    color: #fff;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-family: inherit;
+    min-width: 70px;
+}
+
+.btn-protocolo:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+}
+
+.btn-protocolo.tcp {
+    border-color: rgba(76, 175, 80, 0.5);
+}
+
+.btn-protocolo.tcp:hover,
+.btn-protocolo.tcp.selecionado {
+    background: rgba(76, 175, 80, 0.2);
+    border-color: #4CAF50;
+    color: #4CAF50;
+}
+
+.btn-protocolo.udp {
+    border-color: rgba(33, 150, 243, 0.5);
+}
+
+.btn-protocolo.udp:hover,
+.btn-protocolo.udp.selecionado {
+    background: rgba(33, 150, 243, 0.2);
+    border-color: #2196F3;
+    color: #2196F3;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-10px); }
+    75% { transform: translateX(10px); }
+}
+
+/* === DESAFIO 2: PORTAS === */
+.portas-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.porta-card {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 2rem;
+    border-radius: 15px;
+    border: 2px solid rgba(255, 152, 0, 0.3);
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.porta-card:hover {
+    background: rgba(255, 152, 0, 0.1);
+    border-color: #FF9800;
+    transform: translateY(-5px);
+}
+
+.porta-numero {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #FF9800;
+    margin-bottom: 1rem;
+    font-family: 'Courier New', monospace;
+}
+
+.servico-opcoes {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-top: 1rem;
+}
+
+.servico-btn {
+    padding: 0.75rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(255, 152, 0, 0.3);
+    border-radius: 8px;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-weight: 600;
+}
+
+.servico-btn:hover {
+    background: rgba(255, 152, 0, 0.2);
+    border-color: #FF9800;
+}
+
+.servico-btn.selecionado {
+    background: rgba(225, 234, 45, 0.2);
+    border-color: #E1EA2D;
+    color: #E1EA2D;
+}
+
+.porta-card.correto {
+    background: rgba(76, 175, 80, 0.15);
+    border-color: #4CAF50;
+}
+
+.porta-card.incorreto {
+    background: rgba(244, 67, 54, 0.15);
+    border-color: #f44336;
+    animation: shake 0.5s;
+}
+
+/* === DESAFIO 3: SEGMENTOS === */
+.segmento-explicacao {
+    background: rgba(255, 152, 0, 0.05);
+    padding: 2rem;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 152, 0, 0.3);
+    margin-bottom: 3rem;
+    text-align: center;
+}
+
+.segmento-explicacao h3 {
+    color: #FF9800;
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+}
+
+.segmento-explicacao p {
+    font-size: 1rem;
+    line-height: 1.8;
+    opacity: 0.9;
+}
+
+.segmento-visualizacao {
+    background: rgba(77, 208, 225, 0.1);
+    padding: 2rem;
+    border-radius: 12px;
+    border: 2px solid rgba(77, 208, 225, 0.3);
+    margin-bottom: 2rem;
+}
+
+.segmento-visualizacao h3 {
+    color: #4DD0E1;
+    margin-bottom: 1.5rem;
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+.segmento-estrutura {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.segmento-parte {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    border: 1px solid rgba(77, 208, 225, 0.3);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.segmento-parte span:first-child {
+    color: #4DD0E1;
+    font-weight: 600;
+}
+
+.segmento-parte span:last-child {
+    font-family: 'Courier New', monospace;
+    color: #E1EA2D;
+}
+
+.ordem-desafio {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.componentes-disponiveis,
+.ordem-montagem {
+    background: rgba(255, 255, 255, 0.03);
+    padding: 1.5rem;
+    border-radius: 12px;
+    border: 2px solid rgba(255, 152, 0, 0.3);
+}
+
+.componentes-disponiveis h4,
+.ordem-montagem h4 {
+    color: #FF9800;
+    margin-bottom: 1.25rem;
+    text-align: center;
+    font-size: 1.1rem;
+}
+
+.componente-lista,
+.slot-lista {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.componente-item {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 1rem;
+    border-radius: 8px;
+    border: 2px solid rgba(255, 152, 0, 0.3);
+    cursor: move;
+    transition: all 0.3s;
+    text-align: center;
+    color: #FF9800;
+    font-weight: 600;
+}
+
+.componente-item:hover {
+    background: rgba(255, 152, 0, 0.15);
+    border-color: #FF9800;
+}
+
+.componente-item.arrastando {
+    opacity: 0.4;
+}
+
+.slot-item {
+    min-height: 60px;
+    border: 2px dashed rgba(77, 208, 225, 0.4);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    background: rgba(77, 208, 225, 0.05);
+    transition: all 0.3s;
+    color: #4DD0E1;
+}
+
+.slot-item:hover {
+    border-color: #4DD0E1;
+    border-style: solid;
+    background: rgba(77, 208, 225, 0.15);
+}
+
+.slot-item.drag-over {
+    border-color: #E1EA2D;
+    border-style: solid;
+    background: rgba(225, 234, 45, 0.2);
+}
+
+.slot-item.ocupado {
+    border-color: #E1EA2D;
+    border-style: solid;
+    background: rgba(225, 234, 45, 0.1);
+    color: #E1EA2D;
+}
+
+.slot-item.correto {
+    border-color: #4CAF50;
+    background: rgba(76, 175, 80, 0.15);
+    color: #4CAF50;
+}
+
+.slot-item.incorreto {
+    border-color: #f44336;
+    background: rgba(244, 67, 54, 0.15);
+    color: #f44336;
+}
+
+/* === BOTÕES === */
+.btn-verificar,
+.btn-resetar {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 25px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-family: inherit;
+    margin-right: 1rem;
+}
+
+.btn-verificar {
+    background: linear-gradient(135deg, #FF9800, #F57C00);
+    color: #fff;
+}
+
+.btn-verificar:hover:not(:disabled) {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(255, 152, 0, 0.4);
+}
+
+.btn-verificar:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.btn-resetar {
+    background: rgba(128, 128, 128, 0.2);
+    color: #fff;
+    border: 1px solid rgba(128, 128, 128, 0.4);
+}
+
+.btn-resetar:hover {
+    background: rgba(128, 128, 128, 0.3);
+    transform: translateY(-3px);
+}
+
+/* === FEEDBACK === */
+.desafio-feedback {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    border-radius: 12px;
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: 600;
+    display: none;
+}
+
+.desafio-feedback.sucesso {
+    display: block;
+    background: rgba(76, 175, 80, 0.15);
+    border: 2px solid #4CAF50;
+    color: #4CAF50;
+}
+
+.desafio-feedback.erro {
+    display: block;
+    background: rgba(244, 67, 54, 0.15);
+    border: 2px solid #f44336;
+    color: #f44336;
+}
+
+/* === CONCLUSÃO === */
+.conclusao-visual {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.sucesso-icon {
+    width: 100px;
+    height: 100px;
+    background: linear-gradient(135deg, #4CAF50, #8BC34A);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 4rem;
+    color: #fff;
+    margin: 0 auto 2rem;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+.conclusao-visual h2 {
+    font-size: 2.5rem;
+    color: #E1EA2D;
+    margin-bottom: 1rem;
+}
+
+.conclusao-visual p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+}
+
+.conhecimentos-adquiridos {
+    background: rgba(76, 175, 80, 0.05);
+    padding: 2.5rem;
+    border-radius: 15px;
+    border: 2px solid rgba(76, 175, 80, 0.3);
+    margin-bottom: 2rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.conhecimentos-adquiridos h3 {
+    color: #4CAF50;
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+.conhecimentos-adquiridos ul {
+    list-style: none;
+}
+
+.conhecimentos-adquiridos li {
+    padding: 1rem;
+    font-size: 1.1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.conhecimentos-adquiridos li:last-child {
+    border-bottom: none;
+}
+
+.resultados-fase {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    max-width: 900px;
+    margin: 0 auto 2rem;
+}
+
+.resultado-item {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 1.5rem;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 152, 0, 0.3);
+    text-align: center;
+}
+
+.resultado-label {
+    display: block;
+    color: #FF9800;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+    opacity: 0.8;
+}
+
+.resultado-valor {
+    display: block;
+    color: #E1EA2D;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.conclusao-acoes {
+    text-align: center;
+}
+
+
+
+/* ============================================
+   RESPONSIVIDADE MOBILE
+   ============================================ */
+
+@media (max-width: 768px) {
+    /* Header */
+    .fase-header {
+        padding: 1rem;
+        flex-direction: column;
+        align-items: flex-start;
+        position: relative;
+    }
+    
+    .header-left {
+        width: 100%;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+    
+    .btn-voltar-fase {
+        padding: 0.6rem 1rem;
+        font-size: 0.85rem;
+    }
+    
+    .fase-titulo h1 {
+        font-size: 1.2rem;
+    }
+    
+    .fase-titulo p {
+        font-size: 0.8rem;
+    }
+    
+    .header-right {
+        width: 100%;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
+    }
+    
+    .progresso-bar-mini {
+        width: 100px;
+    }
+    
+    /* Main */
+    .fase-main {
+        padding: 1rem;
+        width: 100%;
+        max-width: 100vw;
+        overflow-x: hidden;
+    }
+    
+    .fase-secao {
+        width: 100%;
+        max-width: 100%;
+    }
+    
+    /* Introdução */
+    .intro-visual {
+        margin-bottom: 1.5rem;
+    }
+    
+    .transporte-animado {
+        padding: 1rem;
+        gap: 1rem;
+    }
+    
+    .protocolo-box {
+        padding: 1rem 1.5rem;
+        min-width: 100px;
+    }
+    
+    .protocolo-box h3 {
+        font-size: 1.1rem;
+    }
+    
+    .protocolo-box p {
+        font-size: 0.75rem;
+    }
+    
+    .intro-texto {
+        padding: 0 0.5rem;
+    }
+    
+    .intro-texto h2 {
+        font-size: 1.4rem;
+    }
+    
+    .intro-texto > p {
+        font-size: 0.9rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .conceitos-chave {
+        padding: 1.25rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .conceitos-chave h3 {
+        font-size: 1rem;
+    }
+    
+    .conceitos-chave li {
+        font-size: 0.85rem;
+        padding: 0.5rem 0;
+    }
+    
+    .btn-continuar {
+        width: 100%;
+        justify-content: center;
+        padding: 1rem 1.5rem;
+        font-size: 1rem;
+    }
+    
+    /* Desafios */
+    .desafio-header {
+        margin-bottom: 2rem;
+    }
+    
+    .desafio-header h2 {
+        font-size: 1.3rem;
+    }
+    
+    .desafio-header p {
+        font-size: 0.9rem;
+    }
+    
+    /* Desafio 1: Aplicações - Mobile */
+    .aplicacoes-lista {
+        gap: 1rem;
+    }
+    
+    .aplicacao-item {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 1.25rem;
+        gap: 1rem;
+    }
+    
+    .app-info h3 {
+        font-size: 1rem;
+        text-align: center;
+    }
+    
+    .app-info p {
+        font-size: 0.85rem;
+        text-align: center;
+    }
+    
+    .protocolo-escolha {
+        justify-content: center;
+        width: 100%;
+        gap: 0.5rem;
+    }
+    
+    .btn-protocolo {
+        flex: 1;
+        padding: 0.7rem 1rem;
+        font-size: 0.9rem;
+    }
+    
+    /* Desafio 2: Portas - 1 coluna */
+    .portas-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .porta-card {
+        padding: 1.5rem;
+    }
+    
+    .porta-numero {
+        font-size: 1.6rem;
+    }
+    
+    .servico-btn {
+        padding: 0.6rem;
+        font-size: 0.85rem;
+    }
+    
+    /* Desafio 3: Segmentos */
+    .segmento-explicacao {
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+    }
+    
+    .segmento-explicacao h3 {
+        font-size: 1.1rem;
+    }
+    
+    .segmento-explicacao p {
+        font-size: 0.9rem;
+    }
+    
+    .segmento-visualizacao {
+        padding: 1.5rem;
+    }
+    
+    .segmento-visualizacao h3 {
+        font-size: 1.1rem;
+    }
+    
+    .segmento-parte {
+        padding: 0.75rem 1rem;
+        font-size: 0.85rem;
+        flex-direction: column;
+        gap: 0.5rem;
+        text-align: center;
+    }
+    
+    .ordem-desafio {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .componentes-disponiveis,
+    .ordem-montagem {
+        padding: 1.25rem;
+    }
+    
+    .componente-item,
+    .slot-item {
+        padding: 0.75rem;
+        font-size: 0.85rem;
+    }
+    
+    /* Botões */
+    .btn-verificar,
+    .btn-resetar {
+        width: 100%;
+        margin: 0.5rem 0;
+        padding: 0.9rem 1.5rem;
+        font-size: 0.9rem;
+    }
+    
+    /* Conclusão */
+    .sucesso-icon {
+        width: 80px;
+        height: 80px;
+        font-size: 3rem;
+    }
+    
+    .conclusao-visual h2 {
+        font-size: 1.8rem;
+    }
+    
+    .conclusao-visual p {
+        font-size: 1rem;
+    }
+    
+    .conhecimentos-adquiridos {
+        padding: 1.5rem;
+    }
+    
+    .conhecimentos-adquiridos h3 {
+        font-size: 1.2rem;
+    }
+    
+    .conhecimentos-adquiridos li {
+        font-size: 0.95rem;
+        padding: 0.75rem;
+    }
+    
+    .resultados-fase {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .resultado-item {
+        padding: 1.25rem;
+    }
+
+}
+
+/* === TELAS PEQUENAS === */
+@media (max-width: 480px) {
+    .fase-titulo h1 {
+        font-size: 1rem;
+    }
+    
+    .desafio-header h2 {
+        font-size: 1.1rem;
+    }
+    
+    .protocolo-box h3 {
+        font-size: 1rem;
+    }
+    
+    .cenario-card h4 {
+        font-size: 0.9rem;
+    }
+    
+    .porta-numero {
+        font-size: 1.4rem;
+    }
+    
+    .segmento-parte {
+        font-size: 0.8rem;
+    }
+}

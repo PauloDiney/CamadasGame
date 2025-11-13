@@ -1,0 +1,1077 @@
+/* ============================================
+   FASE 3 - CAMADA DE REDE
+   CSS Completo e Independente
+   ============================================ */
+
+/* === RESET E BASE === */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body.has-fase-container {
+    background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 100%);
+    color: #fff;
+    font-family: 'Kdam Thmor Pro', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* === CONTAINER PRINCIPAL === */
+.fase-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* === HEADER DA FASE === */
+.fase-header {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(156, 39, 176, 0.2);
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    flex: 1;
+    min-width: 250px;
+}
+
+.btn-voltar-fase {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.25rem;
+    background: rgba(255, 255, 255, 0.05);
+    color: #9C27B0;
+    border: 1px solid rgba(156, 39, 176, 0.3);
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: all 0.3s;
+}
+
+.btn-voltar-fase:hover {
+    background: rgba(156, 39, 176, 0.1);
+    border-color: #9C27B0;
+    transform: translateX(-3px);
+}
+
+.fase-titulo h1 {
+    font-size: 1.5rem;
+    color: #E1EA2D;
+    margin-bottom: 0.25rem;
+}
+
+.fase-titulo p {
+    font-size: 0.9rem;
+    color: #9C27B0;
+    opacity: 0.8;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.fase-pontos {
+    background: rgba(225, 234, 45, 0.1);
+    padding: 0.75rem 1.5rem;
+    border-radius: 25px;
+    border: 1px solid rgba(225, 234, 45, 0.3);
+}
+
+.fase-pontos span {
+    color: #E1EA2D;
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.fase-progresso {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.fase-progresso span {
+    font-size: 0.9rem;
+    color: #fff;
+}
+
+.progresso-bar-mini {
+    width: 120px;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progresso-fill-mini {
+    height: 100%;
+    background: linear-gradient(90deg, #9C27B0, #7B1FA2);
+    border-radius: 10px;
+    transition: width 0.5s ease;
+    width: 0%;
+}
+
+/* === MAIN CONTENT === */
+.fase-main {
+    flex: 1;
+    padding: 2rem;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+.fase-secao {
+    display: none;
+    animation: fadeIn 0.5s;
+}
+
+.fase-secao.ativa {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* === INTRODUÇÃO === */
+.intro-visual {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+
+.roteador-animado {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 2rem;
+    background: rgba(156, 39, 176, 0.05);
+    border-radius: 15px;
+    border: 2px solid rgba(156, 39, 176, 0.3);
+    max-width: 100%;
+}
+
+.roteador-icone {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #9C27B0, #7B1FA2);
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+.rede-conexoes {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.dispositivo {
+    width: 50px;
+    height: 50px;
+    background: rgba(77, 208, 225, 0.2);
+    border: 2px solid #4DD0E1;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+}
+
+.linha-conexao {
+    width: 50px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #9C27B0, transparent);
+}
+
+.intro-texto {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.intro-texto h2 {
+    font-size: 2rem;
+    color: #E1EA2D;
+    margin-bottom: 1rem;
+}
+
+.intro-texto > p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+}
+
+.conceitos-chave {
+    background: rgba(255, 255, 255, 0.03);
+    padding: 2rem;
+    border-radius: 12px;
+    border: 1px solid rgba(156, 39, 176, 0.2);
+    margin-bottom: 2rem;
+    text-align: left;
+}
+
+.conceitos-chave h3 {
+    color: #9C27B0;
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+}
+
+.conceitos-chave ul {
+    list-style: none;
+}
+
+.conceitos-chave li {
+    padding: 0.75rem 0;
+    font-size: 1rem;
+    line-height: 1.6;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.conceitos-chave li:last-child {
+    border-bottom: none;
+}
+
+.btn-continuar {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1.25rem 2.5rem;
+    background: linear-gradient(135deg, #E1EA2D, #C5D41F);
+    color: #000;
+    border: none;
+    border-radius: 30px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-family: inherit;
+}
+
+.btn-continuar:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(225, 234, 45, 0.4);
+}
+
+/* === DESAFIOS === */
+.desafio-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.desafio-header h2 {
+    font-size: 1.8rem;
+    color: #E1EA2D;
+    margin-bottom: 0.75rem;
+}
+
+.desafio-header p {
+    font-size: 1rem;
+    opacity: 0.9;
+}
+
+.desafio-area {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* === DESAFIO 1: CLASSIFICAÇÃO DE IPs === */
+.ip-cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.ip-card {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 2rem;
+    border-radius: 15px;
+    border: 2px solid rgba(156, 39, 176, 0.3);
+    cursor: pointer;
+    transition: all 0.3s;
+    text-align: center;
+}
+
+.ip-card:hover {
+    background: rgba(156, 39, 176, 0.1);
+    border-color: #9C27B0;
+    transform: translateY(-5px);
+}
+
+.ip-card.selecionado {
+    background: rgba(225, 234, 45, 0.15);
+    border-color: #E1EA2D;
+    transform: scale(1.05);
+}
+
+.ip-card.correto {
+    background: rgba(76, 175, 80, 0.15);
+    border-color: #4CAF50;
+}
+
+.ip-card.incorreto {
+    background: rgba(244, 67, 54, 0.15);
+    border-color: #f44336;
+    animation: shake 0.5s;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-10px); }
+    75% { transform: translateX(10px); }
+}
+
+.ip-address {
+    font-family: 'Courier New', monospace;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #9C27B0;
+    margin-bottom: 1rem;
+}
+
+.classe-opcoes {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.classe-btn {
+    padding: 0.6rem 1.2rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(156, 39, 176, 0.3);
+    border-radius: 8px;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-weight: 600;
+}
+
+.classe-btn:hover {
+    background: rgba(156, 39, 176, 0.2);
+    border-color: #9C27B0;
+}
+
+.classe-btn.selecionada {
+    background: rgba(225, 234, 45, 0.2);
+    border-color: #E1EA2D;
+    color: #E1EA2D;
+}
+
+.ip-status {
+    margin-top: 1rem;
+    font-size: 2rem;
+    min-height: 40px;
+}
+
+/* === DESAFIO 2: TABELA DE ROTEAMENTO === */
+.tabela-roteamento {
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 2rem;
+}
+
+.tabela-roteamento table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tabela-roteamento th {
+    background: rgba(156, 39, 176, 0.2);
+    padding: 1.25rem;
+    text-align: left;
+    color: #9C27B0;
+    font-weight: 700;
+    border-bottom: 2px solid rgba(156, 39, 176, 0.4);
+}
+
+.tabela-roteamento td {
+    padding: 1.25rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    font-family: 'Courier New', monospace;
+}
+
+.tabela-roteamento tr:hover {
+    background: rgba(156, 39, 176, 0.05);
+}
+
+.pacote-teste {
+    background: rgba(77, 208, 225, 0.1);
+    padding: 2rem;
+    border-radius: 12px;
+    border: 2px solid rgba(77, 208, 225, 0.3);
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.pacote-teste h3 {
+    color: #4DD0E1;
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+}
+
+.pacote-ip {
+    font-family: 'Courier New', monospace;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #E1EA2D;
+    margin: 1rem 0;
+}
+
+.rotas-opcoes {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+    margin-top: 2rem;
+}
+
+.rota-opcao {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 1.5rem;
+    border-radius: 12px;
+    border: 2px solid rgba(156, 39, 176, 0.3);
+    cursor: pointer;
+    transition: all 0.3s;
+    text-align: center;
+}
+
+.rota-opcao:hover {
+    background: rgba(156, 39, 176, 0.1);
+    border-color: #9C27B0;
+    transform: translateY(-3px);
+}
+
+.rota-opcao.selecionada {
+    background: rgba(225, 234, 45, 0.15);
+    border-color: #E1EA2D;
+    transform: scale(1.05);
+}
+
+.rota-opcao.correta {
+    background: rgba(76, 175, 80, 0.15);
+    border-color: #4CAF50;
+}
+
+.rota-opcao.incorreta {
+    background: rgba(244, 67, 54, 0.15);
+    border-color: #f44336;
+}
+
+.rota-opcao h4 {
+    color: #9C27B0;
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.rota-opcao p {
+    font-family: 'Courier New', monospace;
+    font-size: 0.95rem;
+    opacity: 0.9;
+}
+
+/* === DESAFIO 3: SUB-REDES === */
+.subnet-explicacao {
+    background: rgba(156, 39, 176, 0.05);
+    padding: 2rem;
+    border-radius: 12px;
+    border: 1px solid rgba(156, 39, 176, 0.3);
+    margin-bottom: 3rem;
+    text-align: center;
+}
+
+.subnet-explicacao h3 {
+    color: #9C27B0;
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+}
+
+.subnet-explicacao p {
+    font-size: 1rem;
+    line-height: 1.8;
+    opacity: 0.9;
+}
+
+.subnet-problema {
+    background: rgba(77, 208, 225, 0.1);
+    padding: 2rem;
+    border-radius: 12px;
+    border: 2px solid rgba(77, 208, 225, 0.3);
+    margin-bottom: 2rem;
+}
+
+.subnet-problema h3 {
+    color: #4DD0E1;
+    margin-bottom: 1.5rem;
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+.subnet-info {
+    font-family: 'Courier New', monospace;
+    font-size: 1.1rem;
+    line-height: 2;
+    text-align: center;
+}
+
+.subnet-info strong {
+    color: #E1EA2D;
+}
+
+.subnet-opcoes {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+    margin-top: 2rem;
+}
+
+.subnet-opcao {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 1.75rem;
+    border-radius: 12px;
+    border: 2px solid rgba(156, 39, 176, 0.3);
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.subnet-opcao:hover {
+    background: rgba(156, 39, 176, 0.1);
+    border-color: #9C27B0;
+    transform: translateY(-3px);
+}
+
+.subnet-opcao.selecionada {
+    background: rgba(225, 234, 45, 0.15);
+    border-color: #E1EA2D;
+    transform: scale(1.05);
+}
+
+.subnet-opcao.correta {
+    background: rgba(76, 175, 80, 0.15);
+    border-color: #4CAF50;
+}
+
+.subnet-opcao.incorreta {
+    background: rgba(244, 67, 54, 0.15);
+    border-color: #f44336;
+}
+
+.subnet-opcao h4 {
+    color: #9C27B0;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    text-align: center;
+}
+
+.subnet-opcao p {
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+    line-height: 1.8;
+    opacity: 0.9;
+    text-align: center;
+}
+
+/* === BOTÕES === */
+.btn-verificar {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 2rem;
+    background: linear-gradient(135deg, #9C27B0, #7B1FA2);
+    color: #fff;
+    border: none;
+    border-radius: 25px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-family: inherit;
+}
+
+.btn-verificar:hover:not(:disabled) {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(156, 39, 176, 0.4);
+}
+
+.btn-verificar:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+/* === FEEDBACK === */
+.desafio-feedback {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    border-radius: 12px;
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: 600;
+    display: none;
+}
+
+.desafio-feedback.sucesso {
+    display: block;
+    background: rgba(76, 175, 80, 0.15);
+    border: 2px solid #4CAF50;
+    color: #4CAF50;
+}
+
+.desafio-feedback.erro {
+    display: block;
+    background: rgba(244, 67, 54, 0.15);
+    border: 2px solid #f44336;
+    color: #f44336;
+}
+
+/* === CONCLUSÃO === */
+.conclusao-visual {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.sucesso-icon {
+    width: 100px;
+    height: 100px;
+    background: linear-gradient(135deg, #4CAF50, #8BC34A);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 4rem;
+    color: #fff;
+    margin: 0 auto 2rem;
+    animation: pulse 2s infinite;
+}
+
+.conclusao-visual h2 {
+    font-size: 2.5rem;
+    color: #E1EA2D;
+    margin-bottom: 1rem;
+}
+
+.conclusao-visual p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+}
+
+.conhecimentos-adquiridos {
+    background: rgba(76, 175, 80, 0.05);
+    padding: 2.5rem;
+    border-radius: 15px;
+    border: 2px solid rgba(76, 175, 80, 0.3);
+    margin-bottom: 2rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.conhecimentos-adquiridos h3 {
+    color: #4CAF50;
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+.conhecimentos-adquiridos ul {
+    list-style: none;
+}
+
+.conhecimentos-adquiridos li {
+    padding: 1rem;
+    font-size: 1.1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.conhecimentos-adquiridos li:last-child {
+    border-bottom: none;
+}
+
+.resultados-fase {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    max-width: 900px;
+    margin: 0 auto 2rem;
+}
+
+.resultado-item {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 1.5rem;
+    border-radius: 12px;
+    border: 1px solid rgba(156, 39, 176, 0.3);
+    text-align: center;
+}
+
+.resultado-label {
+    display: block;
+    color: #9C27B0;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+    opacity: 0.8;
+}
+
+.resultado-valor {
+    display: block;
+    color: #E1EA2D;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.conclusao-acoes {
+    text-align: center;
+}
+
+
+
+/* ============================================
+   RESPONSIVIDADE MOBILE
+   ============================================ */
+
+@media (max-width: 768px) {
+    /* Header */
+    .fase-header {
+        padding: 1rem;
+        flex-direction: column;
+        align-items: flex-start;
+        position: relative;
+    }
+    
+    .header-left {
+        width: 100%;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+    
+    .btn-voltar-fase {
+        padding: 0.6rem 1rem;
+        font-size: 0.85rem;
+    }
+    
+    .fase-titulo h1 {
+        font-size: 1.2rem;
+    }
+    
+    .fase-titulo p {
+        font-size: 0.8rem;
+    }
+    
+    .header-right {
+        width: 100%;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
+    }
+    
+    .progresso-bar-mini {
+        width: 100px;
+    }
+    
+    /* Main */
+    .fase-main {
+        padding: 1rem;
+        width: 100%;
+        max-width: 100vw;
+        overflow-x: hidden;
+    }
+    
+    .fase-secao {
+        width: 100%;
+        max-width: 100%;
+    }
+    
+    /* Introdução */
+    .intro-visual {
+        margin-bottom: 1.5rem;
+    }
+    
+    .roteador-animado {
+        padding: 1rem;
+    }
+    
+    .roteador-icone {
+        width: 60px;
+        height: 60px;
+        font-size: 2rem;
+    }
+    
+    .dispositivo {
+        width: 35px;
+        height: 35px;
+        font-size: 1rem;
+    }
+    
+    .linha-conexao {
+        width: 20px;
+    }
+    
+    .rede-conexoes {
+        gap: 0.5rem;
+    }
+    
+    .intro-texto {
+        padding: 0 0.5rem;
+    }
+    
+    .intro-texto h2 {
+        font-size: 1.4rem;
+    }
+    
+    .intro-texto > p {
+        font-size: 0.9rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .conceitos-chave {
+        padding: 1.25rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .conceitos-chave h3 {
+        font-size: 1rem;
+    }
+    
+    .conceitos-chave li {
+        font-size: 0.85rem;
+        padding: 0.5rem 0;
+    }
+    
+    .btn-continuar {
+        width: 100%;
+        justify-content: center;
+        padding: 1rem 1.5rem;
+        font-size: 1rem;
+    }
+    
+    /* Desafios */
+    .desafio-header {
+        margin-bottom: 2rem;
+    }
+    
+    .desafio-header h2 {
+        font-size: 1.3rem;
+    }
+    
+    .desafio-header p {
+        font-size: 0.9rem;
+    }
+    
+    /* Desafio 1: IPs - 1 coluna */
+    .ip-cards {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .ip-card {
+        padding: 1.5rem;
+    }
+    
+    .ip-address {
+        font-size: 1.1rem;
+    }
+    
+    .classe-opcoes {
+        gap: 0.5rem;
+    }
+    
+    .classe-btn {
+        padding: 0.5rem 1rem;
+        font-size: 0.85rem;
+    }
+    
+    /* Desafio 2: Roteamento */
+    .tabela-roteamento {
+        overflow-x: auto;
+    }
+    
+    .tabela-roteamento th,
+    .tabela-roteamento td {
+        padding: 0.75rem;
+        font-size: 0.8rem;
+    }
+    
+    .pacote-teste {
+        padding: 1.5rem;
+    }
+    
+    .pacote-teste h3 {
+        font-size: 1.1rem;
+    }
+    
+    .pacote-ip {
+        font-size: 1.3rem;
+    }
+    
+    .rotas-opcoes {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .rota-opcao {
+        padding: 1.25rem;
+    }
+    
+    .rota-opcao h4 {
+        font-size: 1rem;
+    }
+    
+    .rota-opcao p {
+        font-size: 0.85rem;
+    }
+    
+    /* Desafio 3: Sub-redes */
+    .subnet-explicacao {
+        padding: 1.5rem;
+    }
+    
+    .subnet-explicacao h3 {
+        font-size: 1.1rem;
+    }
+    
+    .subnet-explicacao p {
+        font-size: 0.9rem;
+    }
+    
+    .subnet-problema {
+        padding: 1.5rem;
+    }
+    
+    .subnet-problema h3 {
+        font-size: 1.1rem;
+    }
+    
+    .subnet-info {
+        font-size: 0.95rem;
+    }
+    
+    .subnet-opcoes {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .subnet-opcao {
+        padding: 1.25rem;
+    }
+    
+    .subnet-opcao h4 {
+        font-size: 0.9rem;
+    }
+    
+    .subnet-opcao p {
+        font-size: 0.8rem;
+    }
+    
+    /* Botões */
+    .btn-verificar {
+        width: 100%;
+        padding: 0.9rem 1.5rem;
+        font-size: 0.9rem;
+    }
+    
+    /* Conclusão */
+    .sucesso-icon {
+        width: 80px;
+        height: 80px;
+        font-size: 3rem;
+    }
+    
+    .conclusao-visual h2 {
+        font-size: 1.8rem;
+    }
+    
+    .conclusao-visual p {
+        font-size: 1rem;
+    }
+    
+    .conhecimentos-adquiridos {
+        padding: 1.5rem;
+    }
+    
+    .conhecimentos-adquiridos h3 {
+        font-size: 1.2rem;
+    }
+    
+    .conhecimentos-adquiridos li {
+        font-size: 0.95rem;
+        padding: 0.75rem;
+    }
+    
+    .resultados-fase {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .resultado-item {
+        padding: 1.25rem;
+    }
+
+}
+
+/* === TELAS PEQUENAS === */
+@media (max-width: 480px) {
+    .fase-titulo h1 {
+        font-size: 1rem;
+    }
+    
+    .desafio-header h2 {
+        font-size: 1.1rem;
+    }
+    
+    .ip-address {
+        font-size: 1rem;
+    }
+    
+    .classe-btn {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.8rem;
+    }
+    
+    .pacote-ip {
+        font-size: 1.1rem;
+    }
+    
+    .tabela-roteamento th,
+    .tabela-roteamento td {
+        padding: 0.5rem;
+        font-size: 0.75rem;
+    }
+}

@@ -20,7 +20,8 @@ body {
   
 }
 
-body::before {
+/* Efeitos de fundo desabilitados nas páginas de fase para evitar quebra de layout */
+body:not(.fase-container):not(.has-fase-container)::before {
     content: '';
     position: fixed;
     top: 0;
@@ -40,7 +41,7 @@ body::before {
     opacity: 0.6;
 }
 
-body::after {
+body:not(.fase-container):not(.has-fase-container)::after {
     content: '';
     position: fixed;
     top: 0;

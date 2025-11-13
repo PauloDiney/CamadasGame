@@ -9,7 +9,25 @@ class Fase4Manager {
         this.portasAssociadas = {};
         this.etapasOrdenadas = [];
         this.desafiosConcluidos = [];
+        
+        // Integração com GameSystem
+        this.gameSystem = null;
+        this.waitForGameSystem();
+        
         this.inicializar();
+    }
+    
+    // Aguarda o GameSystem ser carregado
+    waitForGameSystem() {
+        const checkGameSystem = () => {
+            if (window.simpleGameSystem) {
+                this.gameSystem = window.simpleGameSystem;
+                console.log('SimpleGameSystem conectado à Fase 4');
+            } else {
+                setTimeout(checkGameSystem, 100);
+            }
+        };
+        checkGameSystem();
     }
 
     inicializar() {
@@ -57,6 +75,18 @@ class Fase4Manager {
         this.desafioAtual = numero;
         this.progressoAtual++;
         this.atualizarProgresso();
+        
+        // Iniciar timer na primeira vez que iniciar um desafio
+        if (this.gameSystem && !this.gameSystem.gameState.timerIniciado) {
+            console.log('🎮 Iniciando timer do jogo...');
+            this.gameSystem.iniciarTimer();
+        }
+        
+        // Mostrar HUD quando iniciar desafio
+        const hud = document.querySelector('.hud-progresso');
+        if (hud) {
+            hud.classList.add('visivel');
+        }
         
         // Esconde seção atual e mostra nova
         document.querySelectorAll('.fase-secao').forEach(secao => {
@@ -151,36 +181,47 @@ class Fase4Manager {
         setTimeout(() => {
             const servicos = document.querySelectorAll('.servico-item');
             const slots = document.querySelectorAll('.porta-slot');
+            let servicoSelecionado = null;
 
+            // Configurar cliques nos serviços
             servicos.forEach(servico => {
-                servico.addEventListener('dragstart', (e) => {
-                    e.dataTransfer.setData('text/plain', servico.dataset.servico);
-                    e.dataTransfer.setData('porta', servico.dataset.porta);
-                    servico.classList.add('arrastando');
-                });
-
-                servico.addEventListener('dragend', () => {
-                    servico.classList.remove('arrastando');
+                servico.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    
+                    // Não permitir selecionar se já foi usado
+                    if (servico.style.display === 'none') return;
+                    
+                    // Remove seleção anterior
+                    document.querySelectorAll('.servico-item').forEach(s => s.classList.remove('selecionado'));
+                    
+                    // Seleciona novo serviço
+                    servico.classList.add('selecionado');
+                    servicoSelecionado = servico;
+                    
+                    if (typeof anunciarParaLeitorTela === 'function') {
+                        const nome = servico.getAttribute('data-servico');
+                        const porta = servico.getAttribute('data-porta');
+                        anunciarParaLeitorTela(`${nome} porta ${porta} selecionado. Clique em um slot para associar.`);
+                    }
                 });
             });
 
+            // Configurar cliques nos slots
             slots.forEach(slot => {
-                slot.addEventListener('dragover', (e) => {
+                slot.addEventListener('click', (e) => {
                     e.preventDefault();
-                    slot.classList.add('hover');
-                });
-
-                slot.addEventListener('dragleave', () => {
-                    slot.classList.remove('hover');
-                });
-
-                slot.addEventListener('drop', (e) => {
-                    e.preventDefault();
-                    slot.classList.remove('hover');
                     
-                    const servico = e.dataTransfer.getData('text/plain');
-                    const portaServico = e.dataTransfer.getData('porta');
-                    const portaSlot = slot.dataset.porta;
+                    if (!servicoSelecionado) {
+                        const feedback = document.getElementById('feedback-desafio2');
+                        feedback.textContent = 'Selecione um serviço primeiro!';
+                        feedback.className = 'desafio-feedback erro';
+                        feedback.style.display = 'block';
+                        setTimeout(() => feedback.style.display = 'none', 2000);
+                        return;
+                    }
+                    
+                    const servico = servicoSelecionado.getAttribute('data-servico');
+                    const portaSlot = slot.getAttribute('data-porta');
                     
                     // Remove serviço anterior se existir
                     const slotContent = slot.querySelector('.slot-content');
@@ -189,6 +230,7 @@ class Fase4Manager {
                         const elementoAnterior = document.querySelector(`[data-servico="${servicoAnterior}"]`);
                         if (elementoAnterior) {
                             elementoAnterior.style.display = 'block';
+                            elementoAnterior.classList.remove('selecionado');
                         }
                     }
                     
@@ -197,10 +239,9 @@ class Fase4Manager {
                     slotContent.textContent = servico;
                     
                     // Esconde serviço da lista
-                    const elemento = document.querySelector(`[data-servico="${servico}"]`);
-                    if (elemento) {
-                        elemento.style.display = 'none';
-                    }
+                    servicoSelecionado.style.display = 'none';
+                    servicoSelecionado.classList.remove('selecionado');
+                    servicoSelecionado = null;
                     
                     this.verificarPortasCompletas();
                 });

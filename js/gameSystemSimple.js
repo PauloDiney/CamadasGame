@@ -15,6 +15,7 @@ class SimpleGameSystem {
             tempo: 60,
             pontos: 0,
             ativo: false,
+            timerIniciado: false,
             timerId: null
         };
         
@@ -199,13 +200,11 @@ class SimpleGameSystem {
                 // Inserir no início do body para ficar fixo no topo
                 document.body.insertAdjacentHTML('afterbegin', hudHTML);
                 
-                // Adicionar padding ao body para compensar o HUD fixo
-                document.body.style.paddingTop = '80px';
-                
                 const hudCreated = document.getElementById('simple-game-hud');
                 if (hudCreated) {
                     console.log('✅ Interface criada com sucesso!');
-                    this.iniciarTimer();
+                    // NÃO iniciar timer automaticamente
+                    console.log('⏸️ Timer aguardando início do jogo...');
                 } else {
                     console.log('❌ Falha ao criar interface');
                 }
@@ -219,6 +218,12 @@ class SimpleGameSystem {
     }
     
     iniciarTimer() {
+        // Só iniciar se ainda não foi iniciado
+        if (this.gameState.timerIniciado) {
+            console.log('⚠️ Timer já foi iniciado!');
+            return;
+        }
+        
         console.log('🚀 Iniciando timer...');
         
         // Limpeza robusta de timers anteriores
@@ -236,6 +241,7 @@ class SimpleGameSystem {
         }
         
         this.gameState.ativo = true;
+        this.gameState.timerIniciado = true;
         
         this.gameState.timerId = setInterval(() => {
             this.gameState.tempo--;
