@@ -1,6 +1,8 @@
 /* ============================================
    FASE 5 - CAMADA DE APLICAÇÃO
    Tema: Verde (#4CAF50)
+   Última atualização: v11
+   Layout: Flexbox responsivo
    ============================================ */
 
 /* ===== RESET E BASE ===== */
@@ -16,17 +18,13 @@ body {
     color: #fff;
     min-height: 100vh;
     overflow-x: hidden;
-    width: 100%;
-    max-width: 100vw;
 }
 
 .fase-container {
     width: 100%;
-    max-width: 100vw;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    overflow-x: hidden;
 }
 
 /* ===== HEADER DA FASE ===== */
@@ -125,6 +123,8 @@ body {
 /* ===== MAIN CONTENT ===== */
 .fase-main {
     flex: 1;
+    display: flex;
+    flex-direction: column;
     padding: 2rem;
     width: 100%;
     max-width: 100%;
@@ -142,42 +142,35 @@ body {
 
 .secao-content {
     max-width: 1400px;
-    width: 100%;
     margin: 0 auto;
     background: rgba(255, 255, 255, 0.05);
     border-radius: 20px;
     padding: 2.5rem;
     border: 2px solid rgba(76, 175, 80, 0.3);
-    overflow-x: hidden;
-    box-sizing: border-box;
 }
 
 /* ===== SEÇÃO DE INTRODUÇÃO ===== */
 #secao-intro .secao-content {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     gap: 3rem;
     align-items: center;
-}
-
-#secao-intro .intro-visual,
-#secao-intro .intro-texto {
-    flex: 1;
 }
 
 .intro-visual {
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 100%;
+    max-width: 600px;
 }
 
 .aplicacao-animada {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 2rem;
-    padding: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
     width: 100%;
-    max-width: 100%;
 }
 
 .servico {
@@ -188,9 +181,13 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     gap: 1rem;
     transition: all 0.3s ease;
     animation: pulse 2s ease-in-out infinite;
+    min-height: 140px;
+    flex: 0 0 calc(50% - 0.75rem);
+    max-width: calc(50% - 0.75rem);
 }
 
 .servico:nth-child(2) {
@@ -206,19 +203,28 @@ body {
 }
 
 .servico:hover {
-    transform: scale(1.1);
+    transform: scale(1.05);
     border-color: #4CAF50;
     box-shadow: 0 10px 40px rgba(76, 175, 80, 0.4);
 }
 
 .servico span {
     font-size: 3rem;
+    display: block;
 }
 
 .servico small {
     font-size: 1rem;
     font-weight: 600;
     color: #4CAF50;
+    display: block;
+    text-align: center;
+}
+
+.intro-texto {
+    width: 100%;
+    max-width: 800px;
+    text-align: center;
 }
 
 .intro-texto h2 {
@@ -240,6 +246,7 @@ body {
     padding: 1.5rem;
     border-radius: 12px;
     margin-bottom: 2rem;
+    text-align: left;
 }
 
 .conceitos-chave h3 {
@@ -342,8 +349,6 @@ body {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 1.5rem;
-    width: 100%;
-    max-width: 100%;
 }
 
 .componente-item {
@@ -411,8 +416,6 @@ body {
     grid-template-columns: repeat(3, 1fr);
     gap: 1.5rem;
     margin-bottom: 2rem;
-    width: 100%;
-    max-width: 100%;
 }
 
 .etapa-dns {
@@ -487,8 +490,6 @@ body {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     gap: 1rem;
-    width: 100%;
-    max-width: 100%;
 }
 
 .slot-dns {
@@ -532,8 +533,6 @@ body {
     grid-template-columns: repeat(4, 1fr);
     gap: 2rem;
     margin-bottom: 2rem;
-    width: 100%;
-    max-width: 100%;
 }
 
 .participante,
@@ -939,13 +938,14 @@ body {
     }
 
     .aplicacao-animada {
-        grid-template-columns: repeat(2, 1fr);
         gap: 1rem;
         padding: 1rem;
     }
 
     .servico {
         padding: 1.5rem;
+        flex: 0 0 calc(50% - 0.5rem);
+        max-width: calc(50% - 0.5rem);
     }
 
     .servico span {
@@ -1190,12 +1190,13 @@ body {
 
     /* Introdução */
     .aplicacao-animada {
-        grid-template-columns: 1fr;
         gap: 1rem;
     }
 
     .servico {
         padding: 1.25rem;
+        flex: 0 0 100%;
+        max-width: 100%;
     }
 
     .servico span {
@@ -1290,7 +1291,12 @@ body {
     }
 
     .aplicacao-animada {
-        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+
+    .servico {
+        flex: 0 0 calc(50% - 0.5rem);
+        max-width: calc(50% - 0.5rem);
     }
 
     .etapas-dns {
